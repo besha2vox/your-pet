@@ -4,6 +4,10 @@
 
 ![icons-list](./assets/icons-list.png)
 
+```javascript
+import { VariableName } from 'shared/utils/icons';
+```
+
 | #   | Variable       | #   | Variable         | #   | Variable        |
 | --- | -------------- | --- | ---------------- | --- | --------------- |
 | 1   | PawPrintIcon   | 10  | PlusIcon         | 19  | PlusSmallIcon   |
