@@ -1,0 +1,24 @@
+@import-normalize; /* bring in normalize.css styles */
+
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  color: #111111;
+  background-color: #fef9f9;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
