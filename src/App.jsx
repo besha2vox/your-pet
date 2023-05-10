@@ -1,4 +1,4 @@
-import SharedLayout from 'SharedLayout/SharedLayout';
+import SharedLayout from 'shared/SharedLayout/SharedLayout';
 import AddPetPage from 'pages/AddPetPage/AddPetPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import MainPage from 'pages/MainPage/MainPage';
@@ -9,7 +9,7 @@ import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import UserPage from 'pages/UserPage/UserPage';
 import { Routes, Route } from 'react-router-dom';
 
-export const App = () => {
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}></Route>
@@ -24,3 +24,5 @@ export const App = () => {
     </Routes>
   );
 };
+
+export default App;
