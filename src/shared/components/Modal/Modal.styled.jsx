@@ -9,6 +9,8 @@ export const Backdrop = styled.div`
 
   background-color: #51515199;
 
+  backdrop-filter: blur(${({ inNoticePage }) => (inNoticePage ? '4px' : 0)});
+
   z-index: 2;
 `;
 
@@ -21,6 +23,8 @@ export const ModalWindow = styled.div`
 
   border-radius: 40px;
   background-color: #ffffff;
+
+  z-index: 3;
 `;
 
 export const CloseBtn = styled.button`

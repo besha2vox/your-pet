@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import { CrossSmallIcon } from 'shared/utils/icons';
@@ -23,7 +24,9 @@ const modalContainer = document.getElementById('modal-root');
 //   );}
 
 const Modal = ({ toggleModal, children }) => {
-  console.log('children: ', children);
+  const location = useLocation();
+  const inNoticePage = location.pathname.includes('notices');
+
   useEffect(() => {
     const onKeyDown = event => {
       if (event.code === 'Escape') {
@@ -44,14 +47,16 @@ const Modal = ({ toggleModal, children }) => {
     }
   };
   return createPortal(
-    <Backdrop onClick={onModalOpen}>
-      <ModalWindow>
-        <CloseBtn type="button" onClick={toggleModal}>
-          <CrossSmallIcon />
-        </CloseBtn>
-        {children}
-      </ModalWindow>
-    </Backdrop>,
+    <>
+      <Backdrop onClick={onModalOpen} inNoticePage={inNoticePage}>
+        <ModalWindow>
+          <CloseBtn type="button" onClick={toggleModal}>
+            <CrossSmallIcon />
+          </CloseBtn>
+          {children}
+        </ModalWindow>
+      </Backdrop>
+    </>,
     modalContainer
   );
 };
