@@ -20,12 +20,11 @@ export const theme = {
     lightBlue: '#CCE4FB',
     green: '#00C3AD',
     red: '#F43F5E',
-  },
-  gradients: {
-    blue: 'linear-gradient(290.46deg, #419EF1 0%, #9BD0FF 107.89%)',
+    gradientBlue: 'linear-gradient(290.46deg, #419EF1 0%, #9BD0FF 107.89%)',
   },
   boxShadows: {
     main: '3px 8px 14px rgba(136, 198, 253, 0.19)',
     secondary: '7px 13px 14px rgba(116, 177, 232, 0.24)',
   },
+  transition: { main: 'cubic-bezier(0.4, 0, 0.2, 1)' },
 };
