@@ -1,24 +1,105 @@
 @import-normalize; /* bring in normalize.css styles */
 
-body {
-  margin: 0;
-  font-family: 'Manrope', sans-serif;
-  color: #111111;
-  background-color: #fef9f9;
+@font-face {
+  font-family: "Inter-Regular";
+  src: local("Inter-Regular"),
+    url('./fonts/Inter/Inter-Regular.ttf') format("truetype");
 }
 
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
+@font-face {
+  font-family: "Inter-Medium";
+  src: local("Inter-Medium"),
+    url('./fonts/Inter/Inter-Medium.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "Manrope-Regular";
+  src: local("Manrope-Regular"),
+    url('./fonts/Manrope/Manrope-Regular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "Manrope-Medium";
+  src: local("Manrope-Medium"),
+    url('./fonts/Manrope/Manrope-Medium.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "Manrope-SemiBold";
+  src: local("Manrope-SemiBold"),
+    url('./fonts/Manrope/Manrope-SemiBold.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "Manrope-Bold";
+  src: local("Manrope-Bold"),
+    url('./fonts/Manrope/Manrope-Bold.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "Manrope-ExtraBold";
+  src: local("Manrope-ExtraBold"),
+    url('./fonts/Manrope/Manrope-ExtraBold.ttf') format("truetype");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+p,
+li {
+  margin: 0;
 }
 
 ul {
-  margin: 0;
   padding: 0;
   list-style: none;
 }
 
 a {
+  display: block;
   text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+select {
+  font: inherit;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+
+  font-family: "Manrope-Regular";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  line-height: 1.37;
+
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
