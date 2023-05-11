@@ -1,3 +1,4 @@
+
 import NewsList from './NewsList';
 import NewsFilter from './NewsFilter';
 import { useState, useEffect } from 'react';
@@ -9,6 +10,22 @@ import Section from 'shared/components/Section/Section';
 import {Title} from './NewsPage.styled';
 import { format } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+// import { useDispatch } from 'react-redux';
+// import { useEffect } from 'react';
+// import { fetchNews } from 'redux/news/operations';
+
+// const NewsPage = () => {
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+//     const fn = async () => {
+//       await dispatch(fetchNews());
+//     };
+//     fn();
+//   }, [dispatch]);
+
+
 
 const NewsPage = () => {
 
@@ -74,6 +91,4 @@ const NewsPage = () => {
       </Container>
     </Section>
   );
-};
 
-export default NewsPage;
