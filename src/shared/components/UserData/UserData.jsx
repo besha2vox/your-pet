@@ -38,7 +38,7 @@ const UserData = () => {
 return (
     <>
         <div>
-            <img src={avatarDefault2x} alt="user avatar" />
+            <img src={avatarDefault2x} alt="user avatar" width="182" height="182" />
             <div>
                 <Camera stroke="#54ADFF"/>
                 <button>Edit photo</button>
@@ -55,11 +55,6 @@ return (
             <UserDataItem value={phone} handleChange={handleChange} {...fields.phone} onSubmit={handleSubmit} />
             <UserDataItem value={city} handleChange={handleChange} {...fields.city} onSubmit={handleSubmit} />
         </div>
-    {/* <UserData />
-        UserDataItem --- input типу файл, url object -предпросмотр, 
-        дані користувача + кнопка для редагування
-        клік на кнопку - елемент в режимі редагування + кнопка для відправки
-        доступно 1 поле для редагування */}
     </>
 );
 };

@@ -1,19 +1,43 @@
 import UserData from '../../shared/components/UserData/UserData';
+import PetsData from '../../shared/components/PetsData/PetsData';
+import Logout from '../../shared/components/Logout/Logout';
+import ModalCongrats from "../../shared/components/ModalCongrats/ModalCongrats";
+import { useState, useEffect } from 'react';
+import Modal from 'shared/components/Modal/Modal';
 
 
 const UserPage = () => {
+  // const dispatch = useDispatch();
+  // const isFirstVisit = useSelector(state => state.firstVisit);
+  const [congradModal, setCongradModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const firstVisit = true;
+
+  useEffect(() => {
+    if (firstVisit) {
+      setIsModalOpen(true);
+      setCongradModal(true);
+    }
+  }, []);
+
+  const toggleModal = () => {
+      setIsModalOpen(prevState => !prevState);
+      setCongradModal(prevState => !prevState);
+      // dispatch() // Отправляем новое значение в store
+  };
 
     return (
     <>
-      {/* ModalCongrats
-      useEffect(() => {
-      if (firstVisit) {
-        <ModalCongrats />
-      }
-    }, []); */}
+      {(isModalOpen && congradModal) && (
+            <Modal toggleModal={toggleModal}>
+                <ModalCongrats toggleModal={toggleModal}/>
+            </Modal>
+        )}
       <p>My information:</p>
       <div>
           <UserData />
+          <Logout />
         {/* <UserData />
             UserDataItem --- input типу файл, url object -предпросмотр, 
             дані користувача + кнопка для редагування
@@ -24,7 +48,7 @@ const UserPage = () => {
       </div>
       <p>My pets:</p>
       <div>
-        {/* <PetsData /> */}
+        <PetsData />
             {/* <Add pet/> кнопка посилання на AddPetPage */}
             {/* <PetsList - де взяти тих звірів?/> */}
               {/* PetsItem + ModalApproveAction (якщо так -*/}
