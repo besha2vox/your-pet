@@ -16,6 +16,8 @@ margin-top: 40px;
 background: #FFFFFF;
   
 list-style-type: none;
+
+
 @media (min-width: 768px) {
   max-width: 336px;
   margin-top: 60px;
@@ -29,8 +31,9 @@ list-style-type: none;
 export const Line = styled.span`
     margin-bottom: 14px;
     display: block;
-    width: 280px;
+    min-width: 280px;
     height: 4px;
+    width: 100%;
   
     border-radius: 40px;
     background-image: linear-gradient(290.46deg, #419EF1 0%, #9BD0FF 107.89%);
@@ -46,6 +49,7 @@ export const Line = styled.span`
 
 export const Poster = styled.img`
   margin-bottom: 16px;
+  width: 100%;
 
   border-radius: 20px;
   min-width: 280px;
@@ -105,12 +109,12 @@ export const BottomInfoWrapper = styled.div`
 `;
 
 export const NewsDate = styled.p`
-font-family: 'Manrope';
+  font-family: 'Manrope';
 
-font-weight: 400;
-font-size: 16px;
+  font-weight: 400;
+  font-size: 16px;
 
-line-height: 22px;
+  line-height: 22px;
   color: #888888;
 `;
 
@@ -118,10 +122,10 @@ export const NewsLink = styled.a`
   font-size: 16px;
   font-weight: 500;
   line-height: 1.375;
-  color: #54ADFF;
+  color: #54adff;
   text-decoration: none;
   &:hover,
   :focus {
-    color: #FFC107;
+    color: #ffc107;
   }
 `;

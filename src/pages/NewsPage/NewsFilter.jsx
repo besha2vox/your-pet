@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 //import s from './newsFilter.module.scss';
-
+import {SearchComponent, SearchInput} from './NewsFilter.styled';
 import { SearchIcon } from 'shared/utils/icons';
+
 
 export default function NewsFilter({
   input,
@@ -12,8 +13,8 @@ export default function NewsFilter({
 
 {
   return (
-    <div >
-      <input
+    <SearchComponent >
+      <SearchInput
        
         type="text"
         placeholder="Search"
@@ -27,7 +28,7 @@ export default function NewsFilter({
         </div>
       )}
       {!inputValue && <SearchIcon id="icon-search-news" />}
-    </div>
+    </SearchComponent>
   );
 }
 
