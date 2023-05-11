@@ -1,7 +1,7 @@
 import { Wrapper } from './Container.styled';
 
 const Container = ({ children }) => {
-  return <Wrapper>Hi</Wrapper>;
+  return <Wrapper>{children}</Wrapper>;
 };
 
 export default Container;
