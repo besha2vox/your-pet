@@ -1,21 +1,16 @@
 import PropTypes from 'prop-types';
-//import s from './newsFilter.module.scss';
-import {SearchComponent, SearchInput} from './NewsFilter.styled';
+import { SearchComponent, SearchInput } from './NewsFilter.styled';
 import { SearchIcon } from 'shared/utils/icons';
-
 
 export default function NewsFilter({
   input,
   onChange,
   resetInput,
   inputValue,
-}) 
-
-{
+}) {
   return (
-    <SearchComponent >
+    <SearchComponent>
       <SearchInput
-       
         type="text"
         placeholder="Search"
         name="filter"
@@ -24,10 +19,10 @@ export default function NewsFilter({
       />
       {inputValue && (
         <div onClick={() => resetInput()}>
-          <SearchIcon id="icon-reset-search" />
+          <SearchIcon />
         </div>
       )}
-      {!inputValue && <SearchIcon id="icon-search-news" />}
+      {!inputValue && <SearchIcon />}
     </SearchComponent>
   );
 }
