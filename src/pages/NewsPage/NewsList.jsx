@@ -1,14 +1,12 @@
 import NewsItem from './NewsItem';
-//import s from './newsList.module.scss';
+import {List} from './NewsList.styled';
 import { nanoid } from 'nanoid';
 
 export default function NewsList({ data }) {
 
-console.log(data);
-
   return (
     <>
-      <ul>
+      <List>
         {data?.map(({title, url,  date, imgUrl, text}) => (
           <NewsItem
             key={nanoid()}
@@ -19,7 +17,7 @@ console.log(data);
             imgUrl={imgUrl}
           />
         ))}
-      </ul>
+      </List>
     </>
   );
 }
