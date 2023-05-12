@@ -2,7 +2,17 @@ import PropTypes from 'prop-types';
 //import EllipsisText from 'react-ellipsis-text';
 import { format } from 'date-fns';
 import { useState, useEffect } from 'react';
-import {Item, Line, Poster, NewsBody, NewsTitle, TextContent, BottomInfoWrapper, NewsDate, NewsLink} from './NewsItem.styled';
+import {
+  Item,
+  Line,
+  Poster,
+  NewsBody,
+  NewsTitle,
+  TextContent,
+  BottomInfoWrapper,
+  NewsDate,
+  NewsLink,
+} from './NewsItem.styled';
 
 export default function NewsItem({ title, url, date, imgUrl, text }) {
   const [matches, setMatches] = useState(
@@ -19,26 +29,23 @@ export default function NewsItem({ title, url, date, imgUrl, text }) {
 
   return (
     <Item>
-        <Line/>
+      <Line />
       <Poster src={imgUrl} width="100" alt={title} />
-      
+
       <TextContent>
-      <NewsTitle
-        text={title}
-        tooltip={title}
-        length={Number(`${matches ? 50 : 35}`)}
-      />
+        <NewsTitle
+          text={title}
+          tooltip={title}
+          length={Number(`${matches ? 50 : 35}`)}
+        />
+        <NewsBody text={text} length={230} />
 
-      <NewsBody text={text} length={230} />
-
-
-      <BottomInfoWrapper>
-        <NewsDate>{zeroDate}</NewsDate>
-        <NewsLink href={url} target="_blank" rel="noreferrer">
-          Read more
-        </NewsLink>
-      </BottomInfoWrapper>
-
+        <BottomInfoWrapper>
+          <NewsDate>{zeroDate}</NewsDate>
+          <NewsLink href={url} target="_blank" rel="noreferrer">
+            Read more
+          </NewsLink>
+        </BottomInfoWrapper>
       </TextContent>
     </Item>
   );
