@@ -1,10 +1,9 @@
 import UserData from '../../shared/components/UserData/UserData';
 import PetsData from '../../shared/components/PetsData/PetsData';
 import Logout from '../../shared/components/Logout/Logout';
-import ModalCongrats from "../../shared/components/ModalCongrats/ModalCongrats";
+import ModalCongrats from '../../shared/components/ModalCongrats/ModalCongrats';
 import { useState, useEffect } from 'react';
 import Modal from 'shared/components/Modal/Modal';
-
 
 const UserPage = () => {
   // const dispatch = useDispatch();
@@ -19,25 +18,25 @@ const UserPage = () => {
       setIsModalOpen(true);
       setCongradModal(true);
     }
-  }, []);
+  }, [firstVisit]);
 
   const toggleModal = () => {
-      setIsModalOpen(prevState => !prevState);
-      setCongradModal(prevState => !prevState);
-      // dispatch() // Отправляем новое значение в store
+    setIsModalOpen(prevState => !prevState);
+    setCongradModal(prevState => !prevState);
+    // dispatch() // Отправляем новое значение в store
   };
 
-    return (
+  return (
     <>
-      {(isModalOpen && congradModal) && (
-            <Modal toggleModal={toggleModal}>
-                <ModalCongrats toggleModal={toggleModal}/>
-            </Modal>
-        )}
+      {isModalOpen && congradModal && (
+        <Modal toggleModal={toggleModal}>
+          <ModalCongrats toggleModal={toggleModal} />
+        </Modal>
+      )}
       <p>My information:</p>
       <div>
-          <UserData />
-          <Logout />
+        <UserData />
+        <Logout />
         {/* <UserData />
             UserDataItem --- input типу файл, url object -предпросмотр, 
             дані користувача + кнопка для редагування
@@ -49,13 +48,12 @@ const UserPage = () => {
       <p>My pets:</p>
       <div>
         <PetsData />
-            {/* <Add pet/> кнопка посилання на AddPetPage */}
-            {/* <PetsList - де взяти тих звірів?/> */}
-              {/* PetsItem + ModalApproveAction (якщо так -*/}
+        {/* <Add pet/> кнопка посилання на AddPetPage */}
+        {/* <PetsList - де взяти тих звірів?/> */}
+        {/* PetsItem + ModalApproveAction (якщо так -*/}
       </div>
     </>
-    );
-  };
-  
-  
-  export default UserPage;
+  );
+};
+
+export default UserPage;
