@@ -11,7 +11,17 @@ export const theme = {
     },
     secondary: { regular: 'Inter-Regular', medium: 'Inter-Medium' },
   },
-  fontSizes: ['12px', '14px', '16px', '20px', '24px', '28px', '48px', '68px'],
+  fontSizes: [
+    '12px',
+    '14px',
+    '16px',
+    '20px',
+    '24px',
+    '28px',
+    '32px',
+    '48px',
+    '68px',
+  ],
   colors: {
     yellow: '#FFC107',
     white: '#FDF7F2',
