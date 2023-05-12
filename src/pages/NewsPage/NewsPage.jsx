@@ -92,7 +92,7 @@ const NewsPage = () => {
         resetInput={resetInput}
         inputValue={inputValue}
       />
-      <NewsList data={filterNews()} />;
+      <NewsList data={filterNews()} />
     </Container>
   );
 };
