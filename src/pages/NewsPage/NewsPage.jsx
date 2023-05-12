@@ -92,3 +92,6 @@ const NewsPage = () => {
     </Section>
   );
 
+};
+
+export default NewsPage;
