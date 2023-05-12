@@ -7,7 +7,7 @@ import Container from 'shared/components/Container/Container';
 //import Section from 'shared/components/Section/Section';
 
 import { Title } from './NewsPage.styled';
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import { useDispatch, useSelector } from 'react-redux';
