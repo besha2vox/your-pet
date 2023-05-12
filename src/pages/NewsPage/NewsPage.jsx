@@ -10,34 +10,47 @@ import { Title } from './NewsPage.styled';
 import { format } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchNews } from 'redux/news/operations';
+import { getAllNews, getHintsh } from 'redux/news/selectors';
 
 const NewsPage = () => {
+  // const [data, setData] = useState([]);
 
-  const [data, setData] = useState([]);
-//console.log("data", data);  
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   const fn = async () => {
+  //     var news = await dispatch(fetchNews());
+  //     const formatDate = news.payload.result.map(item => ({
+  //       ...item,
+  //       date: Number(format(new Date(item.date), 'T')),
+  //     }));
+  //     const sortDate = formatDate.sort(function (a, b) {
+  //       return b.date - a.date;
+  //     });
+  //     // console.log(sortDate);
+  //     setData(sortDate);
+  //   };
+  //   fn();
+  // }, [dispatch]);
 
   const dispatch = useDispatch();
+  const data = useSelector(getAllNews);
+  const hints = useSelector(getHintsh);
+
+  console.log(hints);
 
   useEffect(() => {
-    const fn = async () => {
-      var news = await dispatch(fetchNews());
-      const formatDate = news.payload.map(item => ({
-        ...item,
-        date: Number(format(new Date(item.date), 'T')),
-      }));
-      const sortDate = formatDate.sort(function (a, b) {
-        return b.date - a.date;
-      });
-      // console.log(sortDate);
-      setData(sortDate);
-    };
-    fn();
+    const fetchAllNews = async () => await dispatch(fetchNews());
+    fetchAllNews();
   }, [dispatch]);
 
-
+  // const data = news.map(item => ({
+  //   ...item,
+  //   date: Number(format(new Date(item.date), 'T')),
+  // }));
 
   // useEffect(() => {
   //   const formatDate = news.map(item => ({
@@ -50,7 +63,6 @@ const NewsPage = () => {
   //   // console.log(sortDate);
   //   setData(sortDate);
   // }, []);
-
 
   const [filter, setFilter] = useState('');
   const [inputValue, setInputValue] = useState(false);
