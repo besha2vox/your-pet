@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/your-pet/static/css/main.844dc193.css",
-    "main.js": "/your-pet/static/js/main.269a41c7.js",
+    "main.js": "/your-pet/static/js/main.154312e1.js",
     "static/media/Inter-Medium.ttf": "/your-pet/static/media/Inter-Medium.9d1fd4235eeb376c5f96.ttf",
     "static/media/Inter-Regular.ttf": "/your-pet/static/media/Inter-Regular.b559a93b35af397f4b6f.ttf",
     "static/media/Manrope-ExtraBold.ttf": "/your-pet/static/media/Manrope-ExtraBold.8d30ac27ff052fef056a.ttf",
@@ -42,10 +42,10 @@
     "static/media/chevron-down.svg": "/your-pet/static/media/chevron-down.1a212c1c13748ebea659b0fd342f0062.svg",
     "static/media/plus.svg": "/your-pet/static/media/plus.82f4622ce65fb42acb45c3cd956c8148.svg",
     "main.844dc193.css.map": "/your-pet/static/css/main.844dc193.css.map",
-    "main.269a41c7.js.map": "/your-pet/static/js/main.269a41c7.js.map"
+    "main.154312e1.js.map": "/your-pet/static/js/main.154312e1.js.map"
   },
   "entrypoints": [
     "static/css/main.844dc193.css",
-    "static/js/main.269a41c7.js"
+    "static/js/main.154312e1.js"
   ]
 }
