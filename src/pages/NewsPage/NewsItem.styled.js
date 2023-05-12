@@ -19,11 +19,11 @@ list-style-type: none;
 
 
 @media (min-width: 768px) {
-  max-width: 336px;
+  width: calc((100% - 32px) / 2);
   margin-top: 60px;
 }
 @media (min-width: 1280px) {
-  max-width: 394px;
+  width: calc((100% - 32px * 2) / 3);
 }
 }
 `;

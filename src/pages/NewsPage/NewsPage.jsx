@@ -3,41 +3,54 @@ import NewsFilter from './NewsFilter';
 import { useState, useEffect } from 'react';
 
 import Container from 'shared/components/Container/Container';
-import news from './news.json';
-import Section from 'shared/components/Section/Section';
+//import news from './news.json';
+//import Section from 'shared/components/Section/Section';
 
 import { Title } from './NewsPage.styled';
 import { format } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-// import { useDispatch } from 'react-redux';
-// import { useEffect } from 'react';
-// import { fetchNews } from 'redux/news/operations';
+import { useDispatch } from 'react-redux';
 
-// const NewsPage = () => {
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     const fn = async () => {
-//       await dispatch(fetchNews());
-//     };
-//     fn();
-//   }, [dispatch]);
+import { fetchNews } from 'redux/news/operations';
 
 const NewsPage = () => {
+
   const [data, setData] = useState([]);
+//console.log("data", data);  
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const formatDate = news.map(item => ({
-      ...item,
-      date: Number(format(new Date(item.date), 'T')),
-    }));
-    const sortDate = formatDate.sort(function (a, b) {
-      return b.date - a.date;
-    });
-    // console.log(sortDate);
-    setData(sortDate);
-  }, []);
+    const fn = async () => {
+      var news = await dispatch(fetchNews());
+      const formatDate = news.payload.map(item => ({
+        ...item,
+        date: Number(format(new Date(item.date), 'T')),
+      }));
+      const sortDate = formatDate.sort(function (a, b) {
+        return b.date - a.date;
+      });
+      // console.log(sortDate);
+      setData(sortDate);
+    };
+    fn();
+  }, [dispatch]);
+
+
+
+  // useEffect(() => {
+  //   const formatDate = news.map(item => ({
+  //     ...item,
+  //     date: Number(format(new Date(item.date), 'T')),
+  //   }));
+  //   const sortDate = formatDate.sort(function (a, b) {
+  //     return b.date - a.date;
+  //   });
+  //   // console.log(sortDate);
+  //   setData(sortDate);
+  // }, []);
+
 
   const [filter, setFilter] = useState('');
   const [inputValue, setInputValue] = useState(false);
