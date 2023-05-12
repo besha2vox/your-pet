@@ -9,10 +9,10 @@ const INITIAL_STATE = {
   title: '',
   birthday: '',
   breed: '',
-  image: null,
-  sex: '',
   location: '',
   comments: '',
+  image: null,
+  sex: '',
   price: '',
 };
 
@@ -25,13 +25,13 @@ const ChooseForm = ({ nextStep, setCategory }) => {
     setCategoryLocal(event.target.value);
   };
 
+  const handleCancelClick = () => {
+    navigate(-1); ///Повернення на попередню сторінку
+  };
+
   const handleNextClick = () => {
     setCategory(category);
     nextStep(); //// на наступну сторінку
-  };
-
-  const handleCancelClick = () => {
-    navigate(-1); ///Повернення на попередню сторінку
   };
 
   return (
