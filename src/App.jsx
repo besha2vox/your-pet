@@ -9,8 +9,6 @@ import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import UserPage from 'pages/UserPage/UserPage';
 import { Routes, Route } from 'react-router-dom';
 
-
-
 const App = () => {
   return (
     <Routes>
