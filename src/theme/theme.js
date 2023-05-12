@@ -12,15 +12,15 @@ export const theme = {
     secondary: { regular: 'Inter-Regular', medium: 'Inter-Medium' },
   },
   fontSizes: [
-    '12px',
-    '14px',
-    '16px',
-    '20px',
-    '24px',
-    '28px',
-    '32px',
-    '48px',
-    '68px',
+    '12px', // 0
+    '14px', // 1
+    '16px', // 2
+    '20px', // 3
+    '24px', // 4
+    '28px', // 5
+    '32px', // 6
+    '48px', // 7
+    '68px', // 8
   ],
   colors: {
     yellow: '#FFC107',
