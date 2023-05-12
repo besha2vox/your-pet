@@ -35,7 +35,7 @@ const ChooseForm = ({ nextStep, setCategory }) => {
   };
 
   return (
-    <div>
+    <>
       <Formik initialValues={INITIAL_STATE} validationSchema={validatePet}>
         <Form autoComplete="on">
           <label>
@@ -86,7 +86,7 @@ const ChooseForm = ({ nextStep, setCategory }) => {
           </button>
         </Form>
       </Formik>
-    </div>
+    </>
   );
 };
 

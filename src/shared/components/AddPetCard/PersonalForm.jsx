@@ -14,7 +14,7 @@ const INITIAL_STATE = {
   price: '',
 };
 
-const PetsForm = ({ prevStep, nextStep, category }) => {
+const PersonalForm = ({ prevStep, nextStep, category }) => {
   const handleNextClick = () => {
     nextStep();
   };
@@ -62,4 +62,4 @@ const PetsForm = ({ prevStep, nextStep, category }) => {
   );
 };
 
-export default PetsForm;
+export default PersonalForm;

@@ -1,10 +1,10 @@
 import React from 'react';
-import PetsForm from '../../shared/components/AddPetCard/FormPets';
+import AddPetPageForm from '../../shared/components/AddPetCard/PetPageForm';
 
 const AddPetPage = () => {
   return (
     <div>
-      <PetsForm />
+      <AddPetPageForm />
     </div>
   );
 };

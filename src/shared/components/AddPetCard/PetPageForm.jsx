@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import MoreInfo from './MoreInfoForm';
 import ChooseForm from './ChooseForm';
-import PersonalDetails from './FormPets';
+import PersonalForm from './PersonalForm';
 
 const AddPetPageForm = () => {
   const [step, setStep] = useState(1);
@@ -18,7 +18,7 @@ const AddPetPageForm = () => {
       />
     ),
     2: (
-      <PersonalDetails
+      <PersonalForm
         prevStep={() => setStep(step - 1)}
         nextStep={() => setStep(step + 1)}
         category={category}

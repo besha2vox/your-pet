@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Formik, ErrorMessage, Field, Form } from 'formik';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 import validatePet from './VaidatePet';
 
@@ -19,7 +19,7 @@ const INITIAL_STATE = {
 
 const MoreInfo = ({ prevStep, category }) => {
   const [fileInput, setFileInput] = useState();
-  const dispatch = useDispatch();
+  //   const dispatch = useDispatch();
 
   const handleAddAvatar = e => {
     const [file] = e.target.files;
@@ -83,9 +83,7 @@ const MoreInfo = ({ prevStep, category }) => {
                     checked={values.sex === 'male'}
                     // hidden
                   />
-                  <span>
-                    <BsGenderMale fill="#54ADFF" />
-                  </span>
+                  <span></span>
                   <p>Male</p>
                 </label>
               </>
@@ -93,17 +91,15 @@ const MoreInfo = ({ prevStep, category }) => {
             {/* <p></p> */}
             <label htmlFor="pet-image">
               Load the pet's image:
-              {fileInput ? (
-                <img
-                  id="image"
-                  src={URL.createObjectURL(fileInput)}
-                  alt={fileInput.name}
-                  width="182px"
-                  height="182px"
-                />
-              ) : (
-                <IconPlus />
-              )}
+              {/* {fileInput  */}
+              <img
+                id="image"
+                src={URL.createObjectURL(fileInput)}
+                alt={fileInput.name}
+                width="182px"
+                height="182px"
+              />
+              {/* } */}
               <Field
                 type="file"
                 id="pet-image"
