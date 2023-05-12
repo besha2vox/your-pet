@@ -1,8 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchNews } from './operations';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { fetchNews, fetchNewsByQuery } from './operations';
 
 const initialState = {
   items: [],
+  hints: 0,
+  totalHints: 0,
   isLoading: false,
   error: null,
 };
@@ -12,17 +14,29 @@ const newsSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(fetchNews.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(fetchNews.fulfilled, (state, { payload }) => {
-        state.error = null;
-        state.items = payload;
-      })
-      .addCase(fetchNews.rejected, (state, { payload }) => {
-        state.error = payload;
-        state.isLoading = false;
-      });
+      .addMatcher(
+        isAnyOf(fetchNews.pending, fetchNewsByQuery.pending),
+        state => {
+          state.isLoading = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(fetchNews.fulfilled, fetchNewsByQuery.fulfilled),
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = null;
+          state.items = payload.result;
+          state.hints = payload.hints;
+          state.totalHints = payload.totalHints;
+        }
+      )
+      .addMatcher(
+        isAnyOf(fetchNews.rejected, fetchNewsByQuery.rejected),
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = payload;
+        }
+      );
   },
 });
 
