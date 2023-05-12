@@ -25,6 +25,8 @@ import { ReactComponent as PlusIcon } from 'images/icons/plus.svg';
 import { ReactComponent as SearchIcon } from 'images/icons/search.svg';
 import { ReactComponent as TrashIcon } from 'images/icons/trash-2.svg';
 import { ReactComponent as UserIcon } from 'images/icons/user-1.svg';
+import { ReactComponent as LogoIcon } from 'images/icons/logo.svg';
+import { ReactComponent as LogoIconSm } from 'images/icons/logo-small.svg';
 
 export {
   ArrowLeftIcon,
@@ -54,4 +56,6 @@ export {
   SearchIcon,
   TrashIcon,
   UserIcon,
+  LogoIcon,
+  LogoIconSm,
 };
