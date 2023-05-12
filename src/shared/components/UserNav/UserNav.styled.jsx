@@ -10,6 +10,7 @@ const Wrapper = styled(Link)`
   padding: ${({ theme }) => theme.space[2] * 3 + 'px'} 0;
 
   font-family: ${({ theme }) => theme.fonts.main.semiBold};
+  font-size: ${({ theme }) => theme.fontSizes[2]};
   color: ${({ theme }) => theme.colors.yellow};
 
   transition: color 350ms ${({ theme }) => theme.transition.main};
