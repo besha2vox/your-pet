@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import EllipsisText from 'react-ellipsis-text';
 
 export const Item = styled.li`
+height: auto;
 
 display: flex;
 flex-direction: column;
 // justify-content: center;
-align-items: flex-start;
+align-items: space-between;
 box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
 border-radius: 20px;
 
@@ -16,7 +17,6 @@ margin-top: 40px;
 background: #FFFFFF;
   
 list-style-type: none;
-
 
 @media (min-width: 768px) {
   width: calc((100% - 32px) / 2);
@@ -72,6 +72,8 @@ export const TextContent = styled.div`
   align-items: flex-start;
   height: auto;
   padding: 0px 12px;
+  flex-grow: 2;
+  
 `;
 
 export const NewsTitle = styled(EllipsisText)`
@@ -82,14 +84,15 @@ export const NewsTitle = styled(EllipsisText)`
   font-weight: 700;
   line-height: 1.375;
   letter-spacing: -0.01em;
-
   flex-grow: 2;
+
 `;
 
 export const NewsBody = styled(EllipsisText)`
   font-size: 16px;
   font-weight: 400;
   line-height: 1.375;
+  height: auto;
 
   @media (min-width: 768px) {
     height: 150px;
@@ -104,8 +107,9 @@ export const BottomInfoWrapper = styled.div`
   padding-top: 20px;
   width: 100%;
   display: flex;
-  //align-items: center;
+  align-items: center;
   justify-content: space-between;
+  margin-top: auto;
 `;
 
 export const NewsDate = styled.p`
