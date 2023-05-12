@@ -1,4 +1,3 @@
-
 import NewsList from './NewsList';
 import NewsFilter from './NewsFilter';
 import { useState, useEffect } from 'react';
@@ -7,7 +6,7 @@ import Container from 'shared/components/Container/Container';
 import news from './news.json';
 import Section from 'shared/components/Section/Section';
 
-import {Title} from './NewsPage.styled';
+import { Title } from './NewsPage.styled';
 import { format } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -25,14 +24,10 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 //     fn();
 //   }, [dispatch]);
 
-
-
 const NewsPage = () => {
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    
     const formatDate = news.map(item => ({
       ...item,
       date: Number(format(new Date(item.date), 'T')),
@@ -76,22 +71,17 @@ const NewsPage = () => {
   }
 
   return (
-    <Section>
-      <Container>
-        <Title> News</Title>
-
-        <NewsFilter
-            input={filter}
-            onChange={handleChange}
-            resetInput={resetInput}
-            inputValue={inputValue}
-          />
-
-        <NewsList data={filterNews()} />;
-      </Container>
-    </Section>
+    <Container>
+      <Title> News</Title>
+      <NewsFilter
+        input={filter}
+        onChange={handleChange}
+        resetInput={resetInput}
+        inputValue={inputValue}
+      />
+      <NewsList data={filterNews()} />;
+    </Container>
   );
-
 };
 
 export default NewsPage;
