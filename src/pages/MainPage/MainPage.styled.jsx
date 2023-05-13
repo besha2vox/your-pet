@@ -138,19 +138,21 @@ const MainTitle = styled.h1`
 const ImageContainer = styled.div`
   position: absolute;
   overflow: visible;
-  bottom: 0;
+  top: 216px;
   width: 320px;
   height: 390px;
 
   @media screen and (min-width: 768px) {
     width: 768px;
-    height: 800px;
+    height: 815px;
+    top: 375px;
   }
 
   @media screen and (min-width: 1280px) {
     width: 917px;
     height: 670px;
-    right: 0;
+    left: 365px;
+    top: 98px;
   }
 `;
 
