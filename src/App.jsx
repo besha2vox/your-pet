@@ -12,15 +12,16 @@ import { Routes, Route } from 'react-router-dom';
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<SharedLayout />}></Route>
-      <Route path="main" element={<MainPage />} />
-      <Route path="notices/:categoryName" element={<NoticesPage />} />
-      <Route path="friends" element={<OurFriendsPage />} />
-      <Route path="register" element={<RegisterPage />} />
-      <Route path="login" element={<LoginPage />} />
-      <Route path="user" element={<UserPage />} />
-      <Route path="add-pet" element={<AddPetPage />} />
-      <Route path="news" element={<NewsPage />} />
+      <Route path="/" element={<SharedLayout />}>
+        <Route path="main" element={<MainPage />} />
+        <Route path="notices/:categoryName" element={<NoticesPage />} />
+        <Route path="friends" element={<OurFriendsPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="user" element={<UserPage />} />
+        <Route path="add-pet" element={<AddPetPage />} />
+        <Route path="news" element={<NewsPage />} />
+      </Route>
     </Routes>
   );
 };

@@ -10,12 +10,12 @@ import { VariableName } from 'shared/utils/icons';
 
 | #   | Variable       | #   | Variable         | #   | Variable        |
 | --- | -------------- | --- | ---------------- | --- | --------------- |
-| 1   | PawPrintIcon   | 10  | PlusIcon         | 19  | PlusSmallIcon   |
-| 2   | CrossIcon      | 11  | TrashIcon        | 20  | SearchIcon      |
-| 3   | HeartIcon      | 12  | UserIcon         | 21  | EditIcon        |
-| 4   | CheckIcon      | 13  | CameraIcon       | 22  | LogoutIcon      |
-| 5   | ArrowLeftIcon  | 14  | FilterIcon       | 23  | MaleIcon        |
-| 6   | FemaleIcon     | 15  | LocationIcon     | 24  | ClockIcon       |
-| 7   | MenuBurgerIcon | 16  | FilterBurgerIcon | 25  | ChevronDownIcon |
-| 8   | ChevronUpIcon  | 17  | CheckRoundIcon   | 26  | RoundIcon       |
-| 9   | CrossSmallIcon | 18  | EyeOpenIcon      | 27  | EyeClosedIcon   |
+| 1   | PawPrintIcon   | 2   | PlusIcon         | 3   | PlusSmallIcon   |
+| 4   | CrossIcon      | 5   | TrashIcon        | 6   | SearchIcon      |
+| 7   | HeartIcon      | 8   | UserIcon         | 9   | EditIcon        |
+| 10  | CheckIcon      | 11  | CameraIcon       | 12  | LogoutIcon      |
+| 13  | ArrowLeftIcon  | 14  | FilterIcon       | 15  | MaleIcon        |
+| 16  | FemaleIcon     | 17  | LocationIcon     | 18  | ClockIcon       |
+| 19  | MenuBurgerIcon | 20  | FilterBurgerIcon | 21  | ChevronDownIcon |
+| 22  | ChevronUpIcon  | 23  | CheckRoundIcon   | 24  | RoundIcon       |
+| 25  | CrossSmallIcon | 26  | EyeOpenIcon      | 27  | EyeClosedIcon   |
