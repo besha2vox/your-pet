@@ -1,15 +1,26 @@
 export const theme = {
   breakpoints: { mobile: '480px', tablet: '768px', desktop: '1280px' },
-  space: [0, 2, 4, 8, 16, 32, 64],
+  space: [
+    0, //0
+    2, //1
+    4, //2
+    8, //3
+    16, //4
+    32, //5
+    64, //6
+  ],
   fonts: {
     main: {
-      regular: 'Manrope-Regular',
-      medium: 'Manrope-Medium',
-      semiBold: 'Manrope-SemiBold',
-      bold: 'Manrope-Bold',
-      extraBold: 'Manrope-ExtraBold',
+      regular: 'Manrope-Regular', //400
+      medium: 'Manrope-Medium', //500
+      semiBold: 'Manrope-SemiBold', //600
+      bold: 'Manrope-Bold', //700
+      extraBold: 'Manrope-ExtraBold', //800
     },
-    secondary: { regular: 'Inter-Regular', medium: 'Inter-Medium' },
+    secondary: {
+      regular: 'Inter-Regular', //400
+      medium: 'Inter-Medium', //500
+    },
   },
   fontSizes: [
     '12px', // 0
