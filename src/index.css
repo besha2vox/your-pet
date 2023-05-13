@@ -82,6 +82,8 @@ select {
   font: inherit;
 }
 
+button {padding: 0;}
+
 body {
   min-height: 100vh;
   margin: 0;
