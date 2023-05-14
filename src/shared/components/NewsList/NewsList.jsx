@@ -1,4 +1,4 @@
-import NewsItem from '../../shared/components/NewsItem/NewsItem';
+import NewsItem from '../NewsItem/NewsItem';
 import {List} from './NewsList.styled';
 import { nanoid } from 'nanoid';
 

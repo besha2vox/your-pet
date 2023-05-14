@@ -1,5 +1,5 @@
-import NewsList from './NewsList';
-import NewsFilter from './NewsFilter';
+import NewsList from '../../shared/components/NewsList/NewsList';
+import NoticesSearch from '../../shared/components/NoticesSearch/NoticesSearch';
 import { useState, useEffect } from 'react';
 
 import Container from 'shared/components/Container/Container';
@@ -7,34 +7,13 @@ import Container from 'shared/components/Container/Container';
 //import Section from 'shared/components/Section/Section';
 
 import { Title } from './NewsPage.styled';
-// import { format } from 'date-fns';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { fetchNews } from 'redux/news/operations';
+
 import { getAllNews, getHintsh } from 'redux/news/selectors';
 
 const NewsPage = () => {
-  // const [data, setData] = useState([]);
-
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   const fn = async () => {
-  //     var news = await dispatch(fetchNews());
-  //     const formatDate = news.payload.result.map(item => ({
-  //       ...item,
-  //       date: Number(format(new Date(item.date), 'T')),
-  //     }));
-  //     const sortDate = formatDate.sort(function (a, b) {
-  //       return b.date - a.date;
-  //     });
-  //     // console.log(sortDate);
-  //     setData(sortDate);
-  //   };
-  //   fn();
-  // }, [dispatch]);
 
   const dispatch = useDispatch();
   const data = useSelector(getAllNews);
@@ -47,25 +26,11 @@ const NewsPage = () => {
     fetchAllNews();
   }, [dispatch]);
 
-  // const data = news.map(item => ({
-  //   ...item,
-  //   date: Number(format(new Date(item.date), 'T')),
-  // }));
 
-  // useEffect(() => {
-  //   const formatDate = news.map(item => ({
-  //     ...item,
-  //     date: Number(format(new Date(item.date), 'T')),
-  //   }));
-  //   const sortDate = formatDate.sort(function (a, b) {
-  //     return b.date - a.date;
-  //   });
-  //   // console.log(sortDate);
-  //   setData(sortDate);
-  // }, []);
 
+  
   const [filter, setFilter] = useState('');
-  const [inputValue, setInputValue] = useState(false);
+   const [inputValue, setInputValue] = useState(false);
 
   const handleChange = event => {
     // console.log(filter.length);
@@ -95,15 +60,27 @@ const NewsPage = () => {
     return filterlist;
   }
 
+  // <NewsFilter
+  //       input={filter}
+  //       onChange={handleChange}
+  //       resetInput={resetInput}
+  //       inputValue={inputValue}
+  //     />
+
+
+const onSearch =() => {
+
+
+
+}
+
+
   return (
     <Container>
       <Title> News</Title>
-      <NewsFilter
-        input={filter}
-        onChange={handleChange}
-        resetInput={resetInput}
-        inputValue={inputValue}
-      />
+      <NoticesSearch onFormSubmit = {onSearch()}>
+
+      </NoticesSearch>
       <NewsList data={filterNews()} />
     </Container>
   );
