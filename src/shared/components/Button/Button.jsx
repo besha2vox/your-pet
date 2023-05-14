@@ -21,9 +21,10 @@ import { Btn } from './Button.styled';
 // - filled - не обов'язковий - робить фон кнопки синім у звичайному стані;
 // - short - не обов'язковий - зменшує довжину кнопки з 252px до 129px;
 
-const Button = ({ text, icon, clickHandler, filled, short }) => {
+const Button = ({ text, icon, clickHandler, filled, short, type }) => {
   return (
     <Btn
+      type={type}
       onClick={clickHandler && (() => clickHandler(false))}
       filled={filled}
       short={short}
