@@ -43,6 +43,7 @@ import desctop2_3x from '../../images/main_img/desctop/2desctop3x.png';
 import desctop3_1x from '../../images/main_img/desctop/3desctop1x.png';
 import desctop3_2x from '../../images/main_img/desctop/3desctop2x.png';
 import desctop3_3x from '../../images/main_img/desctop/3desctop3x.png';
+import { theme } from 'theme/theme';
 
 const MainContainer = styled.div`
   position: relative;
@@ -66,7 +67,7 @@ const MainContainer = styled.div`
     background-image: url('${bg_mobile3x}');
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     background-image: url('${bg_teblet1x}');
 
     @media (min-device-pixel-ratio: 2),
@@ -105,33 +106,27 @@ const MainTitle = styled.h1`
   position: absolute;
   width: 280px;
   height: 88px;
-  left: 20px;
-  top: 108px;
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 44px;
+  margin-top: ${({theme}) => theme.space[5] + 'px'};
+  font-family: ${({theme}) => theme.fonts.main.bold};
+  font-size: ${({ theme }) => theme.fontSizes[6]};
+  line-height: 1.38;
   color: #000000;
 
-  @media screen and (min-width: 768px) and (max-width: 1279px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 588px;
     height: 200px;
-    left: 32px;
-    top: 148px;
-    font-weight: 700;
-    font-size: 68px;
-    line-height: 100px;
+    margin-top: ${({theme}) => theme.space[6] + 16 + 'px'};
+    font-size: ${({ theme }) => theme.fontSizes[8]};
+    line-height: 1.47;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 501px;
     height: 264px;
-    left: 16px;
-    top: 256px;
-    font-weight: 800;
-    font-size: 68px;
-    line-height: 130%;
+    margin-top: ${({theme}) => theme.space[6] + 176 + 'px'};
+    font-family: ${({theme}) => theme.fonts.main.extraBold};
+    font-size: ${({ theme }) => theme.fontSizes[8]};
+    line-height: 1,3,;
   }
 `;
 
@@ -142,13 +137,13 @@ const ImageContainer = styled.div`
   width: 320px;
   height: 390px;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 768px;
     height: 815px;
     top: 375px;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 917px;
     height: 670px;
     left: 365px;
@@ -158,7 +153,6 @@ const ImageContainer = styled.div`
 
 const ImageOne = styled.img`
   position: absolute;
-  line-height: 0;
   width: 183px;
   height: auto;
   left: -60px;
@@ -177,7 +171,7 @@ const ImageOne = styled.img`
       content: url('${mobile1_3x}');
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 380px;
     bottom: 112px;
     left: -45px;
@@ -197,7 +191,7 @@ const ImageOne = styled.img`
     }
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 380px;
     bottom: -25px;
     left: 0;
@@ -220,7 +214,6 @@ const ImageOne = styled.img`
 
 const ImageTwo = styled.img`
   position: absolute;
-  line-height: 0;
   width: 235px;
   height: auto;
   right: -45px;
@@ -239,7 +232,7 @@ const ImageTwo = styled.img`
         content: url('${mobile2_3x}');
     }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     bottom: 280px;
     width: 490px;
     right: -74px;
@@ -259,7 +252,7 @@ const ImageTwo = styled.img`
     }
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     bottom: 130px;
     right: 30px;
     width: 490px;
@@ -282,7 +275,6 @@ const ImageTwo = styled.img`
 
 const ImageThree = styled.img`
   position: absolute;
-  line-height: 0;
   width: 165px;
   height: auto;
   bottom: -5px;
@@ -301,7 +293,7 @@ const ImageThree = styled.img`
         content: url('${mobile3_3x}');
     }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     bottom: 12px;
     right: 12px;
     width: 332px;
@@ -321,7 +313,7 @@ const ImageThree = styled.img`
     }
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     bottom: -140px;
     right: 112px;
     width: 336px;
