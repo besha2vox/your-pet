@@ -2,17 +2,17 @@ import PropTypes from 'prop-types';
 import { Btn } from './Button.styled';
 
 // - кнопка без іконки з прозорим фоном, при ховері - синій градієнт, довжина 252px (248px):
-// <Button text="Your text" clickHandler={YourClickHandler} />;
+// <Button type='button' text="Your text" clickHandler={YourClickHandler} />;
 // пропси text та clickHandler є обов'язковими
 
 // - кнопка з іконкою з прозорим фоном, при ховері - синій градієнт, довжина 252px (248px):
-// <Button text="Your text" clickHandler={YourClickHandler} icon={<YourIcon/>} />;
+// <Button type='button' text="Your text" clickHandler={YourClickHandler} icon={<YourIcon/>} />;
 
 // - кнопка з іконкою з синім фоном, при ховері - синій градієнт, довжина 252px (248px):
-//<Button text="Your text" clickHandler={YourClickHandler} icon={<YourIcon />} filled />;
+//<Button type='button' text="Your text" clickHandler={YourClickHandler} icon={<YourIcon />} filled />;
 
 // - кнопка з іконкою з синім фоном, при ховері - синій градієнт, довжина 129px:
-// <Button text="Your text" clickHandler={YourClickHandler} icon={<YourIcon />} filled short />;
+// <Button type='button' text="Your text" clickHandler={YourClickHandler} icon={<YourIcon />} filled short />;
 
 // PROPS
 // - text - обов'язковий - текст кнопки;
@@ -23,11 +23,7 @@ import { Btn } from './Button.styled';
 
 const Button = ({ text, icon, clickHandler, filled, short }) => {
   return (
-    <Btn
-      onClick={clickHandler && (() => clickHandler(false))}
-      filled={filled}
-      short={short}
-    >
+    <Btn type="button" onClick={clickHandler} filled={filled} short={short}>
       {text}
       {icon}
     </Btn>

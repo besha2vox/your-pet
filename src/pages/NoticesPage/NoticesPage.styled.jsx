@@ -20,4 +20,35 @@ const Title = styled.h2`
   }
 `;
 
-export { Wrapper, Title };
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${({ theme }) => theme.space[2] * 3 + 'px'};
+`;
+
+const Filters = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 35px;
+
+  margin-top: ${({ theme }) => theme.space[2] * 5 + 'px'};
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: ${({ theme }) => theme.space[3] * 10 + 'px'};
+
+    margin-top: ${({ theme }) => theme.space[3] * 5 + 'px'};
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+
+    width: 100%;
+    margin-top: ${({ theme }) => theme.space[3] * 5 + 'px'};
+  }
+`;
+
+export { Wrapper, Title, Container, Filters };
