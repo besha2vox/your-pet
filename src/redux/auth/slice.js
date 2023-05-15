@@ -1,5 +1,11 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { register, logIn, logOut, getCurrentUser } from './operations';
+import {
+  register,
+  logIn,
+  logOut,
+  getCurrentUser,
+  updateUser,
+} from './operations';
 
 const initialState = {
   user: { name: null, email: null },
@@ -44,12 +50,16 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.token = null;
       })
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
+        state.user = payload;
+      })
       .addMatcher(
         isAnyOf(
           register.pending,
           logIn.pending,
           logOut.pending,
-          getCurrentUser.pending
+          getCurrentUser.pending,
+          updateUser.pending
         ),
         state => {
           state.isLoading = true;
@@ -60,7 +70,8 @@ const authSlice = createSlice({
           register.fulfilled,
           logIn.fulfilled,
           logOut.fulfilled,
-          getCurrentUser.fulfilled
+          getCurrentUser.fulfilled,
+          updateUser.fulfilled
         ),
         state => {
           state.isLoading = false;
@@ -72,7 +83,8 @@ const authSlice = createSlice({
           register.rejected,
           logIn.rejected,
           logOut.rejected,
-          getCurrentUser.rejected
+          getCurrentUser.rejected,
+          updateUser.rejected
         ),
         (state, { payload }) => {
           state.isLoading = false;
