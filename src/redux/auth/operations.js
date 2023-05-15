@@ -15,7 +15,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/users/signup', credentials);
+      const response = await axios.post('/users/register', credentials);
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
@@ -66,6 +66,18 @@ export const getCurrentUser = createAsyncThunk(
       setAuthHeader(currentToken);
       const response = await axios.get('/users/current');
       return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  'user/updateUser',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      await axios.put('/users/update', credentials);
+      clearAuthHeader();
     } catch (error) {
       return rejectWithValue(error.message);
     }
