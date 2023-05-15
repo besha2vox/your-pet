@@ -1,4 +1,4 @@
-import { ReactComponent as Pawprint } from "../../../images/icons/pawprint.svg";
+import { ReactComponent as Pawprint } from "images/icons/pawprint.svg";
 
 const ModalCongrats = ( { toggleModal } ) => {
 
