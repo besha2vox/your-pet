@@ -1,6 +1,9 @@
 import NewsList from '../../shared/components/NewsList/NewsList';
 import NoticesSearch from '../../shared/components/NoticesSearch/NoticesSearch';
-import { useState, useEffect } from 'react';
+import {  useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from 'shared/components/Loader/Loader';
 
 import Container from 'shared/components/Container/Container';
 //import news from './news.json';
@@ -8,15 +11,16 @@ import Container from 'shared/components/Container/Container';
 
 import { Title } from './NewsPage.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchNews, fetchNewsByQuery2} from 'redux/news/operations';
+import { fetchNews, fetchNewsByQuery2 } from 'redux/news/operations';
 
-import { getAllNews, getHintsh } from 'redux/news/selectors';
+import { getAllNews, getHintsh, loading ,error} from 'redux/news/selectors';
 
 const NewsPage = () => {
-
   const dispatch = useDispatch();
   const data = useSelector(getAllNews);
   const hints = useSelector(getHintsh);
+  const isLoading = useSelector(loading);
+  const isError = useSelector(error);
 
   //console.log(hints);
 
@@ -25,19 +29,33 @@ const NewsPage = () => {
     fetchAllNews();
   }, [dispatch]);
 
-  const onSearch = (searchQuery) => {
-    console.log(searchQuery);
-    const fetchNewsByQuery = async () => await dispatch(fetchNewsByQuery2(searchQuery));
-    fetchNewsByQuery(searchQuery);
-  }
+  const onSearch = searchQuery => {
+    const fetchNewsByQuery = async () => {
+      await dispatch(fetchNewsByQuery2(searchQuery));
+    };
+    return fetchNewsByQuery(searchQuery);
+  };
 
+  const clearWaitingQueue = () => {
+     toast.clearWaitingQueue();
+  }
+ 
   return (
     <Container>
       <Title> News</Title>
-      <NoticesSearch onFormSubmit = {onSearch}>
+      <NoticesSearch onFormSubmit={onSearch}></NoticesSearch>
+      {isLoading && <Loader />}
 
-      </NoticesSearch>
+      {isError && (toast.warn('Nothing have found. Try smth else!', {
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+            
+          }), clearWaitingQueue())}
       <NewsList data={data} />
+      <ToastContainer limit={1}/>
+      
     </Container>
   );
 };
