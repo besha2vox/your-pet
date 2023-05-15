@@ -49,8 +49,6 @@ const MainContainer = styled.div`
   position: relative;
   width: 100%;
   min-height: 100vh;
-  margin-left: auto;
-  margin-right: auto;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url('${bg_mobile1x}');
