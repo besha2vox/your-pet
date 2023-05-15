@@ -24,8 +24,6 @@ const Pagination = props => {
     totalPagesCount,
   });
 
-  // console.log(currentPage);
-
   if (currentPage === 0 || paginationRange.length < 2) {
     return null;
   }

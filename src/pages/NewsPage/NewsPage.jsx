@@ -31,7 +31,7 @@ const NewsPage = () => {
 
   useEffect(() => {
     const fetchAllNews = async () => await dispatch(fetchNews({ page }));
-    console.log('page', page);
+
     fetchAllNews();
   }, [dispatch, page]);
 
@@ -57,7 +57,6 @@ const NewsPage = () => {
       return;
     }
     setSearchParams({ page: currentPage });
-    console.log(page);
   };
 
   return (
