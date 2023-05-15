@@ -1,7 +1,7 @@
-import { ReactComponent as DeletePet } from "../../../images/icons/trash-2.svg";
+import { ReactComponent as DeletePet } from "images/icons/trash-2.svg";
 import { useState } from "react";
-import Modal from "../Modal/Modal";
-// import ModalApproveAction from "../ModalApproveAction/ModalApproveAction";
+import Modal from "shared/components/Modal/Modal";
+import ModalApproveAction from "../ModalApproveAction/ModalApproveAction";
 
 
 const PetsItem = ({ pet  } ) => {
@@ -11,6 +11,11 @@ const PetsItem = ({ pet  } ) => {
     const toggleModal = () => {
         setIsModalOpen(prevState => !prevState);
     };
+
+    const handlerClick = () => {
+        //     dispatch(logOut())
+            console.log("Delete");
+        }
 
     return ( 
     <>
@@ -26,7 +31,9 @@ const PetsItem = ({ pet  } ) => {
         </li>
         { isModalOpen && (
             <Modal toggleModal={toggleModal}>
-                {/* <ModalApproveAction id={pet._id}/> */}
+                <ModalApproveAction toggleModal={toggleModal} type="button" clickHandler={handlerClick} icon={<DeletePet stroke="#FEF9F9" fill="#54ADFF" />} >
+                    Delete information about {pet.name}?
+                </ModalApproveAction>
             </Modal>
         )}
     </>
