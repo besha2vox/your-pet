@@ -61,11 +61,6 @@ const PaginationItem = styled.li`
     background-color: transparent;
     
 
-  //   &:hover {
-  //     background-color: transparent;
-  //     cursor: default;
-  //   }
-  // }
 `;
 const ArrowLeft = styled.div`
   display: flex;
