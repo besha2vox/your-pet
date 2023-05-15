@@ -7,7 +7,7 @@ export const fetchNews = createAsyncThunk(
   async (params, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `/api/news${createSearchParams(params)}`
+        `/api/news?${createSearchParams(params)}`
       );
       return response.data;
     } catch (error) {
