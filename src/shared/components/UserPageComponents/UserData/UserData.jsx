@@ -1,11 +1,11 @@
 import UserDataItem from '../UserDataItem/UserDataItem';
-import useForm from "../hooks/useForm";
+import useForm from "shared/components/hooks/useForm";
 import fields from "./fields";
-import avatarDefault2x from "../../../images/profile_img/Photo_default_2x.jpg";
-// import avatarDefault1x from "../../../images/profile_img/Photo_default_1x.jpg";
-// import avatarDefault3x from "../../../images/profile_img/Photo_default_3x.jpg";
-import { ReactComponent as Camera } from "../../../images/icons/camera.svg";
-import { ReactComponent as Check } from "../../../images/icons/check.svg";
+import avatarDefault2x from "images/profile_img/Photo_default_2x.jpg";
+// import avatarDefault1x from "images/profile_img/Photo_default_1x.jpg";
+// import avatarDefault3x from "images/profile_img/Photo_default_3x.jpg";
+import { ReactComponent as Camera } from "images/icons/camera.svg";
+import { ReactComponent as Check } from "images/icons/check.svg";
 // import { useSelector, useDispatch } from "react-redux";
 // import { Formik, ErrorMessage } from 'formik';
 // import * as yup from 'yup';

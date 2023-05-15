@@ -1,7 +1,7 @@
-import UserData from '../../shared/components/UserData/UserData';
-import PetsData from '../../shared/components/PetsData/PetsData';
+import UserData from '../../shared/components/UserPageComponents/UserData/UserData';
+import PetsData from '../../shared/components/UserPageComponents/PetsData/PetsData';
 import Logout from '../../shared/components/Logout/Logout';
-import ModalCongrats from '../../shared/components/ModalCongrats/ModalCongrats';
+import ModalCongrats from '../../shared/components/UserPageComponents/ModalCongrats/ModalCongrats';
 import { useState, useEffect } from 'react';
 import Modal from 'shared/components/Modal/Modal';
 
@@ -11,7 +11,7 @@ const UserPage = () => {
   const [congradModal, setCongradModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const firstVisit = true;
+  const firstVisit = false;
 
   useEffect(() => {
     if (firstVisit) {
