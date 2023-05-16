@@ -51,7 +51,7 @@ const MainContainer = styled.div`
   width: 100%;
   min-height: 100vh;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-image: url('${bg_mobile1x}');
   @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
