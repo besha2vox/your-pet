@@ -46,7 +46,8 @@ import desctop3_3x from '../../images/main_img/desctop/3desctop3x.png';
 import { theme } from 'theme/theme';
 
 const MainContainer = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   min-height: 100vh;
   background-repeat: no-repeat;
@@ -83,6 +84,7 @@ const MainContainer = styled.div`
   }
 
   @media screen and (min-width: 1280px) {
+    flex-direction: row;
     background-image: url('${bg_desctop1x}');
 
     @media (min-device-pixel-ratio: 2),
@@ -101,7 +103,6 @@ const MainContainer = styled.div`
 `;
 
 const MainTitle = styled.h1`
-  position: absolute;
   width: 280px;
   height: 88px;
   margin-top: ${({theme}) => theme.space[5] + 'px'};
@@ -121,31 +122,34 @@ const MainTitle = styled.h1`
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 501px;
     height: 264px;
-    margin-top: ${({theme}) => theme.space[6] + 176 + 'px'};
+    margin-top: ${({theme}) => theme.space[6] + 111 + 'px'};
     font-family: ${({theme}) => theme.fonts.main.extraBold};
     font-size: ${({ theme }) => theme.fontSizes[8]};
-    line-height: 1,3,;
+    line-height: 1.3;
   }
 `;
 
 const ImageContainer = styled.div`
-  position: absolute;
+  position: relative;
   overflow: visible;
-  top: 216px;
+  margin-top: 30px;
+  margin-left: -20px;
   width: 320px;
   height: 390px;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    height: 820px;
     width: 768px;
-    height: 815px;
-    top: 375px;
+    margin-top: 20px;
+    margin-left: -30px;
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    position: absolute;
+    right: 0;
     width: 917px;
-    height: 670px;
-    left: 365px;
-    top: 98px;
+    height: 570px;
+    top: 180px;
   }
 `;
 
