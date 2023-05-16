@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/your-pet/static/css/main.f3f92c52.css",
-    "main.js": "/your-pet/static/js/main.0d6fecd7.js",
+    "main.css": "/your-pet/static/css/main.1fb06c5e.css",
+    "main.js": "/your-pet/static/js/main.eb1bb76c.js",
     "static/media/Inter-Medium.ttf": "/your-pet/static/media/Inter-Medium.9d1fd4235eeb376c5f96.ttf",
     "static/media/Inter-Regular.ttf": "/your-pet/static/media/Inter-Regular.b559a93b35af397f4b6f.ttf",
     "static/media/Manrope-ExtraBold.ttf": "/your-pet/static/media/Manrope-ExtraBold.8d30ac27ff052fef056a.ttf",
@@ -32,7 +32,7 @@
     "static/media/logout.svg": "/your-pet/static/media/logout.1afadc87db93acf40fabd99c0812ad0d.svg",
     "static/media/round.svg": "/your-pet/static/media/round.a3d85d5f08089c54a3649f43f1c4000b.svg",
     "static/media/filters-3.svg": "/your-pet/static/media/filters-3.bf8fead705e6463c720477be3c4ec50b.svg",
-    "static/media/arrow-left.svg": "/your-pet/static/media/arrow-left.1c672eb726826c26e4073c01d42bd6d0.svg",
+    "static/media/arrow-left.svg": "/your-pet/static/media/arrow-left.c3e27e6eb955be54dd02f81a953cd0b5.svg",
     "static/media/cross-small-1.svg": "/your-pet/static/media/cross-small-1.c571be2c1d6582816910a877a0db5a4a.svg",
     "static/media/cross-small.svg": "/your-pet/static/media/cross-small.7b3821a2ab5686b23a2f771591b8b66c.svg",
     "static/media/check.svg": "/your-pet/static/media/check.2a64553bc65df77be06926ee8669f056.svg",
@@ -41,11 +41,11 @@
     "static/media/chevron-up.svg": "/your-pet/static/media/chevron-up.8b1ae116e1912ee79d301b6e7f32426a.svg",
     "static/media/chevron-down.svg": "/your-pet/static/media/chevron-down.1a212c1c13748ebea659b0fd342f0062.svg",
     "static/media/plus.svg": "/your-pet/static/media/plus.82f4622ce65fb42acb45c3cd956c8148.svg",
-    "main.f3f92c52.css.map": "/your-pet/static/css/main.f3f92c52.css.map",
-    "main.0d6fecd7.js.map": "/your-pet/static/js/main.0d6fecd7.js.map"
+    "main.1fb06c5e.css.map": "/your-pet/static/css/main.1fb06c5e.css.map",
+    "main.eb1bb76c.js.map": "/your-pet/static/js/main.eb1bb76c.js.map"
   },
   "entrypoints": [
-    "static/css/main.f3f92c52.css",
-    "static/js/main.0d6fecd7.js"
+    "static/css/main.1fb06c5e.css",
+    "static/js/main.eb1bb76c.js"
   ]
 }
