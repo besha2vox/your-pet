@@ -83,7 +83,7 @@ const MainContainer = styled.div`
     }
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     flex-direction: row;
     background-image: url('${bg_desctop1x}');
 
