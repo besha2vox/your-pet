@@ -43,13 +43,17 @@ const NewsPage = () => {
 
   const getNews = (searchQuery, page) => {
     const fetchNewsByQuery = async () => {
-      await dispatch(searchQuery!=='' ? fetchNewsByQuery2({ query: searchQuery, page: page }) : fetchNews({ page: page }));
+      await dispatch(
+        searchQuery
+          ? fetchNewsByQuery2({ query: searchQuery, page: page })
+          : fetchNews({ page: page })
+      );
     };
     return fetchNewsByQuery();
-  }
+  };
 
   const onSearch = searchQuery => {
-    var params = searchQuery ? { query: searchQuery, page: 1 } : { page: 1 }
+    var params = searchQuery ? { query: searchQuery, page: 1 } : { page: 1 };
     setSearchParams(params);
     // getNews(searchQuery, 1);
   };
@@ -62,7 +66,9 @@ const NewsPage = () => {
     if (page === currentPage) {
       return;
     }
-    var params = searchQuery ? { query: searchQuery, page: currentPage } : { page: currentPage }
+    var params = searchQuery
+      ? { query: searchQuery, page: currentPage }
+      : { page: currentPage };
     setSearchParams(params);
   };
 
