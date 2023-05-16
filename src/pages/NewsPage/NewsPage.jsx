@@ -28,12 +28,11 @@ const NewsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page = searchParams.get('page') || 1;
+  const searchQuery = searchParams.get('query');
 
   useEffect(() => {
-    const fetchAllNews = async () => await dispatch(fetchNews({ page }));
-
-    fetchAllNews();
-  }, [dispatch, page]);
+    getNews(searchQuery, page);
+  }, [dispatch, searchQuery, page]);
 
   useEffect(() => {
     if (totalHints) {
@@ -41,11 +40,18 @@ const NewsPage = () => {
       setTotalPages(pages);
     }
   }, [totalHints, hints]);
-  const onSearch = searchQuery => {
+
+  const getNews = (searchQuery, page) => {
     const fetchNewsByQuery = async () => {
-      await dispatch(fetchNewsByQuery2(searchQuery));
+      await dispatch(searchQuery!=='' ? fetchNewsByQuery2({ query: searchQuery, page: page }) : fetchNews({ page: page }));
     };
-    return fetchNewsByQuery(searchQuery);
+    return fetchNewsByQuery();
+  }
+
+  const onSearch = searchQuery => {
+    var params = searchQuery ? { query: searchQuery, page: 1 } : { page: 1 }
+    setSearchParams(params);
+    // getNews(searchQuery, 1);
   };
 
   const clearWaitingQueue = () => {
@@ -56,7 +62,8 @@ const NewsPage = () => {
     if (page === currentPage) {
       return;
     }
-    setSearchParams({ page: currentPage });
+    var params = searchQuery ? { query: searchQuery, page: currentPage } : { page: currentPage }
+    setSearchParams(params);
   };
 
   return (
@@ -73,7 +80,9 @@ const NewsPage = () => {
           draggable: true,
         }),
         clearWaitingQueue())}
+
       <NewsList data={data} />
+
       <ToastContainer limit={1} />
 
       <Pagination

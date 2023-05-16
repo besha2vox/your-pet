@@ -17,6 +17,6 @@ text-align: center;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: ${({ theme }) => theme.fontSizes[7]};
-    padding: 80px 0 60px 0;
+    padding: 80px 0 0 0;
   }
 `;

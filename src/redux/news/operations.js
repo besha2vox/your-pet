@@ -16,24 +16,10 @@ export const fetchNews = createAsyncThunk(
 );
 
 export const fetchNewsByQuery2 = createAsyncThunk(
-  'news/fetchNews',
+  'news/fetchNewsByQuery2',
   async (params, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/api/news/search?query=${params}`);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const fetchNewsByQuery = createAsyncThunk(
-  'news/fetchNewsByQuery',
-  async (params, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(
-        `/api/news/search?${createSearchParams(params)}`
-      );
+      const response = await axios.get(`/api/news/search?${createSearchParams(params)}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
