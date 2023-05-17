@@ -66,10 +66,3 @@ export const PetComment = styled.p`
     font-weight: 600;
   }
 `;
-
-export const TrashButton = styled.button`
-  background: transparent;
-  border: none;
-  width: 24px;
-  height: 24px;
-`;

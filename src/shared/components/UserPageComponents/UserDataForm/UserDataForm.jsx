@@ -136,6 +136,7 @@ const UserDataForm = ({ onSubmit }) => {
           handleClick={handleClick}
           handleSubmit={handleSubmit}
         />
+        <Logout />
       </UserForm>
     </Formik>
   );

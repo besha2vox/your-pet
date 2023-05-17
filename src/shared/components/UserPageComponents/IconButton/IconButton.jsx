@@ -1,25 +1,17 @@
 import PropTypes from 'prop-types';
-import { Btn } from '../../Button/Button.styled';
+import { Btn } from './IconButton.styled';
 
-const Button = ({ type, text, icon, clickHandler, filled, short, heart }) => {
+const IconButton = ({ type, icon, clickHandler }) => {
   return (
-    <Btn
-      type={type}
-      onClick={clickHandler}
-      filled={filled}
-      short={short}
-      heart={heart}
-    >
-      {text}
+    <Btn type={type} onClick={clickHandler}>
       {icon}
     </Btn>
   );
 };
 
-Button.propTypes = {
-  text: PropTypes.string.isRequired,
+IconButton.propTypes = {
   icon: PropTypes.node,
   clickHandler: PropTypes.func.isRequired,
 };
 
-export default Button;
+export default IconButton;
