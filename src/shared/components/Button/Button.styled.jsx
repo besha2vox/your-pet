@@ -25,6 +25,8 @@ const Btn = styled.button`
   border-style: solid;
   border-radius: 40px;
 
+  z-index: 2;
+
   transition: color 300ms ${({ theme }) => theme.transition.main},
     border-color 300ms ${({ theme }) => theme.transition.main},
     background-color 300ms ${({ theme }) => theme.transition.main};
@@ -60,15 +62,17 @@ const Btn = styled.button`
   }
 
   & svg {
-    fill: ${({ theme, filled }) =>
-      filled ? theme.colors.white : theme.colors.blue};
+    fill: ${({ theme, filled, heart }) =>
+      filled && !heart ? theme.colors.white : theme.colors.blue};
+
+    stroke: ${({ theme, heart }) => heart && theme.colors.white};
 
     transition: fill 300ms ${({ theme }) => theme.transition.main};
   }
 
   &:hover svg,
   &:focus svg {
-    fill: ${({ theme }) => theme.colors.white};
+    fill: ${({ theme, heart }) => !heart && theme.colors.white};
   }
 `;
 

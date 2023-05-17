@@ -25,6 +25,8 @@ const Btn = styled(Link)`
   border-radius: 50%;
   box-shadow: ${({ theme }) => theme.boxShadows.main};
 
+  z-index: 1;
+
   transition: background-color 300ms ${({ theme }) => theme.transition.main};
 
   &:hover,

@@ -11,7 +11,8 @@ export const Backdrop = styled.div`
 
   backdrop-filter: blur(${({ inNoticePage }) => (inNoticePage ? '4px' : 0)});
 
-  z-index: 2;
+  overflow-y: scroll;
+  z-index: 101;
 `;
 
 export const ModalWindow = styled.div`
@@ -20,17 +21,20 @@ export const ModalWindow = styled.div`
   left: 50%;
 
   transform: translateX(-50%);
-
-  border-radius: 40px;
+  border-radius: 20px;
   background-color: #ffffff;
 
   z-index: 3;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    border-radius: 40px;
+  }
 `;
 
 export const CloseBtn = styled.button`
   position: absolute;
-  top: 24px;
-  right: 24px;
+  top: 12px;
+  right: 12px;
 
   background-color: transparent;
   border: none;
@@ -38,12 +42,17 @@ export const CloseBtn = styled.button`
   color: ${({ theme }) => theme.colors.black};
 
   & svg {
-    stroke: ${({ theme }) => theme.colors.black};
+    stroke: ${({ theme }) => theme.colors.blue};
 
     transition: stroke 250ms ${({ theme }) => theme.transition.main};
   }
   &:hover svg,
   &:focus svg {
-    stroke: ${({ theme }) => theme.colors.blue};
+    stroke: ${({ theme }) => theme.colors.yellow};
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    top: 24px;
+    right: 24px;
   }
 `;
