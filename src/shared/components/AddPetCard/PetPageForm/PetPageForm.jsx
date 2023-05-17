@@ -2,6 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { addNotice } from 'redux/notices/operations';
 
 import MoreInfo from '../MoreInfoForm/MoreInfoForm';
 import ChooseForm from '../ChooseForm/ChooseForm';
@@ -40,8 +43,8 @@ const AddPetPageForm = () => {
   const [category, setCategory] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const backLink = location.state?.from ?? '/';
-  console.log('location', backLink);
 
   const steps = ['Choose Option', 'Personal Details', 'More Info'];
 
@@ -71,6 +74,12 @@ const AddPetPageForm = () => {
     formData.append('location', values.location);
     formData.append('price', values.price);
     formData.append('comments', values.comments);
+
+    if (category === 'Add my pet') {
+      return;
+    }
+
+    dispatch(addNotice(formData));
 
     formData.forEach((value, key) => console.log(key, ':', value));
     navigate(backLink);
