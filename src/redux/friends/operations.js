@@ -3,10 +3,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchFriends = createAsyncThunk(
   'friends/fetchFriends',
-  async (_, { rejectWithValue }) => {
+  async (page, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get('/api/friends');
-      return data.result;
+      const response = await axios.get(`/api/friends?page=${page}`);
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }

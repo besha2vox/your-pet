@@ -3,6 +3,8 @@ import { fetchFriends } from './operations';
 
 const initialState = {
   items: [],
+  hints: 0,
+  totalHints: 0,
   isLoading: false,
   error: null,
 };
@@ -17,11 +19,14 @@ const friendsSlice = createSlice({
       })
       .addCase(fetchFriends.fulfilled, (store, { payload }) => {
         store.isLoading = false;
-        store.items = payload;
+        store.error = null;
+        store.items = payload.result;
+        store.hints = payload.hints;
+        store.totalHints = payload.totalHints;
       })
       .addCase(fetchFriends.rejected, (store, { payload }) => {
-        store.error = payload;
         store.isLoading = false;
+        store.error = payload;
       });
   },
 });
