@@ -76,13 +76,13 @@ const TextWrapper = styled.li`
     margin-bottom: 12px;
   }
 
-  :hover,
-  :focus {
+  :hover:not(.active),
+  :focus-visible:not(.active) {
     color: ${({ theme }) => theme.colors.blue};
   }
 `;
 
-const WorkTime = styled.button`
+const WorkTime = styled.p`
   font: inherit;
   font-weight: ${({ theme }) => theme.fonts.main.medium};
   font-size: ${({ theme }) => theme.fontSizes[0]};
@@ -93,9 +93,7 @@ const WorkTime = styled.button`
   cursor: pointer;
   border: none;
   background-color: inherit;
-  transition: color 350ms ${({ theme }) => theme.transition.main};
 
-  :hover,
   :focus {
     color: ${({ theme }) => theme.colors.blue};
   }
@@ -152,9 +150,7 @@ const ContactLink = styled.a`
   font-weight: ${({ theme }) => theme.fonts.main.medium};
   font-size: ${({ theme }) => theme.fontSizes[0]};
   line-height: 16px;
-  transition: color 350ms ${({ theme }) => theme.transition.main};
 
-  :hover,
   :focus {
     color: ${({ theme }) => theme.colors.blue};
   }
