@@ -5,6 +5,7 @@ import { visualyHidden } from 'shared/utils/visualyHidden';
 export const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   row-gap: 12px;
 `;
 
