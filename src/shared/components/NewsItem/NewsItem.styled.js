@@ -2,105 +2,78 @@ import styled from 'styled-components';
 import EllipsisText from 'react-ellipsis-text';
 
 export const Item = styled.li`
-height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: ${({ theme }) => theme.boxShadows.main};
+  border-radius: 20px;
 
-display: flex;
-flex-direction: column;
-// justify-content: center;
-align-items: space-between;
-box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
-border-radius: 20px;
+  background: #ffffff;
+  transition: box-shadow 300ms ${({ theme }) => theme.transition.main};
+  &:hover {
+    box-shadow: ${({ theme }) => theme.boxShadows.secondary};
+  }
 
-padding: 0px 0px 12px;
-margin-top: 40px;
-
-background: #FFFFFF;
-  
-list-style-type: none;
-
-@media (min-width: 768px) {
-  width: calc((100% - 32px) / 2);
-  margin-top: 60px;
-}
-@media (min-width: 1280px) {
-  width: calc((100% - 32px * 2) / 3);
-}
-}
-`;
-
-export const Line = styled.span`
-    margin-bottom: 14px;
-    display: block;
-    min-width: 280px;
+  &::before {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: 0;
+    width: 100%;
     height: 4px;
     width: 100%;
-  
+
+    transform: translateY(-100%);
     border-radius: 40px;
-    background-image: linear-gradient(290.46deg, #419EF1 0%, #9BD0FF 107.89%);
-    @media (min-width: 768px) {
-      width: 336px;
+    background-image: ${({ theme }) => theme.colors.gradientBlue};
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: calc((100% - 32px) / 2);
+
+    &::before {
       height: 8px;
     }
-    @media (min-width: 1280px) {
-      width: 394px;
-    }
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: calc((100% - 32px * 2) / 3);
   }
 `;
 
-export const Poster = styled.img`
-  margin-bottom: 16px;
+export const ImageWrapper = styled.div`
+  display: flex;
+  align-items: center;
   width: 100%;
+  object-fit: cover;
+  max-height: 252px;
 
   border-radius: 20px;
-  min-width: 280px;
-  min-height: 252px;
-
-  @media (min-width: 768px) {
-    width: 336px;
-    height: 8px;
-  }
-  @media (min-width: 1280px) {
-    width: 395px;
-    height: 252px;
-  }
+  overflow: hidden;
 `;
 
 export const TextContent = styled.div`
   display: flex;
   flex-direction: column;
-  //justify-content: center;
-  align-items: flex-start;
-  height: auto;
-  padding: 0px 12px;
-  flex-grow: 2;
-  
+  padding: 16px 12px 15px;
+  row-gap: 16px;
+  flex-grow: 1;
+
+  font-size: ${({ theme }) => theme.fontSizes[2]};
+  line-height: 1.38;
 `;
 
 export const NewsTitle = styled(EllipsisText)`
   margin-bottom: 15px;
   display: block;
 
-  font-size: 24px;
-  font-weight: 700;
+  font-family: ${({ theme }) => theme.fonts.main.bold};
+  font-size: ${({ theme }) => theme.fontSizes[4]};
   line-height: 1.375;
   letter-spacing: -0.01em;
-  flex-grow: 2;
-
 `;
 
 export const NewsBody = styled(EllipsisText)`
-  font-size: 16px;
-  font-weight: 400;
   line-height: 1.375;
-  height: auto;
-
-  @media (min-width: 768px) {
-    height: 150px;
-    display: block;
-  }
-  @media (min-width: 1280px) {
-    height: 120px;
-  }
 `;
 
 export const BottomInfoWrapper = styled.div`
@@ -113,23 +86,16 @@ export const BottomInfoWrapper = styled.div`
 `;
 
 export const NewsDate = styled.p`
-  font-family: 'Manrope';
-
-  font-weight: 400;
-  font-size: 16px;
-
-  line-height: 22px;
   color: #888888;
 `;
 
 export const NewsLink = styled.a`
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.375;
-  color: #54adff;
+  font-family: ${({ theme }) => theme.fonts.main.medium};
+  color: ${({ theme }) => theme.colors.blue};
   text-decoration: none;
+
   &:hover,
   :focus {
-    color: #ffc107;
+    color: ${({ theme }) => theme.colors.yellow};
   }
 `;

@@ -37,7 +37,6 @@ const PaginationItem = styled.li`
   line-height: 1.43;
   transition: all 350ms ${({ theme }) => theme.transition.main};
 
-
   &:hover {
     background-color: ${({ theme }) => theme.colors.blue};
     color: ${({ theme }) => theme.colors.white};
@@ -46,11 +45,11 @@ const PaginationItem = styled.li`
       stroke: ${({ theme }) => theme.colors.white};
     }
   }
-&.dots:hover {
-  background-color: transparent;
-  color: ${({ theme }) => theme.colors.blue};
-  cursor: default;
-}
+  &.dots:hover {
+    background-color: transparent;
+    color: ${({ theme }) => theme.colors.blue};
+    cursor: default;
+  }
 
   &.selected {
     background-color: ${({ theme }) => theme.colors.blue};
@@ -59,8 +58,7 @@ const PaginationItem = styled.li`
   &.disabled {
     pointer-events: none;
     background-color: transparent;
-    
-
+  }
 `;
 const ArrowLeft = styled.div`
   display: flex;

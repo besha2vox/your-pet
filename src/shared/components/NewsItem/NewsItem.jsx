@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types';
-//import EllipsisText from 'react-ellipsis-text';
 import { format } from 'date-fns';
 import { useState, useEffect } from 'react';
 import {
   Item,
-  Line,
-  Poster,
   NewsBody,
   NewsTitle,
   TextContent,
   BottomInfoWrapper,
   NewsDate,
   NewsLink,
+  ImageWrapper,
 } from './NewsItem.styled';
 
 export default function NewsItem({ title, url, date, imgUrl, text }) {
@@ -29,9 +27,9 @@ export default function NewsItem({ title, url, date, imgUrl, text }) {
 
   return (
     <Item>
-      <Line />
-      <Poster src={imgUrl} width="100" alt={title} />
-
+      <ImageWrapper>
+        <img src={imgUrl} alt={title} />
+      </ImageWrapper>
       <TextContent>
         <NewsTitle
           text={title}
