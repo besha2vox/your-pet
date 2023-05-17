@@ -3,6 +3,7 @@ import AddPetPage from 'pages/AddPetPage/AddPetPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import MainPage from 'pages/MainPage/MainPage';
 import NewsPage from 'pages/NewsPage/NewsPage';
+import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 import NoticesPage from 'pages/NoticesPage/NoticesPage';
 import OurFriendsPage from 'pages/OurFriendsPage/OurFriendsPage';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="user" element={<UserPage />} />
         <Route path="add-pet" element={<AddPetPage />} />
         <Route path="news" element={<NewsPage />} />
+        <Route path="not" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
