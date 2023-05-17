@@ -13,10 +13,10 @@ const Logout = () => {
     setIsModalOpen(prevState => !prevState);
   };
 
-  const handlerClick = () => {
-    //     dispatch(logOut())
-    console.log('Delete');
-  };
+  //   const handlerClick = () => {
+  //     //     dispatch(logOut())
+  //     console.log('Delete');
+  //   };
 
   return (
     <>
