@@ -1,9 +1,19 @@
-// import UserData from '../../shared/components/UserPageComponents/UserData/UserData';
-// import PetsData from '../../shared/components/UserPageComponents/PetsData/PetsData';
-import Logout from '../../shared/components/Logout/Logout';
-// import ModalCongrats from '../../shared/components/UserPageComponents/ModalCongrats/ModalCongrats';
+import UserData from '../../shared/components/UserPageComponents/UserData/UserData';
+import PetsData from '../../shared/components/UserPageComponents/PetsData/PetsData';
+import ModalCongrats from '../../shared/components/UserPageComponents/ModalCongrats/ModalCongrats';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/operations';
 import Modal from 'shared/components/Modal/Modal';
+import { ReactComponent as AddPet } from '../../images/icons/plus-small.svg';
+import {
+  MainContent,
+  TitleWrap,
+  Title,
+  Card,
+  PetsHeader,
+  AddPetButton,
+} from './UserPage.styled';
 
 const UserPage = () => {
   // const dispatch = useDispatch();
@@ -11,7 +21,12 @@ const UserPage = () => {
   const [congradModal, setCongradModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const firstVisit = false;
+  // const dispatch = useDispatch();
+  // const handleSignup = data => {
+  //   dispatch(logIn(data));
+  // };
+
+  const firstVisit = true;
 
   useEffect(() => {
     if (firstVisit) {
@@ -30,28 +45,40 @@ const UserPage = () => {
     <>
       {isModalOpen && congradModal && (
         <Modal toggleModal={toggleModal}>
-          {/* <ModalCongrats toggleModal={toggleModal} /> */}
+          <ModalCongrats toggleModal={toggleModal} />
         </Modal>
       )}
-      <p>My information:</p>
-      <div>
-        {/* <UserData /> */}
-        <Logout />
-        {/* <UserData />
+      <MainContent>
+        <div>
+          <TitleWrap>
+            <Title>My information:</Title>
+          </TitleWrap>
+          <Card>
+            <UserData />
+            {/* <Logout /> */}
+            {/* <UserData />
             UserDataItem --- input типу файл, url object -предпросмотр, 
             дані користувача + кнопка для редагування
             клік на кнопку - елемент в режимі редагування + кнопка для відправки
             доступно 1 поле для редагування */}
-        {/* <Logout /> По кліку відкривається модальне вікно ModalApproveAction (Already leaving?)
+            {/* <Logout /> По кліку відкривається модальне вікно ModalApproveAction (Already leaving?)
         Треба очистити redux стор після виходу !*/}
-      </div>
-      <p>My pets:</p>
-      <div>
-        {/* <PetsData /> */}
+          </Card>
+        </div>
+        <div>
+          <PetsHeader>
+            <Title>My pets:</Title>
+            <AddPetButton>
+              Add pet
+              <AddPet stroke="#FEF9F9" style={{ marginLeft: 8 }} />
+            </AddPetButton>
+          </PetsHeader>
+          <PetsData />
+        </div>
         {/* <Add pet/> кнопка посилання на AddPetPage */}
         {/* <PetsList - де взяти тих звірів?/> */}
         {/* PetsItem + ModalApproveAction (якщо так -*/}
-      </div>
+      </MainContent>
     </>
   );
 };
