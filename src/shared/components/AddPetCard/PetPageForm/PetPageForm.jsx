@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { addNotice } from 'redux/notices/operations';
 
 import MoreInfo from '../MoreInfoForm/MoreInfoForm';
 import ChooseForm from '../ChooseForm/ChooseForm';
@@ -38,6 +42,9 @@ const AddPetPageForm = () => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const backLink = location.state?.from ?? '/';
 
   const steps = ['Choose Option', 'Personal Details', 'More Info'];
 
@@ -45,10 +52,6 @@ const AddPetPageForm = () => {
     if (index > step) return '';
     if (index < step) return 'completed';
     return 'current';
-  };
-
-  const handleCancelClick = () => {
-    navigate('/user');
   };
 
   const handleNextClick = e => {
@@ -72,7 +75,14 @@ const AddPetPageForm = () => {
     formData.append('price', values.price);
     formData.append('comments', values.comments);
 
+    if (category === 'Add my pet') {
+      return;
+    }
+
+    dispatch(addNotice(formData));
+
     formData.forEach((value, key) => console.log(key, ':', value));
+    navigate(backLink);
   };
 
   const getPageTitle = useCallback(() => {
@@ -127,7 +137,7 @@ const AddPetPageForm = () => {
                 text="Next"
                 icon={<PawPrintIcon />}
                 clickHandler={handleNextClick}
-                filled={true}
+                filled={false}
               />
             )}
 
@@ -147,15 +157,12 @@ const AddPetPageForm = () => {
                 disabled={!category}
                 clickHandler={handlePrevClick}
                 text="Back"
+                isLink={false}
               />
             )}
 
             {step === 0 && (
-              <AddFormButtonBack
-                type="button"
-                clickHandler={handleCancelClick}
-                text="Cancel"
-              />
+              <AddFormButtonBack text="Cancel" isLink={true} path={backLink} />
             )}
           </AddFormButtonWrapper>
         </AddForm>

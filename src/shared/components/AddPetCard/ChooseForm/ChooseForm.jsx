@@ -60,7 +60,7 @@ const ChooseForm = ({ setCategory }) => {
 };
 
 ChooseForm.propTypes = {
-  category: PropTypes.string.isRequired,
+  setCategory: PropTypes.func.isRequired,
 };
 
 export default ChooseForm;

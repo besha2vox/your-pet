@@ -14,7 +14,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
-        <Route path="main" element={<MainPage />} />
+        <Route index element={<MainPage />} />
         <Route path="notices/:categoryName" element={<NoticesPage />} />
         <Route path="friends" element={<OurFriendsPage />} />
         <Route path="register" element={<RegisterPage />} />
@@ -22,7 +22,7 @@ const App = () => {
         <Route path="user" element={<UserPage />} />
         <Route path="add-pet" element={<AddPetPage />} />
         <Route path="news" element={<NewsPage />} />
-        <Route path="not" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

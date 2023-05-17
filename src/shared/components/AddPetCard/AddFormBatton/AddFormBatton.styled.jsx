@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const moveArrow = keyframes`
 0% {
@@ -15,7 +16,7 @@ const moveArrow = keyframes`
 }
 `;
 
-export const BackButton = styled.button`
+const buttonBack = css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,7 +47,7 @@ export const BackButton = styled.button`
   }
 `;
 
-export const NextButton = styled.button`
+const buttonNext = css`
   z-index: 10;
   position: relative;
   display: flex;
@@ -101,4 +102,16 @@ export const NextButton = styled.button`
   & svg {
     fill: currentColor;
   }
+`;
+
+export const NextButton = styled.button`
+  ${buttonNext}
+`;
+
+export const BackButton = styled.button`
+  ${buttonBack}
+`;
+
+export const BackLink = styled(Link)`
+  ${buttonBack}
 `;
