@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
-import { CrossSmallIcon } from 'shared/utils/icons';
+import { CrossIcon } from 'shared/utils/icons';
 import { Backdrop, ModalWindow, CloseBtn } from './Modal.styled';
 
 const modalContainer = document.getElementById('modal-root');
@@ -51,7 +51,7 @@ const Modal = ({ toggleModal, children }) => {
       <Backdrop onClick={onModalOpen} inNoticePage={inNoticePage}>
         <ModalWindow>
           <CloseBtn type="button" onClick={toggleModal}>
-            <CrossSmallIcon />
+            <CrossIcon />
           </CloseBtn>
           {children}
         </ModalWindow>
