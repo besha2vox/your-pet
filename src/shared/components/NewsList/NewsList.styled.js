@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
 export const List = styled.ul`
-padding: 0;
-margin: 0;
-@media (min-width: 768px) {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  row-gap: 44px;
+  margin-top: 44px;
 
-  column-gap: 32px;
-}
+  @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 32px;
+    row-gap: 46px;
+    margin-top: 80px;
+  }
 `;
-

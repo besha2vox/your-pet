@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 export const AddFormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 20px 8px 17px;
   width: 100%;
   min-height: 496px;
-  background: #ffffff;
-  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  background: ${({ theme }) => theme.colors.white};
+  box-shadow: ${({ theme }) => theme.boxShadows.main};
   border-radius: 40px;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin: 0 auto;
     padding: 20px 32px;
     max-width: 458px;

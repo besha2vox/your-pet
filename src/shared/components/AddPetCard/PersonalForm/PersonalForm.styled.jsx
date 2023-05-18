@@ -4,6 +4,7 @@ import { Field } from 'formik';
 export const PersonalFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   padding: 16px 0 24px;
   gap: 20px;
 `;
