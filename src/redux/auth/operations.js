@@ -15,7 +15,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/users/register', credentials);
+      const response = await axios.post('api/users/register', credentials);
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
@@ -33,7 +33,7 @@ export const logIn = createAsyncThunk(
   'auth/logIn',
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/users/login', credentials);
+      const response = await axios.post('api/users/login', credentials);
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
@@ -46,7 +46,7 @@ export const logOut = createAsyncThunk(
   'auth/logOut',
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post('/users/logout');
+      await axios.post('api/users/logout');
       clearAuthHeader();
     } catch (error) {
       return rejectWithValue(error.message);
@@ -64,7 +64,7 @@ export const getCurrentUser = createAsyncThunk(
 
     try {
       setAuthHeader(currentToken);
-      const response = await axios.get('/users/current');
+      const response = await axios.get('api/users/current');
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -76,7 +76,7 @@ export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (credentials, { rejectWithValue }) => {
     try {
-      await axios.put('/users/update', credentials);
+      await axios.put('api/users/update', credentials);
       clearAuthHeader();
     } catch (error) {
       return rejectWithValue(error.message);

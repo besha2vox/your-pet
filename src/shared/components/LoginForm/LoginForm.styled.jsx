@@ -21,36 +21,74 @@ export const LogInFormTitle = styled.h1`
   }
 `;
 
-export const LogInFormInput = styled(Field)`
-  padding: 12px 16px;
+export const LogInFormEmailContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
   margin-bottom: 32px;
 
+  @media screen and (max-width: 767px) {
+    margin-bottom: 24px;
+  }
+`;
+
+export const LogInFormEmailInputContainer = styled.div`
+  display: flex;
+  padding: 2px 16px;
+
+  border: 1px solid
+    ${({ theme, error }) => (error ? theme.colors.red : theme.colors.blue)};
+  border-radius: 40px;
+  &:focus-within {
+    border: 1px solid ${({ theme }) => theme.colors.yellow};
+    outline: none;
+  }
+`;
+
+export const LogInFormPasswordContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  margin-bottom: 32px;
+`;
+
+export const LogInFormPasswordInputContainer = styled.div`
+  display: flex;
+  padding: 2px 16px;
+
+  border: 1px solid
+    ${({ theme, error }) => (error ? theme.colors.red : theme.colors.blue)};
+  border-radius: 40px;
+
+  &:focus-within {
+    border: 1px solid ${({ theme }) => theme.colors.yellow};
+    outline: none;
+  }
+`;
+
+export const LogInFormInput = styled(Field)`
+  padding: 12px 0;
   line-height: 1.5;
   letter-spacing: 0.04em;
 
   width: 100%;
   height: 48px;
-  border: 1px solid ${({ theme }) => theme.colors.blue};
-  border-radius: 40px;
+  border: none;
+  outline: none;
+`;
 
-  &:focus {
-    border: 1px solid ${({ theme }) => theme.colors.yellow};
-    outline: none;
-  }
-  у @media screen and (max-width: 767px) {
-    margin-bottom: 24px;
-  }
+export const ErrorMessage = styled.div`
+  padding-left: 16px;
+  margin-top: 4px;
+  color: ${({ theme }) => theme.colors.red};
 `;
 
 export const PasswordIcon = styled.span`
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 50%;
-  right: 16px;
-  transform: translateY(-50%);
-  color: ${({ theme }) => theme.colors.blue};
+
   cursor: pointer;
 `;
 
@@ -60,6 +98,7 @@ export const EyeIcon = styled.span`
   justify-content: center;
   width: 24px;
   height: 24px;
+  color: ${({ theme }) => theme.colors.blue};
 `;
 
 export const LogInBtn = styled.button`
@@ -82,7 +121,7 @@ export const LogInBtn = styled.button`
   color: #ffffff;
 
   @media screen and (max-width: 767px) {
-    margin-top: 56px;
+    margin-top: 48px;
     margin-bottom: 24px;
   }
 `;

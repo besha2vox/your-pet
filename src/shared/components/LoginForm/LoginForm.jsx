@@ -2,90 +2,79 @@ import { Formik } from 'formik';
 import { ReactComponent as OpenEyeIcon } from '../../../images/icons/eye-open.svg';
 import { ReactComponent as CloseEyeIcon } from '../../../images/icons/eye-closed.svg';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
 
 import {
   LogInForm,
   LogInFormTitle,
+  LogInFormEmailContainer,
+  LogInFormEmailInputContainer,
   LogInFormInput,
+  LogInFormPasswordContainer,
+  LogInFormPasswordInputContainer,
+  ErrorMessage,
   PasswordIcon,
   LogInBtn,
   EyeIcon,
   RegisterText,
   RegisterLink,
 } from './LoginForm.styled';
+import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/operations';
+
+const initialValues = {
+  email: '',
+  password: '',
+};
+
+const fieldValidation = values => {
+  const errors = {};
+  if (!values.email) {
+    errors.email = 'This field is required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+    errors.email = 'Enter a valid Email';
+  }
+
+  if (!values.password) {
+    errors.password = 'This field is required';
+  } else if (values.password.length < 8) {
+    errors.password = 'Password must be at least 8 characters long';
+  }
+
+  return errors;
+};
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-
   const [showPassword, setShowPassword] = useState(false);
-
-  // const [state, setState] = useState({ email: '', password: '' });
-  // const [loading, setLoading] = useState(false);
-
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   const form = e.currentTarget;
-
-  //   if (loading) {
-  //     return;
-  //   }
-
-  //   setLoading(true);
-
-  //   try {
-  //     await dispatch(
-  //       logIn({
-  //         email: form.elements.email.value,
-  //         password: form.elements.password.value,
-  //         // user: {
-  //         //   email: form.elements.email.value,
-  //         //   password: form.elements.password.value,
-  //         // },
-  //         // token: '',
-  //       })
-  //     );
-  //     setState({ email: '', password: '' });
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // const handleChange = ({ target }) => {
-  //   const { name, value } = target;
-  //   setState(prevState => {
-  //     return { ...prevState, [name]: value };
-  //   });
-  // };
-
-  const emailValidation = values => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = 'Enter a valid Email';
-    }
-    return errors;
-  };
+  const [loading, setLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  // const { email, password } = state;
+
+  const handleSubmit = async (values, { setSubmitting }) => {
+    if (loading) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await dispatch(logIn(values));
+      setSubmitting(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Formik
-      initialValues={{ email: '', password: '' }}
-      validate={emailValidation}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}
+      initialValues={initialValues}
+      validate={fieldValidation}
+      validateOnChange={false}
+      onSubmit={handleSubmit}
     >
       {({
         values,
@@ -96,34 +85,48 @@ const LoginForm = () => {
         handleSubmit,
         isSubmitting,
       }) => (
-        <LogInForm>
+        <LogInForm onSubmit={handleSubmit}>
           <LogInFormTitle>Log In</LogInFormTitle>
-          <LogInFormInput
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={values.email}
-            onChange={handleChange}
-            required
-          />
-          {errors.email && touched.email && <div>{errors.email}</div>}
-          <LogInFormInput
-            type={showPassword ? 'text' : 'password'}
-            name="password"
-            placeholder="Password"
-            value={values.password}
-            onChange={handleChange}
-            required
-            right={
+          <LogInFormEmailContainer>
+            <LogInFormEmailInputContainer error={errors.email && touched.email}>
+              <LogInFormInput
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={values.email}
+                onChange={handleChange}
+                required
+              />
+            </LogInFormEmailInputContainer>
+            {errors.email && touched.email && (
+              <ErrorMessage>{errors.email}</ErrorMessage>
+            )}
+          </LogInFormEmailContainer>
+
+          <LogInFormPasswordContainer>
+            <LogInFormPasswordInputContainer
+              error={errors.password && touched.password}
+            >
+              <LogInFormInput
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Password"
+                value={values.password}
+                onChange={handleChange}
+                required
+              />
               <PasswordIcon onClick={togglePasswordVisibility}>
                 <EyeIcon>
-                  {showPassword ? <CloseEyeIcon /> : <OpenEyeIcon />}
+                  {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
                 </EyeIcon>
               </PasswordIcon>
-            }
-          />
+            </LogInFormPasswordInputContainer>
 
-          {errors.password && touched.password && <div>{errors.password}</div>}
+            {errors.password && touched.email && (
+              <ErrorMessage>{errors.password}</ErrorMessage>
+            )}
+          </LogInFormPasswordContainer>
+
           <LogInBtn type="submit" disabled={isSubmitting}>
             Log In
           </LogInBtn>
