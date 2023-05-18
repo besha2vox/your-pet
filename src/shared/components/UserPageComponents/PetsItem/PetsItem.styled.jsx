@@ -19,6 +19,7 @@ export const PetImage = styled.img`
   height: 240px;
   margin: 0 auto 20px;
   border-radius: 20px;
+  object-fit: cover;
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 128px;
     height: 128px;

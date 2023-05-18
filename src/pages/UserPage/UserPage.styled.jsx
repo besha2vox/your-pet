@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const MainContent = styled.div`
+  position: relative;
+
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     display: flex;
     gap: 32px;

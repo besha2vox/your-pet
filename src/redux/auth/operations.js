@@ -121,3 +121,54 @@ export const addMyPet = createAsyncThunk(
     }
   }
 );
+
+export const deletePet = createAsyncThunk(
+  'user/deleteMyPet',
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.delete(`api/pets/${id}`);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const getUserInfo = createAsyncThunk(
+  'user/getUserInfo',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`api/users/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const changeUser = createAsyncThunk(
+  'user/changeUser',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = credentials;
+      const response = await axios.put(`api/users/`, data);
+      console.log("response.data", response.data)
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const changeStatus = createAsyncThunk(
+  'user/changeStatus',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(`api/users/status`, data);
+      console.log("response.data", response.data)
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

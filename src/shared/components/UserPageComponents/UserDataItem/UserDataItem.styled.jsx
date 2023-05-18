@@ -1,5 +1,6 @@
 import { CheckIcon, EditIcon } from 'shared/utils/icons';
 import styled from 'styled-components';
+import { Field } from 'formik';
 
 export const FormItem = styled.div`
   position: relative;
@@ -32,7 +33,7 @@ export const EditInpuButton = styled.button`
   border: none;
 `;
 
-export const FormInput = styled.input`
+export const FormInput = styled(Field)`
   width: calc(100vw - 40vw);
   height: 28px;
   padding: 4px 12px;
@@ -70,11 +71,23 @@ export const EditIc = styled(EditIcon)`
   }
 `;
 export const ConfirmIcon = styled(CheckIcon)`
-  stroke: #00c3ad;
+  color: ${({ theme }) => theme.colors.green};
   width: 20px;
   height: 20px;
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 24px;
     height: 24px;
+  }
+`;
+
+export const ErrorContainer = styled.div`
+  position: absolute;
+  display: block;
+  color: ${({ theme }) => theme.colors.red};
+  margin-left: 110px;
+  margin-top: -30px;
+  background-color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.main.regular};
+  font-size: ${({ theme }) => theme.fontSizes[0]};
   }
 `;

@@ -12,6 +12,7 @@ const IconButton = ({ type, icon, clickHandler }) => {
 IconButton.propTypes = {
   icon: PropTypes.node,
   clickHandler: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default IconButton;

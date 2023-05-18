@@ -2,27 +2,33 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Btn = styled(Link)`
-  position: fixed;
-  top: 460px;
-  right: 20px;
+  // position: fixed;
+  // top: 460px;
+  // right: 20px;
+  translate: 0 -64px;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
-  gap: ${({ theme }) => theme.space[2] + 'px'};
+  gap: ${({ theme }) => theme.space[3] + 'px'};
 
-  width: 80px;
-  height: 80px;
-  padding-top: ${({ theme }) => theme.space[2] * 5 + 'px'};
-  padding-bottom: ${({ theme }) => theme.space[4] + 'px'};
+  width: 129px;
+  height: 40px;
+  // width: 80px;
+  // height: 80px;
+  padding-top: ${({ theme }) => theme.space[3] + 'px'};
+  padding-bottom: ${({ theme }) => theme.space[3] + 'px'};
+  padding-left: ${({ theme }) => theme.space[4] + 'px'};
+  padding-right: ${({ theme }) => theme.space[4] + 'px'};
 
   font-family: ${({ theme }) => theme.fonts.main.semiBold};
-  font-size: ${({ theme }) => theme.fontSizes[0]};
+  font-size: ${({ theme }) => theme.fontSizes[2]};
   color: #fff;
 
   background-color: ${({ theme }) => theme.colors.blue};
-  border-radius: 50%;
+  border-radius: 40px;
+  // border-radius: 50%;
   box-shadow: ${({ theme }) => theme.boxShadows.main};
 
   z-index: 1;
@@ -63,6 +69,8 @@ const Btn = styled(Link)`
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     position: relative;
+    translate: 0 -60px;
+
     top: 0;
     right: 0;
 
@@ -80,6 +88,9 @@ const Btn = styled(Link)`
     font-size: ${({ theme }) => theme.fontSizes[2]};
 
     border-radius: 40px;
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    translate: 0 -64px;
   }
 `;
 
