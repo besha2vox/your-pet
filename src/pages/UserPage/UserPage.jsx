@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
 import Modal from 'shared/components/Modal/Modal';
+import Button from 'shared/components/Button/Button';
 import { ReactComponent as AddPet } from '../../images/icons/plus-small.svg';
 import {
   MainContent,
@@ -68,10 +69,22 @@ const UserPage = () => {
         <div>
           <PetsHeader>
             <Title>My pets:</Title>
-            <AddPetButton>
+            <Button
+              //тут має бути хендлер для перенаправлення на сторінку додавання пету
+              //toggle  тільки для демонстрації
+              clickHandler={toggleModal}
+              filled
+              type="button"
+              short
+              text="Add pet"
+              icon={<AddPet stroke="#FEF9F9" style={{ marginLeft: 8 }} />}
+            ></Button>
+            {/**кастомна кнопка AddPet */}
+
+            {/* <AddPetButton>
               Add pet
               <AddPet stroke="#FEF9F9" style={{ marginLeft: 8 }} />
-            </AddPetButton>
+            </AddPetButton> */}
           </PetsHeader>
           <PetsData />
         </div>

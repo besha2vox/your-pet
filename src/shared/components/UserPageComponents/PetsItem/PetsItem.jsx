@@ -12,8 +12,9 @@ import {
   InfoItem,
   PetComment,
   InfoText,
-  TrashButton,
 } from './PetsItem.styled';
+
+import IconButton from '../IconButton/IconButton';
 
 const PetsItem = ({ pet, ava }) => {
   // name, birthday, breed, avatarURL, comments
@@ -38,9 +39,11 @@ const PetsItem = ({ pet, ava }) => {
               <SubTitle>Name:&nbsp;</SubTitle>
               <InfoText>{pet.name}</InfoText>
             </InfoItem>
-            <TrashButton onClick={() => setIsModalOpen(true)}>
-              <DeletePet stroke="#54ADFF" width={24} height={24} />
-            </TrashButton>
+            <IconButton
+              type="button"
+              clickHandler={handlerClick}
+              icon={<DeletePet stroke="#54ADFF" />}
+            ></IconButton>
           </NameWrapper>
           <InfoItem>
             <SubTitle>Date of birth:&nbsp; </SubTitle>

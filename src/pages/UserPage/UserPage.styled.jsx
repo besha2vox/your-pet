@@ -8,8 +8,8 @@ export const MainContent = styled.div`
 `;
 
 export const TitleWrap = styled.div`
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    font-size: 28px;
+  margin: 40px 0 18px;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin: 60px 0 24px;
   }
 `;
@@ -19,7 +19,7 @@ export const Title = styled.p`
   font-size: 20px;
   line-height: 1.36;
   letter-spacing: 0.04em;
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: 28px;
   }
 `;
@@ -38,6 +38,11 @@ export const Card = styled.div`
       height: 520px;
       padding: 20px;
     }
+    @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+      width: 395px;
+      height: 520px;
+      padding: 20px;
+    }
   }
 `;
 
@@ -48,7 +53,7 @@ export const PetsHeader = styled.div`
   height: 40px;
   margin: 40px 0 24px;
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    margin: 60px 0 44px;
+    margin: 40px 0 20px;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     margin: 60px 0 24px;

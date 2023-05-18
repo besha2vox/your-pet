@@ -13,6 +13,8 @@ import {
   EditInpuButton,
   FormInput,
   InputName,
+  EditIc,
+  ConfirmIcon,
 } from './UserDataItem.styled';
 
 const UserDataItem = ({ label, name, isdisabled, handleChange, handleSubmit, handleClick, ...props }) => {
@@ -26,28 +28,26 @@ const UserDataItem = ({ label, name, isdisabled, handleChange, handleSubmit, han
     <FormWrapper>
       <FormItem>
         <InputName>{label}</InputName>
-        <FormLabel htmlFor={id}>
-          {(!!isdisabled) && 
-          <EditInpuButton type="button"
-          onClick={() => handleActiveClick(name)}
-          >
-            <EditIcon stroke="#54ADFF" style={{ width: 20, height: 20 }} />
-          </EditInpuButton>}
-          {(!isdisabled) && 
-          <EditInpuButton type="submit"
-          onClick={handleSubmit}
-          >
-            <ConfirmIcon stroke="#00C3AD" style={{ width: 20, height: 20 }} />
-          </EditInpuButton>}
-          <FormInput
-            autoComplete="off"
-            id={id}
-            onChange={(e) => handleChange({ target: { name, value: e.target.value } })}
-            disabled={isdisabled}
-            {...props}
-          />
-        </FormLabel>
-        <ErrorMessage name={name} component="div" />
+        <FormLabel htmlFor={id}></FormLabel>
+        {!!isdisabled && (
+          <EditInpuButton type="button" onClick={() => handleActiveClick(name)}>
+            <EditIc />
+          </EditInpuButton>
+        )}
+        {!isdisabled && (
+          <EditInpuButton type="submit" onClick={handleSubmit}>
+            <ConfirmIcon />
+          </EditInpuButton>
+        )}
+        <FormInput
+          autoComplete="off"
+          id={id}
+          onChange={e =>
+            handleChange({ target: { name, value: e.target.value } })
+          }
+          disabled={isdisabled}
+          {...props}
+        />
       </FormItem>
     </FormWrapper>
   );
