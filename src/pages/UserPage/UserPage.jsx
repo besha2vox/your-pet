@@ -15,33 +15,27 @@ import {
   PetsHeader,
   AddPetButton,
 } from './UserPage.styled';
-
 const UserPage = () => {
   // const dispatch = useDispatch();
   // const isFirstVisit = useSelector(state => state.firstVisit);
   const [congradModal, setCongradModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   // const dispatch = useDispatch();
   // const handleSignup = data => {
   //   dispatch(logIn(data));
   // };
-
   const firstVisit = true;
-
   useEffect(() => {
     if (firstVisit) {
       setIsModalOpen(true);
       setCongradModal(true);
     }
   }, [firstVisit]);
-
   const toggleModal = () => {
     setIsModalOpen(prevState => !prevState);
     setCongradModal(prevState => !prevState);
     // dispatch() // Отправляем новое значение в store
   };
-
   return (
     <>
       {isModalOpen && congradModal && (
@@ -56,14 +50,7 @@ const UserPage = () => {
           </TitleWrap>
           <Card>
             <UserData />
-            {/* <Logout /> */}
-            {/* <UserData />
-            UserDataItem --- input типу файл, url object -предпросмотр, 
-            дані користувача + кнопка для редагування
-            клік на кнопку - елемент в режимі редагування + кнопка для відправки
-            доступно 1 поле для редагування */}
-            {/* <Logout /> По кліку відкривається модальне вікно ModalApproveAction (Already leaving?)
-        Треба очистити redux стор після виходу !*/}
+        {/* Треба очистити redux стор після виходу !*/}
           </Card>
         </div>
         <div>
@@ -95,5 +82,4 @@ const UserPage = () => {
     </>
   );
 };
-
 export default UserPage;
