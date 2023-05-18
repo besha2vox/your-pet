@@ -9,17 +9,11 @@ export const Section = styled.div`
   min-width: calc(100vw - 40px);
   height: 287px;
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    min-width: calc(100vw - 40px);
-    height: 287px;
+    min-width: calc(100vw - 160px);
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    min-width: calc(100vw - 160px);
-    height: 354px;
-  }
-
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    min-width: calc(100vw - 672px);
+    min-width: 608px;
     height: 354px;
   }
 `;

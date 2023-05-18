@@ -1,7 +1,7 @@
 const fields = {
-  name: {
+  username: {
     type: 'text',
-    name: 'name',
+    name: 'username',
     label: 'Name:',
     placeholder: 'Your name',
   },
@@ -13,7 +13,7 @@ const fields = {
   },
   birthday: {
     type: 'text',
-    name: 'birthday:',
+    name: 'birthday',
     label: 'Birthday:',
     placeholder: '00.00.0000',
   },

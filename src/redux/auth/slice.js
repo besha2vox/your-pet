@@ -5,6 +5,10 @@ import {
   logOut,
   getCurrentUser,
   updateUser,
+  getUserInfo,
+  deletePet,
+  changeUser,
+  changeStatus,
 } from './operations';
 
 const initialState = {
@@ -12,7 +16,7 @@ const initialState = {
   token: null,
   isLoading: false,
   error: null,
-  isLoggedIn: false,
+  isLoggedIn: true,
   isRefreshing: false,
 };
 
@@ -33,7 +37,10 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(logOut.fulfilled, (state, { payload }) => {
-        state.user = { name: null, email: null };
+        state.user = { 
+          name: null, 
+          email: null,  
+        };
         state.token = null;
         state.isLoggedIn = false;
         state.isRefreshing = false;
@@ -54,13 +61,32 @@ const authSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, { payload }) => {
         state.user = payload;
       })
+      .addCase(getUserInfo.fulfilled, (state, { payload }) => {
+        state.user = payload.user;
+      })
+      .addCase(deletePet.fulfilled, (state, { payload }) => {
+        const index = state.user.pet.findIndex(
+          pet => pet._id === payload.id
+        );
+        state.user.pet.splice(index, 1);
+      })
+      .addCase(changeUser.fulfilled, (state, { payload }) => {
+        state.user = payload.user;
+      })
+      .addCase(changeStatus.fulfilled, (state, { payload }) => {
+        state.user = payload.user;
+      })
       .addMatcher(
         isAnyOf(
           register.pending,
           logIn.pending,
           logOut.pending,
           getCurrentUser.pending,
-          updateUser.pending
+          updateUser.pending,
+          getUserInfo.pending,
+          deletePet.pending,
+          changeUser.pending,
+          changeStatus.pending,
         ),
         state => {
           state.isLoading = true;
@@ -72,7 +98,11 @@ const authSlice = createSlice({
           logIn.fulfilled,
           logOut.fulfilled,
           getCurrentUser.fulfilled,
-          updateUser.fulfilled
+          updateUser.fulfilled,
+          getUserInfo.fulfilled,
+          deletePet.fulfilled,
+          changeUser.fulfilled,
+          changeStatus.fulfilled,
         ),
         state => {
           state.isLoading = false;
@@ -85,7 +115,11 @@ const authSlice = createSlice({
           logIn.rejected,
           logOut.rejected,
           getCurrentUser.rejected,
-          updateUser.rejected
+          updateUser.rejected,
+          getUserInfo.rejected,
+          deletePet.rejected,
+          changeUser.rejected,
+          changeStatus.rejected,
         ),
         (state, { payload }) => {
           state.isLoading = false;

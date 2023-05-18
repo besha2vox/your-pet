@@ -1,36 +1,48 @@
-import { useState } from 'react';
+import {
+  useState,
+  // useEffect
+} from 'react';
 import avatarDefault2x from 'images/profile_img/Photo_default_2x.jpg';
 // import avatarDefault1x from "images/profile_img/Photo_default_1x.jpg";
 // import avatarDefault3x from "/images/profile_img/Photo_default_3x.jpg";
 import { ReactComponent as Camera } from 'images/icons/camera.svg';
-import { ReactComponent as Check } from 'images/icons/check.svg';
-import { ReactComponent as Cross } from 'images/icons/cross-small.svg';
-// import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectUser } from 'redux/auth/selectors';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useDispatch } from 'react-redux';
+import { changeUser } from 'redux/auth/operations';
+import { Formik, Field, ErrorMessage } from 'formik';
 import UserDataForm from '../UserDataForm/UserDataForm';
 import {
   UserInfo,
+  StylizedForm,
   Avatar,
   EditButton,
   ConfirmButtonWrap,
   ImageControls,
+  Cross,
+  Check,
 } from './UserData.styled';
+import PropTypes from 'prop-types';
 
-const UserData = () => {
+const UserData = ({ user }) => {
   const [edit, setEdit] = useState(false);
-  const [fileInput, setFileInput] = useState('');
+  const [petPhoto, setFileInput] = useState('');
+  const dispatch = useDispatch();
 
-  const { userImage } = useSelector(selectUser);
-
-  const initialValues = { fileInput: userImage || avatarDefault2x };
+  const initialValues = {
+    petPhoto:
+      user.avatarURL ||
+      avatarDefault2x,
+  };
 
   const handleAddAvatar = e => {
-    console.log(fileInput);
-    //   // диспатч и очистка
-    // setFileInput(false);
+    const formData = new FormData();
+    formData.append('petsPhoto', petPhoto);
+    dispatch(changeUser(formData));
+    setFileInput(false);
     setEdit(false);
+    setFileInput(false);
+    const newFormData = new FormData();
+    newFormData.append('pets-photo', petPhoto);
+    dispatch(changeUser(newFormData)); 
   };
 
   const handleCancelAvatar = e => {
@@ -43,20 +55,18 @@ const UserData = () => {
     const [file] = e.target.files;
     if (file) {
       setFileInput(file);
-      // console.log({ file });
     }
   };
 
   const handleEditBtn = () => {
-    document.getElementById('my-file-input').click();
+    document.getElementById('petPhoto').click();
   };
 
   const handleChangeData = data => {
     const updatedData = Object.fromEntries(
       Object.entries(data).filter(([key, value]) => value !== '')
     );
-    // dispatch({ type: 'MY_ACTION', payload: state });
-    console.log(updatedData);
+    dispatch(changeUser(updatedData));
   };
 
   return (
@@ -64,47 +74,45 @@ const UserData = () => {
       <UserInfo>
         <Formik initialValues={initialValues}>
           {({ setFieldValue }) => (
-            <Form>
-              <label htmlFor="my-file-input">
-                {!fileInput && !userImage && (
+            <StylizedForm>
+              <label htmlFor="petPhoto">
+                {!petPhoto && !user.avatarURL && (
                   <Avatar src={avatarDefault2x} alt="user avatar" />
                 )}
-                {!fileInput && userImage && (
-                  <Avatar src={userImage} alt="user avatar" />
+                {!petPhoto && user.avatarURL && (
+                  <Avatar src={user.avatarURL} alt="user avatar" />
                 )}
-                {!!fileInput && (
+                {!!petPhoto && (
                   <Avatar
+                    src={URL.createObjectURL(petPhoto)}
                     id="image"
-                    src={URL.createObjectURL(fileInput)}
-                    alt={fileInput.name}
+                    alt={petPhoto.username}
                   />
                 )}
-                <div>
-                  <Field name="fileInput">
-                    {({ field }) => (
-                      <Field
-                        type="file"
-                        id="my-file-input"
-                        name="fileInput"
-                        accept=".png, .jpg, .jpeg, .webp"
-                        hidden
-                        value=""
-                        onChange={handleClickInput}
-                      />
-                    )}
-                  </Field>
-                  <ErrorMessage name="user-avatar" component="div" />
-                </div>
+                <Field name="fileInput">
+                  {({ field }) => (
+                    <Field
+                      type="file"
+                      id="petPhoto"
+                      name="petPhoto"
+                      accept=".png, .jpg, .jpeg, .webp"
+                      hidden
+                      value=""
+                      onChange={handleClickInput}
+                    />
+                  )}
+                </Field>
+                <ErrorMessage name="user-avatar" component="div" />
               </label>
               <ImageControls>
-                {edit && fileInput ? (
+                {edit && petPhoto ? (
                   <ConfirmButtonWrap>
                     <EditButton type="button" onClick={handleAddAvatar}>
-                      <Check stroke="#54ADFF" style={{ marginRight: 8 }} />
+                      <Check />
                       Confirm
                     </EditButton>
                     <EditButton type="button" onClick={handleCancelAvatar}>
-                      <Cross stroke="#F43F5E" style={{ marginRight: 8 }} />
+                      <Cross />
                       Cancel
                     </EditButton>
                   </ConfirmButtonWrap>
@@ -115,13 +123,21 @@ const UserData = () => {
                   </EditButton>
                 )}
               </ImageControls>
-            </Form>
+            </StylizedForm>
           )}
         </Formik>
-        <UserDataForm onSubmit={handleChangeData} />
+        <UserDataForm onSubmit={handleChangeData} user={user} />
       </UserInfo>
     </>
   );
 };
 
 export default UserData;
+
+UserData.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.string,
+    username: PropTypes.string,
+    email: PropTypes.string,
+})
+};

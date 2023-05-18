@@ -1,7 +1,10 @@
-import { useMemo } from 'react';
+import {
+  useMemo,
+  // useState
+} from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-
+import { ErrorMessage } from 'formik';
 import {
   FormWrapper,
   FormItem,
@@ -11,15 +14,18 @@ import {
   InputName,
   EditIc,
   ConfirmIcon,
+  ErrorContainer,
 } from './UserDataItem.styled';
 
 const UserDataItem = ({
   label,
   name,
+  value,
   isdisabled,
-  handleChange,
-  handleSubmit,
   handleClick,
+  formik,
+  formErrors,
+  setFormErrors,
   ...props
 }) => {
   const id = useMemo(() => nanoid(), []);
@@ -39,19 +45,23 @@ const UserDataItem = ({
           </EditInpuButton>
         )}
         {!isdisabled && (
-          <EditInpuButton type="submit" onClick={handleSubmit}>
+          <EditInpuButton type="submit">
             <ConfirmIcon />
           </EditInpuButton>
         )}
         <FormInput
           autoComplete="off"
           id={id}
-          onChange={e =>
-            handleChange({ target: { name, value: e.target.value } })
-          }
+          name={name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values[name]}
           disabled={isdisabled}
           {...props}
         />
+        <ErrorMessage name={name}>
+          {msg => <ErrorContainer>{formErrors[name] || msg}</ErrorContainer>}
+        </ErrorMessage>
       </FormItem>
     </FormWrapper>
   );
@@ -60,6 +70,12 @@ const UserDataItem = ({
 export default UserDataItem;
 
 UserDataItem.propTypes = {
-  handleChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  isdisabled: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  formik: PropTypes.object.isRequired,
+  formErrors: PropTypes.object,
+  setFormErrors: PropTypes.func,
 };
