@@ -1,8 +1,6 @@
 import { useMemo, useState } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-import { ReactComponent as EditIcon } from 'images/icons/edit-2.svg';
-import { ReactComponent as ConfirmIcon } from 'images/icons/check.svg';
 import { ErrorMessage } from "formik";
 
 
