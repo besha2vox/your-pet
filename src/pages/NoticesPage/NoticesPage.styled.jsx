@@ -51,4 +51,12 @@ const Filters = styled.div`
   }
 `;
 
-export { Wrapper, Title, Container, Filters };
+const ListContainer = styled.div`
+  margin-top: ${({ theme }) => theme.space[3] * 3 + 'px'};
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    margin-top: ${({ theme }) => theme.space[3] * 5 + 'px'};
+  }
+`;
+
+export { Wrapper, Title, Container, Filters, ListContainer };

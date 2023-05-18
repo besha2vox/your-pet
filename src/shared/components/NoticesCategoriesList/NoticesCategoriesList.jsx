@@ -1,6 +1,5 @@
+import PropTypes from 'prop-types';
 import Button from '../Button/Button';
-import Modal from '../Modal/Modal';
-import ModalNotice from '../ModalNotice/ModalNotice';
 import { ageDeterminationFunc } from 'shared/helpers/ageDeterminationFunc';
 import {
   HeartIcon,
@@ -12,7 +11,6 @@ import {
 } from 'shared/utils/icons';
 
 import {
-  ListContainer,
   List,
   ListItem,
   ImageWrapper,
@@ -24,7 +22,7 @@ import {
   Comments,
 } from './NoticesCategoriesList.styled';
 
-const NoticesCategoriesList = ({ items, toggleModal, isModalOpen }) => {
+const NoticesCategoriesList = ({ items, moreBtnClickHandler }) => {
   const pets = items.map(pet => {
     const age = ageDeterminationFunc(pet.birthday);
     const title =
@@ -60,22 +58,34 @@ const NoticesCategoriesList = ({ items, toggleModal, isModalOpen }) => {
             type="button"
             text="Learn more"
             icon={<PawPrintIcon />}
-            clickHandler={toggleModal}
+            clickHandler={() => moreBtnClickHandler(pet)}
           />
         </CardFooter>
-        {isModalOpen && (
-          <Modal toggleModal={toggleModal}>
-            <ModalNotice item={pet} />
-          </Modal>
-        )}
       </ListItem>
     );
   });
-  return (
-    <ListContainer>
-      <List>{pets}</List>
-    </ListContainer>
-  );
+  return <List>{pets}</List>;
+};
+
+NoticesCategoriesList.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      birthday: PropTypes.string.isRequired,
+      breed: PropTypes.string.isRequired,
+      location: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      sex: PropTypes.string.isRequired,
+      comments: PropTypes.string.isRequired,
+      category: PropTypes.string.isRequired,
+      titleOfAdd: PropTypes.string.isRequired,
+      owner: PropTypes.string.isRequired,
+      avatarURL: PropTypes.string.isRequired,
+      favorite: PropTypes.arrayOf(PropTypes.string.isRequired),
+    })
+  ),
+  moreBtnClickHandler: PropTypes.func.isRequired,
 };
 
 export default NoticesCategoriesList;

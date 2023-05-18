@@ -3,8 +3,15 @@ import NoticesCategoriesNav from 'shared/components/NoticesCategoriesNav/Notices
 import NoticesFilters from 'shared/components/NoticesFilters/NoticesFilters';
 import AddPetBtn from 'shared/components/AddPetBtn/AddPetBtn';
 import NoticesCategoriesList from 'shared/components/NoticesCategoriesList/NoticesCategoriesList';
-import { Wrapper, Title, Container, Filters } from './NoticesPage.styled';
+import ModalNotice from 'shared/components/ModalNotice/ModalNotice';
 import { useState } from 'react';
+import {
+  Wrapper,
+  Title,
+  Container,
+  Filters,
+  ListContainer,
+} from './NoticesPage.styled';
 
 const items = [
   {
@@ -76,11 +83,18 @@ const items = [
 
 const NoticesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [pet, setPet] = useState(null);
   const [user] = useState('Postman');
+
   const onFormSubmit = query => {};
 
   const toggleModal = () => {
     setIsModalOpen(prevState => !prevState);
+  };
+
+  const moreBtnClickHandler = pet => {
+    setPet(pet);
+    toggleModal();
   };
 
   return (
@@ -94,13 +108,13 @@ const NoticesPage = () => {
           <AddPetBtn text="Add pet" path="/add-pet" />
         </Container>
       </Filters>
-      <div>
+      <ListContainer>
         <NoticesCategoriesList
           items={items}
-          toggleModal={toggleModal}
-          isModalOpen={isModalOpen}
+          moreBtnClickHandler={moreBtnClickHandler}
         />
-      </div>
+      </ListContainer>
+      {isModalOpen && <ModalNotice item={pet} toggleModal={toggleModal} />}
     </Wrapper>
   );
 };

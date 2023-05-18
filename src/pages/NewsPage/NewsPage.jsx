@@ -31,6 +31,17 @@ const NewsPage = () => {
   const searchQuery = searchParams.get('query');
 
   useEffect(() => {
+    const getNews = (searchQuery, page) => {
+      const fetchNewsByQuery = async () => {
+        await dispatch(
+          searchQuery
+            ? fetchNewsByQuery2({ query: searchQuery, page: page })
+            : fetchNews({ page: page })
+        );
+      };
+      return fetchNewsByQuery();
+    };
+
     getNews(searchQuery, page);
   }, [dispatch, searchQuery, page]);
 
@@ -40,17 +51,6 @@ const NewsPage = () => {
       setTotalPages(pages);
     }
   }, [totalHints, hints]);
-
-  const getNews = (searchQuery, page) => {
-    const fetchNewsByQuery = async () => {
-      await dispatch(
-        searchQuery
-          ? fetchNewsByQuery2({ query: searchQuery, page: page })
-          : fetchNews({ page: page })
-      );
-    };
-    return fetchNewsByQuery();
-  };
 
   const onSearch = searchQuery => {
     var params = searchQuery ? { query: searchQuery, page: 1 } : { page: 1 };

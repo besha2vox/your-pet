@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-const ListContainer = styled.div`
-  margin-top: ${({ theme }) => theme.space[3] * 3 + 'px'};
-
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    margin-top: ${({ theme }) => theme.space[3] * 5 + 'px'};
-  }
-`;
-
 const List = styled.ul`
   display: grid;
   grid-template-columns: 1fr;
@@ -165,7 +157,6 @@ const Comments = styled.h3`
 `;
 
 export {
-  ListContainer,
   List,
   ListItem,
   ImageWrapper,

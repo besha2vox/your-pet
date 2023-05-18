@@ -43,7 +43,6 @@ import desctop2_3x from '../../images/main_img/desctop/2desctop3x.png';
 import desctop3_1x from '../../images/main_img/desctop/3desctop1x.png';
 import desctop3_2x from '../../images/main_img/desctop/3desctop2x.png';
 import desctop3_3x from '../../images/main_img/desctop/3desctop3x.png';
-import { theme } from 'theme/theme';
 
 const MainContainer = styled.div`
   display: flex;
@@ -105,8 +104,8 @@ const MainContainer = styled.div`
 const MainTitle = styled.h1`
   width: 280px;
   height: 88px;
-  margin-top: ${({theme}) => theme.space[5] + 'px'};
-  font-family: ${({theme}) => theme.fonts.main.bold};
+  margin-top: ${({ theme }) => theme.space[5] + 'px'};
+  font-family: ${({ theme }) => theme.fonts.main.bold};
   font-size: ${({ theme }) => theme.fontSizes[6]};
   line-height: 1.38;
   color: #000000;
@@ -114,7 +113,7 @@ const MainTitle = styled.h1`
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 588px;
     height: 200px;
-    margin-top: ${({theme}) => theme.space[6] + 16 + 'px'};
+    margin-top: ${({ theme }) => theme.space[6] + 16 + 'px'};
     font-size: ${({ theme }) => theme.fontSizes[8]};
     line-height: 1.47;
   }
@@ -122,8 +121,8 @@ const MainTitle = styled.h1`
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 501px;
     height: 264px;
-    margin-top: ${({theme}) => theme.space[6] + 111 + 'px'};
-    font-family: ${({theme}) => theme.fonts.main.extraBold};
+    margin-top: ${({ theme }) => theme.space[6] + 111 + 'px'};
+    font-family: ${({ theme }) => theme.fonts.main.extraBold};
     font-size: ${({ theme }) => theme.fontSizes[8]};
     line-height: 1.3;
   }
@@ -164,13 +163,13 @@ const ImageOne = styled.img`
     (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-      content: url('${mobile1_2x}');
+    content: url('${mobile1_2x}');
   }
   @media (min-device-pixel-ratio: 3),
     (-webkit-min-device-pixel-ratio: 3),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-      content: url('${mobile1_3x}');
+    content: url('${mobile1_3x}');
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
@@ -183,13 +182,13 @@ const ImageOne = styled.img`
       (-webkit-min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${tablet1_2x}');
+      content: url('${tablet1_2x}');
     }
     @media (min-device-pixel-ratio: 3),
       (-webkit-min-device-pixel-ratio: 3),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${tablet1_3x}');
+      content: url('${tablet1_3x}');
     }
   }
 
@@ -203,13 +202,13 @@ const ImageOne = styled.img`
       (-webkit-min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${desctop1_2x}');
+      content: url('${desctop1_2x}');
     }
     @media (min-device-pixel-ratio: 3),
       (-webkit-min-device-pixel-ratio: 3),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${desctop1_3x}');
+      content: url('${desctop1_3x}');
     }
   }
 `;
@@ -222,17 +221,17 @@ const ImageTwo = styled.img`
   bottom: 131px;
   content: url('${mobile2_1x}');
   @media (min-device-pixel-ratio: 2),
-      (-webkit-min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-        content: url('${mobile2_2x}');
-    }
-    @media (min-device-pixel-ratio: 3),
-      (-webkit-min-device-pixel-ratio: 3),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-        content: url('${mobile2_3x}');
-    }
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    content: url('${mobile2_2x}');
+  }
+  @media (min-device-pixel-ratio: 3),
+    (-webkit-min-device-pixel-ratio: 3),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    content: url('${mobile2_3x}');
+  }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     bottom: 280px;
@@ -244,13 +243,13 @@ const ImageTwo = styled.img`
       (-webkit-min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${tablet2_2x}');
+      content: url('${tablet2_2x}');
     }
     @media (min-device-pixel-ratio: 3),
       (-webkit-min-device-pixel-ratio: 3),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${tablet2_3x}');
+      content: url('${tablet2_3x}');
     }
   }
 
@@ -259,18 +258,18 @@ const ImageTwo = styled.img`
     right: 30px;
     width: 490px;
     content: url('${desctop2_1x}');
-    
+
     @media (min-device-pixel-ratio: 2),
       (-webkit-min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${desctop2_2x}');
+      content: url('${desctop2_2x}');
     }
     @media (min-device-pixel-ratio: 3),
       (-webkit-min-device-pixel-ratio: 3),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${desctop2_3x}');
+      content: url('${desctop2_3x}');
     }
   }
 `;
@@ -283,17 +282,17 @@ const ImageThree = styled.img`
   right: 1px;
   content: url('${mobile3_1x}');
   @media (min-device-pixel-ratio: 2),
-      (-webkit-min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-        content: url('${mobile3_2x}');
-    }
-    @media (min-device-pixel-ratio: 3),
-      (-webkit-min-device-pixel-ratio: 3),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-        content: url('${mobile3_3x}');
-    }
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    content: url('${mobile3_2x}');
+  }
+  @media (min-device-pixel-ratio: 3),
+    (-webkit-min-device-pixel-ratio: 3),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    content: url('${mobile3_3x}');
+  }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     bottom: 12px;
@@ -305,13 +304,13 @@ const ImageThree = styled.img`
       (-webkit-min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${tablet3_2x}');
+      content: url('${tablet3_2x}');
     }
     @media (min-device-pixel-ratio: 3),
       (-webkit-min-device-pixel-ratio: 3),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${tablet3_3x}');
+      content: url('${tablet3_3x}');
     }
   }
 
@@ -325,13 +324,13 @@ const ImageThree = styled.img`
       (-webkit-min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${desctop3_2x}');
+      content: url('${desctop3_2x}');
     }
     @media (min-device-pixel-ratio: 3),
       (-webkit-min-device-pixel-ratio: 3),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-        content: url('${desctop3_3x}');
+      content: url('${desctop3_3x}');
     }
   }
 `;
