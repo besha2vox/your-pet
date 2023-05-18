@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { SearchIcon, CrossIcon } from 'shared/utils/icons';
 import { useState } from 'react';
 import { Form, Input, CleareUpBtn, SubmitBtn } from './NoticesSearch.styled';
@@ -35,6 +36,10 @@ const NoticesSearch = ({ onFormSubmit }) => {
       </CleareUpBtn>
     </Form>
   );
+};
+
+NoticesSearch.propTypes = {
+  onFormSubmit: PropTypes.func.isRequired,
 };
 
 export default NoticesSearch;

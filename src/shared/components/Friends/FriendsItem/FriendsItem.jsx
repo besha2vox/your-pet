@@ -13,7 +13,7 @@ import {
   TextWrapper,
 } from './FriendsItem.styled';
 import WorkTimePopup from './WorkTimePopup';
-import defaultFriendImage from './../../../../images/friends/defaultFriendImage.jpg';
+import defaultFriendImage from './../../../../images/friends/defaultFriendImage.png';
 
 const dayNow = new Date();
 const numberOfDay = dayNow.getDay();
@@ -57,7 +57,9 @@ export const FriendsItem = ({
               setIsVisible(true);
             }}
           >
-            {workDays === null || workDays === undefined ? (
+            {workDays === null ||
+            workDays === undefined ||
+            workDays.length === 0 ? (
               <>
                 <TextTitle>Time: </TextTitle>
                 <Text>day and night</Text>

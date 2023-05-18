@@ -13,6 +13,7 @@ import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
 import { newsReducer } from './news/slice';
 import { friendsReducer } from './friends/slice';
+import { noticesReducer } from './notices/slice';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -33,6 +34,7 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
     news: newsReducer,
     friends: friendsReducer,
+    notices: noticesReducer,
   },
   middleware,
 });

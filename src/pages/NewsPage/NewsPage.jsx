@@ -1,110 +1,101 @@
-import NewsList from './NewsList';
-import NewsFilter from './NewsFilter';
-import { useState, useEffect } from 'react';
+import NewsList from '../../shared/components/NewsList/NewsList';
+import NoticesSearch from '../../shared/components/NoticesSearch/NoticesSearch';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from 'shared/components/Loader/Loader';
 
 import Container from 'shared/components/Container/Container';
 //import news from './news.json';
 //import Section from 'shared/components/Section/Section';
-
+import Pagination from 'shared/components/Pagination/Pagination';
 import { Title } from './NewsPage.styled';
-// import { format } from 'date-fns';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchNews, fetchNewsByQuery2 } from 'redux/news/operations';
 
-import { fetchNews } from 'redux/news/operations';
-import { getAllNews, getHintsh } from 'redux/news/selectors';
+import { getAllNews, getHints, loading, error } from 'redux/news/selectors';
 
 const NewsPage = () => {
-  // const [data, setData] = useState([]);
-
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   const fn = async () => {
-  //     var news = await dispatch(fetchNews());
-  //     const formatDate = news.payload.result.map(item => ({
-  //       ...item,
-  //       date: Number(format(new Date(item.date), 'T')),
-  //     }));
-  //     const sortDate = formatDate.sort(function (a, b) {
-  //       return b.date - a.date;
-  //     });
-  //     // console.log(sortDate);
-  //     setData(sortDate);
-  //   };
-  //   fn();
-  // }, [dispatch]);
-
   const dispatch = useDispatch();
   const data = useSelector(getAllNews);
-  const hints = useSelector(getHintsh);
+  const { totalHints, hints } = useSelector(getHints);
+  const isLoading = useSelector(loading);
+  const isError = useSelector(error);
+  const [totalPages, setTotalPages] = useState(null);
 
-  console.log(hints);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
-    const fetchAllNews = async () => await dispatch(fetchNews());
-    fetchAllNews();
-  }, [dispatch]);
-
-  // const data = news.map(item => ({
-  //   ...item,
-  //   date: Number(format(new Date(item.date), 'T')),
-  // }));
-
-  // useEffect(() => {
-  //   const formatDate = news.map(item => ({
-  //     ...item,
-  //     date: Number(format(new Date(item.date), 'T')),
-  //   }));
-  //   const sortDate = formatDate.sort(function (a, b) {
-  //     return b.date - a.date;
-  //   });
-  //   // console.log(sortDate);
-  //   setData(sortDate);
-  // }, []);
-
-  const [filter, setFilter] = useState('');
-  const [inputValue, setInputValue] = useState(false);
-
-  const handleChange = event => {
-    // console.log(filter.length);
-    setFilter(event.currentTarget.value);
-  };
+  const page = searchParams.get('page') || 1;
+  const searchQuery = searchParams.get('query');
 
   useEffect(() => {
-    filter.length > 0 ? setInputValue(true) : setInputValue(false);
-  }, [filter.length]);
+    const getNews = (searchQuery, page) => {
+      const fetchNewsByQuery = async () => {
+        await dispatch(
+          searchQuery
+            ? fetchNewsByQuery2({ query: searchQuery, page: page })
+            : fetchNews({ page: page })
+        );
+      };
+      return fetchNewsByQuery();
+    };
 
-  const resetInput = event => {
-    setFilter('');
+    getNews(searchQuery, page);
+  }, [dispatch, searchQuery, page]);
+
+  useEffect(() => {
+    if (totalHints) {
+      const pages = Math.ceil(totalHints / hints);
+      setTotalPages(pages);
+    }
+  }, [totalHints, hints]);
+
+  const onSearch = searchQuery => {
+    var params = searchQuery ? { query: searchQuery, page: 1 } : { page: 1 };
+    setSearchParams(params);
+    // getNews(searchQuery, 1);
   };
 
-  function filterNews() {
-    if (!filter) {
-      return data;
+  const clearWaitingQueue = () => {
+    toast.clearWaitingQueue();
+  };
+
+  const onPageChange = currentPage => {
+    if (page === currentPage) {
+      return;
     }
-    const normalizedFilter = filter.toLocaleLowerCase();
-    const filterlist = data.filter(news => {
-      return news.title.toLocaleLowerCase().includes(normalizedFilter);
-    });
-    //console.log(filterlist);
-    if (filterlist.length === 0) {
-      Notify.warning('Write a correct request');
-    }
-    return filterlist;
-  }
+    var params = searchQuery
+      ? { query: searchQuery, page: currentPage }
+      : { page: currentPage };
+    setSearchParams(params);
+  };
 
   return (
     <Container>
       <Title> News</Title>
-      <NewsFilter
-        input={filter}
-        onChange={handleChange}
-        resetInput={resetInput}
-        inputValue={inputValue}
+      <NoticesSearch onFormSubmit={onSearch}></NoticesSearch>
+      {isLoading && <Loader />}
+
+      {isError &&
+        (toast.warn('Nothing have found. Try smth else!', {
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+        }),
+        clearWaitingQueue())}
+
+      <NewsList data={data} />
+
+      <ToastContainer limit={1} />
+
+      <Pagination
+        currentPage={Number(page)}
+        totalPagesCount={totalPages}
+        onPageChange={page => onPageChange(page)}
       />
-      <NewsList data={filterNews()} />
     </Container>
   );
 };
