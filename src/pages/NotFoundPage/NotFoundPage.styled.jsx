@@ -14,11 +14,9 @@ export const MainContainer = styled.div`
   /* display: flex; */
   /* flex-direction: column; */
   width: 100%;
-  min-height: 100vh;
   background-repeat: no-repeat;
   background-size: contain;
   background-image: url('${bg_mobile}');
-  
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     background-image: url('${bg_tablet}');
@@ -31,47 +29,46 @@ export const MainContainer = styled.div`
 `;
 
 export const Title = styled.h2`
-margin-top: 71px;
-display: flex;
-align-items: center;
-text-align: center;
-justify-content: center;
+  margin-top: 71px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 
-font-family: 'Manrope';
-font-weight: 600;
-@media (min-width: 768px){
-  fontSize: 24px;
-  lineHeight: 33px;
-}
+  font-family: 'Manrope';
+  font-weight: 600;
+  @media (min-width: 768px) {
+    fontsize: 24px;
+    lineheight: 33px;
+  }
 
-@media (min-width: 1280px) {
-  lineHeight: 88px;
-}
+  @media (min-width: 1280px) {
+    lineheight: 88px;
+  }
 
-@media (min-width: 1280px) {
-  fontSize: 68px;
-  lineHeight: 100px;
-}`;
+  @media (min-width: 1280px) {
+    fontsize: 68px;
+    lineheight: 100px;
+  }
+`;
 export const ImageContainer = styled.div`
-display: flex;
-justify-content: center;
-margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
 `;
 
 export const Image = styled.img`
-/* margin-top: 80px; */
-width: 100%;
-height: 320px;
-content: url('${mobile}');
+  /* margin-top: 80px; */
+  width: 100%;
+  height: auto;
+  content: url('${mobile}');
 
-@media (min-width: 768px) {
-  height: 650px;
-  content: url('${tablet}');
-}
-@media (min-width: 1280px) {
-  height: 822px;
-  content: url('${desctop}');
-}
+  @media (min-width: 768px) {
+    content: url('${tablet}');
+  }
+  @media (min-width: 1280px) {
+    content: url('${desctop}');
+  }
 `;
 export const BottomInfoWrapper = styled.div`
   width: 100%;
@@ -81,6 +78,4 @@ export const BottomInfoWrapper = styled.div`
   margin-top: 18px;
 `;
 
-export const Span = styled.span`
-
-`;
+export const Span = styled.span``;
