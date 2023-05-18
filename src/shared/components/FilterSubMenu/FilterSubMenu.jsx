@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   ChevronDownIcon,
   ChevronUpIcon,
@@ -65,6 +66,12 @@ const FilterSubMenu = ({ isAgeMenuOpen, isGenderMenuOpen, toggleMenu }) => {
       </Menu>
     </>
   );
+};
+
+FilterSubMenu.propTypes = {
+  isAgeMenuOpen: PropTypes.bool.isRequired,
+  isGenderMenuOpen: PropTypes.bool.isRequired,
+  toggleMenu: PropTypes.func.isRequired,
 };
 
 export default FilterSubMenu;

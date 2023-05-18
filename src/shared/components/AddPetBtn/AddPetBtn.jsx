@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { PlusIcon, PlusSmallIcon } from 'shared/utils/icons';
 import { useWindowSize } from 'hooks/useResize';
 import { Btn } from './AddPetBtn.styled';
@@ -14,6 +15,11 @@ const AddPetBtn = ({ text, path }) => {
       {screenWidth >= 768 && <PlusSmallIcon />}
     </Btn>
   );
+};
+
+AddPetBtn.propTypes = {
+  text: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default AddPetBtn;

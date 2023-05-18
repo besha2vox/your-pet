@@ -1,5 +1,4 @@
 import FilterSubMenu from '../FilterSubMenu/FilterSubMenu';
-
 import { useState } from 'react';
 import { useWindowSize } from 'hooks/useResize';
 import { FilterIcon } from 'shared/utils/icons';
@@ -39,7 +38,6 @@ const NoticesFilters = () => {
       <Btn type="button" onClick={filtersToggle} isOpen={isMenuOpen}>
         {screenWidth >= 768 && 'Filter'} <FilterIcon />
       </Btn>
-
       <Filters
         isOpen={isMenuOpen}
         isAgeMenuOpen={isAgeMenuOpen}

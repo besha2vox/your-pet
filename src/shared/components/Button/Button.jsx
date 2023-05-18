@@ -38,6 +38,7 @@ const Button = ({ type, text, icon, clickHandler, filled, short, heart }) => {
 };
 
 Button.propTypes = {
+  type: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   icon: PropTypes.node,
   clickHandler: PropTypes.func.isRequired,
