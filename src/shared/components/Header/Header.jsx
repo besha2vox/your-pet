@@ -10,7 +10,7 @@ import { HeaderWrapper, Wrapper, NavWrapper, Menu } from './Header.styled';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [user] = useState('Postman');
+  const [user] = useState('');
   const [screenWidth] = useWindowSize();
 
   return (

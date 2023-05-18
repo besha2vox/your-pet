@@ -1,9 +1,10 @@
 import { ReactComponent as LogoutIcon } from '../../../images/icons/logout.svg';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
-// import ModalApproveAction from "../UserPageComponents/ModalApproveAction/ModalApproveAction";
+import ModalApproveAction from '../UserPageComponents/ModalApproveAction/ModalApproveAction';
 // import { useDispatch } from "react";
 // import { logOut } from "../../../redux/auth/operations";
+import { LogoutButton } from './Logout.styled';
 
 const Logout = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,27 +14,27 @@ const Logout = () => {
     setIsModalOpen(prevState => !prevState);
   };
 
-  //   const handlerClick = () => {
-  //     //     dispatch(logOut())
-  //     console.log('Delete');
-  //   };
+  const handlerClick = () => {
+    //     dispatch(logOut())
+    console.log('Delete');
+  };
 
   return (
     <>
-      <button onClick={() => setIsModalOpen(true)}>
+      <LogoutButton onClick={() => setIsModalOpen(true)}>
         <LogoutIcon stroke="#54ADFF" />
         Log out
-      </button>
+      </LogoutButton>
       {isModalOpen && (
         <Modal toggleModal={toggleModal}>
-          {/* <ModalApproveAction
+          <ModalApproveAction
             toggleModal={toggleModal}
             type="button"
             clickHandler={handlerClick}
             icon={<LogoutIcon stroke="#FEF9F9" />}
           >
             Are you leaving?
-          </ModalApproveAction> */}
+          </ModalApproveAction>
         </Modal>
       )}
     </>

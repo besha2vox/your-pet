@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { List, Btn } from './NoticesCategoriesNav.styled';
 
 const filters = [
@@ -26,6 +27,10 @@ const NoticesCategoriesNav = ({ user }) => {
   });
 
   return <List>{items}</List>;
+};
+
+NoticesCategoriesNav.propTypes = {
+  user: PropTypes.string.isRequired,
 };
 
 export default NoticesCategoriesNav;

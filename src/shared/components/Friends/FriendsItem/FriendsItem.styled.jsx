@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 const FriendItem = styled.li`
-  padding: 12px;
+  padding: 16px 12px;
   background-color: #ffffff;
   box-shadow: ${({ theme }) => theme.boxShadows.main};
   border-radius: 20px;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    padding: 16px;
     border-radius: 40px;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
@@ -17,37 +16,32 @@ const FriendItem = styled.li`
 
 const FriendLinkTitle = styled.a`
   display: block;
-  margin-bottom: 12px;
-  font-weight: ${({ theme }) => theme.fonts.main.bold};
+  margin-bottom: 16px;
   font-weight: 700;
-  font-size: ${({ theme }) => theme.fontSizes[0]};
-  line-height: 16px;
+  font-size: ${({ theme }) => theme.fontSizes[3]};
+  line-height: 1.35;
   color: ${({ theme }) => theme.colors.blue};
   text-align: center;
-  transition: transform 350ms ${({ theme }) => theme.transition.main};
+  transition: transform 350ms ${({ theme }) => theme.transition.main},
+    color 350ms ${({ theme }) => theme.transition.main};
 
   :hover,
   :focus {
     transform: scale(1.1);
-  }
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    margin-bottom: 16px;
-  }
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    font-size: ${({ theme }) => theme.fontSizes[3]};
-    line-height: 27px;
+    color: ${({ theme }) => theme.colors.yellow};
   }
 `;
 
 const FriendBox = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const FriendImgBox = styled.img`
-  margin-right: 12px;
-  max-width: 110px;
+  margin-right: 16px;
+  max-width: 100px;
+
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     max-width: 120px;
     margin-right: 14px;
@@ -84,9 +78,9 @@ const TextWrapper = styled.li`
 
 const WorkTime = styled.p`
   font: inherit;
-  font-weight: ${({ theme }) => theme.fonts.main.medium};
+  font-weight: 500;
   font-size: ${({ theme }) => theme.fontSizes[0]};
-  line-height: 16px;
+  line-height: 1.34;
   display: flex;
   align-items: center;
   padding: 0;
@@ -100,11 +94,11 @@ const WorkTime = styled.p`
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: ${({ theme }) => theme.fontSizes[1]};
-    line-height: 19px;
+    line-height: 1.36;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: ${({ theme }) => theme.fontSizes[2]};
-    line-height: 22px;
+    line-height: 1.38;
   }
 `;
 
@@ -112,17 +106,17 @@ const TextTitle = styled.p`
   display: flex;
   justify-content: space-between;
   font: inherit;
-  font-weight: ${({ theme }) => theme.fonts.main.semiBold};
+  font-weight: 600;
   font-size: ${({ theme }) => theme.fontSizes[0]};
-  line-height: 16px;
+  line-height: 1.34;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: ${({ theme }) => theme.fontSizes[1]};
-    line-height: 19px;
+    line-height: 1.36;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: ${({ theme }) => theme.fontSizes[2]};
-    line-height: 21px;
+    line-height: 1.38;
   }
 `;
 
@@ -130,26 +124,25 @@ const Text = styled.p`
   display: flex;
   justify-content: space-between;
   font: inherit;
-  font-weight: ${({ theme }) => theme.fonts.main.regular};
   font-size: ${({ theme }) => theme.fontSizes[0]};
-  line-height: 16px;
+  line-height: 1.34;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: ${({ theme }) => theme.fontSizes[1]};
-    line-height: 19px;
+    line-height: 1.36;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: ${({ theme }) => theme.fontSizes[2]};
-    line-height: 21px;
+    line-height: 1.38;
   }
 `;
 
 const ContactLink = styled.a`
   text-decoration: none;
   color: inherit;
-  font-weight: ${({ theme }) => theme.fonts.main.medium};
+  font-weight: 500;
   font-size: ${({ theme }) => theme.fontSizes[0]};
-  line-height: 16px;
+  line-height: 1.34;
 
   :focus {
     color: ${({ theme }) => theme.colors.blue};
@@ -157,22 +150,23 @@ const ContactLink = styled.a`
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: ${({ theme }) => theme.fontSizes[1]};
-    line-height: 19px;
+    line-height: 1.36;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: ${({ theme }) => theme.fontSizes[2]};
-    line-height: 22px;
+    line-height: 1.38;
   }
 `;
 
 const WorkTimeList = styled.ul`
+  padding: 12px;
   position: absolute;
   top: 48px;
   left: 0;
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: center;
 
   background: #ffffff;
@@ -180,12 +174,18 @@ const WorkTimeList = styled.ul`
   box-shadow: ${({ theme }) => theme.boxShadows.main};
   border-radius: 8px;
 
-  padding: 12px;
-
   color: ${({ theme }) => theme.colors.black};
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    top: 40px;
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    top: 48px;
+  }
 `;
 
 const WorkTimeItem = styled.li`
+  width: 100px;
   :not(:last-child) {
     margin-bottom: 4px;
   }
