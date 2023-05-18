@@ -16,7 +16,7 @@ export const register = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await axios.post('api/users/register', credentials);
-      setAuthHeader(response.data.token);
+      setAuthHeader(response.data.accessToken);
       return response.data;
     } catch (error) {
       const { code } = error.response.data;
@@ -34,7 +34,7 @@ export const logIn = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await axios.post('api/users/login', credentials);
-      setAuthHeader(response.data.token);
+      setAuthHeader(response.data.accessToken);
       return response.data;
     } catch (error) {
       return rejectWithValue({ message: 'Email or password is incorrect.' });
