@@ -1,31 +1,36 @@
-import Container from 'shared/components/Container/Container';
 import Button from '../../shared/components/Button/Button';
 import React from 'react';
-import {Poster, Title, BottomInfoWrapper} from './NotFoundPage.styled';
-import { NavLink } from 'react-router-dom';
+import {
+  Image,
+  ImageContainer,
+  Title,
+  BottomInfoWrapper,
+  Span,
+  MainContainer,
+} from './NotFoundPage.styled';
+import { useNavigate } from 'react-router-dom';
 import { PawPrintIcon } from 'shared/utils/icons';
 
 function NotFoundPage() {
-  // const url= ('../../images/notFound/notFound-mobile@2x.png');
-  // // ('../../images/notFound/notFound-tablet@2x.png'),
-  // // ('../../images/notFound/notFound-desktop@2x.png');
+  const navigate = useNavigate();
+
   return (
-    <>
-      <Container >
-        <Title>
-         <h2>Ooops! This page not found :(</h2>
-        </Title>
-        <Poster src="./test.png" alt="not found"/>
-        <BottomInfoWrapper>
+    <MainContainer>
+      <Span>
+        <Title>Ooops! This page not found :(</Title>
+      </Span>
+      <ImageContainer>
+        <Image />
+      </ImageContainer>
+      <BottomInfoWrapper>
         <Button
-          text ={<NavLink to={'/'}>To main page</NavLink>}
+          type="button"
+          text={'To main page'}
           icon={<PawPrintIcon fill="white" />}
-        >
-          {/* <NavLink to={'/'}>To main page</NavLink> */}
-        </Button>
-        </BottomInfoWrapper>
-      </Container>
-    </>
+          clickHandler={() => navigate('/')}
+        ></Button>
+      </BottomInfoWrapper>
+    </MainContainer>
   );
 }
 
