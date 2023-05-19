@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import { Wrapper } from './Section.styled';
 
 const Section = ({ children }) => {
-  return <Wrapper>{children}</Wrapper>;
+  const location = useLocation();
+
+  return <Wrapper location={location.pathname}>{children}</Wrapper>;
 };
 
 Section.propTypes = {

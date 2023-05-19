@@ -1,22 +1,10 @@
-// import Container from '../../shared/components/Container/Container';
-import {
-  MainContainer,
-  MainTitle,
-  ImageContainer,
-  ImageOne,
-  ImageTwo,
-  ImageThree,
-} from './MainPage.styled';
+import { MainContainer, MainTitle, Image } from './MainPage.styled';
 
 const MainPage = () => {
   return (
     <MainContainer>
       <MainTitle>Take good care of your small pets</MainTitle>
-      <ImageContainer>
-      <ImageOne />
-      <ImageTwo />
-      <ImageThree />
-      </ImageContainer>
+      <Image />
     </MainContainer>
   );
 };

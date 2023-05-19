@@ -11,7 +11,13 @@ const SharedLayout = () => {
     <>
       <ContentWrapper>
         <Header />
-        <main>
+        <main
+          style={{
+            display: 'flex',
+            width: '100%',
+            flex: '1 0 auto',
+          }}
+        >
           <Section>
             <Container>
               <Suspense fallback={<p>Loading...</p>}>

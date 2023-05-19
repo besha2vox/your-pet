@@ -72,7 +72,6 @@ a {
 }
 
 img {
-  max-width: 100%;
   display: block;
 }
 
@@ -87,8 +86,7 @@ button {
   cursor: pointer;
 }
 
-body {
-  min-height: 100vh;
+body { 
   margin: 0;
 
   font-family: "Manrope-Regular";

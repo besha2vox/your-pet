@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
 const HeaderWrapper = styled.header`
+  position: absolute;
+  left: 0;
+  right: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 100vw;
+  width: 100%;
 `;
 
 const Wrapper = styled.div`

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding-top: ${({ theme }) => theme.space[3] * 5 + 'px'};
+  padding-top: ${({ theme }) => theme.space[6] + 24 + 'px'};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    padding-top: ${({ theme }) => theme.space[3] * 10 + 'px'};
+    padding-top: ${({ theme }) => theme.space[6] * 2 + 16 + 'px'};
   }
 `;
 
