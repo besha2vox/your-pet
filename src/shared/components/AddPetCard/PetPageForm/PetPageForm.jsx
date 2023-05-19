@@ -79,36 +79,53 @@ const AddPetPageForm = () => {
 
     const newFormData = new FormData();
 
-    newFormData.append('name', formData.name);
-    newFormData.append('birthday', formData.birthday);
-    newFormData.append('breed', formData.breed);
-    newFormData.append('pets-photo', formData.petPhoto);
-    newFormData.append('comments', formData.comments);
-
     if (formData.category === 'your-pet') {
+      newFormData.append('name', formData.name);
+      newFormData.append('birthday', formData.birthday);
+      newFormData.append('breed', formData.breed);
+      newFormData.append('pets-photo', formData.petPhoto);
+      newFormData.append('comments', formData.comments);
+
       dispatch(addMyPet(newFormData));
       navigate(backLink);
       return;
     }
 
-    newFormData.append('category', formData.category);
-    newFormData.append('title', formData.title);
-    newFormData.append('sex', formData.sex);
-    newFormData.append('location', formData.location);
-
     if (
       formData.category === 'lost-found' ||
       formData.category === 'good-hands'
     ) {
+      newFormData.append('name', formData.name);
+      newFormData.append('birthday', formData.birthday);
+      newFormData.append('breed', formData.breed);
+      newFormData.append('pets-photo', formData.petPhoto);
+      newFormData.append('comments', formData.comments);
+      newFormData.append('category', formData.category);
+      newFormData.append('title', formData.title);
+      newFormData.append('sex', formData.sex);
+      newFormData.append('location', formData.location);
+
       dispatch(addNotice(newFormData));
       navigate(backLink);
       return;
     }
 
-    newFormData.append('price', formData.price);
+    if (formData.category === 'your-pet') {
+      newFormData.append('name', formData.name);
+      newFormData.append('birthday', formData.birthday);
+      newFormData.append('breed', formData.breed);
+      newFormData.append('pets-photo', formData.petPhoto);
+      newFormData.append('comments', formData.comments);
+      newFormData.append('category', formData.category);
+      newFormData.append('title', formData.title);
+      newFormData.append('sex', formData.sex);
+      newFormData.append('location', formData.location);
+      newFormData.append('price', formData.price);
+      newFormData.forEach((value, key) => console.log(value, key));
 
-    dispatch(addNotice(newFormData));
-    navigate(backLink);
+      dispatch(addNotice(newFormData));
+      navigate(backLink);
+    }
   };
 
   return (
