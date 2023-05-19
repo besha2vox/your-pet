@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { NextButton } from './AddFormBatton.styled';
+import { NextButton } from './AddFormButton.styled';
 
 const AddFormButtonNext = ({
   text,
@@ -8,6 +8,7 @@ const AddFormButtonNext = ({
   filled,
   short,
   type,
+  isDisabled,
 }) => {
   return (
     <NextButton
@@ -15,6 +16,7 @@ const AddFormButtonNext = ({
       onClick={clickHandler && (() => clickHandler(false))}
       filled={filled}
       short={short}
+      disabled={isDisabled}
     >
       {text}
       {icon}
@@ -26,6 +28,7 @@ AddFormButtonNext.propTypes = {
   text: PropTypes.string.isRequired,
   icon: PropTypes.node,
   clickHandler: PropTypes.func,
+  isDisabled: PropTypes.bool.isRequired,
 };
 
 export default AddFormButtonNext;

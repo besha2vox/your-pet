@@ -20,7 +20,7 @@ export const AddFormTitle = styled.h1`
 export const AddFormList = styled.ul`
   display: flex;
   column-gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 `;
 
 export const AddFormItem = styled.li`
@@ -80,7 +80,8 @@ export const AddFormButtonWrapper = styled.div`
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     flex-direction: row-reverse;
-    justify-content: end;
+    justify-content: ${({ category, isMoreInfo }) =>
+      category !== 'your-pet' ? 'center' && isMoreInfo : 'end'};
     margin-top: 40px;
     column-gap: 24px;
   }

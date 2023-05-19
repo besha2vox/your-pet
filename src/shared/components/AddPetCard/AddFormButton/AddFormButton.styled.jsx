@@ -83,7 +83,7 @@ const buttonNext = css`
     left: 0;
     width: 100%;
     height: 100%;
-    background: ${({ theme }) => theme.colors.gradientBlue};
+    background-image: ${({ theme }) => theme.colors.gradientBlue};
     opacity: 0;
     transition: opacity 300ms ${({ theme }) => theme.transition.main};
   }
@@ -101,6 +101,13 @@ const buttonNext = css`
 
   & svg {
     fill: currentColor;
+  }
+
+  &:disabled {
+    color: ${({ theme }) => theme.colors.grey};
+    background-color: ${({ theme }) => theme.colors.lightBlue};
+    border-color: ${({ theme }) => theme.colors.lightBlue};
+    pointer-events: none;
   }
 `;
 

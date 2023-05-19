@@ -20,10 +20,14 @@ export const AddFormLabel = styled.label`
 
   color: ${({ theme }) => theme.colors.black};
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     gap: 8px;
     font-size: 20px;
     line-height: 1.3;
+  }
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    gap: 20px;
   }
 `;
 
@@ -38,7 +42,9 @@ export const AddFormInput = styled(Field)`
   outline-color: ${({ theme }) => theme.colors.blue};
   transition: outline 300ms ${({ theme }) => theme.transition.main};
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: 16px;
+    min-width: 394px;
+    padding: 12px 16px;
   }
 `;

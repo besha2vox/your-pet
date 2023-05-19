@@ -13,6 +13,7 @@ export const AddFormWrapper = styled.div`
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     margin: 0 auto;
     padding: 20px 32px;
-    max-width: 458px;
+    width: fit-content;
+    min-width: 458px;
   }
 `;

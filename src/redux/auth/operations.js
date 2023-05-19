@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://your-pet-by-it-kotiki.onrender.com/';
+// axios.defaults.baseURL = 'http://localhost:3001/';
 
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -77,6 +78,18 @@ export const updateUser = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       await axios.put('api/users/update', credentials);
+      clearAuthHeader();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addMyPet = createAsyncThunk(
+  'user/addMyPet',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      await axios.post('api/pets', credentials);
       clearAuthHeader();
     } catch (error) {
       return rejectWithValue(error.message);
