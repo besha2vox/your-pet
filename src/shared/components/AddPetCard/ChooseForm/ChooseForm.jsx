@@ -1,5 +1,10 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+
+import { AddFormButtonWrapper } from '../PetPageForm/PetPageForm.styled';
+import AddFormButtonBack from '../AddFormButton/AddFormButtonBack';
+import AddFormButtonNext from '../AddFormButton/AddFormButtonNext';
+import { PawPrintIcon } from 'shared/utils/icons';
 
 import {
   AddFormRadioButton,
@@ -7,12 +12,21 @@ import {
   CategoryWrapper,
 } from './ChooseForm.styled';
 
-const ChooseForm = ({ setCategory }) => {
-  const [category, setLocalCategory] = useState('');
+const ChooseForm = ({ formData, setFormData, nextStep, cancel, setValues }) => {
+  const [isDisabled, setIsDisabled] = useState(true);
 
-  const handleCategoryChange = event => {
-    setCategory(event.target.value);
-    setLocalCategory(event.target.value);
+  useEffect(() => {
+    if (!formData.category) setIsDisabled(true);
+    else setIsDisabled(false);
+  }, [formData.category]);
+
+  const handleCategoryChange = e => {
+    const { name, value } = e.target;
+
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (
@@ -22,8 +36,8 @@ const ChooseForm = ({ setCategory }) => {
         name="category"
         value="your-pet"
         id="your-pet"
-        checked={category === 'your-pet'}
         onChange={handleCategoryChange}
+        checked={formData.category === 'your-pet'}
       />
       <RadioCategoryLabel htmlFor="your-pet">Your pet</RadioCategoryLabel>
       <AddFormRadioButton
@@ -31,7 +45,7 @@ const ChooseForm = ({ setCategory }) => {
         name="category"
         value="sell"
         id="sell"
-        checked={category === 'sell'}
+        checked={formData.category === 'sell'}
         onChange={handleCategoryChange}
       />
       <RadioCategoryLabel htmlFor="sell">Sell</RadioCategoryLabel>
@@ -40,7 +54,7 @@ const ChooseForm = ({ setCategory }) => {
         name="category"
         value="lost-found"
         id="lost-found"
-        checked={category === 'lost-found'}
+        checked={formData.category === 'lost-found'}
         onChange={handleCategoryChange}
       />
       <RadioCategoryLabel htmlFor="lost-found">Lost/found</RadioCategoryLabel>
@@ -49,18 +63,35 @@ const ChooseForm = ({ setCategory }) => {
         name="category"
         value="good-hands"
         id="good-hands"
-        checked={category === 'good-hands'}
+        checked={formData.category === 'good-hands'}
         onChange={handleCategoryChange}
       />
       <RadioCategoryLabel htmlFor="good-hands">
         In good hands
       </RadioCategoryLabel>
+      <AddFormButtonWrapper>
+        <AddFormButtonNext
+          isDisabled={isDisabled}
+          type="button"
+          text="Next"
+          icon={<PawPrintIcon />}
+          clickHandler={nextStep}
+          filled={false}
+        />
+        <AddFormButtonBack text="Cancel" isLink={true} path={cancel} />
+      </AddFormButtonWrapper>
     </CategoryWrapper>
   );
 };
 
 ChooseForm.propTypes = {
-  setCategory: PropTypes.func.isRequired,
+  formData: PropTypes.object.isRequired,
+  setFormData: PropTypes.func.isRequired,
+  cancel: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.object.isRequired,
+  ]),
+  nextStep: PropTypes.func.isRequired,
 };
 
 export default ChooseForm;

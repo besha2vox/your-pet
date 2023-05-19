@@ -50,7 +50,7 @@ const UserPage = () => {
           </TitleWrap>
           <Card>
             <UserData />
-        {/* Треба очистити redux стор після виходу !*/}
+            {/* Треба очистити redux стор після виходу !*/}
           </Card>
         </div>
         <div>

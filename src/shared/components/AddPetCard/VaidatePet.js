@@ -1,67 +1,79 @@
-const validatePet = values => {
-  const errors = {};
+import * as Yup from 'yup';
 
-  // якщо не вибрана жодна категорія то автоматично буде вибрата категорія йор петс
-  if (
-    !values.category ||
-    !['your-pet', 'sell', 'lost-found', 'good-hands'].includes(values.category)
-  ) {
-    values.category = 'your-pet';
+export const validatePetSchema = Yup.object().shape({
+  title: Yup.string()
+    .required('Title is required')
+    .min(2, 'Name must be at least 2 characters')
+    .max(16, 'Name must not exceed 16 characters'),
+  category: Yup.string()
+    .required('Category is required')
+    .oneOf(['my pet', 'sell', 'lost-found', 'for-free'], 'Invalid category'),
+  name: Yup.string()
+    .required('Name is required')
+    .min(2, 'Name must be at least 2 characters')
+    .max(16, 'Name must not exceed 16 characters'),
+  birthday: Yup.string()
+    .required('Date is required')
+    .matches(
+      /^(\d{2})\.(\d{2})\.(\d{4})$/,
+      'Invalid date format. Use DD.MM.YYYY'
+    ),
+  breed: Yup.string()
+    .required('Breed is required')
+    .min(2, 'Breed must be at least 2 characters')
+    .max(16, 'Breed must not exceed 16 characters'),
+  file: Yup.mixed()
+    .required('File is required')
+    .test(
+      'fileSize',
+      'File size must not exceed 3MB',
+      value => value && value.size <= 3 * 1024 * 1024
+    ),
+  sex: Yup.string().when('category', {
+    is: value => ['sell', 'lost-found', 'for-free'].includes(value),
+    then: Yup.string()
+      .required('Sex is required')
+      .oneOf(['male', 'female'], 'Invalid sex'),
+  }),
+  location: Yup.string().when('category', {
+    is: value => ['sell', 'lost-found', 'for-free'].includes(value),
+    then: Yup.string()
+      .required('Location is required')
+      .matches(/^[A-Za-z\s]+$/, 'Invalid location format'),
+  }),
+  price: Yup.number().when('category', {
+    is: 'sell',
+    then: Yup.number()
+      .positive('Price must be greater than 0')
+      .required('Price is required'),
+  }),
+  comments: Yup.string()
+    .min(8, 'Comments must be at least 8 characters')
+    .max(120, 'Comments must not exceed 120 characters'),
+});
+
+export const isFieldValid = async (fieldName, value) => {
+  try {
+    await Yup.reach(validatePetSchema, fieldName).validate(value);
+    return true;
+  } catch (error) {
+    return false;
   }
-
-  //  імя обовязкове , якщо меньше 2 то видає помилку і більше 16 також видає помилку
-  if (!values.name) {
-    errors.name = 'Required';
-  } else if (values.name.length < 2) {
-    errors.name = 'Too Short!';
-  } else if (values.name.length > 16) {
-    errors.name = 'Too Long!';
-  }
-
-  if (!values.date) {
-    errors.date = 'Required';
-  } else if (!/^([0-9]{2}).([0-9]{2}).([0-9]{4})$/.test(values.date)) {
-    errors.date = 'Invalid date format. Use DD.MM.YYYY';
-  }
-
-  // //  імя обовязкове , якщо меньше 2 то видає помилку і більше 16 також видає помилку
-  if (!values.breed) {
-    errors.breed = 'Required';
-  } else if (values.breed.length < 2) {
-    errors.breed = 'Breed should be at least 2 characters';
-  } else if (values.breed.length > 16) {
-    errors.breed = 'Breed should not exceed 16 characters';
-  }
-
-  //обмеження на розмір файлу
-
-  if (values.file && values.file.size > 5000000) {
-    errors.file = 'File size too large';
-  }
-
-  //  при виборі однієї із трьох категорій , появляється значення вибору статі який є обовязковим
-  if (['sell', 'lost-found', 'good-hands'].includes(values.category)) {
-    if (!values.sex) {
-      errors.sex = 'Required';
-    } else if (!['male', 'female'].includes(values.sex)) {
-      errors.sex = 'Invalid value';
-    }
-    if (!values.location) {
-      errors.location = 'Required';
-    }
-
-    if (values.category === 'sell' && (!values.price || values.price < 1)) {
-      errors.price = 'Price should be more than 0';
-    }
-
-    if (values.comments && values.comments.length < 4) {
-      errors.comments = 'Comments should be at least 8 characters';
-    } else if (values.comments && values.comments.length > 120) {
-      errors.comments = 'Comments should not exceed 120 characters';
-    }
-  }
-
-  return errors;
 };
 
-export default validatePet;
+export const validateField = async (fieldName, value, setErrors) => {
+  console.log({ fieldName, value });
+  try {
+    await validatePetSchema.validateAt(fieldName, value);
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      [fieldName]: '',
+    }));
+  } catch (error) {
+    console.log(error);
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      [fieldName]: error.message,
+    }));
+  }
+};
