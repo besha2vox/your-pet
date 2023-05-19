@@ -2,8 +2,6 @@ import UserData from 'shared/components/UserPageComponents/UserData/UserData';
 import PetsData from 'shared/components/UserPageComponents/PetsData/PetsData';
 import ModalCongrats from 'shared/components/UserPageComponents/ModalCongrats/ModalCongrats';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
 import Modal from 'shared/components/Modal/Modal';
 import Button from 'shared/components/Button/Button';
 import { ReactComponent as AddPet } from 'images/icons/plus-small.svg';
@@ -13,7 +11,6 @@ import {
   Title,
   Card,
   PetsHeader,
-  AddPetButton,
 } from './UserPage.styled';
 const UserPage = () => {
   // const dispatch = useDispatch();
@@ -50,7 +47,7 @@ const UserPage = () => {
           </TitleWrap>
           <Card>
             <UserData />
-        {/* Треба очистити redux стор після виходу !*/}
+            {/* Треба очистити redux стор після виходу !*/}
           </Card>
         </div>
         <div>
