@@ -66,6 +66,10 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
           })
         : value;
 
+    if (name === 'birthday') {
+      console.log(inputValue, typeof inputValue);
+    }
+
     setFormData(prevState => ({
       ...prevState,
       [name]: inputValue,

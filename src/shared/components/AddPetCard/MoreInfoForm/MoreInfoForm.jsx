@@ -101,19 +101,19 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
               ? 'Add photo'
               : 'Load the pet’s image:'}
             <AddFormImageWrapper>
-              {!formData.avatar && <PlusIcon width="30" height="30" />}
-              {!!formData.avatar && (
+              {!formData.petPhoto && <PlusIcon width="30" height="30" />}
+              {!!formData['pets-photo'] && (
                 <img
                   id="image"
-                  src={URL.createObjectURL(formData.avatar)}
-                  alt={formData.avatar.name}
+                  src={URL.createObjectURL(formData.petPhoto)}
+                  alt={formData.petPhoto.name}
                 />
               )}
             </AddFormImageWrapper>
             <FileInput
               type="file"
               id="pet-image"
-              name="avatar"
+              name="petPhoto"
               accept=".png, .jpg, .jpeg, .webp"
               onChange={handleInputChange}
               value={imageValue}

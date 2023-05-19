@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Formik } from 'formik';
 import { useLocation } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-// import { addNotice } from 'redux/notices/operations';
-// import { addMyPet } from 'redux/auth/operations';
+import { addNotice } from 'redux/notices/operations';
+import { addMyPet } from 'redux/auth/operations';
 import { validatePetSchema } from '../VaidatePet';
 
 import MoreInfo from '../MoreInfoForm/MoreInfoForm';
@@ -29,7 +29,7 @@ const AddPetPageForm = () => {
     breed: '',
     location: '',
     comments: '',
-    avatar: null,
+    petPhoto: null,
     sex: '',
     price: 0,
   });
@@ -38,8 +38,8 @@ const AddPetPageForm = () => {
   const [title, setTitle] = useState('');
   const location = useLocation();
   const backLink = location.state?.from ?? '/';
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const getPageTitle = useCallback(() => {
     if (step < 1) return 'Add Pet';
@@ -74,32 +74,41 @@ const AddPetPageForm = () => {
     setStep(prevState => prevState - 1);
   };
 
-  const handleSubmit = async values => {
-    console.log(values);
-    // const newFormData = new FormData();
+  const handleSubmit = async () => {
+    if (!formData.category) return;
 
-    // newFormData.append('category', formData.category);
-    // newFormData.append('title', formData.title);
-    // newFormData.append('name', formData.name);
-    // newFormData.append('birthday', formData);
-    // newFormData.append('breed', formData.breed);
-    // newFormData.append('sex', formData.sex);
-    // newFormData.append('avatar', formData.image);
-    // newFormData.append('location', formData.location);
-    // newFormData.append('price', formData.price);
-    // newFormData.append('comments', formData.comments);
+    const newFormData = new FormData();
 
-    // if (category === 'Add my pet') {
-    //   return;
-    // }
-    // dispatch(addMyPet(newFormData));
-    // dispatch(addNotice(formData));
-    // console.log({ values });
-    // formData.forEach((value, key) =>
-    //   console.log(key, ':', value, typeof value)
-    // );
+    newFormData.append('name', formData.name);
+    newFormData.append('birthday', formData.birthday);
+    newFormData.append('breed', formData.breed);
+    newFormData.append('pets-photo', formData.petPhoto);
+    newFormData.append('comments', formData.comments);
 
-    // navigate(backLink);
+    if (formData.category === 'your-pet') {
+      dispatch(addMyPet(newFormData));
+      navigate(backLink);
+      return;
+    }
+
+    newFormData.append('category', formData.category);
+    newFormData.append('title', formData.title);
+    newFormData.append('sex', formData.sex);
+    newFormData.append('location', formData.location);
+
+    if (
+      formData.category === 'lost-found' ||
+      formData.category === 'good-hands'
+    ) {
+      dispatch(addNotice(newFormData));
+      navigate(backLink);
+      return;
+    }
+
+    newFormData.append('price', formData.price);
+
+    dispatch(addNotice(newFormData));
+    navigate(backLink);
   };
 
   return (
