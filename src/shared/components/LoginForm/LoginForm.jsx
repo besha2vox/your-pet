@@ -1,6 +1,8 @@
 import { Formik } from 'formik';
 import { ReactComponent as OpenEyeIcon } from '../../../images/icons/eye-open.svg';
 import { ReactComponent as CloseEyeIcon } from '../../../images/icons/eye-closed.svg';
+import { ReactComponent as CrossIcon } from '../../../images/icons/cross-small.svg';
+import { ReactComponent as CheckIcon } from '../../../images/icons/check.svg';
 import { useState } from 'react';
 
 import {
@@ -9,12 +11,14 @@ import {
   LogInFormEmailContainer,
   LogInFormEmailInputContainer,
   LogInFormInput,
+  ErrorIcon,
   LogInFormPasswordContainer,
   LogInFormPasswordInputContainer,
   ErrorMessage,
   PasswordIcon,
-  LogInBtn,
   EyeIcon,
+  CheckMarkIcon,
+  LogInBtn,
   RegisterText,
   RegisterLink,
 } from './LoginForm.styled';
@@ -84,57 +88,99 @@ const LoginForm = () => {
         handleBlur,
         handleSubmit,
         isSubmitting,
-      }) => (
-        <LogInForm onSubmit={handleSubmit}>
-          <LogInFormTitle>Log In</LogInFormTitle>
-          <LogInFormEmailContainer>
-            <LogInFormEmailInputContainer error={errors.email && touched.email}>
-              <LogInFormInput
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={values.email}
-                onChange={handleChange}
-                required
-              />
-            </LogInFormEmailInputContainer>
-            {errors.email && touched.email && (
-              <ErrorMessage>{errors.email}</ErrorMessage>
-            )}
-          </LogInFormEmailContainer>
+      }) => {
+        const isPasswordValid = values.password && values.password.length >= 8;
 
-          <LogInFormPasswordContainer>
-            <LogInFormPasswordInputContainer
-              error={errors.password && touched.password}
-            >
-              <LogInFormInput
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                placeholder="Password"
-                value={values.password}
-                onChange={handleChange}
-                required
-              />
-              <PasswordIcon onClick={togglePasswordVisibility}>
-                <EyeIcon>
-                  {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
-                </EyeIcon>
-              </PasswordIcon>
-            </LogInFormPasswordInputContainer>
+        return (
+          <LogInForm onSubmit={handleSubmit}>
+            <LogInFormTitle>Log In</LogInFormTitle>
+            <LogInFormEmailContainer>
+              <LogInFormEmailInputContainer
+                error={errors.email && touched.email}
+              >
+                <LogInFormInput
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={values.email}
+                  onChange={handleChange}
+                  required
+                />
+                {errors.email && touched.email && (
+                  <ErrorIcon
+                    onClick={() => {
+                      handleChange('email', '');
+                      handleBlur('email', false);
+                    }}
+                  >
+                    <CrossIcon />
+                  </ErrorIcon>
+                )}
+              </LogInFormEmailInputContainer>
 
-            {errors.password && touched.email && (
-              <ErrorMessage>{errors.password}</ErrorMessage>
-            )}
-          </LogInFormPasswordContainer>
+              {errors.email && touched.email && (
+                <ErrorMessage>{errors.email}</ErrorMessage>
+              )}
+            </LogInFormEmailContainer>
 
-          <LogInBtn type="submit" disabled={isSubmitting}>
-            Log In
-          </LogInBtn>
-          <RegisterText>
-            Don't have an account? <RegisterLink href="">Register</RegisterLink>
-          </RegisterText>
-        </LogInForm>
-      )}
+            <LogInFormPasswordContainer>
+              <LogInFormPasswordInputContainer
+                error={errors.password && touched.password}
+                valid={isPasswordValid}
+              >
+                <LogInFormInput
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  placeholder="Password"
+                  value={values.password}
+                  onChange={handleChange}
+                  required
+                />
+                <PasswordIcon onClick={togglePasswordVisibility}>
+                  <EyeIcon
+                    error={errors.password && touched.password}
+                    valid={isPasswordValid}
+                  >
+                    {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
+                  </EyeIcon>
+                  {isPasswordValid && (
+                    <CheckMarkIcon>
+                      <CheckIcon />
+                    </CheckMarkIcon>
+                  )}
+                  {errors.password && touched.password && (
+                    <ErrorIcon
+                      onClick={() => {
+                        handleChange('email', '');
+                        handleBlur('email', false);
+                      }}
+                    >
+                      <CrossIcon />
+                    </ErrorIcon>
+                  )}
+                </PasswordIcon>
+              </LogInFormPasswordInputContainer>
+
+              {errors.password && touched.password && !isPasswordValid && (
+                <ErrorMessage>{errors.password}</ErrorMessage>
+              )}
+              {isPasswordValid && (
+                <ErrorMessage valid={isPasswordValid}>
+                  Password is secure
+                </ErrorMessage>
+              )}
+            </LogInFormPasswordContainer>
+
+            <LogInBtn type="submit" disabled={isSubmitting}>
+              Log In
+            </LogInBtn>
+            <RegisterText>
+              Don't have an account?{' '}
+              <RegisterLink href="">Register</RegisterLink>
+            </RegisterText>
+          </LogInForm>
+        );
+      }}
     </Formik>
   );
 };
