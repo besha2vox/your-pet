@@ -60,15 +60,7 @@ export const LogInFormPasswordInputContainer = styled.div`
   padding: 2px 16px;
 
   border: 1px solid
-    ${({ theme, error, valid }) => {
-      if (error) {
-        return theme.colors.red;
-      } else if (valid) {
-        return theme.colors.green;
-      } else {
-        return theme.colors.blue;
-      }
-    }};
+    ${({ theme, error }) => (error ? theme.colors.red : theme.colors.blue)};
   border-radius: 40px;
 
   &:focus-within {
@@ -94,21 +86,19 @@ export const ErrorIcon = styled.span`
   justify-content: center;
   width: 24px;
   height: 24px;
+  cursor: pointer;
   color: ${({ theme }) => theme.colors.red};
 `;
 
 export const ErrorMessage = styled.div`
   padding-left: 16px;
   margin-top: 4px;
-  color: ${({ theme, valid }) =>
-    valid ? theme.colors.green : theme.colors.red};
+  color: ${({ theme }) => theme.colors.red};
 `;
 
 export const PasswordIcon = styled.span`
   display: flex;
   align-items: center;
-
-  cursor: pointer;
 `;
 
 export const EyeIcon = styled.span`
@@ -117,30 +107,15 @@ export const EyeIcon = styled.span`
   justify-content: center;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 
-  margin-right: ${({ error, valid }) => (error || valid ? '10px' : '')};
-  color: ${({ theme, error, valid }) => {
-    if (error) {
-      return theme.colors.red;
-    } else if (valid) {
-      return theme.colors.green;
-    } else {
-      return theme.colors.blue;
-    }
-  }};
+  margin-right: ${({ error }) => (error ? '10px' : '')};
+  color: ${({ theme, error }) =>
+    error ? theme.colors.red : theme.colors.blue};
 
   ${LogInFormPasswordInputContainer}:focus-within & {
     color: ${({ theme }) => theme.colors.yellow};
   }
-`;
-
-export const CheckMarkIcon = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  color: ${({ theme }) => theme.colors.green};
 `;
 
 export const LogInBtn = styled.button`

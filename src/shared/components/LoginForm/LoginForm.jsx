@@ -56,7 +56,7 @@ const LoginForm = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     if (loading) {
       return;
     }
@@ -65,11 +65,13 @@ const LoginForm = () => {
 
     try {
       await dispatch(logIn(values));
-      setSubmitting(false);
+      // setSubmitting(false);
+      resetForm();
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
+      setSubmitting(false);
     }
   };
 
@@ -78,6 +80,7 @@ const LoginForm = () => {
       initialValues={initialValues}
       validate={fieldValidation}
       validateOnChange={false}
+      validateOnBlur={false}
       onSubmit={handleSubmit}
     >
       {({
@@ -88,99 +91,76 @@ const LoginForm = () => {
         handleBlur,
         handleSubmit,
         isSubmitting,
-      }) => {
-        const isPasswordValid = values.password && values.password.length >= 8;
+        resetForm,
+      }) => (
+        <LogInForm onSubmit={handleSubmit}>
+          <LogInFormTitle>Log In</LogInFormTitle>
+          <LogInFormEmailContainer>
+            <LogInFormEmailInputContainer error={errors.email && touched.email}>
+              <LogInFormInput
+                type="string"
+                name="email"
+                placeholder="Email"
+                value={values.email}
+                onChange={handleChange}
+              />
+              {errors.email && touched.email && (
+                <ErrorIcon
+                  onClick={() => {
+                    resetForm({ values: { ...values, email: '' } });
+                  }}
+                >
+                  <CrossIcon />
+                </ErrorIcon>
+              )}
+            </LogInFormEmailInputContainer>
 
-        return (
-          <LogInForm onSubmit={handleSubmit}>
-            <LogInFormTitle>Log In</LogInFormTitle>
-            <LogInFormEmailContainer>
-              <LogInFormEmailInputContainer
-                error={errors.email && touched.email}
-              >
-                <LogInFormInput
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={values.email}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.email && touched.email && (
+            {errors.email && touched.email && (
+              <ErrorMessage>{errors.email}</ErrorMessage>
+            )}
+          </LogInFormEmailContainer>
+
+          <LogInFormPasswordContainer>
+            <LogInFormPasswordInputContainer
+              error={errors.password && touched.password}
+            >
+              <LogInFormInput
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Password"
+                value={values.password}
+                onChange={handleChange}
+              />
+              <PasswordIcon onClick={togglePasswordVisibility}>
+                <EyeIcon error={errors.password && touched.password}>
+                  {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
+                </EyeIcon>
+
+                {errors.password && touched.password && (
                   <ErrorIcon
                     onClick={() => {
-                      handleChange('email', '');
-                      handleBlur('email', false);
+                      resetForm({ values: { ...values, password: '' } });
                     }}
                   >
                     <CrossIcon />
                   </ErrorIcon>
                 )}
-              </LogInFormEmailInputContainer>
+              </PasswordIcon>
+            </LogInFormPasswordInputContainer>
 
-              {errors.email && touched.email && (
-                <ErrorMessage>{errors.email}</ErrorMessage>
-              )}
-            </LogInFormEmailContainer>
+            {errors.password && touched.password && (
+              <ErrorMessage>{errors.password}</ErrorMessage>
+            )}
+          </LogInFormPasswordContainer>
 
-            <LogInFormPasswordContainer>
-              <LogInFormPasswordInputContainer
-                error={errors.password && touched.password}
-                valid={isPasswordValid}
-              >
-                <LogInFormInput
-                  type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  placeholder="Password"
-                  value={values.password}
-                  onChange={handleChange}
-                  required
-                />
-                <PasswordIcon onClick={togglePasswordVisibility}>
-                  <EyeIcon
-                    error={errors.password && touched.password}
-                    valid={isPasswordValid}
-                  >
-                    {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
-                  </EyeIcon>
-                  {isPasswordValid && (
-                    <CheckMarkIcon>
-                      <CheckIcon />
-                    </CheckMarkIcon>
-                  )}
-                  {errors.password && touched.password && (
-                    <ErrorIcon
-                      onClick={() => {
-                        handleChange('email', '');
-                        handleBlur('email', false);
-                      }}
-                    >
-                      <CrossIcon />
-                    </ErrorIcon>
-                  )}
-                </PasswordIcon>
-              </LogInFormPasswordInputContainer>
-
-              {errors.password && touched.password && !isPasswordValid && (
-                <ErrorMessage>{errors.password}</ErrorMessage>
-              )}
-              {isPasswordValid && (
-                <ErrorMessage valid={isPasswordValid}>
-                  Password is secure
-                </ErrorMessage>
-              )}
-            </LogInFormPasswordContainer>
-
-            <LogInBtn type="submit" disabled={isSubmitting}>
-              Log In
-            </LogInBtn>
-            <RegisterText>
-              Don't have an account?{' '}
-              <RegisterLink href="">Register</RegisterLink>
-            </RegisterText>
-          </LogInForm>
-        );
-      }}
+          <LogInBtn type="submit" disabled={isSubmitting}>
+            Log In
+          </LogInBtn>
+          <RegisterText>
+            Don't have an account? <RegisterLink href="">Register</RegisterLink>
+          </RegisterText>
+        </LogInForm>
+      )}
     </Formik>
   );
 };
