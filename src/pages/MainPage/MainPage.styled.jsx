@@ -102,7 +102,7 @@ const MainContainer = styled.div`
 `;
 
 const MainTitle = styled.h1`
-  width: 280px;
+  max-width: 280px;
   height: 88px;
   margin-top: ${({ theme }) => theme.space[5] + 'px'};
   font-family: ${({ theme }) => theme.fonts.main.bold};
@@ -111,7 +111,7 @@ const MainTitle = styled.h1`
   color: #000000;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 588px;
+    max-width: 588px;
     height: 200px;
     margin-top: ${({ theme }) => theme.space[6] + 16 + 'px'};
     font-size: ${({ theme }) => theme.fontSizes[8]};
@@ -119,7 +119,7 @@ const MainTitle = styled.h1`
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 501px;
+    max-width: 501px;
     height: 264px;
     margin-top: ${({ theme }) => theme.space[6] + 111 + 'px'};
     font-family: ${({ theme }) => theme.fonts.main.extraBold};
@@ -144,7 +144,6 @@ const ImageContainer = styled.div`
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    position: absolute;
     right: 0;
     width: 917px;
     height: 570px;
@@ -195,7 +194,7 @@ const ImageOne = styled.img`
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     width: 380px;
     bottom: -25px;
-    left: 0;
+    left: -140px;
     content: url('${desctop1_1x}');
 
     @media (min-device-pixel-ratio: 2),
