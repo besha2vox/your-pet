@@ -7,7 +7,7 @@ const LogoWrapper = styled(Link)`
   justify-content: center;
   align-items: center;
 
-  z-index: 50;
+  z-index: 5;
 `;
 
 export { LogoWrapper };

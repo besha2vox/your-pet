@@ -25,7 +25,7 @@ const Btn = styled.button`
   border-style: solid;
   border-radius: 40px;
 
-  z-index: 2;
+  z-index: 0;
 
   transition: color 300ms ${({ theme }) => theme.transition.main},
     border-color 300ms ${({ theme }) => theme.transition.main},

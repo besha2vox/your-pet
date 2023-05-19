@@ -10,6 +10,8 @@ const HeaderWrapper = styled.header`
   align-items: center;
 
   width: 100%;
+
+  z-index: 4;
 `;
 
 const Wrapper = styled.div`
@@ -54,6 +56,8 @@ const Menu = styled.div`
     isOpen &&
     screenWidth < 1280 &&
     'border-radius: 0; top: 50%; right: 50%; transform: translate(50%, -50%); width: 100%; height: 100%; transition: border-radius 750ms 450ms cubic-bezier(0.23, 1, 0.32, 1), top 0ms 250ms cubic-bezier(0.23, 1, 0.32, 1), right 350ms 700ms cubic-bezier(0.23, 1, 0.32, 1), transform 0ms 250ms ease, width 650ms 250ms cubic-bezier(0.23, 1, 0.32, 1), height 650ms 250ms cubic-bezier(0.23, 1, 0.32, 1);'};
+
+  z-index: 4;
 
   @media screen and (max-width: 769px) {
     padding-top: ${({ theme }) => theme.space[1] * 41 + 'px'};
