@@ -65,7 +65,6 @@ const LoginForm = () => {
 
     try {
       await dispatch(logIn(values));
-      // setSubmitting(false);
       resetForm();
     } catch (error) {
       console.log(error);
@@ -96,15 +95,22 @@ const LoginForm = () => {
         <LogInForm onSubmit={handleSubmit}>
           <LogInFormTitle>Log In</LogInFormTitle>
           <LogInFormEmailContainer>
-            <LogInFormEmailInputContainer error={errors.email && touched.email}>
+            <LogInFormEmailInputContainer
+              error={errors.email && touched.email}
+              style={{
+                borderColor:
+                  errors.email && touched.email ? '#F43F5E' : '#54ADFF',
+              }}
+            >
               <LogInFormInput
                 type="string"
                 name="email"
                 placeholder="Email"
                 value={values.email}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
-              {errors.email && touched.email && (
+              {errors.email && touched.email && values.email && (
                 <ErrorIcon
                   onClick={() => {
                     resetForm({ values: { ...values, email: '' } });
@@ -123,6 +129,10 @@ const LoginForm = () => {
           <LogInFormPasswordContainer>
             <LogInFormPasswordInputContainer
               error={errors.password && touched.password}
+              style={{
+                borderColor:
+                  errors.password && touched.password ? '#F43F5E' : '#54ADFF',
+              }}
             >
               <LogInFormInput
                 type={showPassword ? 'text' : 'password'}
@@ -136,7 +146,7 @@ const LoginForm = () => {
                   {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
                 </EyeIcon>
 
-                {errors.password && touched.password && (
+                {errors.password && touched.password && values.password && (
                   <ErrorIcon
                     onClick={() => {
                       resetForm({ values: { ...values, password: '' } });

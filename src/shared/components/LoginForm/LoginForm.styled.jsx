@@ -62,11 +62,6 @@ export const LogInFormPasswordInputContainer = styled.div`
   border: 1px solid
     ${({ theme, error }) => (error ? theme.colors.red : theme.colors.blue)};
   border-radius: 40px;
-
-  &:focus-within {
-    border: 1px solid ${({ theme }) => theme.colors.yellow};
-    outline: none;
-  }
 `;
 
 export const LogInFormInput = styled(Field)`
@@ -112,10 +107,6 @@ export const EyeIcon = styled.span`
   margin-right: ${({ error }) => (error ? '10px' : '')};
   color: ${({ theme, error }) =>
     error ? theme.colors.red : theme.colors.blue};
-
-  ${LogInFormPasswordInputContainer}:focus-within & {
-    color: ${({ theme }) => theme.colors.yellow};
-  }
 `;
 
 export const LogInBtn = styled.button`
