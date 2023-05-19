@@ -6,7 +6,7 @@ import { ReactComponent as Camera } from 'images/icons/camera.svg';
 import { ReactComponent as Check } from 'images/icons/check.svg';
 import { ReactComponent as Cross } from 'images/icons/cross-small.svg';
 // import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectUser } from 'redux/auth/selectors';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import UserDataForm from '../UserDataForm/UserDataForm';
@@ -22,8 +22,6 @@ const UserData = () => {
   const [edit, setEdit] = useState(false);
   const [fileInput, setFileInput] = useState('');
 
-  const dispatch = useDispatch();
-
   const { userImage } = useSelector(selectUser);
 
   const initialValues = { fileInput: userImage || avatarDefault2x };
@@ -38,7 +36,7 @@ const UserData = () => {
   const handleCancelAvatar = e => {
     setFileInput();
     setEdit(false);
-  }
+  };
 
   const handleClickInput = e => {
     setEdit(true);

@@ -4,25 +4,31 @@ import { useState, useEffect } from 'react';
 import fields from './fields';
 import useForm from '../../hooks/useForm';
 import { UserForm } from './UserDataForm.styled';
-import { Formik, ErrorMessage } from 'formik';
-import { selectUser } from "redux/auth/selectors";
-import { useSelector } from "react-redux"
+import { Formik } from 'formik';
+import { selectUser } from 'redux/auth/selectors';
+import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
-const cityRegex = /^(?:(?:[a-zA-Zа-яА-ЯіІїЇєЄ]+(?:[.'’‘`-][a-zA-Zа-яА-ЯіІїЇєЄ]+)*)\s*)+$/;
+const cityRegex =
+  /^(?:(?:[a-zA-Zа-яА-ЯіІїЇєЄ]+(?:[.'’‘`-][a-zA-Zа-яА-ЯіІїЇєЄ]+)*)\s*)+$/;
 const nameRegex = /^[a-zA-Zа-яА-ЯІіїЇґҐ\s-]+$/;
 const birthdayRegex = /^([0-2]\d|3[0-1])\.(0\d|1[0-2])\.\d{4}$/;
 
 const validationSchema = Yup.object({
   name: Yup.string().matches(nameRegex, 'Enter your name'),
-  email:  Yup.string().email('Invalid email'),
-  birthday: Yup.string().matches(birthdayRegex, 'Invalid date format, expected dd.mm.yyyy'),
+  email: Yup.string().email('Invalid email'),
+  birthday: Yup.string().matches(
+    birthdayRegex,
+    'Invalid date format, expected dd.mm.yyyy'
+  ),
   phone: Yup.string().matches(/^\+380\d{9}$/, 'Incorrect phone number format'),
-  city: Yup.string().matches(cityRegex, 'Enter the city in the format "Brovary", "Kyiv", "Akhtyrka", "Sumy"')
+  city: Yup.string().matches(
+    cityRegex,
+    'Enter the city in the format "Brovary", "Kyiv", "Akhtyrka", "Sumy"'
+  ),
 });
 
-
-const UserDataForm = ({onSubmit}) => {
+const UserDataForm = ({ onSubmit }) => {
   const user = useSelector(selectUser);
 
   const initialState = {
@@ -33,7 +39,10 @@ const UserDataForm = ({onSubmit}) => {
     city: '',
   };
 
-  const { state, handleChange, handleSubmit } = useForm({ initialState, onSubmit });
+  const { state, handleChange, handleSubmit } = useForm({
+    initialState,
+    onSubmit,
+  });
   const { name, email, birthday, phone, city } = state;
 
   const [nameIsActive, setNameIsActive] = useState(true);
@@ -51,7 +60,7 @@ const UserDataForm = ({onSubmit}) => {
       setCityIsActive(true);
     }
   }, [user]);
-  
+
   const countActiveButtons = () => {
     let count = 0;
     if (nameIsActive) count++;
@@ -59,30 +68,30 @@ const UserDataForm = ({onSubmit}) => {
     if (birthdayIsActive) count++;
     if (phoneIsActive) count++;
     if (cityIsActive) count++;
-    
+
     if (count === 5) {
       return true;
     } else {
       return false;
     }
-  }
+  };
 
-  const handleClick = (name) => {
+  const handleClick = name => {
     if (countActiveButtons()) {
       switch (name) {
-        case "name":
+        case 'name':
           setNameIsActive(false);
           break;
-        case "email":
+        case 'email':
           setEmailIsActive(false);
           break;
-        case "birthday":
+        case 'birthday':
           setBirthdayIsActive(false);
           break;
-        case "phone":
+        case 'phone':
           setPhoneIsActive(false);
           break;
-        case "city":
+        case 'city':
           setCityIsActive(false);
           break;
         default:
@@ -91,12 +100,8 @@ const UserDataForm = ({onSubmit}) => {
     }
   };
 
-
   return (
-    <Formik
-      initialValues={initialState}
-      validationSchema={validationSchema}
-    >
+    <Formik initialValues={initialState} validationSchema={validationSchema}>
       <UserForm>
         <UserDataItem
           value={name}
