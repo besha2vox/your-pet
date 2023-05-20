@@ -11,11 +11,13 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
+let retry = false;
+
 axios.interceptors.response.use(
   response => response,
   async error => {
-    if (error.response.status === 401 && !error.config.retry) {
-      error.config.retry = true;
+    if (error.response.status === 401 && !retry) {
+      retry = true;
 
       const refreshToken = localStorage.getItem('refreshToken');
       try {
@@ -80,17 +82,18 @@ export const logOut = createAsyncThunk(
 
 export const getCurrentUser = createAsyncThunk(
   'auth/currentUser',
-  async (_, { rejectWithValue }) => {
-    // const state = getState();
-    // const currentToken = state.auth.token;
-
-    // if (currentToken === null) return rejectWithValue('Unable to fetch user');
+  async (_, { rejectWithValue, getState }) => {
+    if (!retry) {
+      const state = getState();
+      const currentToken = state.auth.token;
+      setAuthHeader(currentToken);
+    }
 
     try {
-      // setAuthHeader(currentToken);
-
       const response = await axios.get('api/users/current');
-      return response.data;
+
+      const token = axios.defaults.headers.common.Authorization.split(' ')[1];
+      return { token, data: response.data };
     } catch (error) {
       return rejectWithValue(error.message);
     }
