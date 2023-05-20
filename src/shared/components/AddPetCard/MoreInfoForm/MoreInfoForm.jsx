@@ -1,10 +1,10 @@
-import { ErrorMessage } from 'formik';
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { AddFormButtonWrapper } from '../PetPageForm/PetPageForm.styled';
 import AddFormButtonBack from '../AddFormButton/AddFormButtonBack';
 import AddFormButtonNext from '../AddFormButton/AddFormButtonNext';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 import { validateField } from '../vaidatePet';
 
@@ -17,6 +17,7 @@ import {
 import {
   AddFormInput,
   AddFormLabel,
+  AddFormLabelWrapper,
 } from '../PersonalForm/PersonalForm.styled';
 import {
   AddFormTextArea,
@@ -44,16 +45,6 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
   const isLocationFieldValid = Boolean(!errors.location && !!formData.location);
   const isSexFieldValid = Boolean(!errors.sex && !!formData.sex);
   const isPriceFieldValid = Boolean(!errors.price && !!formData.price);
-
-  console.log(errors.location);
-  console.log(formData.location);
-  // console.log({
-  //   isCommentsFieldValid,
-  //   isLocationFieldValid,
-  //   isPetPhotoFieldValid,
-  //   isPriceFieldValid,
-  //   isSexFieldValid,
-  // });
 
   useEffect(() => {
     const handleResize = () => {
@@ -183,50 +174,55 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
               value={imageValue}
               onBlur={() => validateField('petPhoto', formData, setErrors)}
             />
-            <ErrorMessage name="pet-image" component="div" />
           </AddFormImageLabel>
         </FirstPartFormWrapper>
         <SecondPartFormWrapper>
           {formData.category !== 'your-pet' && (
-            <AddFormLabel htmlFor="location">
-              Location
-              <AddFormInput
-                placeholder="Type of location"
-                type="text"
-                name="location"
-                onChange={handleInputChange}
-                value={formData.location}
-                onBlur={() => validateField('location', formData, setErrors)}
-              />
-              <ErrorMessage name="location" component="div" />
-            </AddFormLabel>
+            <AddFormLabelWrapper>
+              <AddFormLabel htmlFor="location">
+                Location
+                <AddFormInput
+                  placeholder="Type of location"
+                  type="text"
+                  name="location"
+                  onChange={handleInputChange}
+                  value={formData.location}
+                  onBlur={() => validateField('location', formData, setErrors)}
+                />
+              </AddFormLabel>
+              {!!errors.location && <ErrorMessage message={errors.location} />}
+            </AddFormLabelWrapper>
           )}
           {formData.category === 'sell' && (
-            <AddFormLabel htmlFor="price">
-              Price
-              <AddFormInput
-                placeholder="Type of price"
-                type="number"
-                name="price"
-                onChange={handleInputChange}
-                value={formData.price}
-                onBlur={() => validateField('price', formData, setErrors)}
-              />
-              <ErrorMessage name="price" component="div" />
-            </AddFormLabel>
+            <AddFormLabelWrapper>
+              <AddFormLabel htmlFor="price">
+                Price
+                <AddFormInput
+                  placeholder="Type of price"
+                  type="number"
+                  name="price"
+                  onChange={handleInputChange}
+                  value={formData.price}
+                  onBlur={() => validateField('price', formData, setErrors)}
+                />
+              </AddFormLabel>
+              {!!errors.price && <ErrorMessage message={errors.price} />}
+            </AddFormLabelWrapper>
           )}
-          <AddFormTextAreaLabel htmlFor="comments">
-            Comments
-            <AddFormTextArea
-              component="textarea"
-              placeholder="Type comments"
-              name="comments"
-              onChange={handleInputChange}
-              value={formData.comments}
-              onBlur={() => validateField('comments', formData, setErrors)}
-            />
-            <ErrorMessage name="comments" component="div" />
-          </AddFormTextAreaLabel>
+          <AddFormLabelWrapper>
+            <AddFormTextAreaLabel htmlFor="comments">
+              Comments
+              <AddFormTextArea
+                component="textarea"
+                placeholder="Type comments"
+                name="comments"
+                onChange={handleInputChange}
+                value={formData.comments}
+                onBlur={() => validateField('comments', formData, setErrors)}
+              />
+            </AddFormTextAreaLabel>
+            {!!errors.comments && <ErrorMessage message={errors.comments} />}
+          </AddFormLabelWrapper>
         </SecondPartFormWrapper>
       </MoreInfoFormWrapper>
       <AddFormButtonWrapper isMoreInfo={true} category={formData.category}>

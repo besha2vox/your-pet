@@ -9,8 +9,12 @@ export const PersonalFormWrapper = styled.div`
   gap: 20px;
 `;
 
+export const AddFormLabelWrapper = styled.div`
+  position: relative;
+`;
+
 export const AddFormLabel = styled.label`
-  display: inherit;
+  display: flex;
   flex-direction: column;
   gap: 4px;
 
@@ -24,10 +28,6 @@ export const AddFormLabel = styled.label`
     gap: 8px;
     font-size: 20px;
     line-height: 1.3;
-  }
-
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    gap: 20px;
   }
 `;
 
@@ -46,5 +46,9 @@ export const AddFormInput = styled(Field)`
     font-size: 16px;
     min-width: 394px;
     padding: 12px 16px;
+  }
+
+  &[type='date']::-webkit-calendar-picker-indicator {
+    cursor: pointer;
   }
 `;
