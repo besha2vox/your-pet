@@ -1,8 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-import { ErrorMessage } from "formik";
-
 
 import {
   FormWrapper,
@@ -15,12 +13,20 @@ import {
   ConfirmIcon,
 } from './UserDataItem.styled';
 
-const UserDataItem = ({ label, name, isdisabled, handleChange, handleSubmit, handleClick, ...props }) => {
+const UserDataItem = ({
+  label,
+  name,
+  isdisabled,
+  handleChange,
+  handleSubmit,
+  handleClick,
+  ...props
+}) => {
   const id = useMemo(() => nanoid(), []);
-  
-  const handleActiveClick = (name) => {
+
+  const handleActiveClick = name => {
     handleClick(name);
-  }
+  };
 
   return (
     <FormWrapper>

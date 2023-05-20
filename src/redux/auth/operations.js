@@ -11,12 +11,35 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
+axios.interceptors.response.use(
+  response => response,
+  async error => {
+    if (error.response.status === 401 && !error.config.retry) {
+      error.config.retry = true;
+
+      const refreshToken = localStorage.getItem('refreshToken');
+      try {
+        const { data } = await axios.post('api/users/refresh', {
+          refreshToken,
+        });
+        setAuthHeader(data.accessToken);
+        localStorage.setItem('refreshToken', data.refreshToken);
+        return axios(error.config);
+      } catch (error) {
+        return Promise.reject.error;
+      }
+    }
+    return Promise.reject.error;
+  }
+);
+
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await axios.post('api/users/register', credentials);
       setAuthHeader(response.data.accessToken);
+      localStorage.setItem('refreshToken', response.data.refreshToken);
       return response.data;
     } catch (error) {
       const { code } = error.response.data;
@@ -35,6 +58,7 @@ export const logIn = createAsyncThunk(
     try {
       const response = await axios.post('api/users/login', credentials);
       setAuthHeader(response.data.accessToken);
+      localStorage.setItem('refreshToken', response.data.refreshToken);
       return response.data;
     } catch (error) {
       return rejectWithValue({ message: 'Email or password is incorrect.' });
@@ -56,14 +80,15 @@ export const logOut = createAsyncThunk(
 
 export const getCurrentUser = createAsyncThunk(
   'auth/currentUser',
-  async (_, { rejectWithValue, getState }) => {
-    const state = getState();
-    const currentToken = state.auth.token;
+  async (_, { rejectWithValue }) => {
+    // const state = getState();
+    // const currentToken = state.auth.token;
 
-    if (currentToken === null) return rejectWithValue('Unable to fetch user');
+    // if (currentToken === null) return rejectWithValue('Unable to fetch user');
 
     try {
-      setAuthHeader(currentToken);
+      // setAuthHeader(currentToken);
+
       const response = await axios.get('api/users/current');
       return response.data;
     } catch (error) {
@@ -77,7 +102,17 @@ export const updateUser = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       await axios.put('api/users/update', credentials);
-      clearAuthHeader();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addMyPet = createAsyncThunk(
+  'user/addMyPet',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      await axios.post('api/pets', credentials);
     } catch (error) {
       return rejectWithValue(error.message);
     }

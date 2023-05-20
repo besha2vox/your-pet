@@ -1,18 +1,16 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
 import { Formik } from 'formik';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { addNotice } from 'redux/notices/operations';
+import { addMyPet } from 'redux/auth/operations';
+import { validatePetSchema } from '../VaidatePet';
 
 import MoreInfo from '../MoreInfoForm/MoreInfoForm';
 import ChooseForm from '../ChooseForm/ChooseForm';
 import PersonalForm from '../PersonalForm/PersonalForm';
-// import validatePet from '../VaidatePet';
-import AddFormButtonBack from '../AddFormBatton/AddFormBattonBack';
-import AddFormButtonNext from '../AddFormBatton/AddFormBattonNext';
-import { PawPrintIcon } from 'shared/utils/icons';
 
 import {
   AddForm,
@@ -20,31 +18,45 @@ import {
   AddFormList,
   AddFormItem,
   AddFormStepName,
-  AddFormButtonWrapper,
 } from './PetPageForm.styled';
 
-const INITIAL_STATE = {
-  category: '',
-  name: '',
-  title: '',
-  birthday: '',
-  breed: '',
-  location: '',
-  comments: '',
-  image: null,
-  sex: '',
-  price: '',
-};
-
 const AddPetPageForm = () => {
-  const [fileInput, setFileInput] = useState('');
+  const [formData, setFormData] = useState({
+    category: '',
+    name: '',
+    title: '',
+    birthday: '',
+    breed: '',
+    location: '',
+    comments: '',
+    petPhoto: null,
+    sex: '',
+    price: 0,
+  });
+
   const [step, setStep] = useState(0);
   const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
-  const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
   const backLink = location.state?.from ?? '/';
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const getPageTitle = useCallback(() => {
+    if (step < 1) return 'Add Pet';
+
+    const titles = {
+      'your-pet': 'Add my pet',
+      sell: 'Add pet for sell',
+      'lost-found': 'Add to lost or found pet',
+      'good-hands': 'Add to give a Pet for Adoption',
+      '': 'Add Pet',
+    };
+    return titles[formData.category] || 'Add Pet';
+  }, [formData.category, step]);
+
+  useEffect(() => {
+    setTitle(getPageTitle());
+  }, [getPageTitle]);
 
   const steps = ['Choose Option', 'Personal Details', 'More Info'];
 
@@ -62,110 +74,106 @@ const AddPetPageForm = () => {
     setStep(prevState => prevState - 1);
   };
 
-  const handleSubmit = async values => {
-    const formData = new FormData();
-    formData.append('category', values.category);
-    formData.append('title', values.title);
-    formData.append('name', values.name);
-    formData.append('birthday', values.birthday);
-    formData.append('breed', values.breed);
-    formData.append('sex', values.sex);
-    formData.append('image', fileInput);
-    formData.append('location', values.location);
-    formData.append('price', values.price);
-    formData.append('comments', values.comments);
+  const handleSubmit = async () => {
+    if (!formData.category) return;
 
-    if (category === 'Add my pet') {
+    const newFormData = new FormData();
+
+    if (formData.category === 'your-pet') {
+      newFormData.append('name', formData.name);
+      newFormData.append('birthday', formData.birthday);
+      newFormData.append('breed', formData.breed);
+      newFormData.append('pets-photo', formData.petPhoto);
+      newFormData.append('comments', formData.comments);
+
+      dispatch(addMyPet(newFormData));
+      navigate(backLink);
       return;
     }
 
-    dispatch(addNotice(formData));
+    if (
+      formData.category === 'lost-found' ||
+      formData.category === 'good-hands'
+    ) {
+      newFormData.append('name', formData.name);
+      newFormData.append('birthday', formData.birthday);
+      newFormData.append('breed', formData.breed);
+      newFormData.append('pets-photo', formData.petPhoto);
+      newFormData.append('comments', formData.comments);
+      newFormData.append('category', formData.category);
+      newFormData.append('title', formData.title);
+      newFormData.append('sex', formData.sex);
+      newFormData.append('location', formData.location);
 
-    formData.forEach((value, key) => console.log(key, ':', value));
-    navigate(backLink);
+      dispatch(addNotice(newFormData));
+      navigate(backLink);
+      return;
+    }
+
+    if (formData.category === 'your-pet') {
+      newFormData.append('name', formData.name);
+      newFormData.append('birthday', formData.birthday);
+      newFormData.append('breed', formData.breed);
+      newFormData.append('pets-photo', formData.petPhoto);
+      newFormData.append('comments', formData.comments);
+      newFormData.append('category', formData.category);
+      newFormData.append('title', formData.title);
+      newFormData.append('sex', formData.sex);
+      newFormData.append('location', formData.location);
+      newFormData.append('price', formData.price);
+      newFormData.forEach((value, key) => console.log(value, key));
+
+      dispatch(addNotice(newFormData));
+      navigate(backLink);
+    }
   };
-
-  const getPageTitle = useCallback(() => {
-    const titles = {
-      'your-pet': 'Add my pet',
-      sell: 'Add pet for sell',
-      'lost-found': 'Add to lost or found pet',
-      'good-hands': 'Add to give a Pet for Adoption',
-      '': 'Add Pet',
-    };
-    return titles[category] || 'Add Pet';
-  }, [category]);
-
-  useEffect(() => {
-    setTitle(getPageTitle());
-  }, [getPageTitle]);
 
   return (
     <>
       <AddFormTitle>{title}</AddFormTitle>
       <AddFormList>
         {steps.map((stepName, index) => (
-          <AddFormItem
-            key={index}
-            // className={index <= step ? 'current' : 'completed'}
-            className={setClassName(index)}
-          >
+          <AddFormItem key={index} className={setClassName(index)}>
             <AddFormStepName>{stepName}</AddFormStepName>
           </AddFormItem>
         ))}
       </AddFormList>
       <Formik
-        initialValues={INITIAL_STATE}
-        //  validationSchema={validatePet}
+        initialValues={formData}
+        validationSchema={validatePetSchema}
         onSubmit={handleSubmit}
+        validateOnChange={false}
       >
-        <AddForm autoComplete="on">
-          {step === 0 && <ChooseForm setCategory={setCategory} />}
-          {step === 1 && <PersonalForm category={category} />}
-          {step === 2 && (
-            <MoreInfo
-              fileInput={fileInput}
-              setFileInput={setFileInput}
-              category={category}
-            />
-          )}
-
-          <AddFormButtonWrapper>
-            {step < 2 && (
-              <AddFormButtonNext
-                type="button"
-                text="Next"
-                icon={<PawPrintIcon />}
-                clickHandler={handleNextClick}
-                filled={false}
-              />
-            )}
-
-            {step === 2 && (
-              <AddFormButtonNext
-                type="submit"
-                text="Done"
-                icon={<PawPrintIcon />}
-                filled={true}
-                clickHandler={handleSubmit}
-              />
-            )}
-
-            {step > 0 && (
-              <AddFormButtonBack
-                type="button"
-                disabled={!category}
-                clickHandler={handlePrevClick}
-                text="Back"
-                isLink={false}
-              />
-            )}
-
+        {({ isValid, validateField }) => (
+          <AddForm autoComplete="on">
             {step === 0 && (
-              <AddFormButtonBack text="Cancel" isLink={true} path={backLink} />
+              <ChooseForm
+                formData={formData}
+                setFormData={setFormData}
+                nextStep={handleNextClick}
+                cancel={backLink}
+              />
             )}
-          </AddFormButtonWrapper>
-        </AddForm>
+            {step === 1 && (
+              <PersonalForm
+                formData={formData}
+                setFormData={setFormData}
+                nextStep={handleNextClick}
+                backStep={handlePrevClick}
+                isValid={validateField}
+              />
+            )}
+            {step === 2 && (
+              <MoreInfo
+                formData={formData}
+                setFormData={setFormData}
+                backStep={handlePrevClick}
+                submit={handleSubmit}
+                isValid={isValid}
+              />
+            )}
+          </AddForm>
+        )}
       </Formik>
     </>
   );
