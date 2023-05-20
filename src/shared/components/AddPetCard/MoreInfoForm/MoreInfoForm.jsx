@@ -41,7 +41,6 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
     };
     window.addEventListener('resize', handleResize);
 
-    // Прибирання прослуховувача подій під час розмонтування компонента
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -102,7 +101,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
               : 'Load the pet’s image:'}
             <AddFormImageWrapper>
               {!formData.petPhoto && <PlusIcon width="30" height="30" />}
-              {!!formData['pets-photo'] && (
+              {!!formData.petPhoto && (
                 <img
                   id="image"
                   src={URL.createObjectURL(formData.petPhoto)}

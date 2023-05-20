@@ -79,51 +79,37 @@ const AddPetPageForm = () => {
 
     const newFormData = new FormData();
 
-    if (formData.category === 'your-pet') {
-      newFormData.append('name', formData.name);
-      newFormData.append('birthday', formData.birthday);
-      newFormData.append('breed', formData.breed);
-      newFormData.append('pets-photo', formData.petPhoto);
-      newFormData.append('comments', formData.comments);
+    newFormData.append('name', formData.name);
+    newFormData.append('birthday', formData.birthday);
+    newFormData.append('breed', formData.breed);
+    newFormData.append('pets-photo', formData.petPhoto);
+    newFormData.append('comments', formData.comments);
 
+    if (formData.category === 'your-pet') {
       dispatch(addMyPet(newFormData));
       navigate(backLink);
       return;
     }
 
+    const category = formData.category;
+
+    newFormData.append('titleOfAdd', formData.title);
+    newFormData.append('sex', formData.sex);
+    newFormData.append('location', formData.location);
+
     if (
       formData.category === 'lost-found' ||
       formData.category === 'good-hands'
     ) {
-      newFormData.append('name', formData.name);
-      newFormData.append('birthday', formData.birthday);
-      newFormData.append('breed', formData.breed);
-      newFormData.append('pets-photo', formData.petPhoto);
-      newFormData.append('comments', formData.comments);
-      newFormData.append('category', formData.category);
-      newFormData.append('title', formData.title);
-      newFormData.append('sex', formData.sex);
-      newFormData.append('location', formData.location);
-
-      dispatch(addNotice(newFormData));
+      dispatch(addNotice({ category, newFormData }));
       navigate(backLink);
       return;
     }
 
-    if (formData.category === 'your-pet') {
-      newFormData.append('name', formData.name);
-      newFormData.append('birthday', formData.birthday);
-      newFormData.append('breed', formData.breed);
-      newFormData.append('pets-photo', formData.petPhoto);
-      newFormData.append('comments', formData.comments);
-      newFormData.append('category', formData.category);
-      newFormData.append('title', formData.title);
-      newFormData.append('sex', formData.sex);
-      newFormData.append('location', formData.location);
-      newFormData.append('price', formData.price);
-      newFormData.forEach((value, key) => console.log(value, key));
+    newFormData.append('price', formData.price);
 
-      dispatch(addNotice(newFormData));
+    if (formData.category === 'sell') {
+      dispatch(addNotice({ category, newFormData }));
       navigate(backLink);
     }
   };
