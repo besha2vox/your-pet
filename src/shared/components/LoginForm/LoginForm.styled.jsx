@@ -35,6 +35,7 @@ export const LogInFormEmailContainer = styled.div`
 
 export const LogInFormEmailInputContainer = styled.div`
   display: flex;
+  align-items: center;
   padding: 2px 16px;
 
   border: 1px solid
@@ -61,11 +62,6 @@ export const LogInFormPasswordInputContainer = styled.div`
   border: 1px solid
     ${({ theme, error }) => (error ? theme.colors.red : theme.colors.blue)};
   border-radius: 40px;
-
-  &:focus-within {
-    border: 1px solid ${({ theme }) => theme.colors.yellow};
-    outline: none;
-  }
 `;
 
 export const LogInFormInput = styled(Field)`
@@ -79,6 +75,16 @@ export const LogInFormInput = styled(Field)`
   outline: none;
 `;
 
+export const ErrorIcon = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.red};
+`;
+
 export const ErrorMessage = styled.div`
   padding-left: 16px;
   margin-top: 4px;
@@ -88,8 +94,6 @@ export const ErrorMessage = styled.div`
 export const PasswordIcon = styled.span`
   display: flex;
   align-items: center;
-
-  cursor: pointer;
 `;
 
 export const EyeIcon = styled.span`
@@ -98,7 +102,16 @@ export const EyeIcon = styled.span`
   justify-content: center;
   width: 24px;
   height: 24px;
-  color: ${({ theme }) => theme.colors.blue};
+  cursor: pointer;
+
+  margin-right: ${({ error }) => (error ? '10px' : '')};
+  color: ${({ theme, error }) =>
+    error ? theme.colors.red : theme.colors.blue};
+`;
+
+export const LoginErrorMessage = styled.div`
+  padding-left: 16px;
+  color: ${({ theme }) => theme.colors.red};
 `;
 
 export const LogInBtn = styled.button`

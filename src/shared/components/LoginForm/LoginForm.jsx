@@ -1,6 +1,9 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
+import { logIn } from 'redux/auth/operations';
 import { ReactComponent as OpenEyeIcon } from '../../../images/icons/eye-open.svg';
 import { ReactComponent as CloseEyeIcon } from '../../../images/icons/eye-closed.svg';
+import { ReactComponent as CrossIcon } from '../../../images/icons/cross-small.svg';
 import { useState } from 'react';
 
 import {
@@ -9,17 +12,19 @@ import {
   LogInFormEmailContainer,
   LogInFormEmailInputContainer,
   LogInFormInput,
+  ErrorIcon,
   LogInFormPasswordContainer,
   LogInFormPasswordInputContainer,
   ErrorMessage,
   PasswordIcon,
-  LogInBtn,
   EyeIcon,
+  LoginErrorMessage,
+  LogInBtn,
   RegisterText,
   RegisterLink,
 } from './LoginForm.styled';
-import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
+import { selectError } from 'redux/auth/selectors';
+import { useNavigate } from 'react-router';
 
 const initialValues = {
   email: '',
@@ -36,8 +41,6 @@ const fieldValidation = values => {
 
   if (!values.password) {
     errors.password = 'This field is required';
-  } else if (values.password.length < 8) {
-    errors.password = 'Password must be at least 8 characters long';
   }
 
   return errors;
@@ -48,11 +51,15 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
+  const loginError = useSelector(selectError);
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     if (loading) {
       return;
     }
@@ -61,11 +68,17 @@ const LoginForm = () => {
 
     try {
       await dispatch(logIn(values));
-      setSubmitting(false);
+      navigate('/');
     } catch (error) {
-      console.log(error);
+      if (error === 'Unable to fetch user') {
+        dispatch({
+          type: 'SET_ERROR',
+          payload: 'Email or password is incorrect!',
+        });
+      }
     } finally {
       setLoading(false);
+      setSubmitting(false);
     }
   };
 
@@ -74,6 +87,7 @@ const LoginForm = () => {
       initialValues={initialValues}
       validate={fieldValidation}
       validateOnChange={false}
+      validateOnBlur={false}
       onSubmit={handleSubmit}
     >
       {({
@@ -84,20 +98,37 @@ const LoginForm = () => {
         handleBlur,
         handleSubmit,
         isSubmitting,
+        resetForm,
       }) => (
         <LogInForm onSubmit={handleSubmit}>
           <LogInFormTitle>Log In</LogInFormTitle>
           <LogInFormEmailContainer>
-            <LogInFormEmailInputContainer error={errors.email && touched.email}>
+            <LogInFormEmailInputContainer
+              error={errors.email && touched.email}
+              style={{
+                borderColor:
+                  errors.email && touched.email ? '#F43F5E' : '#54ADFF',
+              }}
+            >
               <LogInFormInput
-                type="email"
+                type="string"
                 name="email"
                 placeholder="Email"
                 value={values.email}
                 onChange={handleChange}
-                required
+                onBlur={handleBlur}
               />
+              {errors.email && touched.email && values.email && (
+                <ErrorIcon
+                  onClick={() => {
+                    resetForm({ values: { ...values, email: '' } });
+                  }}
+                >
+                  <CrossIcon />
+                </ErrorIcon>
+              )}
             </LogInFormEmailInputContainer>
+
             {errors.email && touched.email && (
               <ErrorMessage>{errors.email}</ErrorMessage>
             )}
@@ -106,6 +137,10 @@ const LoginForm = () => {
           <LogInFormPasswordContainer>
             <LogInFormPasswordInputContainer
               error={errors.password && touched.password}
+              style={{
+                borderColor:
+                  errors.password && touched.password ? '#F43F5E' : '#54ADFF',
+              }}
             >
               <LogInFormInput
                 type={showPassword ? 'text' : 'password'}
@@ -113,25 +148,45 @@ const LoginForm = () => {
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}
-                required
               />
               <PasswordIcon onClick={togglePasswordVisibility}>
-                <EyeIcon>
+                <EyeIcon error={errors.password && touched.password}>
                   {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
                 </EyeIcon>
+
+                {errors.password && touched.password && values.password && (
+                  <ErrorIcon
+                    onClick={() => {
+                      resetForm({ values: { ...values, password: '' } });
+                    }}
+                  >
+                    <CrossIcon />
+                  </ErrorIcon>
+                )}
               </PasswordIcon>
             </LogInFormPasswordInputContainer>
 
-            {errors.password && touched.email && (
+            {errors.password && touched.password && (
               <ErrorMessage>{errors.password}</ErrorMessage>
             )}
           </LogInFormPasswordContainer>
+
+          {loginError && (
+            <LoginErrorMessage>{loginError.message}</LoginErrorMessage>
+          )}
 
           <LogInBtn type="submit" disabled={isSubmitting}>
             Log In
           </LogInBtn>
           <RegisterText>
-            Don't have an account? <RegisterLink href="">Register</RegisterLink>
+            Don't have an account?{' '}
+            <RegisterLink
+              onClick={() => {
+                navigate('/register');
+              }}
+            >
+              Register
+            </RegisterLink>
           </RegisterText>
         </LogInForm>
       )}
