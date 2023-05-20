@@ -1,5 +1,17 @@
+import RegisterForm from 'shared/components/RegisterForm/RegisterForm';
+import {
+  RegisterPageWrapper,
+  RegisterFormWrapper,
+} from './RegisterPage.styled';
+
 const RegisterPage = () => {
-  return <>{/* Тра-та-та */}</>;
+  return (
+    <RegisterPageWrapper>
+      <RegisterFormWrapper>
+        <RegisterForm />
+      </RegisterFormWrapper>
+    </RegisterPageWrapper>
+  );
 };
 
 export default RegisterPage;
