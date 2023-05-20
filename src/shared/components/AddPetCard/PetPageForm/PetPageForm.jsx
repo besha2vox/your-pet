@@ -91,17 +91,18 @@ const AddPetPageForm = () => {
       return;
     }
 
-    const category = formData.category;
-
     newFormData.append('titleOfAdd', formData.title);
     newFormData.append('sex', formData.sex);
     newFormData.append('location', formData.location);
 
-    if (
-      formData.category === 'lost-found' ||
-      formData.category === 'for-free'
-    ) {
-      dispatch(addNotice({ category, newFormData }));
+    if (formData.category === 'lost-found') {
+      dispatch(addNotice({ category: 'lost-found', newFormData }));
+      navigate(backLink);
+      return;
+    }
+
+    if (formData.category === 'for-free') {
+      dispatch(addNotice({ category: 'in-good-hands', newFormData }));
       navigate(backLink);
       return;
     }
@@ -109,7 +110,7 @@ const AddPetPageForm = () => {
     newFormData.append('price', formData.price);
 
     if (formData.category === 'sell') {
-      dispatch(addNotice({ category, newFormData }));
+      dispatch(addNotice({ category: formData.category, newFormData }));
       navigate(backLink);
     }
   };
@@ -130,7 +131,7 @@ const AddPetPageForm = () => {
         onSubmit={handleSubmit}
         validateOnChange={false}
       >
-        {({ isValid, validateField }) => (
+        {() => (
           <AddForm autoComplete="on">
             {step === 0 && (
               <ChooseForm
@@ -146,7 +147,6 @@ const AddPetPageForm = () => {
                 setFormData={setFormData}
                 nextStep={handleNextClick}
                 backStep={handlePrevClick}
-                isValid={validateField}
               />
             )}
             {step === 2 && (
@@ -155,7 +155,6 @@ const AddPetPageForm = () => {
                 setFormData={setFormData}
                 backStep={handlePrevClick}
                 submit={handleSubmit}
-                isValid={isValid}
               />
             )}
           </AddForm>
