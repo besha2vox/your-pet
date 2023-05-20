@@ -62,7 +62,6 @@ export const isFieldValid = async (fieldName, value) => {
 };
 
 export const validateField = async (fieldName, value, setErrors) => {
-  console.log({ fieldName, value });
   try {
     await validatePetSchema.validateAt(fieldName, value);
     setErrors(prevErrors => ({
