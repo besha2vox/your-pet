@@ -68,7 +68,7 @@ const LoginForm = () => {
 
     try {
       await dispatch(logIn(values));
-      navigate('/user');
+      navigate('/');
     } catch (error) {
       if (error === 'Unable to fetch user') {
         dispatch({
