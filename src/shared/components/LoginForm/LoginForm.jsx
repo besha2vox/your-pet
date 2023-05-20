@@ -1,8 +1,9 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
+import { logIn } from 'redux/auth/operations';
 import { ReactComponent as OpenEyeIcon } from '../../../images/icons/eye-open.svg';
 import { ReactComponent as CloseEyeIcon } from '../../../images/icons/eye-closed.svg';
 import { ReactComponent as CrossIcon } from '../../../images/icons/cross-small.svg';
-import { ReactComponent as CheckIcon } from '../../../images/icons/check.svg';
 import { useState } from 'react';
 
 import {
@@ -17,13 +18,13 @@ import {
   ErrorMessage,
   PasswordIcon,
   EyeIcon,
-  CheckMarkIcon,
+  LoginErrorMessage,
   LogInBtn,
   RegisterText,
   RegisterLink,
 } from './LoginForm.styled';
-import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
+import { selectError } from 'redux/auth/selectors';
+import { useNavigate } from 'react-router';
 
 const initialValues = {
   email: '',
@@ -40,8 +41,6 @@ const fieldValidation = values => {
 
   if (!values.password) {
     errors.password = 'This field is required';
-  } else if (values.password.length < 8) {
-    errors.password = 'Password must be at least 8 characters long';
   }
 
   return errors;
@@ -51,6 +50,10 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const loginError = useSelector(selectError);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -65,9 +68,14 @@ const LoginForm = () => {
 
     try {
       await dispatch(logIn(values));
-      resetForm();
+      navigate('/user');
     } catch (error) {
-      console.log(error);
+      if (error === 'Unable to fetch user') {
+        dispatch({
+          type: 'SET_ERROR',
+          payload: 'Email or password is incorrect!',
+        });
+      }
     } finally {
       setLoading(false);
       setSubmitting(false);
@@ -163,11 +171,22 @@ const LoginForm = () => {
             )}
           </LogInFormPasswordContainer>
 
+          {loginError && (
+            <LoginErrorMessage>{loginError.message}</LoginErrorMessage>
+          )}
+
           <LogInBtn type="submit" disabled={isSubmitting}>
             Log In
           </LogInBtn>
           <RegisterText>
-            Don't have an account? <RegisterLink href="">Register</RegisterLink>
+            Don't have an account?{' '}
+            <RegisterLink
+              onClick={() => {
+                navigate('/register');
+              }}
+            >
+              Register
+            </RegisterLink>
           </RegisterText>
         </LogInForm>
       )}
