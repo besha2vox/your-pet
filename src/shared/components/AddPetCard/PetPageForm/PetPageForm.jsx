@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { addNotice } from 'redux/notices/operations';
 import { addMyPet } from 'redux/auth/operations';
-import { validatePetSchema } from '../VaidatePet';
+import { validatePetSchema } from '../vaidatePet';
 
 import MoreInfo from '../MoreInfoForm/MoreInfoForm';
 import ChooseForm from '../ChooseForm/ChooseForm';
@@ -45,10 +45,10 @@ const AddPetPageForm = () => {
     if (step < 1) return 'Add Pet';
 
     const titles = {
-      'your-pet': 'Add my pet',
+      'my-pet': 'Add my pet',
       sell: 'Add pet for sell',
       'lost-found': 'Add to lost or found pet',
-      'good-hands': 'Add to give a Pet for Adoption',
+      'for-free': 'Add to give a Pet for Adoption',
       '': 'Add Pet',
     };
     return titles[formData.category] || 'Add Pet';
@@ -85,7 +85,7 @@ const AddPetPageForm = () => {
     newFormData.append('pets-photo', formData.petPhoto);
     newFormData.append('comments', formData.comments);
 
-    if (formData.category === 'your-pet') {
+    if (formData.category === 'my-pet') {
       dispatch(addMyPet(newFormData));
       navigate(backLink);
       return;
@@ -99,7 +99,7 @@ const AddPetPageForm = () => {
 
     if (
       formData.category === 'lost-found' ||
-      formData.category === 'good-hands'
+      formData.category === 'for-free'
     ) {
       dispatch(addNotice({ category, newFormData }));
       navigate(backLink);
