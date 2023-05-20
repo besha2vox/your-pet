@@ -6,6 +6,8 @@ import { AddFormButtonWrapper } from '../PetPageForm/PetPageForm.styled';
 import AddFormButtonBack from '../AddFormButton/AddFormButtonBack';
 import AddFormButtonNext from '../AddFormButton/AddFormButtonNext';
 
+import { validateField } from '../vaidatePet';
+
 import {
   PlusIcon,
   MaleIcon,
@@ -32,8 +34,26 @@ import {
 import { AddFormRadioButton } from '../ChooseForm/ChooseForm.styled';
 
 const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [errors, setErrors] = useState({});
   const [imageValue, setImageValue] = useState('');
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+
+  const isPetPhotoFieldValid = Boolean(!errors.petPhoto && !!formData.petPhoto);
+  const isCommentsFieldValid = Boolean(!errors.comments);
+  const isLocationFieldValid = Boolean(!errors.location && !!formData.location);
+  const isSexFieldValid = Boolean(!errors.sex && !!formData.sex);
+  const isPriceFieldValid = Boolean(!errors.price && !!formData.price);
+
+  console.log(errors.location);
+  console.log(formData.location);
+  // console.log({
+  //   isCommentsFieldValid,
+  //   isLocationFieldValid,
+  //   isPetPhotoFieldValid,
+  //   isPriceFieldValid,
+  //   isSexFieldValid,
+  // });
 
   useEffect(() => {
     const handleResize = () => {
@@ -45,6 +65,49 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    switch (formData.category) {
+      case 'sell':
+        setIsDisabled(
+          !(
+            isPetPhotoFieldValid &&
+            isLocationFieldValid &&
+            isSexFieldValid &&
+            isPriceFieldValid &&
+            isCommentsFieldValid
+          )
+        );
+        break;
+
+      case 'lost-found' || 'for-free':
+        setIsDisabled(
+          !(
+            isPetPhotoFieldValid &&
+            isLocationFieldValid &&
+            isSexFieldValid &&
+            isCommentsFieldValid
+          )
+        );
+        break;
+
+      case 'my-pet':
+        setIsDisabled(!isPetPhotoFieldValid && isCommentsFieldValid);
+        break;
+
+      default:
+        setIsDisabled(true);
+        break;
+    }
+  }, [
+    errors,
+    formData.category,
+    isCommentsFieldValid,
+    isLocationFieldValid,
+    isPetPhotoFieldValid,
+    isPriceFieldValid,
+    isSexFieldValid,
+  ]);
 
   const handleInputChange = e => {
     const { name, value, type, files } = e.target;
@@ -75,6 +138,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
                   value="female"
                   onChange={handleInputChange}
                   checked={formData.sex === 'female'}
+                  onBlur={() => validateField('sex', formData, setErrors)}
                 />
                 <AddFormSexLabel htmlFor="female">
                   <FemaleIcon stroke="#F43F5E" />
@@ -87,6 +151,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
                   value="male"
                   onChange={handleInputChange}
                   checked={formData.sex === 'male'}
+                  onBlur={() => validateField('sex', formData, setErrors)}
                 />
                 <AddFormSexLabel htmlFor="male">
                   <MaleIcon stroke="#54ADFF" />
@@ -116,6 +181,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
               accept=".png, .jpg, .jpeg, .webp"
               onChange={handleInputChange}
               value={imageValue}
+              onBlur={() => validateField('petPhoto', formData, setErrors)}
             />
             <ErrorMessage name="pet-image" component="div" />
           </AddFormImageLabel>
@@ -130,6 +196,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
                 name="location"
                 onChange={handleInputChange}
                 value={formData.location}
+                onBlur={() => validateField('location', formData, setErrors)}
               />
               <ErrorMessage name="location" component="div" />
             </AddFormLabel>
@@ -143,6 +210,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
                 name="price"
                 onChange={handleInputChange}
                 value={formData.price}
+                onBlur={() => validateField('price', formData, setErrors)}
               />
               <ErrorMessage name="price" component="div" />
             </AddFormLabel>
@@ -155,6 +223,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
               name="comments"
               onChange={handleInputChange}
               value={formData.comments}
+              onBlur={() => validateField('comments', formData, setErrors)}
             />
             <ErrorMessage name="comments" component="div" />
           </AddFormTextAreaLabel>
@@ -167,7 +236,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
           icon={<PawPrintIcon />}
           filled={true}
           clickHandler={submit}
-          isDisabled={false}
+          isDisabled={isDisabled}
         />
         <AddFormButtonBack
           type="button"

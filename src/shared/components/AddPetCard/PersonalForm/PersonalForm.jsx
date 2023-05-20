@@ -13,43 +13,59 @@ import {
   AddFormInput,
 } from './PersonalForm.styled';
 
-import { validateField } from '../VaidatePet';
+import { validateField } from '../vaidatePet';
 
 const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
   const [isDisabled, setIsDisabled] = useState(true);
-  const [errors, setErrors] = useState({ name: 'error' });
+  const [errors, setErrors] = useState({});
+
+  const isNameFieldValid = Boolean(!errors.name && !!formData.name);
+  const isBirthdayFieldValid = Boolean(!errors.birthday && !!formData.birthday);
+  const isBreedFieldValid = Boolean(!errors.breed && !!formData.breed);
+  const isTitleFieldValid = Boolean(!errors.title && !!formData.title);
 
   useEffect(() => {
     switch (formData.category) {
       case 'sell':
         setIsDisabled(
-          Boolean(
-            errors.name &&
-              errors.birthday &&
-              errors.breed &&
-              errors.title &&
-              errors.price
+          !(
+            isNameFieldValid &&
+            isBirthdayFieldValid &&
+            isBreedFieldValid &&
+            isTitleFieldValid
           )
         );
         break;
 
-      case 'lost-found' || 'good-hands':
+      case 'lost-found' || 'for-free':
         setIsDisabled(
-          Boolean(
-            errors.name && errors.birthday && errors.breed && errors.title
+          !(
+            isNameFieldValid &&
+            isBirthdayFieldValid &&
+            isBreedFieldValid &&
+            isTitleFieldValid
           )
         );
         break;
 
-      case 'your-pet':
-        setIsDisabled(Boolean(errors.name && errors.birthday && errors.breed));
+      case 'my-pet':
+        setIsDisabled(
+          !(isNameFieldValid && isBirthdayFieldValid && isBreedFieldValid)
+        );
         break;
 
       default:
         setIsDisabled(true);
         break;
     }
-  }, [errors, formData.category]);
+  }, [
+    errors,
+    formData.category,
+    isBirthdayFieldValid,
+    isBreedFieldValid,
+    isNameFieldValid,
+    isTitleFieldValid,
+  ]);
 
   useEffect(() => {
     setIsDisabled(true);
@@ -74,7 +90,7 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
 
   return (
     <PersonalFormWrapper>
-      {formData.category !== 'your-pet' && (
+      {formData.category !== 'my-pet' && (
         <AddFormLabel htmlFor="title">
           Title of add:
           <AddFormInput
