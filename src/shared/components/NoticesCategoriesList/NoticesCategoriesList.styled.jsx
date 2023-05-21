@@ -23,7 +23,12 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   border-radius: 0px 0px 40px 40px;
-  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  box-shadow: ${({ theme }) => theme.boxShadows.main};
+  transition: box-shadow 300ms ${({ theme }) => theme.transition.main};
+
+  &:hover {
+    box-shadow: ${({ theme }) => theme.boxShadows.secondary};
+  }
 `;
 
 const ImageWrapper = styled.div`
