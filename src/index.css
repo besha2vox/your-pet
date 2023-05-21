@@ -102,11 +102,21 @@ body {
 
   background-color: #FDF7F2;
 
+  overflow-y: scroll;
+    overflow-x: hidden;
+
   @media screen and (min-width: 768px) {
     font-size: 16px;
   }
+}
 
-    
+body::-webkit-scrollbar {
+  width: 4px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(158, 158, 158, 1);
+  border-radius: 2px;
 }
 
 code {
