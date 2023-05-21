@@ -15,9 +15,11 @@ import {
 
 const initialState = {
   items: [],
+
   currentNotice: null,
   hits: 0,
   totalHits: 0,
+  newNotice: {},
   isLoading: false,
   error: null,
 };
@@ -28,10 +30,10 @@ const noticesSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getNoticeById.fulfilled, (state, { payload }) => {
-        state.currentNotice = payload;
+        state.currentNotice = payload.result;
       })
       .addCase(addNotice.fulfilled, (state, { payload }) => {
-        state.items.push(payload);
+        state.newNotice = payload.result;
       })
       .addCase(removeNotice.fulfilled, (state, { payload }) => {
         const index = state.items.findIndex(

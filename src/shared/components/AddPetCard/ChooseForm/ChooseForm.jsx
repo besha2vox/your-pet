@@ -34,12 +34,12 @@ const ChooseForm = ({ formData, setFormData, nextStep, cancel, setValues }) => {
       <AddFormRadioButton
         type="radio"
         name="category"
-        value="your-pet"
-        id="your-pet"
+        value="my-pet"
+        id="my-pet"
         onChange={handleCategoryChange}
-        checked={formData.category === 'your-pet'}
+        checked={formData.category === 'my-pet'}
       />
-      <RadioCategoryLabel htmlFor="your-pet">Your pet</RadioCategoryLabel>
+      <RadioCategoryLabel htmlFor="my-pet">Your pet</RadioCategoryLabel>
       <AddFormRadioButton
         type="radio"
         name="category"
@@ -61,14 +61,12 @@ const ChooseForm = ({ formData, setFormData, nextStep, cancel, setValues }) => {
       <AddFormRadioButton
         type="radio"
         name="category"
-        value="good-hands"
-        id="good-hands"
-        checked={formData.category === 'good-hands'}
+        value="for-free"
+        id="for-free"
+        checked={formData.category === 'for-free'}
         onChange={handleCategoryChange}
       />
-      <RadioCategoryLabel htmlFor="good-hands">
-        In good hands
-      </RadioCategoryLabel>
+      <RadioCategoryLabel htmlFor="for-free">In good hands</RadioCategoryLabel>
       <AddFormButtonWrapper>
         <AddFormButtonNext
           isDisabled={isDisabled}

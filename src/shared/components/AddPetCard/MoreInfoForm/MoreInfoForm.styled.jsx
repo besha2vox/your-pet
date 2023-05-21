@@ -16,17 +16,17 @@ export const MoreInfoFormWrapper = styled.div`
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     ${({ category }) =>
-      category !== 'your-pet' ? 'flex-direction: row; column-gap:44px' : ''};
+      category !== 'my-pet' ? 'flex-direction: row; column-gap:44px' : ''};
   }
 `;
 
 export const FirstPartFormWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  ${({ category }) => (category !== 'my-pet' ? 'flex-direction: column;' : '')};
   gap: 20px;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    ${({ category }) => (category !== 'your-pet' ? 'row-gap: 48px;' : '')};
+    ${({ category }) => (category !== 'my-pet' ? 'row-gap: 38px;' : '')};
   }
 `;
 
@@ -120,7 +120,7 @@ export const AddFormImageLabel = styled(AddFormLabel)`
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     ${({ category }) =>
-      category !== 'your-pet' ? 'flex-direction: column' : ''};
+      category !== 'my-pet' ? 'flex-direction: column' : ''};
   }
 `;
 

@@ -11,6 +11,11 @@ const FriendItem = styled.li`
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     max-width: 395px;
+    transition: box-shadow 300ms ${({ theme }) => theme.transition.main};
+
+    &:hover {
+      box-shadow: ${({ theme }) => theme.boxShadows.secondary};
+    }
   }
 `;
 

@@ -4,52 +4,69 @@ import { useState, useEffect } from 'react';
 import { AddFormButtonWrapper } from '../PetPageForm/PetPageForm.styled';
 import AddFormButtonBack from '../AddFormButton/AddFormButtonBack';
 import AddFormButtonNext from '../AddFormButton/AddFormButtonNext';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import { PawPrintIcon } from 'shared/utils/icons';
 
-import { ErrorMessage } from 'formik';
 import {
   PersonalFormWrapper,
   AddFormLabel,
   AddFormInput,
+  AddFormLabelWrapper,
 } from './PersonalForm.styled';
 
-import { validateField } from '../VaidatePet';
+import { validateField } from '../vaidatePet';
 
 const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
   const [isDisabled, setIsDisabled] = useState(true);
-  const [errors, setErrors] = useState({ name: 'error' });
+  const [errors, setErrors] = useState({});
+
+  const isNameFieldValid = Boolean(!errors.name && !!formData.name);
+  const isBirthdayFieldValid = Boolean(!errors.birthday && !!formData.birthday);
+  const isBreedFieldValid = Boolean(!errors.breed && !!formData.breed);
+  const isTitleFieldValid = Boolean(!errors.title && !!formData.title);
 
   useEffect(() => {
     switch (formData.category) {
       case 'sell':
         setIsDisabled(
-          Boolean(
-            errors.name &&
-              errors.birthday &&
-              errors.breed &&
-              errors.title &&
-              errors.price
+          !(
+            isNameFieldValid &&
+            isBirthdayFieldValid &&
+            isBreedFieldValid &&
+            isTitleFieldValid
           )
         );
         break;
 
-      case 'lost-found' || 'good-hands':
+      case 'lost-found' || 'for-free':
         setIsDisabled(
-          Boolean(
-            errors.name && errors.birthday && errors.breed && errors.title
+          !(
+            isNameFieldValid &&
+            isBirthdayFieldValid &&
+            isBreedFieldValid &&
+            isTitleFieldValid
           )
         );
         break;
 
-      case 'your-pet':
-        setIsDisabled(Boolean(errors.name && errors.birthday && errors.breed));
+      case 'my-pet':
+        setIsDisabled(
+          !(isNameFieldValid && isBirthdayFieldValid && isBreedFieldValid)
+        );
         break;
 
       default:
         setIsDisabled(true);
         break;
     }
-  }, [errors, formData.category]);
+  }, [
+    errors,
+    formData.category,
+    isBirthdayFieldValid,
+    isBreedFieldValid,
+    isNameFieldValid,
+    isTitleFieldValid,
+  ]);
 
   useEffect(() => {
     setIsDisabled(true);
@@ -66,10 +83,6 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
           })
         : value;
 
-    if (name === 'birthday') {
-      console.log(inputValue, typeof inputValue);
-    }
-
     setFormData(prevState => ({
       ...prevState,
       [name]: inputValue,
@@ -78,57 +91,65 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
 
   return (
     <PersonalFormWrapper>
-      {formData.category !== 'your-pet' && (
-        <AddFormLabel htmlFor="title">
-          Title of add:
-          <AddFormInput
-            placeholder="Type title"
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleInputChange}
-            onBlur={() => validateField('title', formData, setErrors)}
-          />
-          <ErrorMessage name="title" component="div" />
-        </AddFormLabel>
+      {formData.category !== 'my-pet' && (
+        <AddFormLabelWrapper>
+          <AddFormLabel htmlFor="title">
+            Title of add:
+            <AddFormInput
+              placeholder="Type title"
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+              onBlur={() => validateField('title', formData, setErrors)}
+            />
+          </AddFormLabel>
+          {!!errors.title && <ErrorMessage message={errors.title} />}
+        </AddFormLabelWrapper>
       )}
-      <AddFormLabel htmlFor="name">
-        Name:
-        <AddFormInput
-          placeholder="Type name pet"
-          type="text"
-          name="name"
-          onChange={handleInputChange}
-          value={formData.name}
-          onBlur={() => validateField('name', formData, setErrors)}
-        />
-        <ErrorMessage name="name" component="div" />
-      </AddFormLabel>
-      <AddFormLabel htmlFor="birthday">
-        Birthday:
-        <AddFormInput
-          placeholder="Type date of birth"
-          type="date"
-          name="birthday"
-          data-pattern="**.**.****"
-          onChange={handleInputChange}
-          value={formData.birthday.split('.').reverse().join('-')}
-          onBlur={() => validateField('birthday', formData, setErrors)}
-        />
-        <ErrorMessage name="birthday" component="div" />
-      </AddFormLabel>
-      <AddFormLabel htmlFor="breed">
-        Breed:
-        <AddFormInput
-          placeholder="Type breed"
-          type="text"
-          name="breed"
-          onChange={handleInputChange}
-          value={formData.breed}
-          onBlur={() => validateField('breed', formData, setErrors)}
-        />
-        <ErrorMessage name="breed" component="div" />
-      </AddFormLabel>
+      <AddFormLabelWrapper>
+        <AddFormLabel htmlFor="name">
+          Name:
+          <AddFormInput
+            placeholder="Type name pet"
+            type="text"
+            name="name"
+            onChange={handleInputChange}
+            value={formData.name}
+            onBlur={() => validateField('name', formData, setErrors)}
+          />
+        </AddFormLabel>
+        {!!errors.name && <ErrorMessage message={errors.name} />}
+      </AddFormLabelWrapper>
+      <AddFormLabelWrapper>
+        <AddFormLabel htmlFor="birthday">
+          Birthday:
+          <AddFormInput
+            placeholder="Type date of birth"
+            type="date"
+            name="birthday"
+            data-pattern="**.**.****"
+            onChange={handleInputChange}
+            value={formData.birthday.split('.').reverse().join('-')}
+            onBlur={() => validateField('birthday', formData, setErrors)}
+          />
+        </AddFormLabel>
+        {!!errors.birthday && <ErrorMessage message={errors.birthday} />}
+      </AddFormLabelWrapper>
+      <AddFormLabelWrapper>
+        <AddFormLabel htmlFor="breed">
+          Breed:
+          <AddFormInput
+            placeholder="Type breed"
+            type="text"
+            name="breed"
+            onChange={handleInputChange}
+            value={formData.breed}
+            onBlur={() => validateField('breed', formData, setErrors)}
+          />
+        </AddFormLabel>
+        {!!errors.breed && <ErrorMessage message={errors.breed} />}
+      </AddFormLabelWrapper>
       <AddFormButtonWrapper>
         <AddFormButtonNext
           type="button"
@@ -137,7 +158,6 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
           clickHandler={nextStep}
           filled={false}
           isDisabled={isDisabled}
-          // isDisabled={false}
         />
         <AddFormButtonBack
           type="button"

@@ -1,16 +1,21 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Formik } from 'formik';
 import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { addNotice } from 'redux/notices/operations';
 import { addMyPet } from 'redux/auth/operations';
-import { validatePetSchema } from '../VaidatePet';
+import { validatePetSchema } from '../vaidatePet';
 
 import MoreInfo from '../MoreInfoForm/MoreInfoForm';
 import ChooseForm from '../ChooseForm/ChooseForm';
 import PersonalForm from '../PersonalForm/PersonalForm';
+import Modal from 'shared/components/Modal/Modal';
+import AddPetModal from '../AddPetModal/AddPetModal';
+
+import { selectIsLoading } from 'redux/auth/selectors';
+import { selectNoticesIsLoading } from 'redux/notices/selectors';
 
 import {
   AddForm,
@@ -18,6 +23,7 @@ import {
   AddFormList,
   AddFormItem,
   AddFormStepName,
+  AddFormWrapper,
 } from './PetPageForm.styled';
 
 const AddPetPageForm = () => {
@@ -33,22 +39,25 @@ const AddPetPageForm = () => {
     sex: '',
     price: 0,
   });
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [step, setStep] = useState(0);
   const [title, setTitle] = useState('');
   const location = useLocation();
   const backLink = location.state?.from ?? '/';
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isAddMyPetLoading = useSelector(selectIsLoading);
+  const isAddPetLoading = useSelector(selectNoticesIsLoading);
+  const isLoading = isAddMyPetLoading || isAddPetLoading;
 
   const getPageTitle = useCallback(() => {
     if (step < 1) return 'Add Pet';
 
     const titles = {
-      'your-pet': 'Add my pet',
+      'my-pet': 'Add my pet',
       sell: 'Add pet for sell',
       'lost-found': 'Add to lost or found pet',
-      'good-hands': 'Add to give a Pet for Adoption',
+      'for-free': 'Add to give a Pet for Adoption',
       '': 'Add Pet',
     };
     return titles[formData.category] || 'Add Pet';
@@ -59,6 +68,10 @@ const AddPetPageForm = () => {
   }, [getPageTitle]);
 
   const steps = ['Choose Option', 'Personal Details', 'More Info'];
+
+  const toggleModal = () => {
+    setIsModalOpen(prevState => !prevState);
+  };
 
   const setClassName = index => {
     if (index > step) return '';
@@ -83,36 +96,43 @@ const AddPetPageForm = () => {
     newFormData.append('birthday', formData.birthday);
     newFormData.append('breed', formData.breed);
     newFormData.append('pets-photo', formData.petPhoto);
-    newFormData.append('comments', formData.comments);
 
-    if (formData.category === 'your-pet') {
+    if (formData.comments) {
+      newFormData.append('comments', formData.comments);
+    }
+
+    if (formData.category === 'my-pet') {
       dispatch(addMyPet(newFormData));
-      navigate(backLink);
+      toggleModal();
       return;
     }
 
-    newFormData.append('category', formData.category);
-    newFormData.append('title', formData.title);
+    newFormData.append('titleOfAdd', formData.title);
     newFormData.append('sex', formData.sex);
     newFormData.append('location', formData.location);
 
-    if (
-      formData.category === 'lost-found' ||
-      formData.category === 'good-hands'
-    ) {
-      dispatch(addNotice(newFormData));
-      navigate(backLink);
+    if (formData.category === 'lost-found') {
+      dispatch(addNotice({ category: 'lost-found', newFormData }));
+      toggleModal();
+      return;
+    }
+
+    if (formData.category === 'for-free') {
+      dispatch(addNotice({ category: 'in-good-hands', newFormData }));
+      toggleModal();
       return;
     }
 
     newFormData.append('price', formData.price);
 
-    dispatch(addNotice(newFormData));
-    navigate(backLink);
+    if (formData.category === 'sell') {
+      dispatch(addNotice({ category: formData.category, newFormData }));
+      toggleModal();
+    }
   };
 
   return (
-    <>
+    <AddFormWrapper step={step} category={formData.category}>
       <AddFormTitle>{title}</AddFormTitle>
       <AddFormList>
         {steps.map((stepName, index) => (
@@ -127,7 +147,7 @@ const AddPetPageForm = () => {
         onSubmit={handleSubmit}
         validateOnChange={false}
       >
-        {({ isValid, validateField }) => (
+        {() => (
           <AddForm autoComplete="on">
             {step === 0 && (
               <ChooseForm
@@ -143,7 +163,6 @@ const AddPetPageForm = () => {
                 setFormData={setFormData}
                 nextStep={handleNextClick}
                 backStep={handlePrevClick}
-                isValid={validateField}
               />
             )}
             {step === 2 && (
@@ -152,13 +171,17 @@ const AddPetPageForm = () => {
                 setFormData={setFormData}
                 backStep={handlePrevClick}
                 submit={handleSubmit}
-                isValid={isValid}
               />
             )}
           </AddForm>
         )}
       </Formik>
-    </>
+      {isModalOpen && !isLoading && (
+        <Modal toggleModal={() => navigate(backLink)}>
+          <AddPetModal backLink={backLink} />
+        </Modal>
+      )}
+    </AddFormWrapper>
   );
 };
 
