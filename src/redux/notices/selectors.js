@@ -1,6 +1,6 @@
 export const selectNotices = state => state.notices.items;
 
-export const selectTotalHintsNotices = state => state.notices.totalHints;
+export const selectTotalHitsNotices = state => state.notices.totalHits;
 
 export const selectCurrentNotice = state => state.notices.currentNotice;
 

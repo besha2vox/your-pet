@@ -5,6 +5,7 @@ import {
   getNoticesByQuery,
   getNoticeById,
   getUsersNotices,
+  getFavoriteNotices,
   addNotice,
   updateNotice,
   removeNotice,
@@ -14,9 +15,9 @@ import {
 
 const initialState = {
   items: [],
-  currentNotice: {},
-  hints: 0,
-  totalHints: 0,
+  currentNotice: null,
+  hits: 0,
+  totalHits: 0,
   isLoading: false,
   error: null,
 };
@@ -42,24 +43,23 @@ const noticesSlice = createSlice({
         isAnyOf(
           getNotices.fulfilled,
           getNoticesByQuery.fulfilled,
-          getUsersNotices.fulfilled
+          getUsersNotices.fulfilled,
+          getFavoriteNotices.fulfilled
         ),
         (state, { payload }) => {
           state.items = payload.result;
-          state.hints = payload.hints;
-          state.totalHints = payload.totalHints;
+          state.hits = payload.hits;
+          state.totalHits = payload.totalHits;
         }
       )
       .addMatcher(
         isAnyOf(
-          updateNotice.pending,
-          addFavoriteNotice.pending,
-          removeFavoriteNotice.pending
+          updateNotice.fulfilled,
+          addFavoriteNotice.fulfilled,
+          removeFavoriteNotice.fulfilled
         ),
         (state, { payload }) => {
-          const index = state.items.findIndex(
-            contact => contact.id === payload
-          );
+          const index = state.items.findIndex(item => item._id === payload._id);
           state.items.splice(index, 1, payload);
         }
       )
@@ -69,6 +69,7 @@ const noticesSlice = createSlice({
           getNoticesByQuery.pending,
           getNoticeById.pending,
           getUsersNotices.pending,
+          getFavoriteNotices.pending,
           addNotice.pending,
           updateNotice.pending,
           removeNotice.pending,
@@ -85,6 +86,7 @@ const noticesSlice = createSlice({
           getNoticesByQuery.fulfilled,
           getNoticeById.fulfilled,
           getUsersNotices.fulfilled,
+          getFavoriteNotices.fulfilled,
           addNotice.fulfilled,
           updateNotice.fulfilled,
           removeNotice.fulfilled,
@@ -102,6 +104,7 @@ const noticesSlice = createSlice({
           getNoticesByQuery.rejected,
           getNoticeById.rejected,
           getUsersNotices.rejected,
+          getFavoriteNotices.rejected,
           addNotice.rejected,
           updateNotice.rejected,
           removeNotice.rejected,
