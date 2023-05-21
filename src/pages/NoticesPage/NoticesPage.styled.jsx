@@ -30,7 +30,7 @@ const Container = styled.div`
 const Filters = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 35px;
+  justify-content: space-between;
 
   margin-top: ${({ theme }) => theme.space[2] * 5 + 'px'};
 
