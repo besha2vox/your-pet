@@ -2,13 +2,13 @@ import PropTypes from 'prop-types';
 import { PlusIcon, PlusSmallIcon } from 'shared/utils/icons';
 import { useWindowSize } from 'hooks/useResize';
 import { Btn } from './AddPetBtn.styled';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
 
 const AddPetBtn = ({ text, path, toggleUnauthorizeModal }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const location = useLocation();
   const [screenWidth] = useWindowSize();
 

@@ -75,6 +75,7 @@ const RegisterForm = () => {
   const navigate = useNavigate();
 
   const registerError = useSelector(selectError);
+  console.log(registerError);
 
   const togglePasswordVisibility = () => {
     setShowPassword(prevState => !prevState);
