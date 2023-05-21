@@ -40,10 +40,6 @@ export const RegisterFormUsernameInputContainer = styled.div`
   border: 1px solid
     ${({ theme, error }) => (error ? theme.colors.red : theme.colors.blue)};
   border-radius: 40px;
-  &:focus-within {
-    border: 1px solid ${({ theme }) => theme.colors.yellow};
-    outline: none;
-  }
 `;
 
 export const RegisterFormEmailContainer = styled.div`
@@ -65,10 +61,6 @@ export const RegisterFormEmailInputContainer = styled.div`
   border: 1px solid
     ${({ theme, error }) => (error ? theme.colors.red : theme.colors.blue)};
   border-radius: 40px;
-  &:focus-within {
-    border: 1px solid ${({ theme }) => theme.colors.yellow};
-    outline: none;
-  }
 `;
 
 export const RegisterFormInput = styled(Field)`
@@ -97,11 +89,6 @@ export const RegisterFormPasswordInputContainer = styled.div`
   border: 1px solid
     ${({ theme, error }) => (error ? theme.colors.red : theme.colors.blue)};
   border-radius: 40px;
-
-  &:focus-within {
-    border: 1px solid ${({ theme }) => theme.colors.yellow};
-    outline: none;
-  }
 `;
 
 export const ErrorMessage = styled.div`
