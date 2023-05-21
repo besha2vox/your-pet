@@ -3,6 +3,10 @@ import styled from 'styled-components';
 const FilterWrapper = styled.div`
   position: relative;
   z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 17px;
 `;
 
 const Btn = styled.button`
