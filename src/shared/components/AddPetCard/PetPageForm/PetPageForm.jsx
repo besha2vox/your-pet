@@ -23,6 +23,7 @@ import {
   AddFormList,
   AddFormItem,
   AddFormStepName,
+  AddFormWrapper,
 } from './PetPageForm.styled';
 
 const AddPetPageForm = () => {
@@ -131,7 +132,7 @@ const AddPetPageForm = () => {
   };
 
   return (
-    <>
+    <AddFormWrapper step={step}>
       <AddFormTitle>{title}</AddFormTitle>
       <AddFormList>
         {steps.map((stepName, index) => (
@@ -180,7 +181,7 @@ const AddPetPageForm = () => {
           <AddPetModal backLink={backLink} />
         </Modal>
       )}
-    </>
+    </AddFormWrapper>
   );
 };
 

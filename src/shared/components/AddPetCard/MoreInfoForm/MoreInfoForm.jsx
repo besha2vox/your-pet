@@ -118,7 +118,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
     <>
       <MoreInfoFormWrapper category={formData.category}>
         <FirstPartFormWrapper category={formData.category}>
-          {formData.category !== 'your-pet' && (
+          {formData.category !== 'my-pet' && (
             <AddFormSexWrapper>
               <p>The Sex</p>
               <AddFormRadioWrapper>
@@ -152,7 +152,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
             </AddFormSexWrapper>
           )}
           <AddFormImageLabel htmlFor="pet-image" category={formData.category}>
-            {formData.category === 'your-pet' || viewportWidth < 768
+            {formData.category === 'my-pet' || viewportWidth < 768
               ? 'Add photo'
               : 'Load the pet’s image:'}
             <AddFormImageWrapper>
@@ -177,7 +177,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
           </AddFormImageLabel>
         </FirstPartFormWrapper>
         <SecondPartFormWrapper>
-          {formData.category !== 'your-pet' && (
+          {formData.category !== 'my-pet' && (
             <AddFormLabelWrapper>
               <AddFormLabel htmlFor="location">
                 Location
