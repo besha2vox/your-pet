@@ -11,6 +11,10 @@ import { validatePetSchema } from '../vaidatePet';
 import MoreInfo from '../MoreInfoForm/MoreInfoForm';
 import ChooseForm from '../ChooseForm/ChooseForm';
 import PersonalForm from '../PersonalForm/PersonalForm';
+import Modal from 'shared/components/Modal/Modal';
+import AddFormButtonBack from '../AddFormButton/AddFormButtonBack';
+import AddFormButtonNext from '../AddFormButton/AddFormButtonNext';
+import { PawPrintIcon } from 'shared/utils/icons';
 
 import {
   AddForm,
@@ -18,6 +22,8 @@ import {
   AddFormList,
   AddFormItem,
   AddFormStepName,
+  AddFormButtonWrapper,
+  AddFormModalWrapper,
 } from './PetPageForm.styled';
 
 const AddPetPageForm = () => {
@@ -33,7 +39,7 @@ const AddPetPageForm = () => {
     sex: '',
     price: 0,
   });
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [step, setStep] = useState(0);
   const [title, setTitle] = useState('');
   const location = useLocation();
@@ -60,6 +66,10 @@ const AddPetPageForm = () => {
 
   const steps = ['Choose Option', 'Personal Details', 'More Info'];
 
+  const toggleModal = () => {
+    setIsModalOpen(prevState => !prevState);
+  };
+
   const setClassName = index => {
     if (index > step) return '';
     if (index < step) return 'completed';
@@ -83,11 +93,14 @@ const AddPetPageForm = () => {
     newFormData.append('birthday', formData.birthday);
     newFormData.append('breed', formData.breed);
     newFormData.append('pets-photo', formData.petPhoto);
-    newFormData.append('comments', formData.comments);
+
+    if (formData.comments) {
+      newFormData.append('comments', formData.comments);
+    }
 
     if (formData.category === 'my-pet') {
       dispatch(addMyPet(newFormData));
-      navigate(backLink);
+      toggleModal();
       return;
     }
 
@@ -97,13 +110,13 @@ const AddPetPageForm = () => {
 
     if (formData.category === 'lost-found') {
       dispatch(addNotice({ category: 'lost-found', newFormData }));
-      navigate(backLink);
+      toggleModal();
       return;
     }
 
     if (formData.category === 'for-free') {
       dispatch(addNotice({ category: 'in-good-hands', newFormData }));
-      navigate(backLink);
+      toggleModal();
       return;
     }
 
@@ -111,7 +124,7 @@ const AddPetPageForm = () => {
 
     if (formData.category === 'sell') {
       dispatch(addNotice({ category: formData.category, newFormData }));
-      navigate(backLink);
+      toggleModal();
     }
   };
 
@@ -160,6 +173,29 @@ const AddPetPageForm = () => {
           </AddForm>
         )}
       </Formik>
+      {isModalOpen && (
+        <Modal toggleModal={() => navigate(backLink)}>
+          <AddFormModalWrapper>
+            <p>Pet was successfully added</p>
+            <AddFormButtonWrapper>
+              <AddFormButtonNext
+                type="button"
+                text="Go to profile"
+                icon={<PawPrintIcon />}
+                clickHandler={() => {}}
+                filled={false}
+                isDisabled={false}
+              />
+              <AddFormButtonBack
+                type="button"
+                clickHandler={() => navigate(backLink)}
+                text="Back"
+                isLink={false}
+              />
+            </AddFormButtonWrapper>
+          </AddFormModalWrapper>
+        </Modal>
+      )}
     </>
   );
 };
