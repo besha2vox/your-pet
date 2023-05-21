@@ -5,6 +5,7 @@ import AddPetBtn from 'shared/components/AddPetBtn/AddPetBtn';
 import NoticesCategoriesList from 'shared/components/NoticesCategoriesList/NoticesCategoriesList';
 import Pagination from 'shared/components/Pagination/Pagination';
 import ModalNotice from 'shared/components/ModalNotice/ModalNotice';
+import ModalUnAuthorized from 'shared/components/ModalUnAuthorized/ModalUnAuthorized';
 import { useState, useEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -44,7 +45,8 @@ const NoticesPage = () => {
   const user = useSelector(selectUser);
   const item = useSelector(selectCurrentNotice);
   const { pathname } = useLocation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+  const [isAuthorizedModalOpen, setIsAuthorizedModalOpen] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const [query, setQuery] = useState('');
   const [genderFilter, setGenderFilter] = useState('');
@@ -108,7 +110,7 @@ const NoticesPage = () => {
   };
 
   const toggleModal = () => {
-    setIsModalOpen(prevState => !prevState);
+    setIsItemModalOpen(prevState => !prevState);
   };
 
   const moreBtnClickHandler = async id => {
@@ -116,6 +118,11 @@ const NoticesPage = () => {
   };
 
   const toggleFavorites = pet => {
+    if (!isLoggedIn) {
+      toggleUnauthorizeModal();
+      return;
+    }
+
     if (pathname.includes('favorite') || pet.favorite.includes(user.id)) {
       dispatch(removeFavoriteNotice(pet));
       return;
@@ -139,6 +146,11 @@ const NoticesPage = () => {
     // setSearchParams(params);
   };
 
+  const toggleUnauthorizeModal = () => {
+    console.log(1);
+    setIsAuthorizedModalOpen(prevState => !prevState);
+  };
+
   return (
     <Wrapper>
       <Title>Find your favorite pet</Title>
@@ -150,7 +162,11 @@ const NoticesPage = () => {
             chooseGender={setGenderFilter}
             chooseAge={setAgeFilter}
           />
-          <AddPetBtn text="Add pet" path="/add-pet" />
+          <AddPetBtn
+            text="Add pet"
+            path="/add-pet"
+            toggleUnauthorizeModal={toggleUnauthorizeModal}
+          />
         </Container>
       </Filters>
       <ListContainer>
@@ -161,6 +177,7 @@ const NoticesPage = () => {
           onDeleteBtnClick={onDeleteMyPet}
           chosenAgeFilter={ageFilter}
           chosenGenderFilter={genderFilter}
+          toggleUnauthorizeModal={toggleUnauthorizeModal}
         />
       </ListContainer>
       {notices && (
@@ -170,11 +187,14 @@ const NoticesPage = () => {
           totalPagesCount={totalPages}
         />
       )}
-      {isModalOpen && (
+      {isItemModalOpen && (
         <ModalNotice
           toggleModal={toggleModal}
           onFavoriteClick={toggleFavorites}
         />
+      )}
+      {isAuthorizedModalOpen && (
+        <ModalUnAuthorized toggleUnauthorizeModal={toggleUnauthorizeModal} />
       )}
     </Wrapper>
   );
