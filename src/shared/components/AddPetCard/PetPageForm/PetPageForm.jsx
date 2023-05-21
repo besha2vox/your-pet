@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Formik } from 'formik';
 import { useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { addNotice } from 'redux/notices/operations';
@@ -12,9 +12,10 @@ import MoreInfo from '../MoreInfoForm/MoreInfoForm';
 import ChooseForm from '../ChooseForm/ChooseForm';
 import PersonalForm from '../PersonalForm/PersonalForm';
 import Modal from 'shared/components/Modal/Modal';
-import AddFormButtonBack from '../AddFormButton/AddFormButtonBack';
-import AddFormButtonNext from '../AddFormButton/AddFormButtonNext';
-import { PawPrintIcon } from 'shared/utils/icons';
+import AddPetModal from '../AddPetModal/AddPetModal';
+
+import { selectIsLoading } from 'redux/auth/selectors';
+import { selectNoticesIsLoading } from 'redux/notices/selectors';
 
 import {
   AddForm,
@@ -22,8 +23,6 @@ import {
   AddFormList,
   AddFormItem,
   AddFormStepName,
-  AddFormButtonWrapper,
-  AddFormModalWrapper,
 } from './PetPageForm.styled';
 
 const AddPetPageForm = () => {
@@ -46,6 +45,9 @@ const AddPetPageForm = () => {
   const backLink = location.state?.from ?? '/';
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isAddMyPetLoading = useSelector(selectIsLoading);
+  const isAddPetLoading = useSelector(selectNoticesIsLoading);
+  const isLoading = isAddMyPetLoading || isAddPetLoading;
 
   const getPageTitle = useCallback(() => {
     if (step < 1) return 'Add Pet';
@@ -173,27 +175,9 @@ const AddPetPageForm = () => {
           </AddForm>
         )}
       </Formik>
-      {isModalOpen && (
+      {isModalOpen && !isLoading && (
         <Modal toggleModal={() => navigate(backLink)}>
-          <AddFormModalWrapper>
-            <p>Pet was successfully added</p>
-            <AddFormButtonWrapper>
-              <AddFormButtonNext
-                type="button"
-                text="Go to profile"
-                icon={<PawPrintIcon />}
-                clickHandler={() => {}}
-                filled={false}
-                isDisabled={false}
-              />
-              <AddFormButtonBack
-                type="button"
-                clickHandler={() => navigate(backLink)}
-                text="Back"
-                isLink={false}
-              />
-            </AddFormButtonWrapper>
-          </AddFormModalWrapper>
+          <AddPetModal backLink={backLink} />
         </Modal>
       )}
     </>
