@@ -68,17 +68,11 @@ const LoginForm = () => {
 
     try {
       await dispatch(logIn(values));
-      navigate('/');
-    } catch (error) {
-      if (error === 'Email or password is incorrect.') {
-        dispatch({
-          type: 'SET_ERROR',
-          payload: 'Email or password is incorrect!',
-        });
+      if (!loginError) {
+        navigate('/');
       }
-      setLoading(false);
-      setSubmitting(false);
-      return;
+    } catch (error) {
+      console.log(error);
     } finally {
       setLoading(false);
       setSubmitting(false);
@@ -156,16 +150,6 @@ const LoginForm = () => {
                 <EyeIcon error={errors.password && touched.password}>
                   {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
                 </EyeIcon>
-
-                {errors.password && touched.password && values.password && (
-                  <ErrorIcon
-                    onClick={() => {
-                      resetForm({ values: { ...values, password: '' } });
-                    }}
-                  >
-                    <CrossIcon />
-                  </ErrorIcon>
-                )}
               </PasswordIcon>
             </LogInFormPasswordInputContainer>
 

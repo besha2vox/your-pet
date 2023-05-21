@@ -101,7 +101,6 @@ export const EyeIcon = styled.span`
   height: 24px;
   cursor: pointer;
 
-  margin-right: ${({ error }) => (error ? '10px' : '')};
   color: ${({ theme, error }) =>
     error ? theme.colors.red : theme.colors.blue};
 `;
