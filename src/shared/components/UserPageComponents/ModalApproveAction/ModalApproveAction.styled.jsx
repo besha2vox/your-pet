@@ -9,17 +9,11 @@ export const Section = styled.div`
   min-width: calc(100vw - 40px);
   height: 287px;
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    min-width: calc(100vw - 40px);
-    height: 287px;
+    min-width: 440px;
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    min-width: calc(100vw - 160px);
-    height: 354px;
-  }
-
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    min-width: calc(100vw - 672px);
+    min-width: 608px;
     height: 354px;
   }
 `;
@@ -27,8 +21,8 @@ export const Header = styled.p`
   font-family: ${({ theme }) => theme.fonts.main.medium};
   color: ${({ theme }) => theme.black};
   font-size: ${({ theme }) => theme.fontSizes[4]};
-  margin-bottom: 48px;
-  padding: 20px;
+  margin-bottom: ${({ theme }) => theme.space[4] * 3 + 'px'};
+  padding: ${({ theme }) => theme.space[2] * 5 + 'px'};
   text-align: center;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
@@ -36,10 +30,6 @@ export const Header = styled.p`
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: 36px;
-  }
-
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     font-size: 36px;
   }
 `;
