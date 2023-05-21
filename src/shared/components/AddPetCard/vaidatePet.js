@@ -58,7 +58,6 @@ export const validateField = async (fieldName, value, setErrors) => {
       [fieldName]: '',
     }));
   } catch (error) {
-    console.log(error);
     setErrors(prevErrors => ({
       ...prevErrors,
       [fieldName]: error.message,
