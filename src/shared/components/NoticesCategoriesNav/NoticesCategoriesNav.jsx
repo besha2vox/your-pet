@@ -1,27 +1,20 @@
 import PropTypes from 'prop-types';
+import { filters } from './filtersData';
 import { List, Btn } from './NoticesCategoriesNav.styled';
 
-const filters = [
-  'sell',
-  'lost/found',
-  'in good hands',
-  'favorite ads',
-  'my ads',
-];
-
-const NoticesCategoriesNav = ({ user }) => {
-  const items = filters.map((filter, ind) => {
-    if (!user && filter === 'favorite ads') {
+const NoticesCategoriesNav = ({ isUser }) => {
+  const items = filters.map(({ filter, path }, ind) => {
+    if (!isUser && filter === 'favorite ads') {
       return null;
     }
 
-    if (!user && filter === 'my ads') {
+    if (!isUser && filter === 'my ads') {
       return null;
     }
 
     return (
       <li key={ind}>
-        <Btn>{filter}</Btn>
+        <Btn to={`/notices/${path}`}>{filter}</Btn>
       </li>
     );
   });
@@ -30,7 +23,7 @@ const NoticesCategoriesNav = ({ user }) => {
 };
 
 NoticesCategoriesNav.propTypes = {
-  user: PropTypes.string.isRequired,
+  isUser: PropTypes.bool.isRequired,
 };
 
 export default NoticesCategoriesNav;

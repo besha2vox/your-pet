@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const List = styled.ul`
   display: flex;
@@ -10,7 +11,7 @@ const List = styled.ul`
   }
 `;
 
-const Btn = styled.button`
+const Btn = styled(NavLink)`
   position: relative;
 
   padding-top: ${({ theme }) => theme.space[3] + 'px'};
@@ -26,6 +27,12 @@ const Btn = styled.button`
 
   transition: color 300ms ${({ theme }) => theme.transition.main},
     background-color 300ms ${({ theme }) => theme.transition.main};
+
+  &.active {
+    color: ${({ theme }) => theme.colors.white};
+
+    background-color: ${({ theme }) => theme.colors.blue};
+  }
 
   &::before {
     content: '';
