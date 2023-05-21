@@ -33,16 +33,8 @@ const ImageWrapper = styled.div`
   background-position: center;
   background-size: cover;
 
-  width: 100%;
+  max-width: 100%;
   height: 288px;
-
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 336px;
-  }
-
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    width: 288px;
-  }
 `;
 
 const Category = styled.p`
@@ -78,20 +70,34 @@ const FavoriteBtn = styled.button`
   width: 40px;
   height: 40px;
 
-  background-color: ${({ theme }) => theme.colors.lightBlue};
+  background-color: ${({ theme, inFavorite }) =>
+    inFavorite ? theme.colors.blue : theme.colors.lightBlue};
   border: none;
   border-radius: 50%;
 
-  &:hover svg,
-  &:focus svg {
-    fill: ${({ theme }) => theme.colors.blue};
+  transition: background-color 300ms ${({ theme }) => theme.transition.main};
+
+  &:hover,
+  &:focus {
+    background-color: ${({ theme }) => theme.colors.blue};
   }
 
   & svg {
-    stroke: ${({ theme }) => theme.colors.blue};
+    stroke: ${({ theme, inFavorite }) =>
+      inFavorite ? '#fff' : theme.colors.blue};
 
-    transition: fill 300ms ease-in-out;
+    transition: stroke 300ms ${({ theme }) => theme.transition.main};
   }
+
+  &:hover svg,
+  &:focus svg {
+    stroke: #fff;
+  }
+`;
+
+const DeleteBtn = styled(FavoriteBtn)`
+  top: 68px;
+  right: 12px;
 `;
 
 const InfoWrapper = styled.div`
@@ -131,6 +137,32 @@ const Info = styled.span`
   }
 `;
 
+const AgeInfo = styled(Info)`
+  color: ${({ theme, inRange }) =>
+    inRange ? theme.colors.white : theme.colors.black};
+
+  background-color: ${({ theme, inRange }) =>
+    inRange ? theme.colors.blue : theme.colors.lightBlue};
+
+  & svg {
+    stroke: ${({ theme, inRange }) =>
+      inRange ? theme.colors.white : theme.colors.blue};
+  }
+`;
+
+const GenderInfo = styled(Info)`
+  color: ${({ theme, inRange }) =>
+    inRange ? theme.colors.white : theme.colors.black};
+
+  background-color: ${({ theme, inRange }) =>
+    inRange ? theme.colors.blue : theme.colors.lightBlue};
+
+  & svg {
+    stroke: ${({ theme, inRange }) =>
+      inRange ? theme.colors.white : theme.colors.blue};
+  }
+`;
+
 const CardFooter = styled.div`
   display: flex;
   flex-direction: column;
@@ -162,8 +194,11 @@ export {
   ImageWrapper,
   Category,
   FavoriteBtn,
+  DeleteBtn,
   InfoWrapper,
   Info,
+  AgeInfo,
+  GenderInfo,
   CardFooter,
   Comments,
 };
