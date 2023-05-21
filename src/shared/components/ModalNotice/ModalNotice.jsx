@@ -1,8 +1,13 @@
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
+// import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCurrentNotice } from 'redux/notices/selectors';
 import { HeartIcon } from 'shared/utils/icons';
 import { transformDate } from 'shared/helpers/transformDateFunc';
+// import { useLocation } from 'react-router-dom';
+import { selectUser } from 'redux/auth/selectors';
 import { useWindowSize } from 'hooks/useResize';
 import {
   Wrapper,
@@ -20,9 +25,11 @@ import {
 } from './ModalNotice.styled';
 import { Category } from '../NoticesCategoriesList/NoticesCategoriesList.styled';
 
-const ModalNotice = ({ item, toggleModal }) => {
+const ModalNotice = ({ toggleModal, onFavoriteClick }) => {
   const [screenWidth] = useWindowSize();
-  const addfavoritClickHandler = () => {};
+  const item = useSelector(selectCurrentNotice);
+  const user = useSelector(selectUser);
+  // const { pathname } = useLocation();
 
   const contactClickHandler = () => {};
 
@@ -61,12 +68,12 @@ const ModalNotice = ({ item, toggleModal }) => {
                 <InfoCred>{item.sex}</InfoCred>
               </Info>
               <Info>
-                <InfoName>Email:</InfoName>
-                <InfoCred>{item.owner}</InfoCred>
+                <InfoName>Owner:</InfoName>
+                <InfoCred>{item.owner.username}</InfoCred>
               </Info>
               <Info>
-                <InfoName>Phone:</InfoName>
-                <InfoCred>{item.owner}</InfoCred>
+                <InfoName>Email:</InfoName>
+                <InfoCred>{item.owner.email}</InfoCred>
               </Info>
             </Container>
           </InfoWrapper>
@@ -79,9 +86,13 @@ const ModalNotice = ({ item, toggleModal }) => {
 
         <BtnWrapper>
           <Button
-            text="Add to"
+            text={
+              !item.favorite || item.favorite.includes(user.id)
+                ? 'Remove'
+                : 'Add to'
+            }
             type="button"
-            clickHandler={addfavoritClickHandler}
+            clickHandler={() => onFavoriteClick(item)}
             icon={<HeartIcon fill="#54ADFF" />}
             filled
             short={screenWidth >= 768}
@@ -100,22 +111,8 @@ const ModalNotice = ({ item, toggleModal }) => {
 };
 
 ModalNotice.propTypes = {
-  item: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    birthday: PropTypes.string.isRequired,
-    breed: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    sex: PropTypes.string.isRequired,
-    comments: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    titleOfAdd: PropTypes.string.isRequired,
-    owner: PropTypes.string.isRequired,
-    avatarURL: PropTypes.string.isRequired,
-    favorite: PropTypes.arrayOf(PropTypes.string.isRequired),
-  }),
   toggleModal: PropTypes.func.isRequired,
+  onFavoriteClick: PropTypes.func.isRequired,
 };
 
 export default ModalNotice;
