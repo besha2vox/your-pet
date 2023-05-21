@@ -250,7 +250,6 @@ MoreInfo.propTypes = {
   setFormData: PropTypes.func.isRequired,
   backStep: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
-  isValid: PropTypes.bool.isRequired,
 };
 
 export default MoreInfo;
