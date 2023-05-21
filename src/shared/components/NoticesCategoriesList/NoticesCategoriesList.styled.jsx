@@ -125,8 +125,7 @@ const Info = styled.span`
   gap: ${({ theme }) => theme.space[2] + 'px'};
 
   min-width: 80px;
-  padding: ${({ theme }) => theme.space[1] + 'px'}
-    ${({ theme }) => theme.space[3] + 'px'};
+  padding: ${({ theme }) => `${theme.space[1]}px ${theme.space[3]}px`};
 
   font-family: ${({ theme }) => theme.fonts.main.semiBold};
   font-size: ${({ theme }) => theme.fontSizes[0]};
