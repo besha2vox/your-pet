@@ -21,7 +21,7 @@ const Logout = () => {
 
   return (
     <>
-      <LogoutButton onClick={() => setIsModalOpen(true)}>
+      <LogoutButton type="button" onClick={() => setIsModalOpen(true)}>
         <LogoutIcon stroke="#54ADFF" />
         Log out
       </LogoutButton>
