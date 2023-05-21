@@ -70,12 +70,15 @@ const LoginForm = () => {
       await dispatch(logIn(values));
       navigate('/');
     } catch (error) {
-      if (error === 'Unable to fetch user') {
+      if (error === 'Email or password is incorrect.') {
         dispatch({
           type: 'SET_ERROR',
           payload: 'Email or password is incorrect!',
         });
       }
+      setLoading(false);
+      setSubmitting(false);
+      return;
     } finally {
       setLoading(false);
       setSubmitting(false);
