@@ -19,7 +19,8 @@ export const AddFormWrapper = styled.div`
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    padding: ${({ step }) => (step === 2 ? '20px 74px' : '20px 32px')};
+    padding: ${({ step, category }) =>
+      step === 2 && category !== 'my-pet' ? '20px 74px' : '20px 32px'};
   }
 `;
 
