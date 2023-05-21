@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const Btn = styled(Link)`
+const Btn = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,15 @@ const Btn = styled(Link)`
 
   transition: color 350ms ${({ theme }) => theme.transition.main},
     background-color 350ms ${({ theme }) => theme.transition.main};
+
+  &.active {
+    background-color: ${({ theme }) => theme.colors.yellow};
+    color: #fef9f9;
+
+    & svg {
+      fill: #fef9f9;
+    }
+  }
 
   &:hover,
   &:focus {
