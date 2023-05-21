@@ -22,47 +22,35 @@ export const validatePetSchema = Yup.object().shape({
     .required('Breed is required')
     .min(2, 'Breed must be at least 2 characters')
     .max(16, 'Breed must not exceed 16 characters'),
-  file: Yup.mixed()
+  petPhoto: Yup.mixed()
     .required('File is required')
     .test(
       'fileSize',
       'File size must not exceed 3MB',
       value => value && value.size <= 3 * 1024 * 1024
     ),
-  sex: Yup.string().when('category', {
-    is: value => ['sell', 'lost-found', 'for-free'].includes(value),
-    then: Yup.string()
-      .required('Sex is required')
-      .oneOf(['male', 'female'], 'Invalid sex'),
-  }),
-  location: Yup.string().when('category', {
-    is: value => ['sell', 'lost-found', 'for-free'].includes(value),
-    then: Yup.string()
-      .required('Location is required')
-      .matches(/^[A-Za-z\s]+$/, 'Invalid location format'),
-  }),
-  price: Yup.number().when('category', {
-    is: 'sell',
-    then: Yup.number()
-      .positive('Price must be greater than 0')
-      .required('Price is required'),
-  }),
-  comments: Yup.string()
-    .min(8, 'Comments must be at least 8 characters')
-    .max(120, 'Comments must not exceed 120 characters'),
+  sex: Yup.string()
+    .required('Sex is required')
+    .oneOf(['male', 'female'], 'Invalid sex'),
+  location: Yup.string()
+    .required('Location is required')
+    .matches(/^[A-Za-z\s]+$/i, 'Invalid location format'),
+  price: Yup.number()
+    .positive('Price must be greater than 0')
+    .required('Price is required'),
+  comments: Yup.string().test(
+    'comments',
+    'Comments must be between 8 and 120 characters',
+    value => {
+      if (!value) {
+        return true;
+      }
+      return value.length >= 8 && value.length <= 120;
+    }
+  ),
 });
 
-export const isFieldValid = async (fieldName, value) => {
-  try {
-    await Yup.reach(validatePetSchema, fieldName).validate(value);
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
-
 export const validateField = async (fieldName, value, setErrors) => {
-  console.log({ fieldName, value });
   try {
     await validatePetSchema.validateAt(fieldName, value);
     setErrors(prevErrors => ({

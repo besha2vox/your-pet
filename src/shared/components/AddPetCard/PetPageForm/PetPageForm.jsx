@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { addNotice } from 'redux/notices/operations';
 import { addMyPet } from 'redux/auth/operations';
-import { validatePetSchema } from '../VaidatePet';
+import { validatePetSchema } from '../vaidatePet';
 
 import MoreInfo from '../MoreInfoForm/MoreInfoForm';
 import ChooseForm from '../ChooseForm/ChooseForm';
@@ -45,10 +45,10 @@ const AddPetPageForm = () => {
     if (step < 1) return 'Add Pet';
 
     const titles = {
-      'your-pet': 'Add my pet',
+      'my-pet': 'Add my pet',
       sell: 'Add pet for sell',
       'lost-found': 'Add to lost or found pet',
-      'good-hands': 'Add to give a Pet for Adoption',
+      'for-free': 'Add to give a Pet for Adoption',
       '': 'Add Pet',
     };
     return titles[formData.category] || 'Add Pet';
@@ -79,51 +79,38 @@ const AddPetPageForm = () => {
 
     const newFormData = new FormData();
 
-    if (formData.category === 'your-pet') {
-      newFormData.append('name', formData.name);
-      newFormData.append('birthday', formData.birthday);
-      newFormData.append('breed', formData.breed);
-      newFormData.append('pets-photo', formData.petPhoto);
-      newFormData.append('comments', formData.comments);
+    newFormData.append('name', formData.name);
+    newFormData.append('birthday', formData.birthday);
+    newFormData.append('breed', formData.breed);
+    newFormData.append('pets-photo', formData.petPhoto);
+    newFormData.append('comments', formData.comments);
 
+    if (formData.category === 'my-pet') {
       dispatch(addMyPet(newFormData));
       navigate(backLink);
       return;
     }
 
-    if (
-      formData.category === 'lost-found' ||
-      formData.category === 'good-hands'
-    ) {
-      newFormData.append('name', formData.name);
-      newFormData.append('birthday', formData.birthday);
-      newFormData.append('breed', formData.breed);
-      newFormData.append('pets-photo', formData.petPhoto);
-      newFormData.append('comments', formData.comments);
-      newFormData.append('category', formData.category);
-      newFormData.append('title', formData.title);
-      newFormData.append('sex', formData.sex);
-      newFormData.append('location', formData.location);
+    newFormData.append('titleOfAdd', formData.title);
+    newFormData.append('sex', formData.sex);
+    newFormData.append('location', formData.location);
 
-      dispatch(addNotice(newFormData));
+    if (formData.category === 'lost-found') {
+      dispatch(addNotice({ category: 'lost-found', newFormData }));
       navigate(backLink);
       return;
     }
 
-    if (formData.category === 'your-pet') {
-      newFormData.append('name', formData.name);
-      newFormData.append('birthday', formData.birthday);
-      newFormData.append('breed', formData.breed);
-      newFormData.append('pets-photo', formData.petPhoto);
-      newFormData.append('comments', formData.comments);
-      newFormData.append('category', formData.category);
-      newFormData.append('title', formData.title);
-      newFormData.append('sex', formData.sex);
-      newFormData.append('location', formData.location);
-      newFormData.append('price', formData.price);
-      newFormData.forEach((value, key) => console.log(value, key));
+    if (formData.category === 'for-free') {
+      dispatch(addNotice({ category: 'in-good-hands', newFormData }));
+      navigate(backLink);
+      return;
+    }
 
-      dispatch(addNotice(newFormData));
+    newFormData.append('price', formData.price);
+
+    if (formData.category === 'sell') {
+      dispatch(addNotice({ category: formData.category, newFormData }));
       navigate(backLink);
     }
   };
@@ -144,7 +131,7 @@ const AddPetPageForm = () => {
         onSubmit={handleSubmit}
         validateOnChange={false}
       >
-        {({ isValid, validateField }) => (
+        {() => (
           <AddForm autoComplete="on">
             {step === 0 && (
               <ChooseForm
@@ -160,7 +147,6 @@ const AddPetPageForm = () => {
                 setFormData={setFormData}
                 nextStep={handleNextClick}
                 backStep={handlePrevClick}
-                isValid={validateField}
               />
             )}
             {step === 2 && (
@@ -169,7 +155,6 @@ const AddPetPageForm = () => {
                 setFormData={setFormData}
                 backStep={handlePrevClick}
                 submit={handleSubmit}
-                isValid={isValid}
               />
             )}
           </AddForm>

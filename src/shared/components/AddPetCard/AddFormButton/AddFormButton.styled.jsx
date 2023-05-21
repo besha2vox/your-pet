@@ -66,12 +66,9 @@ const buttonNext = css`
 
   color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.blue};
-  border-width: ${({ filled }) => (filled ? 0 : '2px')};
-  border-color: ${({ theme }) => theme.colors.blue};
-  border-style: solid;
+  border: none;
   border-radius: 40px;
   transition: color 300ms ${({ theme }) => theme.transition.main},
-    border-color 300ms ${({ theme }) => theme.transition.main},
     background-color 300ms ${({ theme }) => theme.transition.main};
   overflow: hidden;
 
@@ -90,7 +87,6 @@ const buttonNext = css`
 
   &:hover,
   &:focus {
-    border-color: transparent;
     background-color: ${({ filled }) => filled && 'transparent'};
   }
 

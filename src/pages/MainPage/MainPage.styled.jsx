@@ -131,8 +131,7 @@ const MainTitle = styled.h1`
 const ImageContainer = styled.div`
   position: relative;
   overflow: visible;
-  margin-top: 30px;
-  margin-left: -20px;
+  margin: 30px auto 0;
   width: 320px;
   height: 390px;
 
