@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectUser } from 'redux/auth/selectors';
 import { ageDeterminationFunc } from 'shared/helpers/ageDeterminationFunc';
 import {
   HeartIcon,
@@ -8,6 +11,7 @@ import {
   MaleIcon,
   FemaleIcon,
   PawPrintIcon,
+  TrashIcon,
 } from 'shared/utils/icons';
 
 import {
@@ -16,15 +20,31 @@ import {
   ImageWrapper,
   Category,
   FavoriteBtn,
+  DeleteBtn,
   InfoWrapper,
   Info,
+  AgeInfo,
+  GenderInfo,
   CardFooter,
   Comments,
 } from './NoticesCategoriesList.styled';
 
-const NoticesCategoriesList = ({ items, moreBtnClickHandler }) => {
+const NoticesCategoriesList = ({
+  items,
+  moreBtnClickHandler,
+  toggleFavorites,
+  onDeleteBtnClick,
+  chosenAgeFilter,
+  chosenGenderFilter,
+}) => {
+  const user = useSelector(selectUser);
+  const { pathname } = useLocation();
+
+  if (!items) return;
+
   const pets = items.map(pet => {
     const age = ageDeterminationFunc(pet.birthday);
+    const favorite = !pet.favorite || pet.favorite.includes(user.id);
     const title =
       pet.titleOfAdd.length >= 35
         ? pet.titleOfAdd.slice(0, 35) + ' ...'
@@ -34,22 +54,36 @@ const NoticesCategoriesList = ({ items, moreBtnClickHandler }) => {
       <ListItem key={pet._id}>
         <ImageWrapper bgi={pet.avatarURL}>
           <Category>{pet.category}</Category>
-          <FavoriteBtn type="button">
+          <FavoriteBtn
+            inFavorite={favorite}
+            type="button"
+            onClick={() => toggleFavorites(pet)}
+            title={favorite ? 'Remove from favorites' : 'Add to favorites'}
+          >
             <HeartIcon />
           </FavoriteBtn>
+          {pathname.includes('my-pets') && (
+            <DeleteBtn
+              type="button"
+              onClick={() => onDeleteBtnClick(pet._id)}
+              title="Delete from my ads"
+            >
+              <TrashIcon />
+            </DeleteBtn>
+          )}
           <InfoWrapper>
             <Info>
               <LocationIcon />
               {pet.location}
             </Info>
-            <Info>
+            <AgeInfo inRange={chosenAgeFilter}>
               <ClockIcon />
               {age}
-            </Info>
-            <Info>
+            </AgeInfo>
+            <GenderInfo inRange={chosenGenderFilter}>
               {pet.sex === 'male' ? <MaleIcon /> : <FemaleIcon />}
               {pet.sex}
-            </Info>
+            </GenderInfo>
           </InfoWrapper>
         </ImageWrapper>
         <CardFooter>
@@ -58,7 +92,7 @@ const NoticesCategoriesList = ({ items, moreBtnClickHandler }) => {
             type="button"
             text="Learn more"
             icon={<PawPrintIcon />}
-            clickHandler={() => moreBtnClickHandler(pet)}
+            clickHandler={() => moreBtnClickHandler(pet._id)}
           />
         </CardFooter>
       </ListItem>
@@ -75,12 +109,12 @@ NoticesCategoriesList.propTypes = {
       birthday: PropTypes.string.isRequired,
       breed: PropTypes.string.isRequired,
       location: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
+      price: PropTypes.number,
       sex: PropTypes.string.isRequired,
       comments: PropTypes.string.isRequired,
       category: PropTypes.string.isRequired,
       titleOfAdd: PropTypes.string.isRequired,
-      owner: PropTypes.string.isRequired,
+      owner: PropTypes.shape,
       avatarURL: PropTypes.string.isRequired,
       favorite: PropTypes.arrayOf(PropTypes.string.isRequired),
     })

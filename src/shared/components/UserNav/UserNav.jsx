@@ -12,7 +12,7 @@ const UserNav = ({ userName, showName, setIsOpen }) => {
 };
 
 UserNav.propTypes = {
-  userName: PropTypes.string.isRequired,
+  userName: PropTypes.string,
   showName: PropTypes.bool,
   setIsOpen: PropTypes.func,
 };

@@ -3,8 +3,31 @@ import NoticesCategoriesNav from 'shared/components/NoticesCategoriesNav/Notices
 import NoticesFilters from 'shared/components/NoticesFilters/NoticesFilters';
 import AddPetBtn from 'shared/components/AddPetBtn/AddPetBtn';
 import NoticesCategoriesList from 'shared/components/NoticesCategoriesList/NoticesCategoriesList';
+import Pagination from 'shared/components/Pagination/Pagination';
 import ModalNotice from 'shared/components/ModalNotice/ModalNotice';
-import { useState } from 'react';
+import ModalUnAuthorized from 'shared/components/ModalUnAuthorized/ModalUnAuthorized';
+import { useState, useEffect } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectAuth } from 'redux/auth/selectors';
+import { useLocation } from 'react-router-dom';
+import {
+  getNotices,
+  getNoticesByQuery,
+  getUsersNotices,
+  getFavoriteNotices,
+  getNoticeById,
+  addFavoriteNotice,
+  removeFavoriteNotice,
+  removeNotice,
+} from 'redux/notices/operations';
+import {
+  selectNotices,
+  selectTotalHitsNotices,
+  selectCurrentNotice,
+} from 'redux/notices/selectors';
+import { selectUser } from 'redux/auth/selectors';
+
 import {
   Wrapper,
   Title,
@@ -13,88 +36,119 @@ import {
   ListContainer,
 } from './NoticesPage.styled';
 
-const items = [
-  {
-    _id: '6461ef812e14b0d9d3578199',
-    name: 'Dambo',
-    birthday: '2018-10-14T21:00:00.000Z',
-    breed: 'Elephant',
-    location: 'Herson',
-    price: 3000,
-    sex: 'male',
-    comments: 'Kind, intelligent. He likes bananas.',
-    category: 'sell',
-    titleOfAdd: 'Elephant',
-    owner: '646097d25ebd4819ab3f4737',
-    avatarURL:
-      'https://res.cloudinary.com/dgei1ulzc/image/upload/v1684139905/uwuuzos85xuqk0o40frn.jpg',
-    favorite: [],
-  },
-  {
-    _id: '6461e448014843d2285ae0ab',
-    name: 'Serhii',
-    birthday: '1990-12-28T21:00:00.000Z',
-    breed: 'human',
-    location: "don't know",
-    price: 1,
-    sex: 'male',
-    comments: 'qweqwrqrwqwttq',
-    category: 'sell',
-    titleOfAdd: 'qweqweqwe',
-    owner: '6461dde97f0a5c35941e0012',
-    avatarURL:
-      'https://res.cloudinary.com/dgei1ulzc/image/upload/v1684137032/blgjqgd7hq0wm0rqqmi2.jpg',
-    favorite: [],
-  },
-  {
-    _id: '645fe58ce781dffd12939723',
-    name: 'Роззі',
-    birthday: '2022-04-02T21:00:00.000Z',
-    breed: 'пітбуль',
-    location: 'Київ',
-    price: 5000,
-    sex: 'female',
-    comments: 'Самка пітбуля, 3 місяці. Добра та грайлива',
-    category: 'sell',
-    titleOfAdd: 'Молодий пітбуль',
-    owner: '645f88639994886006f9a291',
-    avatarURL:
-      'https://res.cloudinary.com/dgei1ulzc/image/upload/v1684006282/gxctgdz8reqc57o4eizd.jpg',
-    favorite: ['645fa41f80a47de14529a01d'],
-  },
-  {
-    _id: '645fb54ac27aa4e1df1ab0c9',
-    name: 'Sarah',
-    birthday: '2022-04-02T21:00:00.000Z',
-    breed: 'Siamesse cat',
-    location: 'Kyiv',
-    price: 250,
-    sex: 'female',
-    comments:
-      'The British shorthair  are very mellow and easy going making them a wonderful addition to any family. ',
-    category: 'sell',
-    titleOfAdd: 'Funny cat with good habits',
-    owner: '645fa41f80a47de14529a01d',
-    avatarURL:
-      'https://res.cloudinary.com/dgei1ulzc/image/upload/v1683993930/wkn0dickj5bet18imw53.jpg',
-    favorite: [],
-  },
-];
-
 const NoticesPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [pet, setPet] = useState(null);
-  const [user] = useState('Postman');
+  const dispatch = useDispatch();
+  const { categoryName } = useParams();
+  const notices = useSelector(selectNotices);
+  const totalHits = useSelector(selectTotalHitsNotices);
+  const { isLoggedIn } = useSelector(selectAuth);
+  const user = useSelector(selectUser);
+  const item = useSelector(selectCurrentNotice);
+  const { pathname } = useLocation();
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+  const [isAuthorizedModalOpen, setIsAuthorizedModalOpen] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [query, setQuery] = useState('');
+  const [genderFilter, setGenderFilter] = useState('');
+  const [ageFilter, setAgeFilter] = useState('');
 
-  const onFormSubmit = query => {};
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const toggleModal = () => {
-    setIsModalOpen(prevState => !prevState);
+  const page = searchParams.get('page') || 1;
+
+  useEffect(() => {
+    if (categoryName === 'my-pets') {
+      dispatch(getUsersNotices());
+    } else if (categoryName === 'favorite') {
+      dispatch(getFavoriteNotices());
+    } else if (!query) {
+      const searchQuery = {
+        page,
+      };
+
+      if (genderFilter) searchQuery.gender = genderFilter;
+      if (ageFilter) searchQuery.age = ageFilter;
+
+      dispatch(getNotices({ category: categoryName, ...searchQuery }));
+
+      setSearchParams(searchQuery);
+    } else {
+      const searchQuery = {
+        page,
+        query,
+      };
+
+      if (genderFilter) searchQuery.gender = genderFilter;
+      if (ageFilter) searchQuery.age = ageFilter;
+
+      dispatch(getNoticesByQuery({ category: categoryName, ...searchQuery }));
+
+      setSearchParams(searchQuery);
+    }
+  }, [
+    ageFilter,
+    categoryName,
+    dispatch,
+    genderFilter,
+    page,
+    query,
+    setSearchParams,
+  ]);
+
+  useEffect(() => {
+    toggleModal();
+  }, [item]);
+
+  useEffect(() => {
+    const pageCount = Math.ceil(totalHits / 12);
+
+    setTotalPages(pageCount);
+  }, [totalHits]);
+
+  const onFormSubmit = query => {
+    setQuery(query);
   };
 
-  const moreBtnClickHandler = pet => {
-    setPet(pet);
-    toggleModal();
+  const toggleModal = () => {
+    setIsItemModalOpen(prevState => !prevState);
+  };
+
+  const moreBtnClickHandler = async id => {
+    dispatch(getNoticeById(id));
+  };
+
+  const toggleFavorites = pet => {
+    if (!isLoggedIn) {
+      toggleUnauthorizeModal();
+      return;
+    }
+
+    if (pathname.includes('favorite') || pet.favorite.includes(user.id)) {
+      dispatch(removeFavoriteNotice(pet));
+      return;
+    }
+
+    dispatch(addFavoriteNotice(pet));
+  };
+
+  const onDeleteMyPet = _id => {
+    dispatch(removeNotice(_id));
+  };
+
+  const onPageChange = currentPage => {
+    if (page === currentPage) {
+      return;
+    }
+    // const params = searchQuery
+    //   ? { query: searchQuery, page: currentPage }
+    //   : { page: currentPage };
+
+    // setSearchParams(params);
+  };
+
+  const toggleUnauthorizeModal = () => {
+    console.log(1);
+    setIsAuthorizedModalOpen(prevState => !prevState);
   };
 
   return (
@@ -102,19 +156,46 @@ const NoticesPage = () => {
       <Title>Find your favorite pet</Title>
       <NoticesSearch onFormSubmit={onFormSubmit} />
       <Filters>
-        <NoticesCategoriesNav user={user} />
+        <NoticesCategoriesNav isUser={isLoggedIn} />
         <Container>
-          <NoticesFilters />
-          <AddPetBtn text="Add pet" path="/add-pet" />
+          <NoticesFilters
+            chooseGender={setGenderFilter}
+            chooseAge={setAgeFilter}
+          />
+          <AddPetBtn
+            text="Add pet"
+            path="/add-pet"
+            toggleUnauthorizeModal={toggleUnauthorizeModal}
+          />
         </Container>
       </Filters>
       <ListContainer>
         <NoticesCategoriesList
-          items={items}
+          items={notices}
           moreBtnClickHandler={moreBtnClickHandler}
+          toggleFavorites={toggleFavorites}
+          onDeleteBtnClick={onDeleteMyPet}
+          chosenAgeFilter={ageFilter}
+          chosenGenderFilter={genderFilter}
+          toggleUnauthorizeModal={toggleUnauthorizeModal}
         />
       </ListContainer>
-      {isModalOpen && <ModalNotice item={pet} toggleModal={toggleModal} />}
+      {notices && (
+        <Pagination
+          onPageChange={onPageChange}
+          currentPage={Number(page)}
+          totalPagesCount={totalPages}
+        />
+      )}
+      {isItemModalOpen && (
+        <ModalNotice
+          toggleModal={toggleModal}
+          onFavoriteClick={toggleFavorites}
+        />
+      )}
+      {isAuthorizedModalOpen && (
+        <ModalUnAuthorized toggleUnauthorizeModal={toggleUnauthorizeModal} />
+      )}
     </Wrapper>
   );
 };

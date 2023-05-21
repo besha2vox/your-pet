@@ -16,10 +16,22 @@ import {
   ItemCheckbox,
 } from './FilterSubMenu.styled';
 
-const ageFilterData = ['3-12 m', '1 year', '2 year'];
+const ageFilterData = [
+  { text: '3-12 m', filter: '3m-12m' },
+  { text: '1 year', filter: '1y' },
+  { text: '2 year', filter: '2y' },
+];
 const genderFilterData = ['female', 'male'];
 
-const FilterSubMenu = ({ isAgeMenuOpen, isGenderMenuOpen, toggleMenu }) => {
+const FilterSubMenu = ({
+  isAgeMenuOpen,
+  isGenderMenuOpen,
+  toggleMenu,
+  setGenderFilter,
+  setAgeFilter,
+  age,
+  gender,
+}) => {
   return (
     <>
       <Menu>
@@ -30,15 +42,26 @@ const FilterSubMenu = ({ isAgeMenuOpen, isGenderMenuOpen, toggleMenu }) => {
         </MenuBtn>
         <AgeSubMenu isShown={isAgeMenuOpen}>
           {ageFilterData.map(item => (
-            <ItemText key={item}>
-              <ItemCheckbox type="checkbox" />
-              <Icon isShown={isAgeMenuOpen}>
-                <RoundIcon />
-              </Icon>
-              <CheckedIcon isShown={isAgeMenuOpen}>
-                <CheckRoundIcon />
-              </CheckedIcon>
-              {item}
+            <ItemText key={item.text}>
+              <ItemCheckbox
+                type="checkbox"
+                checked={age === item.filter}
+                onChange={() =>
+                  setAgeFilter(age === item.filter ? '' : item.filter)
+                }
+              />
+              {age === item.filter && (
+                <CheckedIcon isShown={isAgeMenuOpen}>
+                  <CheckRoundIcon />
+                </CheckedIcon>
+              )}
+              {age !== item.filter && (
+                <Icon isShown={isAgeMenuOpen}>
+                  <RoundIcon />
+                </Icon>
+              )}
+
+              {item.text}
             </ItemText>
           ))}
         </AgeSubMenu>
@@ -52,13 +75,22 @@ const FilterSubMenu = ({ isAgeMenuOpen, isGenderMenuOpen, toggleMenu }) => {
         <GenderSubMenu isShown={isGenderMenuOpen}>
           {genderFilterData.map(item => (
             <ItemText key={item}>
-              <ItemCheckbox type="checkbox" />
-              <Icon isShown={isGenderMenuOpen}>
-                <RoundIcon />
-              </Icon>
-              <CheckedIcon isShown={isGenderMenuOpen}>
-                <CheckRoundIcon />
-              </CheckedIcon>
+              <ItemCheckbox
+                type="checkbox"
+                checked={gender === item}
+                onChange={() => setGenderFilter(gender === item ? '' : item)}
+              />
+              {gender === item && (
+                <CheckedIcon isShown={isGenderMenuOpen}>
+                  <CheckRoundIcon />
+                </CheckedIcon>
+              )}
+              {gender !== item && (
+                <Icon isShown={isGenderMenuOpen}>
+                  <RoundIcon />
+                </Icon>
+              )}
+
               {item}
             </ItemText>
           ))}
@@ -72,6 +104,8 @@ FilterSubMenu.propTypes = {
   isAgeMenuOpen: PropTypes.bool.isRequired,
   isGenderMenuOpen: PropTypes.bool.isRequired,
   toggleMenu: PropTypes.func.isRequired,
+  setGenderFilter: PropTypes.func.isRequired,
+  setAgeFilter: PropTypes.func.isRequired,
 };
 
 export default FilterSubMenu;

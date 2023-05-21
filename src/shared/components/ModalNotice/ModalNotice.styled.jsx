@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 const Positioning = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: ${({ theme }) => theme.space[2] * 3 + 'px'};
 
@@ -45,9 +45,7 @@ const Image = styled.div`
   }
 `;
 
-const InfoWrapper = styled.div`
-  /* width: 100%; */
-`;
+const InfoWrapper = styled.div``;
 
 const Container = styled.div`
   display: flex;
@@ -62,6 +60,7 @@ const Title = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes[4]};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 321px;
     font-size: ${({ theme }) => theme.fontSizes[5]};
   }
 `;
