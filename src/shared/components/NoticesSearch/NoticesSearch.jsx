@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
 import { SearchIcon, CrossIcon } from 'shared/utils/icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Input, CleareUpBtn, SubmitBtn } from './NoticesSearch.styled';
 
 const NoticesSearch = ({ onFormSubmit }) => {
   const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    if (!query) onFormSubmit(query);
+  }, [onFormSubmit, query]);
 
   const submitHandler = e => {
     e.preventDefault();
