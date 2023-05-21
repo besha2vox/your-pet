@@ -41,10 +41,6 @@ export const LogInFormEmailInputContainer = styled.div`
   border: 1px solid
     ${({ theme, error }) => (error ? theme.colors.red : theme.colors.blue)};
   border-radius: 40px;
-  &:focus-within {
-    border: 1px solid ${({ theme }) => theme.colors.yellow};
-    outline: none;
-  }
 `;
 
 export const LogInFormPasswordContainer = styled.div`
@@ -57,6 +53,7 @@ export const LogInFormPasswordContainer = styled.div`
 
 export const LogInFormPasswordInputContainer = styled.div`
   display: flex;
+  align-items: center;
   padding: 2px 16px;
 
   border: 1px solid
@@ -110,7 +107,7 @@ export const EyeIcon = styled.span`
 `;
 
 export const LoginErrorMessage = styled.div`
-  padding-left: 16px;
+  padding: 15px 16px 0 16px;
   color: ${({ theme }) => theme.colors.red};
 `;
 

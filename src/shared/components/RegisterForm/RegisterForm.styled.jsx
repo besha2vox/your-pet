@@ -35,6 +35,7 @@ export const RegisterFormUsernamelContainer = styled.div`
 
 export const RegisterFormUsernameInputContainer = styled.div`
   display: flex;
+  align-items: center;
   padding: 2px 16px;
 
   border: 1px solid
@@ -56,6 +57,7 @@ export const RegisterFormEmailContainer = styled.div`
 
 export const RegisterFormEmailInputContainer = styled.div`
   display: flex;
+  align-items: center;
   padding: 2px 16px;
 
   border: 1px solid
@@ -74,6 +76,22 @@ export const RegisterFormInput = styled(Field)`
   outline: none;
 `;
 
+export const ErrorIcon = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.red};
+`;
+
+export const ErrorMessage = styled.div`
+  padding-left: 16px;
+  margin-top: 4px;
+  color: ${({ theme }) => theme.colors.red};
+`;
+
 export const RegisterFormPasswordContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -84,6 +102,7 @@ export const RegisterFormPasswordContainer = styled.div`
 
 export const RegisterFormPasswordInputContainer = styled.div`
   display: flex;
+  align-items: center;
   padding: 2px 16px;
 
   border: 1px solid
@@ -91,17 +110,9 @@ export const RegisterFormPasswordInputContainer = styled.div`
   border-radius: 40px;
 `;
 
-export const ErrorMessage = styled.div`
-  padding-left: 16px;
-  margin-top: 4px;
-  color: ${({ theme }) => theme.colors.red};
-`;
-
 export const PasswordIcon = styled.span`
   display: flex;
   align-items: center;
-
-  cursor: pointer;
 `;
 
 export const EyeIcon = styled.span`
@@ -110,7 +121,16 @@ export const EyeIcon = styled.span`
   justify-content: center;
   width: 24px;
   height: 24px;
-  color: ${({ theme }) => theme.colors.blue};
+  cursor: pointer;
+
+  margin-right: ${({ error }) => (error ? '10px' : '')};
+  color: ${({ theme, error }) =>
+    error ? theme.colors.red : theme.colors.blue};
+`;
+
+export const RegisterErrorMessage = styled.div`
+  padding: 15px 16px 0 16px;
+  color: ${({ theme }) => theme.colors.red};
 `;
 
 export const RegisterBtn = styled.button`
@@ -150,14 +170,4 @@ export const LoginLink = styled.a`
   text-decoration-line: underline;
   color: ${({ theme }) => theme.colors.blue};
   display: inline;
-`;
-
-export const ErrorIcon = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  color: ${({ theme }) => theme.colors.red};
 `;

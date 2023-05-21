@@ -19,20 +19,29 @@ import {
   RegisterBtn,
   EyeIcon,
   ErrorIcon,
+  RegisterErrorMessage,
   LoginText,
   LoginLink,
 } from './RegisterForm.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from 'redux/auth/operations';
 import { useNavigate } from 'react-router-dom';
+import { selectError } from 'redux/auth/selectors';
 
 const initialValues = {
+  username: '',
   email: '',
   password: '',
+  confirmPassword: '',
 };
 
 const fieldValidation = values => {
+  console.log(values);
   const errors = {};
+  if (!values.username) {
+    errors.username = 'This field is required';
+  }
+
   if (!values.email) {
     errors.email = 'This field is required';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
@@ -45,21 +54,35 @@ const fieldValidation = values => {
     errors.password = 'Password must be at least 8 characters long';
   }
 
+  if (!values.confirmPassword) {
+    errors.confirmPassword = 'This field is required';
+  } else if (values.confirmPassword.length < 8) {
+    errors.confirmPassword = 'Password must be at least 8 characters long';
+  }
+
   return errors;
 };
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [emailAvailable, setEmailAvailable] = useState(true);
 
   const navigate = useNavigate();
 
+  const registerError = useSelector(selectError);
+
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+    setShowPassword(prevState => !prevState);
   };
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(prevState => !prevState);
+  };
+
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     if (loading) {
       return;
     }
@@ -67,10 +90,15 @@ const RegisterForm = () => {
     setLoading(true);
 
     try {
-      await dispatch(register(values));
-      navigate('/user');
+      const response = await dispatch(register(values));
+      if (response.error) {
+        setEmailAvailable(false);
+      } else {
+        setEmailAvailable(true);
+        navigate('/user');
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
       setSubmitting(false);
@@ -98,16 +126,33 @@ const RegisterForm = () => {
         <RegisterFormEl onSubmit={handleSubmit}>
           <RegisterFormTitle>Registration</RegisterFormTitle>
           <RegisterFormUsernamelContainer>
-            <RegisterFormUsernameInputContainer>
+            <RegisterFormUsernameInputContainer
+              error={errors.username && touched.username}
+              style={{
+                borderColor:
+                  errors.username && touched.username ? '#F43F5E' : '#54ADFF',
+              }}
+            >
               <RegisterFormInput
                 type="string"
                 name="username"
                 placeholder="Username"
-                value={values.email}
+                value={values.username}
                 onChange={handleChange}
-                required
               />
+              {errors.username && touched.username && values.username && (
+                <ErrorIcon
+                  onClick={() => {
+                    resetForm({ values: { ...values, username: '' } });
+                  }}
+                >
+                  <CrossIcon />
+                </ErrorIcon>
+              )}
             </RegisterFormUsernameInputContainer>
+            {errors.username && touched.username && (
+              <ErrorMessage>{errors.username}</ErrorMessage>
+            )}
           </RegisterFormUsernamelContainer>
 
           <RegisterFormEmailContainer>
@@ -152,7 +197,6 @@ const RegisterForm = () => {
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}
-                required
               />
               <PasswordIcon onClick={togglePasswordVisibility}>
                 <EyeIcon>
@@ -161,40 +205,53 @@ const RegisterForm = () => {
               </PasswordIcon>
             </RegisterFormPasswordInputContainer>
 
-            {errors.password && touched.email && (
+            {errors.password && touched.password && (
               <ErrorMessage>{errors.password}</ErrorMessage>
             )}
           </RegisterFormPasswordContainer>
 
           <RegisterFormPasswordContainer>
             <RegisterFormPasswordInputContainer
-              error={errors.password && touched.password}
+              error={errors.confirmPassword && touched.confirmPassword}
             >
               <RegisterFormInput
-                type={showPassword ? 'text' : 'password'}
-                name="password"
+                type={showConfirmPassword ? 'text' : 'password'}
+                name="confirmPassword"
                 placeholder="Confirm password"
-                value={values.password}
+                value={values.confirmPassword}
                 onChange={handleChange}
-                required
               />
-              <PasswordIcon onClick={togglePasswordVisibility}>
+              <PasswordIcon onClick={toggleConfirmPasswordVisibility}>
                 <EyeIcon>
-                  {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
+                  {showConfirmPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
                 </EyeIcon>
               </PasswordIcon>
             </RegisterFormPasswordInputContainer>
 
-            {errors.password && touched.email && (
-              <ErrorMessage>{errors.password}</ErrorMessage>
+            {errors.confirmPassword && touched.confirmPassword && (
+              <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
             )}
           </RegisterFormPasswordContainer>
+
+          {!emailAvailable && (
+            <RegisterErrorMessage>
+              This email is already in use. Please, try with another email or
+              log in!
+            </RegisterErrorMessage>
+          )}
 
           <RegisterBtn type="submit" disabled={isSubmitting}>
             Registration
           </RegisterBtn>
           <LoginText>
-            Already have an account? <LoginLink href="">Log In</LoginLink>
+            Already have an account?{' '}
+            <LoginLink
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              Log In
+            </LoginLink>
           </LoginText>
         </RegisterFormEl>
       )}
