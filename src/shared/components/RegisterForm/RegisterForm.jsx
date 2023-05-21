@@ -40,6 +40,8 @@ const fieldValidation = values => {
   const errors = {};
   if (!values.username) {
     errors.username = 'This field is required';
+  } else if (/^\s+$/.test(values.username)) {
+    errors.username = 'Username cannot be empty';
   }
 
   if (!values.email) {
