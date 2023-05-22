@@ -2,14 +2,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Btn = styled(Link)`
-  // position: fixed;
-  // top: 460px;
-  // right: 20px;
   ${({ isFixed }) => (isFixed ? 'position: fixed;top: 460px;right: 20px;' : '')}
-  /* translate: 0 -64px; */
 
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: ${({ isFixed }) => (isFixed ? 'column' : 'row-reverse')};
   align-items: center;
   justify-content: center;
   gap: ${({ theme }) => theme.space[3] + 'px'};
@@ -22,7 +18,8 @@ const Btn = styled(Link)`
   padding-right: ${({ theme }) => theme.space[4] + 'px'};
 
   font-family: ${({ theme }) => theme.fonts.main.semiBold};
-  font-size: ${({ theme }) => theme.fontSizes[2]};
+  font-size: ${({ theme, isFixed }) =>
+    isFixed ? theme.fontSizes[0] : theme.fontSizes[2]};
   color: #fff;
 
   background-color: ${({ theme }) => theme.colors.blue};
