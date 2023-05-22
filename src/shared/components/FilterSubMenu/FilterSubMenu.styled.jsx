@@ -37,9 +37,8 @@ const AgeSubMenu = styled.form`
 
   width: 100%;
   height: ${({ isShown }) => (isShown ? '104px' : 0)};
-  padding-top: ${({ theme }) => theme.space[2] + 'px'};
+  padding-top: ${({ theme, isShown }) => (isShown ? theme.space[2] + 'px' : 0)};
   padding-left: ${({ theme }) => theme.space[5] + 6 + 'px'};
-  /* padding-bottom: ${({ theme }) => theme.space[3] + 'px'}; */
 
   overflow: hidden;
 
@@ -54,15 +53,14 @@ const ItemText = styled.label`
   position: relative;
 
   display: flex;
-  justify-content: end;
   align-items: center;
 
   width: 100%;
   min-height: 24px;
+  padding-left: ${({ theme }) => theme.space[5] + 4 + 'px'};
 
   font-size: ${({ theme }) => theme.fontSizes[0]};
   color: ${({ theme }) => theme.colors.blue};
-  text-align: right;
 `;
 
 const Icon = styled.div`
