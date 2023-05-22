@@ -1,10 +1,14 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
+
 import { logIn } from 'redux/auth/operations';
+import { selectError } from 'redux/auth/selectors';
+
 import { ReactComponent as OpenEyeIcon } from '../../../images/icons/eye-open.svg';
 import { ReactComponent as CloseEyeIcon } from '../../../images/icons/eye-closed.svg';
 import { ReactComponent as CrossIcon } from '../../../images/icons/cross-small.svg';
-import { useState } from 'react';
 
 import {
   LogInForm,
@@ -23,8 +27,6 @@ import {
   RegisterText,
   RegisterLink,
 } from './LoginForm.styled';
-import { selectError } from 'redux/auth/selectors';
-import { useNavigate } from 'react-router';
 
 const initialValues = {
   email: '',
@@ -131,7 +133,9 @@ const LoginForm = () => {
             )}
           </LogInFormEmailContainer>
 
-          <LogInFormPasswordContainer error={errors.email && touched.email}>
+          <LogInFormPasswordContainer
+            error={errors.password && touched.password}
+          >
             <LogInFormPasswordInputContainer
               error={errors.password && touched.password}
               style={{
