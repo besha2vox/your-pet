@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  useDispatch,
+  // useSelector
+} from 'react-redux';
 import { Formik } from 'formik';
 
 import { register } from 'redux/auth/operations';
-import { selectError } from 'redux/auth/selectors';
+// import { selectError } from 'redux/auth/selectors';
 
 import { ReactComponent as OpenEyeIcon } from '../../../images/icons/eye-open.svg';
 import { ReactComponent as CloseEyeIcon } from '../../../images/icons/eye-closed.svg';
 import { ReactComponent as CrossIcon } from '../../../images/icons/cross-small.svg';
-import { ReactComponent as CheckIcon } from '../../../images/icons/check.svg';
+// import { ReactComponent as CheckIcon } from '../../../images/icons/check.svg';
 
 import {
   RegisterFormEl,
@@ -26,8 +29,8 @@ import {
   RegisterBtn,
   EyeIcon,
   ErrorIcon,
-  CheckMarkIcon,
-  InfoMessage,
+  // CheckMarkIcon,
+  // InfoMessage,
   RegisterErrorMessage,
   LoginText,
   LoginLink,
@@ -133,7 +136,7 @@ const RegisterForm = () => {
         isSubmitting,
         resetForm,
       }) => {
-        const isPasswordValid = values.password && values.password.length >= 8;
+        // const isPasswordValid = values.password && values.password.length >= 8;
 
         return (
           <RegisterFormEl onSubmit={handleSubmit}>
