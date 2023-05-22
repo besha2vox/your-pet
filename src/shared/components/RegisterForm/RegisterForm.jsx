@@ -14,7 +14,7 @@ import { ReactComponent as CheckIcon } from '../../../images/icons/check.svg';
 import {
   RegisterFormEl,
   RegisterFormTitle,
-  RegisterFormUsernamelContainer,
+  RegisterFormUsernameContainer,
   RegisterFormUsernameInputContainer,
   RegisterFormEmailContainer,
   RegisterFormEmailInputContainer,
@@ -133,7 +133,7 @@ const RegisterForm = () => {
         return (
           <RegisterFormEl onSubmit={handleSubmit}>
             <RegisterFormTitle>Registration</RegisterFormTitle>
-            <RegisterFormUsernamelContainer
+            <RegisterFormUsernameContainer
               error={errors.username && touched.username}
             >
               <RegisterFormUsernameInputContainer
@@ -165,7 +165,7 @@ const RegisterForm = () => {
               {errors.username && touched.username && (
                 <ErrorMessage name="username">{errors.username}</ErrorMessage>
               )}
-            </RegisterFormUsernamelContainer>
+            </RegisterFormUsernameContainer>
 
             <RegisterFormEmailContainer error={errors.email && touched.email}>
               <RegisterFormEmailInputContainer
@@ -234,7 +234,7 @@ const RegisterForm = () => {
                   {errors.password && touched.password && values.password && (
                     <ErrorIcon
                       onClick={() => {
-                        resetForm({ values: { ...values, email: '' } });
+                        resetForm({ values: { ...values, password: '' } });
                       }}
                     >
                       <CrossIcon />
@@ -291,7 +291,9 @@ const RegisterForm = () => {
                     values.confirmPassword && (
                       <ErrorIcon
                         onClick={() => {
-                          resetForm({ values: { ...values, email: '' } });
+                          resetForm({
+                            values: { ...values, confirmPassword: '' },
+                          });
                         }}
                       >
                         <CrossIcon />
@@ -300,11 +302,9 @@ const RegisterForm = () => {
                 </PasswordIcon>
               </RegisterFormPasswordInputContainer>
 
-              {errors.confirmPassword &&
-                touched.confirmPassword &&
-                !isPasswordValid && (
-                  <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
-                )}
+              {errors.confirmPassword && touched.confirmPassword && (
+                <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
+              )}
               {/* {isPasswordValid && (
                 <InfoMessage valid={isPasswordValid}>
                   Password is secure

@@ -21,7 +21,7 @@ export const RegisterFormTitle = styled.h1`
   }
 `;
 
-export const RegisterFormUsernamelContainer = styled.div`
+export const RegisterFormUsernameContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
