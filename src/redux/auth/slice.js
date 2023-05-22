@@ -37,9 +37,9 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(logOut.fulfilled, (state, { payload }) => {
-        state.user = { 
-          name: null, 
-          email: null,  
+        state.user = {
+          name: null,
+          email: null,
         };
         state.token = null;
         state.isLoggedIn = false;
@@ -65,9 +65,7 @@ const authSlice = createSlice({
         state.user = payload.user;
       })
       .addCase(deletePet.fulfilled, (state, { payload }) => {
-        const index = state.user.pet.findIndex(
-          pet => pet._id === payload.id
-        );
+        const index = state.user.pet.findIndex(pet => pet._id === payload.id);
         state.user.pet.splice(index, 1);
       })
       .addCase(changeUser.fulfilled, (state, { payload }) => {
@@ -86,7 +84,7 @@ const authSlice = createSlice({
           getUserInfo.pending,
           deletePet.pending,
           changeUser.pending,
-          changeStatus.pending,
+          changeStatus.pending
         ),
         state => {
           state.isLoading = true;
@@ -102,7 +100,7 @@ const authSlice = createSlice({
           getUserInfo.fulfilled,
           deletePet.fulfilled,
           changeUser.fulfilled,
-          changeStatus.fulfilled,
+          changeStatus.fulfilled
         ),
         state => {
           state.isLoading = false;
@@ -119,11 +117,17 @@ const authSlice = createSlice({
           getUserInfo.rejected,
           deletePet.rejected,
           changeUser.rejected,
-          changeStatus.rejected,
+          changeStatus.rejected
         ),
         (state, { payload }) => {
           state.isLoading = false;
           state.error = payload;
+        }
+      )
+      .addMatcher(
+        isAnyOf(register.rejected, logIn.rejected, getCurrentUser.rejected),
+        (state, { payload }) => {
+          state.isLoggedIn = false;
         }
       );
   },
