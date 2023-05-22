@@ -11,6 +11,7 @@ import {
   removeNotice,
   addFavoriteNotice,
   removeFavoriteNotice,
+  removeFavoriteNoticeOnFavoritepage,
 } from './operations';
 
 const initialState = {
@@ -34,12 +35,13 @@ const noticesSlice = createSlice({
       .addCase(addNotice.fulfilled, (state, { payload }) => {
         state.newNotice = payload.result;
       })
-      .addCase(removeNotice.fulfilled, (state, { payload }) => {
-        const index = state.items.findIndex(
-          contact => contact.id === payload.id
-        );
-        state.items.splice(index, 1);
-      })
+      .addCase(
+        removeFavoriteNoticeOnFavoritepage.fulfilled,
+        (state, { payload }) => {
+          const index = state.items.findIndex(item => item._id === payload._id);
+          state.items.splice(index, 1);
+        }
+      )
       .addMatcher(
         isAnyOf(
           getNotices.fulfilled,
