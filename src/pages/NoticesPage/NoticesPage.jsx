@@ -38,34 +38,46 @@ import {
 
 const NoticesPage = () => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const { categoryName } = useParams();
   const notices = useSelector(selectNotices);
   const totalHits = useSelector(selectTotalHitsNotices);
   const { isLoggedIn } = useSelector(selectAuth);
   const user = useSelector(selectUser);
   const item = useSelector(selectCurrentNotice);
-  const { pathname } = useLocation();
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [isAuthorizedModalOpen, setIsAuthorizedModalOpen] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const [query, setQuery] = useState('');
   const [genderFilter, setGenderFilter] = useState('');
   const [ageFilter, setAgeFilter] = useState('');
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page = searchParams.get('page') || 1;
 
   useEffect(() => {
-    if (categoryName === 'my-pets') {
-      dispatch(getUsersNotices());
-    } else if (categoryName === 'favorite') {
-      dispatch(getFavoriteNotices());
-    } else if (!query) {
-      const searchQuery = {
-        page,
-      };
+    const searchQuery = {
+      page,
+    };
 
+    if (categoryName === 'my-pets') {
+      if (query) searchQuery.query = query;
+      if (genderFilter) searchQuery.gender = genderFilter;
+      if (ageFilter) searchQuery.age = ageFilter;
+
+      dispatch(getUsersNotices({ category: categoryName, ...searchQuery }));
+
+      setSearchParams(searchQuery);
+    } else if (categoryName === 'favorite') {
+      if (query) searchQuery.query = query;
+      if (genderFilter) searchQuery.gender = genderFilter;
+      if (ageFilter) searchQuery.age = ageFilter;
+      console.log(searchQuery);
+
+      dispatch(getFavoriteNotices({ category: categoryName, ...searchQuery }));
+
+      setSearchParams(searchQuery);
+    } else if (!query) {
       if (genderFilter) searchQuery.gender = genderFilter;
       if (ageFilter) searchQuery.age = ageFilter;
 
@@ -73,11 +85,7 @@ const NoticesPage = () => {
 
       setSearchParams(searchQuery);
     } else {
-      const searchQuery = {
-        page,
-        query,
-      };
-
+      if (query) searchQuery.query = query;
       if (genderFilter) searchQuery.gender = genderFilter;
       if (ageFilter) searchQuery.age = ageFilter;
 
@@ -139,15 +147,17 @@ const NoticesPage = () => {
     if (page === currentPage) {
       return;
     }
-    // const params = searchQuery
-    //   ? { query: searchQuery, page: currentPage }
-    //   : { page: currentPage };
 
-    // setSearchParams(params);
+    const searchQuery = { page: currentPage };
+
+    if (query) searchQuery.query = query;
+    if (genderFilter) searchQuery.gender = genderFilter;
+    if (ageFilter) searchQuery.age = ageFilter;
+
+    setSearchParams(searchQuery);
   };
 
   const toggleUnauthorizeModal = () => {
-    console.log(1);
     setIsAuthorizedModalOpen(prevState => !prevState);
   };
 
@@ -180,13 +190,11 @@ const NoticesPage = () => {
           toggleUnauthorizeModal={toggleUnauthorizeModal}
         />
       </ListContainer>
-      {notices && (
-        <Pagination
-          onPageChange={onPageChange}
-          currentPage={Number(page)}
-          totalPagesCount={totalPages}
-        />
-      )}
+      <Pagination
+        onPageChange={onPageChange}
+        currentPage={Number(page)}
+        totalPagesCount={totalPages}
+      />
       {isItemModalOpen && (
         <ModalNotice
           toggleModal={toggleModal}
