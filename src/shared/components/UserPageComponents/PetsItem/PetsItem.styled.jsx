@@ -6,7 +6,8 @@ export const MyPetCard = styled.li`
   padding-bottom: ${({ theme }) => theme.space[3] * 5 + 'px'};
   padding-left: ${({ theme }) => theme.space[2] * 5 + 'px'};
 
-  // margin-left: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  margin-bottom: ${({ theme }) => theme.space[2] * 5 + 'px'};
+
   background: ${({ theme }) => theme.colors.classicWhite};
   box-shadow: ${({ theme }) => theme.boxShadows.main};
   border-radius: 20px;
@@ -21,6 +22,7 @@ export const MyPetCard = styled.li`
 export const PetImage = styled.img`
   width: 240px;
   height: 240px;
+  object-fit: cover;
   margin-top: ${({ theme }) => theme.space[0] + 'px'};
   margin-right: auto;
   margin-bottom: ${({ theme }) => theme.space[2] * 5 + 'px'};
@@ -30,6 +32,8 @@ export const PetImage = styled.img`
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 128px;
     height: 128px;
+
+    margin: 0;
   }
 `;
 
@@ -44,6 +48,7 @@ export const SubTitle = styled.p`
 `;
 
 export const NameWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `;
