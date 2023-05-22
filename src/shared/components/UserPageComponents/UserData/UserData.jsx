@@ -32,10 +32,6 @@ const UserData = ({ user }) => {
   };
 
   const handleAddAvatar = e => {
-    const formData = new FormData();
-    formData.append('petsPhoto', petPhoto);
-    dispatch(changeUser(formData));
-    setFileInput(false);
     setEdit(false);
     setFileInput(false);
     const newFormData = new FormData();
