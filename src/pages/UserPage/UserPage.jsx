@@ -51,7 +51,15 @@ const UserPage = () => {
             <UserData user={user} userId={userId} />
           </Card>
         </div>
-        <div style={{ position: 'relative', width: '100%' }}>
+        <div style={{ position: 'relative' }}>
+          <PetsHeader>
+            <Title>My pets:</Title>
+            <AddPetBtn
+              text="Add pet"
+              path="/add-pet"
+              // isFixed={false}
+            />
+          </PetsHeader>
           {user && user.pet && <PetsData pets={user.pet} />}
         </div>
       </MainContent>
