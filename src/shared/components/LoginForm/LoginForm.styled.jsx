@@ -79,7 +79,10 @@ export const ErrorIcon = styled.span`
   width: 24px;
   height: 24px;
   cursor: pointer;
-  color: ${({ theme }) => theme.colors.red};
+
+  & svg {
+    stroke: ${({ theme }) => theme.colors.red};
+  }
 `;
 
 export const ErrorMessage = styled.div`
@@ -101,8 +104,10 @@ export const EyeIcon = styled.span`
   height: 24px;
   cursor: pointer;
 
-  color: ${({ theme, error }) =>
-    error ? theme.colors.red : theme.colors.blue};
+  & svg {
+    stroke: ${({ theme, error }) =>
+      error ? theme.colors.red : theme.colors.blue};
+  }
 `;
 
 export const LoginErrorMessage = styled.div`
@@ -147,4 +152,5 @@ export const RegisterLink = styled.a`
   text-decoration-line: underline;
   color: ${({ theme }) => theme.colors.blue};
   display: inline;
+  cursor: pointer;
 `;

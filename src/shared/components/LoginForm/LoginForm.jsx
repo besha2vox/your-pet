@@ -68,6 +68,7 @@ const LoginForm = () => {
 
     try {
       await dispatch(logIn(values));
+      navigate('/');
       if (!loginError) {
         navigate('/');
       }
@@ -84,7 +85,6 @@ const LoginForm = () => {
       initialValues={initialValues}
       validate={fieldValidation}
       validateOnChange={false}
-      validateOnBlur={false}
       onSubmit={handleSubmit}
     >
       {({
@@ -114,6 +114,7 @@ const LoginForm = () => {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                disabled={loading}
               />
               {errors.email && touched.email && values.email && (
                 <ErrorIcon
@@ -127,7 +128,7 @@ const LoginForm = () => {
             </LogInFormEmailInputContainer>
 
             {errors.email && touched.email && (
-              <ErrorMessage>{errors.email}</ErrorMessage>
+              <ErrorMessage name="email">{errors.email}</ErrorMessage>
             )}
           </LogInFormEmailContainer>
 
@@ -145,6 +146,8 @@ const LoginForm = () => {
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}
+                onBlur={handleBlur}
+                disabled={loading}
               />
               <PasswordIcon onClick={togglePasswordVisibility}>
                 <EyeIcon error={errors.password && touched.password}>
@@ -154,7 +157,7 @@ const LoginForm = () => {
             </LogInFormPasswordInputContainer>
 
             {errors.password && touched.password && (
-              <ErrorMessage>{errors.password}</ErrorMessage>
+              <ErrorMessage name="password">{errors.password}</ErrorMessage>
             )}
           </LogInFormPasswordContainer>
 
@@ -162,7 +165,7 @@ const LoginForm = () => {
             <LoginErrorMessage>{loginError.message}</LoginErrorMessage>
           )}
 
-          <LogInBtn type="submit" disabled={isSubmitting}>
+          <LogInBtn type="submit" disabled={isSubmitting || loading}>
             Log In
           </LogInBtn>
           <RegisterText>
