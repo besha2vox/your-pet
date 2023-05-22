@@ -26,7 +26,7 @@ axios.interceptors.response.use(
         });
         setAuthHeader(data.accessToken);
         localStorage.setItem('refreshToken', data.refreshToken);
-        return axios(error.config);
+        return error.config;
       } catch (error) {
         return Promise.reject.error;
       }
@@ -163,7 +163,7 @@ export const changeStatus = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await axios.patch(`api/users/status`, data);
-      console.log("response.data", response.data)
+      console.log('response.data', response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);

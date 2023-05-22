@@ -44,6 +44,7 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
         state.isRefreshing = false;
+        localStorage.removeItem('refreshToken');
       })
       .addCase(getCurrentUser.pending, state => {
         state.isRefreshing = true;
