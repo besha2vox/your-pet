@@ -243,7 +243,7 @@ const RegisterForm = () => {
                 </PasswordIcon>
               </RegisterFormPasswordInputContainer>
 
-              {errors.password && touched.password && !isPasswordValid && (
+              {errors.password && touched.password && (
                 <ErrorMessage>{errors.password}</ErrorMessage>
               )}
               {/* {isPasswordValid && (
