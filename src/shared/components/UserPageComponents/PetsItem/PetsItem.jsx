@@ -53,12 +53,12 @@ const PetsItem = ({ pet, ava }) => {
             <SubTitle>Breed:&nbsp;</SubTitle>
             <InfoText> {pet.breed}</InfoText>
           </InfoItem>
-          <InfoItem>
-            <PetComment>
-              Comments:&nbsp;
-              <InfoText>{pet.comments}</InfoText>
-            </PetComment>
-          </InfoItem>
+          {pet.comments && (<InfoItem>
+              <PetComment>
+                Comments:&nbsp;
+                <InfoText>{pet.comments}</InfoText>
+              </PetComment>
+            </InfoItem>)}
         </div>
       </MyPetCard>
       {isModalOpen && (
