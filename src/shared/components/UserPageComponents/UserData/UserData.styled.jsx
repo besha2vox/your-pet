@@ -48,14 +48,18 @@ export const ConfirmButtonWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: ${({ theme }) => theme.space[2] * 5 + 'px'};
 `;
 
 export const EditButton = styled.button`
   display: flex;
   align-items: center;
-  margin-top: 14px;
+  margin-top: ${({theme}) => theme.space[1] * 7 + 'px'};
   border: none;
-  padding: 0 5px;
+  padding-top:${({theme}) => theme.space[0] + 'px'};
+  padding-right: 5px;
+  padding-bottom:${({theme}) => theme.space[0] + 'px'};
+  padding-right: 5px;
   border-radius: 20px;
   background: transparent;
 

@@ -18,7 +18,7 @@ const fields = {
     placeholder: '00.00.0000',
   },
   phone: {
-    type: 'phone:',
+    type: 'tel',
     name: 'phone',
     label: 'Phone:',
     placeholder: '+38000000000',
