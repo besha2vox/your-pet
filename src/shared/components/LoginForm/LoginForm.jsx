@@ -68,7 +68,6 @@ const LoginForm = () => {
 
     try {
       await dispatch(logIn(values));
-      navigate('/');
       if (!loginError) {
         navigate('/');
       }
@@ -99,7 +98,7 @@ const LoginForm = () => {
       }) => (
         <LogInForm onSubmit={handleSubmit}>
           <LogInFormTitle>Log In</LogInFormTitle>
-          <LogInFormEmailContainer>
+          <LogInFormEmailContainer error={errors.email && touched.email}>
             <LogInFormEmailInputContainer
               error={errors.email && touched.email}
               style={{
@@ -132,7 +131,7 @@ const LoginForm = () => {
             )}
           </LogInFormEmailContainer>
 
-          <LogInFormPasswordContainer>
+          <LogInFormPasswordContainer error={errors.email && touched.email}>
             <LogInFormPasswordInputContainer
               error={errors.password && touched.password}
               style={{
