@@ -4,6 +4,7 @@ import {
   Image,
   ImageContainer,
   Title,
+  Paragraf,
   BottomInfoWrapper,
   Span,
   MainContainer,
@@ -17,7 +18,9 @@ function NotFoundPage() {
   return (
     <MainContainer>
       <Span>
-        <Title>Ooops! This page not found :(</Title>
+        <Title>Ooops!
+          <Paragraf>  This page not found :(</Paragraf>
+        </Title>
       </Span>
       <ImageContainer>
         <Image />
