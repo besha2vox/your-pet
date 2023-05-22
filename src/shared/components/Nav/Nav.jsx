@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { navData } from './navData';
+import { useLocation } from 'react-router';
 import { useWindowSize } from 'hooks/useResize';
 import { List, Item, Link } from './Nav.styled';
 
 const Nav = ({ isOpen, setIsOpen }) => {
+  const { pathname } = useLocation();
   const [screenWidth] = useWindowSize();
 
   useEffect(() => {
@@ -13,7 +15,13 @@ const Nav = ({ isOpen, setIsOpen }) => {
 
   const items = navData.map(({ text, path }) => (
     <Item key={text} isOpen={isOpen}>
-      <Link to={path} onClick={() => setIsOpen(false)}>
+      <Link
+        to={path}
+        onClick={() => setIsOpen(false)}
+        className={
+          pathname.includes('notices') && path.includes('notices') && 'active'
+        }
+      >
         {text}
       </Link>
     </Item>
