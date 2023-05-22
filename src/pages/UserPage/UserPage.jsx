@@ -6,14 +6,7 @@ import PetsData from 'shared/components/UserPageComponents/PetsData/PetsData';
 import ModalCongrats from 'shared/components/UserPageComponents/ModalCongrats/ModalCongrats';
 import { selectUser } from 'redux/auth/selectors';
 import Modal from 'shared/components/Modal/Modal';
-import {
-  MainContent,
-  TitleWrap,
-  Title,
-  Card,
-  PetsHeader,
-} from './UserPage.styled';
-import AddPetBtn from 'shared/components/AddPetBtn/AddPetBtn';
+import { MainContent, TitleWrap, Title, Card } from './UserPage.styled';
 
 const UserPage = () => {
   const [congradModal, setCongradModal] = useState(false);
@@ -59,17 +52,8 @@ const UserPage = () => {
           </Card>
         </div>
         <div style={{ position: 'relative' }}>
-          <PetsHeader>
-            <Title>My pets:</Title>
-            <AddPetBtn text="Add pet" path="/add-pet" 
-            // isFixed={false} 
-            />
-          </PetsHeader>
-          {user && user.pet && (
-            <PetsData pets={user.pet} />
-          )}
+          {user && user.pet && <PetsData pets={user.pet} />}
         </div>
-
       </MainContent>
     </>
   );
