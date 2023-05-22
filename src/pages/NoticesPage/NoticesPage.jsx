@@ -121,8 +121,8 @@ const NoticesPage = () => {
     setIsItemModalOpen(prevState => !prevState);
   };
 
-  const moreBtnClickHandler = async id => {
-    dispatch(getNoticeById(id));
+  const moreBtnClickHandler = async _id => {
+    dispatch(getNoticeById(_id));
   };
 
   const toggleFavorites = pet => {

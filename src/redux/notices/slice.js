@@ -15,7 +15,6 @@ import {
 
 const initialState = {
   items: [],
-
   currentNotice: null,
   hits: 0,
   totalHits: 0,
@@ -30,7 +29,7 @@ const noticesSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getNoticeById.fulfilled, (state, { payload }) => {
-        state.currentNotice = payload.result;
+        state.currentNotice = payload;
       })
       .addCase(addNotice.fulfilled, (state, { payload }) => {
         state.newNotice = payload.result;
