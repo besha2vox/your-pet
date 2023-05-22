@@ -31,7 +31,6 @@ const ModalNotice = ({ toggleModal, onFavoriteClick }) => {
   const item = useSelector(selectCurrentNotice);
   const user = useSelector(selectUser);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log('isModalOpen: ', isModalOpen);
 
   if (!item) return;
 
