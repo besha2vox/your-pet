@@ -4,6 +4,9 @@ import { useDispatch } from 'react-redux';
 import { getCurrentUser } from 'redux/auth/operations';
 
 import SharedLayout from 'shared/SharedLayout/SharedLayout';
+import PrivateRoute from 'shared/components/PrivateRoute/PrivateROute';
+import PublicRoute from 'shared/components/PublicRoute/PublicRoute';
+
 import AddPetPage from 'pages/AddPetPage/AddPetPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import MainPage from 'pages/MainPage/MainPage';
@@ -27,10 +30,16 @@ const App = () => {
         <Route index element={<MainPage />} />
         <Route path="notices/:categoryName" element={<NoticesPage />} />
         <Route path="friends" element={<OurFriendsPage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="user" element={<UserPage />} />
-        <Route path="add-pet" element={<AddPetPage />} />
+        <Route element={<PublicRoute />}>
+          <Route path="register" element={<RegisterPage />} />
+          <Route path="login" element={<LoginPage />} />
+        </Route>
+
+        <Route element={<PrivateRoute />}>
+          <Route path="user" element={<UserPage />} />
+          <Route path="add-pet" element={<AddPetPage />} />
+        </Route>
+
         <Route path="news" element={<NewsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
