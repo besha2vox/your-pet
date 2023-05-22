@@ -1,11 +1,11 @@
-import { LogoutIcon } from 'shared/utils/icons';
 import { useState } from 'react';
-import Modal from '../Modal/Modal';
-import ModalApproveAction from '../UserPageComponents/ModalApproveAction/ModalApproveAction';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
+import { useNavigate } from 'react-router-dom';
+import { LogoutIcon } from 'shared/utils/icons';
+import Modal from '../Modal/Modal';
+import ModalApproveAction from '../UserPageComponents/ModalApproveAction/ModalApproveAction';
 import { LogoutButton } from './Logout.styled';
-import { useNavigate} from 'react-router-dom';
 
 const Logout = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

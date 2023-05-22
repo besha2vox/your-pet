@@ -1,9 +1,12 @@
-import { ReactComponent as DeletePet } from 'images/icons/trash-2.svg';
-import avatarDefault2x from '../../../../images/profile_img/Photo_default_2x.jpg';
 import { useDispatch } from 'react-redux';
 import { deletePet } from 'redux/auth/operations';
 import { useState } from 'react';
+import { format } from 'date-fns';
+import PropTypes from 'prop-types';
+import { ReactComponent as DeletePet } from 'images/icons/trash-2.svg';
+import avatarDefault2x from '../../../../images/profile_img/Photo_default_2x.jpg';
 import Modal from 'shared/components/Modal/Modal';
+import IconButton from '../IconButton/IconButton';
 import ModalApproveAction from '../ModalApproveAction/ModalApproveAction';
 import {
   MyPetCard,
@@ -14,10 +17,6 @@ import {
   PetComment,
   InfoText,
 } from './PetsItem.styled';
-import { format } from 'date-fns';
-
-import IconButton from '../IconButton/IconButton';
-import PropTypes from 'prop-types';
 
 const PetsItem = ({ pet }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -109,5 +108,5 @@ PetsItem.propTypes = {
     breed: PropTypes.string.isRequired,
     comments: PropTypes.string,
     birthday: PropTypes.string.isRequired,
-})
+  }),
 };

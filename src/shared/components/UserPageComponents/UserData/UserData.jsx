@@ -2,13 +2,14 @@ import {
   useState,
   // useEffect
 } from 'react';
+import { Formik, Field, ErrorMessage } from 'formik';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { changeUser } from 'redux/auth/operations';
 import avatarDefault2x from 'images/profile_img/Photo_default_2x.jpg';
 // import avatarDefault1x from "images/profile_img/Photo_default_1x.jpg";
 // import avatarDefault3x from "/images/profile_img/Photo_default_3x.jpg";
 import { ReactComponent as Camera } from 'images/icons/camera.svg';
-import { useDispatch } from 'react-redux';
-import { changeUser } from 'redux/auth/operations';
-import { Formik, Field, ErrorMessage } from 'formik';
 import UserDataForm from '../UserDataForm/UserDataForm';
 import {
   UserInfo,
@@ -20,7 +21,6 @@ import {
   Cross,
   Check,
 } from './UserData.styled';
-import PropTypes from 'prop-types';
 
 const UserData = ({ user }) => {
   const [edit, setEdit] = useState(false);
@@ -28,9 +28,7 @@ const UserData = ({ user }) => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    petPhoto:
-      user.avatarURL ||
-      avatarDefault2x,
+    petPhoto: user.avatarURL || avatarDefault2x,
   };
 
   const handleAddAvatar = e => {
@@ -42,7 +40,7 @@ const UserData = ({ user }) => {
     setFileInput(false);
     const newFormData = new FormData();
     newFormData.append('pets-photo', petPhoto);
-    dispatch(changeUser(newFormData)); 
+    dispatch(changeUser(newFormData));
   };
 
   const handleCancelAvatar = e => {
@@ -139,5 +137,5 @@ UserData.propTypes = {
     id: PropTypes.string,
     username: PropTypes.string,
     email: PropTypes.string,
-})
+  }),
 };

@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import PetsList from '../PetsList/PetsList';
 import AddPetBtn from 'shared/components/AddPetBtn/AddPetBtn';
 import { MyPetCard } from './PetsData.styled';
-import PropTypes from 'prop-types';
 
 const PetsData = ({ pets }) => {
   return (

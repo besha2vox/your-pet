@@ -1,6 +1,5 @@
-import PetsItem from '../PetsItem/PetsItem';
 import PropTypes from 'prop-types';
-
+import PetsItem from '../PetsItem/PetsItem';
 
 const PetsList = ({ pets }) => {
   return (

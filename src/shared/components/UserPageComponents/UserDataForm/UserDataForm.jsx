@@ -1,11 +1,11 @@
-import UserDataItem from '../UserDataItem/UserDataItem';
-import Logout from 'shared/components/Logout/Logout';
 import { useState, useEffect } from 'react';
-import fields from './fields';
-import { UserForm } from './UserDataForm.styled';
+import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import PropTypes from 'prop-types';
+import UserDataItem from '../UserDataItem/UserDataItem';
+import Logout from 'shared/components/Logout/Logout';
+import fields from './fields';
+import { UserForm } from './UserDataForm.styled';
 
 const cityRegex =
   /^(?:(?:[a-zA-Zа-яА-ЯіІїЇєЄ]+(?:[.'’‘`-][a-zA-Zа-яА-ЯіІїЇєЄ]+)*)\s*)+$/;

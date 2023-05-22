@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 import { ReactComponent as Pawprint } from 'images/icons/pawprint.svg';
+import Button from 'shared/components/Button/Button';
 import {
   Section,
   Header,
 } from '../ModalApproveAction/ModalApproveAction.styled';
-import Button from 'shared/components/Button/Button';
 import { Text } from './ModalCongrats.styled';
-import PropTypes from 'prop-types';
 
 const ModalCongrats = ({ toggleModal }) => {
   return (
