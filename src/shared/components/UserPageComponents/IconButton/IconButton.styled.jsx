@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Btn = styled.button`
-  position: relative;
-
+  position: absolute;
+  right: 0;
+  translate: -20px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,4 +11,7 @@ export const Btn = styled.button`
   height: 24px;
   background: transparent;
   border: none;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    translate: -24px 0;
+  }
 `;

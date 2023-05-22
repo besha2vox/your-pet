@@ -54,7 +54,7 @@ const PetsItem = ({ pet }) => {
             src={pet.avatarURL || avatarDefault2x}
             alt="mypet's avatar"
           />
-          <div>
+          <div style={{}}>
             <NameWrapper>
               <InfoItem>
                 <SubTitle>Name:&nbsp;</SubTitle>
