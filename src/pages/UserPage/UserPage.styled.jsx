@@ -31,7 +31,7 @@ export const Card = styled.div`
   padding-right: ${({ theme }) => theme.space[2] * 2 + 'px'};
   padding-bottom: ${({ theme }) => theme.space[2] * 6 + 'px'};
   padding-left: ${({ theme }) => theme.space[2] * 2 + 'px'};
-  background: ${({ theme }) => theme.colors.classicWhite};
+  background: #FFFFFF;
   box-shadow: ${({ theme }) => theme.boxShadows.main};
   border-radius: 20px;
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {

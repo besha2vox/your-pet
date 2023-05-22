@@ -41,6 +41,7 @@ export const FormInput = styled.input`
   padding-bottom: ${({ theme }) => theme.space[2] + 'px'};
   padding-left: ${({ theme }) => theme.space[2] * 3 + 'px'};
   background: transparent;
+  outline: none;
   border: 1px solid #54adff;
   border-radius: 20px;
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
@@ -74,7 +75,7 @@ export const EditIc = styled(EditIcon)`
   }
 `;
 export const ConfirmIcon = styled(CheckIcon)`
-  stroke: ${({ theme }) => theme.colors.green};
+  color: ${({ theme }) => theme.colors.green};
   width: ${({ theme }) => theme.space[2] * 5 + 'px'};
   heght: ${({ theme }) => theme.space[2] * 5 + 'px'};
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {

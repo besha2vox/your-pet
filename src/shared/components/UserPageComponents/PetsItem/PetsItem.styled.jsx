@@ -8,7 +8,7 @@ export const MyPetCard = styled.li`
 
   margin-bottom: ${({ theme }) => theme.space[2] * 5 + 'px'};
 
-  background: ${({ theme }) => theme.colors.classicWhite};
+  background: #ffffff;
   box-shadow: ${({ theme }) => theme.boxShadows.main};
   border-radius: 20px;
   width: 100%;
@@ -16,6 +16,23 @@ export const MyPetCard = styled.li`
     display: flex;
     gap: ${({ theme }) => theme.space[2] * 5 + 'px'};
     padding: ${({ theme }) => theme.space[2] * 5 + 'px'};
+    width: 703px;
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: flex;
+    gap: ${({ theme }) => theme.space[2] * 5 + 'px'};
+    padding: ${({ theme }) => theme.space[2] * 5 + 'px'};
+    width: 821px;
+  }
+`;
+
+export const InfoWrap = styled.div`
+  width: 100%;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: 515px;
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    width: 580px;
   }
 `;
 
