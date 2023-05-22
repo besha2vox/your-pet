@@ -27,8 +27,6 @@ const NewsPage = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  //const [searchQuery, setSearchQuery] = useState('');
-
   const page = searchParams.get('page') || 1;
   const searchQuery = searchParams.get('query');
 
@@ -60,7 +58,7 @@ const NewsPage = () => {
       var params = searchQuery ? { query: searchQuery, page: 1 } : { page: 1 };
       setSearchParams(params);
     }
-      //getNews(searchQuery, 1);
+    //getNews(searchQuery, 1);
   };
 
   const clearWaitingQueue = () => {
