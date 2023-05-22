@@ -20,6 +20,7 @@ import {
   addFavoriteNotice,
   removeFavoriteNotice,
   removeNotice,
+  removeFavoriteNoticeOnFavoritepage,
 } from 'redux/notices/operations';
 import {
   selectNotices,
@@ -131,7 +132,12 @@ const NoticesPage = () => {
       return;
     }
 
-    if (pathname.includes('favorite') || pet.favorite.includes(user.id)) {
+    if (pathname.includes('favorite')) {
+      dispatch(removeFavoriteNoticeOnFavoritepage(pet));
+      return;
+    }
+
+    if (pet.favorite.includes(user.id)) {
       dispatch(removeFavoriteNotice(pet));
       return;
     }
