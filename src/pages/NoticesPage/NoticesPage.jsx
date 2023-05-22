@@ -173,6 +173,7 @@ const NoticesPage = () => {
             chooseAge={setAgeFilter}
           />
           <AddPetBtn
+            isFixed={true}
             text="Add pet"
             path="/add-pet"
             toggleUnauthorizeModal={toggleUnauthorizeModal}

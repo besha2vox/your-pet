@@ -1,17 +1,8 @@
 import PropTypes from 'prop-types';
 import PetsList from '../PetsList/PetsList';
-import AddPetBtn from 'shared/components/AddPetBtn/AddPetBtn';
-import { MyPetCard } from './PetsData.styled';
 
 const PetsData = ({ pets }) => {
-  return (
-    <>
-      <MyPetCard>
-        <AddPetBtn text="Add pet" path="/add-pet" />
-      </MyPetCard>
-      <PetsList pets={pets} />
-    </>
-  );
+  return <PetsList pets={pets} />;
 };
 
 export default PetsData;

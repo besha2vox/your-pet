@@ -13,6 +13,7 @@ import {
   Card,
   PetsHeader,
 } from './UserPage.styled';
+import AddPetBtn from 'shared/components/AddPetBtn/AddPetBtn';
 
 const UserPage = () => {
   const [congradModal, setCongradModal] = useState(false);
@@ -28,7 +29,6 @@ const UserPage = () => {
       dispatch(getUserInfo(id));
     }
   }, [id, dispatch]);
-
 
   useEffect(() => {
     if (user && user.firstVisit) {
@@ -62,6 +62,7 @@ const UserPage = () => {
           <div style={{ position: 'relative' }}>
             <PetsHeader>
               <Title>My pets:</Title>
+              <AddPetBtn text="Add pet" path="/add-pet" isFixed={false} />
             </PetsHeader>
             <PetsData pets={user.pet} />
           </div>

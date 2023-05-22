@@ -6,9 +6,8 @@ import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
 
-const AddPetBtn = ({ text, path, toggleUnauthorizeModal }) => {
+const AddPetBtn = ({ text, path, toggleUnauthorizeModal, isFixed }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  // const navigate = useNavigate();
   const location = useLocation();
   const [screenWidth] = useWindowSize();
 
@@ -21,7 +20,12 @@ const AddPetBtn = ({ text, path, toggleUnauthorizeModal }) => {
   };
 
   return (
-    <Btn to={path} state={{ from: location }} onClick={onAddBtnClick}>
+    <Btn
+      to={path}
+      state={{ from: location }}
+      onClick={onAddBtnClick}
+      isFixed={isFixed}
+    >
       {screenWidth < 768 && <PlusIcon />}
       {text}
       {screenWidth >= 768 && <PlusSmallIcon />}
@@ -33,6 +37,7 @@ AddPetBtn.propTypes = {
   text: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   toggleUnauthorizeModal: PropTypes.func.isRequired,
+  isFixed: PropTypes.bool.isRequired,
 };
 
 export default AddPetBtn;
