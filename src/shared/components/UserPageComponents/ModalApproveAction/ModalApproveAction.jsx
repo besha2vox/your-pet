@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import Button from 'shared/components/Button/Button.jsx';
 import { Section, BtnDiv, Header } from './ModalApproveAction.styled.jsx';
-import PropTypes from 'prop-types';
 
 const ModalApproveAction = ({
   toggleModal,
@@ -19,7 +19,7 @@ const ModalApproveAction = ({
           text="Yes"
           clickHandler={clickHandler}
           icon={icon}
-            filled
+          filled
           short
         />
       </BtnDiv>

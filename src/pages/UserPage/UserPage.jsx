@@ -1,11 +1,11 @@
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserInfo, changeStatus } from 'redux/auth/operations';
 import UserData from 'shared/components/UserPageComponents/UserData/UserData';
 import PetsData from 'shared/components/UserPageComponents/PetsData/PetsData';
 import ModalCongrats from 'shared/components/UserPageComponents/ModalCongrats/ModalCongrats';
-import { useState, useEffect } from 'react';
 import { selectUser } from 'redux/auth/selectors';
 import Modal from 'shared/components/Modal/Modal';
-import { useSelector, useDispatch } from 'react-redux';
-import { getUserInfo, changeStatus } from 'redux/auth/operations';
 import {
   MainContent,
   TitleWrap,
