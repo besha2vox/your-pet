@@ -83,7 +83,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
         break;
 
       case 'my-pet':
-        setIsDisabled(!isPetPhotoFieldValid && isCommentsFieldValid);
+        setIsDisabled(!(isPetPhotoFieldValid && isCommentsFieldValid));
         break;
 
       default:

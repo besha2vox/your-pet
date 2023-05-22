@@ -1,8 +1,24 @@
 import PropTypes from 'prop-types';
 import PetsList from '../PetsList/PetsList';
+import AddPetBtn from 'shared/components/AddPetBtn/AddPetBtn';
+import { PetsHeader, Title, NoPetsMessageWrapper } from './PetsData.styled';
 
 const PetsData = ({ pets }) => {
-  return <PetsList pets={pets} />;
+  return (
+    <>
+      <PetsHeader>
+        <Title>My pets:</Title>
+        <AddPetBtn text="Add pet" path="/add-pet" isFixed={false} />
+      </PetsHeader>
+      {!pets.length && (
+        <NoPetsMessageWrapper>
+          <p>You haven't added any of your beloved pets yet.</p>
+          <p>To add it, click on the 'Add pet' button above.</p>
+        </NoPetsMessageWrapper>
+      )}
+      {!!pets.length && <PetsList pets={pets} />}
+    </>
+  );
 };
 
 export default PetsData;

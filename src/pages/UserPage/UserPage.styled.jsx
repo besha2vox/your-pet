@@ -16,22 +16,12 @@ export const TitleWrap = styled.div`
   }
 `;
 
-export const Title = styled.p`
-  font-weight: 500;
-  font-size: ${({ theme }) => theme.fontSizes[3]};
-  line-height: 1.36;
-  letter-spacing: 0.04em;
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: ${({ theme }) => theme.fontSizes[5]};
-  }
-`;
-
 export const Card = styled.div`
   padding-top: ${({ theme }) => theme.space[2] * 5 + 'px'};
   padding-right: ${({ theme }) => theme.space[2] * 2 + 'px'};
   padding-bottom: ${({ theme }) => theme.space[2] * 6 + 'px'};
   padding-left: ${({ theme }) => theme.space[2] * 2 + 'px'};
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: ${({ theme }) => theme.boxShadows.main};
   border-radius: 20px;
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
@@ -49,41 +39,12 @@ export const Card = styled.div`
   }
 `;
 
-export const PetsHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 40px;
-  margin-top: ${({ theme }) => theme.space[3] * 5 + 'px'};
-  margin-right: ${({ theme }) => theme.space[0] + 'px'};
-  margin-bottom: ${({ theme }) => theme.space[3] * 3 + 'px'};
-  margin-left: ${({ theme }) => theme.space[0] + 'px'};
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    margin-top: ${({ theme }) => theme.space[3] * 5 + 'px'};
-    margin-right: ${({ theme }) => theme.space[0] + 'px'};
-    margin-bottom: ${({ theme }) => theme.space[2] * 5 + 'px'};
-    margin-left: ${({ theme }) => theme.space[0] + 'px'};
-  }
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    margin-top: ${({ theme }) => theme.space[2] * 15 + 'px'};
-    margin-right: ${({ theme }) => theme.space[0] + 'px'};
-    margin-bottom: ${({ theme }) => theme.space[3] * 3 + 'px'};
-    margin-left: ${({ theme }) => theme.space[0] + 'px'};
-  }
-`;
-
-export const AddPetButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 129px;
-  height: 40px;
-  padding: 9px;
-  background: ${({ theme }) => theme.colors.blue};
-  border-radius: 40px;
-  font-weight: 700;
-  font-size: ${({ theme }) => theme.fontSizes[2]};
-  line-height: 1.35;
+export const Title = styled.p`
+  font-weight: 500;
+  font-size: ${({ theme }) => theme.fontSizes[3]};
+  line-height: 1.36;
   letter-spacing: 0.04em;
-  color: #fef9f9;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: ${({ theme }) => theme.fontSizes[5]};
+  }
 `;
