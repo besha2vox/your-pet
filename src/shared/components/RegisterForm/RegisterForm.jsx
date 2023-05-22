@@ -1,13 +1,20 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
+
+import { register } from 'redux/auth/operations';
+import { selectError } from 'redux/auth/selectors';
+
 import { ReactComponent as OpenEyeIcon } from '../../../images/icons/eye-open.svg';
 import { ReactComponent as CloseEyeIcon } from '../../../images/icons/eye-closed.svg';
 import { ReactComponent as CrossIcon } from '../../../images/icons/cross-small.svg';
-import { useState } from 'react';
+import { ReactComponent as CheckIcon } from '../../../images/icons/check.svg';
 
 import {
   RegisterFormEl,
   RegisterFormTitle,
-  RegisterFormUsernamelContainer,
+  RegisterFormUsernameContainer,
   RegisterFormUsernameInputContainer,
   RegisterFormEmailContainer,
   RegisterFormEmailInputContainer,
@@ -19,14 +26,12 @@ import {
   RegisterBtn,
   EyeIcon,
   ErrorIcon,
+  CheckMarkIcon,
+  InfoMessage,
   RegisterErrorMessage,
   LoginText,
   LoginLink,
 } from './RegisterForm.styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { register } from 'redux/auth/operations';
-import { useNavigate } from 'react-router-dom';
-import { selectError } from 'redux/auth/selectors';
 
 const initialValues = {
   username: '',
@@ -36,7 +41,6 @@ const initialValues = {
 };
 
 const fieldValidation = values => {
-  console.log(values);
   const errors = {};
   if (!values.username) {
     errors.username = 'This field is required';
@@ -60,6 +64,8 @@ const fieldValidation = values => {
     errors.confirmPassword = 'This field is required';
   } else if (values.confirmPassword.length < 8) {
     errors.confirmPassword = 'Password must be at least 8 characters long';
+  } else if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = 'Passwords do not match';
   }
 
   return errors;
@@ -73,9 +79,6 @@ const RegisterForm = () => {
   const [emailAvailable, setEmailAvailable] = useState(true);
 
   const navigate = useNavigate();
-
-  const registerError = useSelector(selectError);
-  console.log(registerError);
 
   const togglePasswordVisibility = () => {
     setShowPassword(prevState => !prevState);
@@ -118,7 +121,6 @@ const RegisterForm = () => {
       initialValues={initialValues}
       validate={fieldValidation}
       validateOnChange={false}
-      validateOnBlur={false}
       onSubmit={handleSubmit}
     >
       {({
@@ -130,139 +132,214 @@ const RegisterForm = () => {
         handleSubmit,
         isSubmitting,
         resetForm,
-      }) => (
-        <RegisterFormEl onSubmit={handleSubmit}>
-          <RegisterFormTitle>Registration</RegisterFormTitle>
-          <RegisterFormUsernamelContainer>
-            <RegisterFormUsernameInputContainer
+      }) => {
+        const isPasswordValid = values.password && values.password.length >= 8;
+
+        return (
+          <RegisterFormEl onSubmit={handleSubmit}>
+            <RegisterFormTitle>Registration</RegisterFormTitle>
+            <RegisterFormUsernameContainer
               error={errors.username && touched.username}
-              style={{
-                borderColor:
-                  errors.username && touched.username ? '#F43F5E' : '#54ADFF',
-              }}
             >
-              <RegisterFormInput
-                type="string"
-                name="username"
-                placeholder="Username"
-                value={values.username}
-                onChange={handleChange}
-              />
-              {errors.username && touched.username && values.username && (
-                <ErrorIcon
-                  onClick={() => {
-                    resetForm({ values: { ...values, username: '' } });
-                  }}
-                >
-                  <CrossIcon />
-                </ErrorIcon>
+              <RegisterFormUsernameInputContainer
+                error={errors.username && touched.username}
+                style={{
+                  borderColor:
+                    errors.username && touched.username ? '#F43F5E' : '#54ADFF',
+                }}
+              >
+                <RegisterFormInput
+                  type="string"
+                  name="username"
+                  placeholder="Username"
+                  value={values.username}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  disabled={loading}
+                />
+                {errors.username && touched.username && values.username && (
+                  <ErrorIcon
+                    onClick={() => {
+                      resetForm({ values: { ...values, username: '' } });
+                    }}
+                  >
+                    <CrossIcon />
+                  </ErrorIcon>
+                )}
+              </RegisterFormUsernameInputContainer>
+              {errors.username && touched.username && (
+                <ErrorMessage name="username">{errors.username}</ErrorMessage>
               )}
-            </RegisterFormUsernameInputContainer>
-            {errors.username && touched.username && (
-              <ErrorMessage>{errors.username}</ErrorMessage>
-            )}
-          </RegisterFormUsernamelContainer>
+            </RegisterFormUsernameContainer>
 
-          <RegisterFormEmailContainer>
-            <RegisterFormEmailInputContainer
-              error={errors.email && touched.email}
-              style={{
-                borderColor:
-                  errors.email && touched.email ? '#F43F5E' : '#54ADFF',
-              }}
-            >
-              <RegisterFormInput
-                type="string"
-                name="email"
-                placeholder="Email"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.email && touched.email && values.email && (
-                <ErrorIcon
-                  onClick={() => {
-                    resetForm({ values: { ...values, email: '' } });
-                  }}
-                >
-                  <CrossIcon />
-                </ErrorIcon>
+            <RegisterFormEmailContainer error={errors.email && touched.email}>
+              <RegisterFormEmailInputContainer
+                error={errors.email && touched.email}
+                style={{
+                  borderColor:
+                    errors.email && touched.email ? '#F43F5E' : '#54ADFF',
+                }}
+              >
+                <RegisterFormInput
+                  type="string"
+                  name="email"
+                  placeholder="Email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  disabled={loading}
+                />
+                {errors.email && touched.email && values.email && (
+                  <ErrorIcon
+                    onClick={() => {
+                      resetForm({ values: { ...values, email: '' } });
+                    }}
+                  >
+                    <CrossIcon />
+                  </ErrorIcon>
+                )}
+              </RegisterFormEmailInputContainer>
+
+              {errors.email && touched.email && (
+                <ErrorMessage name="email">{errors.email}</ErrorMessage>
               )}
-            </RegisterFormEmailInputContainer>
+            </RegisterFormEmailContainer>
 
-            {errors.email && touched.email && (
-              <ErrorMessage>{errors.email}</ErrorMessage>
-            )}
-          </RegisterFormEmailContainer>
-
-          <RegisterFormPasswordContainer>
-            <RegisterFormPasswordInputContainer
+            <RegisterFormPasswordContainer
               error={errors.password && touched.password}
             >
-              <RegisterFormInput
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                placeholder="Password"
-                value={values.password}
-                onChange={handleChange}
-              />
-              <PasswordIcon onClick={togglePasswordVisibility}>
-                <EyeIcon>
-                  {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
-                </EyeIcon>
-              </PasswordIcon>
-            </RegisterFormPasswordInputContainer>
+              <RegisterFormPasswordInputContainer
+                error={errors.password && touched.password}
+                style={{
+                  borderColor:
+                    errors.password && touched.password ? '#F43F5E' : '#54ADFF',
+                }}
+              >
+                <RegisterFormInput
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  placeholder="Password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  disabled={loading}
+                />
+                <PasswordIcon>
+                  <EyeIcon
+                    onClick={togglePasswordVisibility}
+                    error={errors.password && touched.password}
+                  >
+                    {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
+                  </EyeIcon>
+                  {/* {isPasswordValid && (
+                    <CheckMarkIcon>
+                      <CheckIcon />
+                    </CheckMarkIcon>
+                  )} */}
+                  {errors.password && touched.password && values.password && (
+                    <ErrorIcon
+                      onClick={() => {
+                        resetForm({ values: { ...values, password: '' } });
+                      }}
+                    >
+                      <CrossIcon />
+                    </ErrorIcon>
+                  )}
+                </PasswordIcon>
+              </RegisterFormPasswordInputContainer>
 
-            {errors.password && touched.password && (
-              <ErrorMessage>{errors.password}</ErrorMessage>
-            )}
-          </RegisterFormPasswordContainer>
+              {errors.password && touched.password && (
+                <ErrorMessage>{errors.password}</ErrorMessage>
+              )}
+              {/* {isPasswordValid && (
+                <InfoMessage valid={isPasswordValid}>
+                  Password is secure
+                </InfoMessage>
+              )} */}
+            </RegisterFormPasswordContainer>
 
-          <RegisterFormPasswordContainer>
-            <RegisterFormPasswordInputContainer
+            <RegisterFormPasswordContainer
               error={errors.confirmPassword && touched.confirmPassword}
             >
-              <RegisterFormInput
-                type={showConfirmPassword ? 'text' : 'password'}
-                name="confirmPassword"
-                placeholder="Confirm password"
-                value={values.confirmPassword}
-                onChange={handleChange}
-              />
-              <PasswordIcon onClick={toggleConfirmPasswordVisibility}>
-                <EyeIcon>
-                  {showConfirmPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
-                </EyeIcon>
-              </PasswordIcon>
-            </RegisterFormPasswordInputContainer>
+              <RegisterFormPasswordInputContainer
+                error={errors.confirmPassword && touched.confirmPassword}
+                style={{
+                  borderColor:
+                    errors.confirmPassword && touched.confirmPassword
+                      ? '#F43F5E'
+                      : '#54ADFF',
+                }}
+              >
+                <RegisterFormInput
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  name="confirmPassword"
+                  placeholder="Confirm password"
+                  value={values.confirmPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  disabled={loading}
+                />
+                <PasswordIcon>
+                  <EyeIcon
+                    onClick={toggleConfirmPasswordVisibility}
+                    error={errors.confirmPassword && touched.confirmPassword}
+                  >
+                    {showConfirmPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
+                  </EyeIcon>
+                  {/* {isPasswordValid && (
+                    <CheckMarkIcon>
+                      <CheckIcon />
+                    </CheckMarkIcon>
+                  )} */}
+                  {errors.confirmPassword &&
+                    touched.confirmPassword &&
+                    values.confirmPassword && (
+                      <ErrorIcon
+                        onClick={() => {
+                          resetForm({
+                            values: { ...values, confirmPassword: '' },
+                          });
+                        }}
+                      >
+                        <CrossIcon />
+                      </ErrorIcon>
+                    )}
+                </PasswordIcon>
+              </RegisterFormPasswordInputContainer>
 
-            {errors.confirmPassword && touched.confirmPassword && (
-              <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
+              {errors.confirmPassword && touched.confirmPassword && (
+                <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
+              )}
+              {/* {isPasswordValid && (
+                <InfoMessage valid={isPasswordValid}>
+                  Password is secure
+                </InfoMessage>
+              )} */}
+            </RegisterFormPasswordContainer>
+
+            {!emailAvailable && (
+              <RegisterErrorMessage>
+                This email is already in use. Please, try with another email or
+                log in!
+              </RegisterErrorMessage>
             )}
-          </RegisterFormPasswordContainer>
 
-          {!emailAvailable && (
-            <RegisterErrorMessage>
-              This email is already in use. Please, try with another email or
-              log in!
-            </RegisterErrorMessage>
-          )}
-
-          <RegisterBtn type="submit" disabled={isSubmitting}>
-            Registration
-          </RegisterBtn>
-          <LoginText>
-            Already have an account?{' '}
-            <LoginLink
-              onClick={() => {
-                navigate('/login');
-              }}
-            >
-              Log In
-            </LoginLink>
-          </LoginText>
-        </RegisterFormEl>
-      )}
+            <RegisterBtn type="submit" disabled={isSubmitting}>
+              Registration
+            </RegisterBtn>
+            <LoginText>
+              Already have an account?{' '}
+              <LoginLink
+                onClick={() => {
+                  navigate('/login');
+                }}
+              >
+                Log In
+              </LoginLink>
+            </LoginText>
+          </RegisterFormEl>
+        );
+      }}
     </Formik>
   );
 };

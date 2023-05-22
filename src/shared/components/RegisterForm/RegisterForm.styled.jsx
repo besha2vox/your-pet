@@ -21,15 +21,15 @@ export const RegisterFormTitle = styled.h1`
   }
 `;
 
-export const RegisterFormUsernamelContainer = styled.div`
+export const RegisterFormUsernameContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 
-  margin-bottom: 32px;
+  margin-bottom: ${({ error }) => (error ? '6px' : '32px')};
 
   @media screen and (max-width: 767px) {
-    margin-bottom: 24px;
+    margin-bottom: ${({ error }) => (error ? '1px' : '24px')};
   }
 `;
 
@@ -48,10 +48,10 @@ export const RegisterFormEmailContainer = styled.div`
   flex-direction: column;
   width: 100%;
 
-  margin-bottom: 32px;
+  margin-bottom: ${({ error }) => (error ? '6px' : '32px')};
 
   @media screen and (max-width: 767px) {
-    margin-bottom: 24px;
+    margin-bottom: ${({ error }) => (error ? '1px' : '24px')};
   }
 `;
 
@@ -83,7 +83,10 @@ export const ErrorIcon = styled.span`
   width: 24px;
   height: 24px;
   cursor: pointer;
-  color: ${({ theme }) => theme.colors.red};
+
+  & svg {
+    stroke: ${({ theme }) => theme.colors.red};
+  }
 `;
 
 export const ErrorMessage = styled.div`
@@ -97,7 +100,11 @@ export const RegisterFormPasswordContainer = styled.div`
   flex-direction: column;
   width: 100%;
 
-  margin-bottom: 32px;
+  margin-bottom: ${({ error }) => (error ? '6px' : '32px')};
+
+  @media screen and (max-width: 767px) {
+    margin-bottom: ${({ error }) => (error ? '1px' : '24px')};
+  }
 `;
 
 export const RegisterFormPasswordInputContainer = styled.div`
@@ -113,6 +120,7 @@ export const RegisterFormPasswordInputContainer = styled.div`
 export const PasswordIcon = styled.span`
   display: flex;
   align-items: center;
+  gap: 10px;
 `;
 
 export const EyeIcon = styled.span`
@@ -123,9 +131,29 @@ export const EyeIcon = styled.span`
   height: 24px;
   cursor: pointer;
 
-  margin-right: ${({ error }) => (error ? '10px' : '')};
-  color: ${({ theme, error }) =>
-    error ? theme.colors.red : theme.colors.blue};
+  & svg {
+    stroke: ${({ theme, error }) =>
+      error ? theme.colors.red : theme.colors.blue};
+  }
+`;
+
+export const CheckMarkIcon = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+
+  & svg {
+    stroke: ${({ theme }) => theme.colors.green};
+  }
+`;
+
+export const InfoMessage = styled.div`
+  padding-left: 16px;
+  margin-top: 4px;
+  color: ${({ theme }) => theme.colors.green};
 `;
 
 export const RegisterErrorMessage = styled.div`
@@ -134,7 +162,7 @@ export const RegisterErrorMessage = styled.div`
 `;
 
 export const RegisterBtn = styled.button`
-  margin-top: 28px;
+  margin-top: 8px;
   margin-bottom: 20px;
   width: 100%;
 
@@ -153,7 +181,7 @@ export const RegisterBtn = styled.button`
   color: #ffffff;
 
   @media screen and (max-width: 767px) {
-    margin-top: 48px;
+    margin-top: 41px;
     margin-bottom: 24px;
   }
 `;
@@ -170,4 +198,5 @@ export const LoginLink = styled.a`
   text-decoration-line: underline;
   color: ${({ theme }) => theme.colors.blue};
   display: inline;
+  cursor: pointer;
 `;
