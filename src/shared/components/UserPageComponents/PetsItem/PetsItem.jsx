@@ -75,12 +75,13 @@ const PetsItem = ({ pet }) => {
               <SubTitle>Breed:&nbsp;</SubTitle>
               <InfoText> {pet.breed}</InfoText>
             </InfoItem>
-            {pet.comments && (<InfoItem>
+            {pet.comments && (
+            <InfoItem>
               <PetComment>
                 Comments:&nbsp;
                 <InfoText>{pet.comments}</InfoText>
               </PetComment>
-            </InfoItem>
+            </InfoItem>)}
           </InfoWrap>
         </MyPetCard>
       )}
