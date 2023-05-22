@@ -2,27 +2,28 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Btn = styled(Link)`
-  position: fixed;
-  top: 460px;
-  right: 20px;
+  ${({ isFixed }) => (isFixed ? 'position: fixed;top: 460px;right: 20px;' : '')}
 
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ isFixed }) => (isFixed ? 'column' : 'row-reverse')};
   align-items: center;
   justify-content: center;
-  gap: ${({ theme }) => theme.space[2] + 'px'};
+  gap: ${({ theme }) => theme.space[3] + 'px'};
 
-  width: 80px;
-  height: 80px;
-  padding-top: ${({ theme }) => theme.space[2] * 5 + 'px'};
-  padding-bottom: ${({ theme }) => theme.space[4] + 'px'};
+  width: ${({ isFixed }) => (isFixed ? '80px' : '129px')};
+  height: ${({ isFixed }) => (isFixed ? '80px' : '40px')};
+  padding-top: ${({ theme }) => theme.space[3] + 'px'};
+  padding-bottom: ${({ theme }) => theme.space[3] + 'px'};
+  padding-left: ${({ theme }) => theme.space[4] + 'px'};
+  padding-right: ${({ theme }) => theme.space[4] + 'px'};
 
   font-family: ${({ theme }) => theme.fonts.main.semiBold};
-  font-size: ${({ theme }) => theme.fontSizes[0]};
+  font-size: ${({ theme, isFixed }) =>
+    isFixed ? theme.fontSizes[0] : theme.fontSizes[2]};
   color: #fff;
 
   background-color: ${({ theme }) => theme.colors.blue};
-  border-radius: 50%;
+  border-radius: ${({ isFixed }) => (isFixed ? '50%' : '40px')};
   box-shadow: ${({ theme }) => theme.boxShadows.main};
 
   z-index: 1;
@@ -62,9 +63,8 @@ const Btn = styled(Link)`
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    position: relative;
-    top: 0;
-    right: 0;
+    position: static;
+    translate: 0 0;
 
     flex-direction: row;
     gap: 8px;

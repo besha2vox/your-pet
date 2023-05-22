@@ -117,9 +117,9 @@ export const addFavoriteNotice = createAsyncThunk(
   'notices/addFavoriteNotice',
   async (pet, { rejectWithValue }) => {
     try {
-      await axios.post(`/api/notices/favorite/${pet._id}`);
+      const { data } = await axios.post(`/api/notices/favorite/${pet._id}`);
 
-      return pet;
+      return data.result.updatedNotice;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -130,9 +130,22 @@ export const removeFavoriteNotice = createAsyncThunk(
   'notices/removeFavoriteNotice',
   async (pet, { rejectWithValue }) => {
     try {
-      await axios.delete(`/api/notices/favorite/${pet._id}`);
+      const { data } = await axios.delete(`/api/notices/favorite/${pet._id}`);
 
-      return pet;
+      return data.result.updatedNotice;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const removeFavoriteNoticeOnFavoritepage = createAsyncThunk(
+  'notices/removeFavoriteNoticeOnFavoritepage',
+  async (pet, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.delete(`/api/notices/favorite/${pet._id}`);
+
+      return data.result.updatedNotice;
     } catch (error) {
       return rejectWithValue(error.message);
     }

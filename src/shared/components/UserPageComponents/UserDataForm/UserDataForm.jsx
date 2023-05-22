@@ -1,13 +1,11 @@
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import UserDataItem from '../UserDataItem/UserDataItem';
 import Logout from 'shared/components/Logout/Logout';
-import { useState, useEffect } from 'react';
 import fields from './fields';
-import useForm from '../../hooks/useForm';
 import { UserForm } from './UserDataForm.styled';
-import { Formik } from 'formik';
-import { selectUser } from 'redux/auth/selectors';
-import { useSelector } from 'react-redux';
-import * as Yup from 'yup';
 
 const cityRegex =
   /^(?:(?:[a-zA-Zа-яА-ЯіІїЇєЄ]+(?:[.'’‘`-][a-zA-Zа-яА-ЯіІїЇєЄ]+)*)\s*)+$/;
@@ -15,55 +13,70 @@ const nameRegex = /^[a-zA-Zа-яА-ЯІіїЇґҐ\s-]+$/;
 const birthdayRegex = /^([0-2]\d|3[0-1])\.(0\d|1[0-2])\.\d{4}$/;
 
 const validationSchema = Yup.object({
-  name: Yup.string().matches(nameRegex, 'Enter your name'),
-  email: Yup.string().email('Invalid email'),
+  username: Yup.string().matches(
+    nameRegex,
+    'Valid format for name is Elina K...'
+  ),
+  email: Yup.string().email('Valid format for email is test@gmail.com'),
   birthday: Yup.string().matches(
     birthdayRegex,
-    'Invalid date format, expected dd.mm.yyyy'
+    'Valid format for date is dd.mm.yyyy'
   ),
-  phone: Yup.string().matches(/^\+380\d{9}$/, 'Incorrect phone number format'),
-  city: Yup.string().matches(
-    cityRegex,
-    'Enter the city in the format "Brovary", "Kyiv", "Akhtyrka", "Sumy"'
+  phone: Yup.string().matches(
+    /^\+380\d{9}$/,
+    'Valid format for phone is +38000000000'
   ),
+  city: Yup.string().matches(cityRegex, 'Valid format for "city" is "Brovary"'),
 });
 
-const UserDataForm = ({ onSubmit }) => {
-  const user = useSelector(selectUser);
-
-  const initialState = {
-    name: '',
+const UserDataForm = ({ onSubmit, user }) => {
+  const [initialState, setInitialState] = useState({
+    username: '',
     email: '',
     birthday: '',
     phone: '',
     city: '',
-  };
-
-  const { state, handleChange, handleSubmit } = useForm({
-    initialState,
-    onSubmit,
   });
-  const { name, email, birthday, phone, city } = state;
 
-  const [nameIsActive, setNameIsActive] = useState(true);
+  useEffect(() => {
+    if (user) {
+      setInitialState({
+        username: user.username || '',
+        email: user.email || '',
+        birthday: user.birthday || '',
+        phone: user.phone || '',
+        city: user.city || '',
+      });
+    }
+  }, [user]);
+
+  const [usernameIsActive, setUsernameIsActive] = useState(true);
   const [emailIsActive, setEmailIsActive] = useState(true);
   const [birthdayIsActive, setBirthdayIsActive] = useState(true);
   const [phoneIsActive, setPhoneIsActive] = useState(true);
   const [cityIsActive, setCityIsActive] = useState(true);
 
+  const fieldActivity = {
+    username: usernameIsActive,
+    email: emailIsActive,
+    birthday: birthdayIsActive,
+    phone: phoneIsActive,
+    city: cityIsActive,
+  };
+
+  const [formErrors, setFormErrors] = useState({});
+
   useEffect(() => {
-    if (user) {
-      setNameIsActive(true);
-      setEmailIsActive(true);
-      setBirthdayIsActive(true);
-      setPhoneIsActive(true);
-      setCityIsActive(true);
-    }
+    setUsernameIsActive(true);
+    setEmailIsActive(true);
+    setBirthdayIsActive(true);
+    setPhoneIsActive(true);
+    setCityIsActive(true);
   }, [user]);
 
   const countActiveButtons = () => {
     let count = 0;
-    if (nameIsActive) count++;
+    if (usernameIsActive) count++;
     if (emailIsActive) count++;
     if (birthdayIsActive) count++;
     if (phoneIsActive) count++;
@@ -79,8 +92,8 @@ const UserDataForm = ({ onSubmit }) => {
   const handleClick = name => {
     if (countActiveButtons()) {
       switch (name) {
-        case 'name':
-          setNameIsActive(false);
+        case 'username':
+          setUsernameIsActive(false);
           break;
         case 'email':
           setEmailIsActive(false);
@@ -101,58 +114,41 @@ const UserDataForm = ({ onSubmit }) => {
   };
 
   return (
-    <Formik initialValues={initialState} validationSchema={validationSchema}>
-      <UserForm>
-        <UserDataItem
-          value={name}
-          handleChange={handleChange}
-          {...fields.name}
-          name="name"
-          isdisabled={nameIsActive}
-          handleClick={handleClick}
-          handleSubmit={handleSubmit}
-        />
-        <UserDataItem
-          value={email}
-          handleChange={handleChange}
-          {...fields.email}
-          name="email"
-          isdisabled={emailIsActive}
-          handleClick={handleClick}
-          handleSubmit={handleSubmit}
-        />
-        <UserDataItem
-          value={birthday}
-          handleChange={handleChange}
-          {...fields.birthday}
-          name="birthday"
-          isdisabled={birthdayIsActive}
-          handleClick={handleClick}
-          handleSubmit={handleSubmit}
-        />
-
-        <UserDataItem
-          value={phone}
-          handleChange={handleChange}
-          {...fields.phone}
-          name="phone"
-          isdisabled={phoneIsActive}
-          handleClick={handleClick}
-          handleSubmit={handleSubmit}
-        />
-        <UserDataItem
-          value={city}
-          handleChange={handleChange}
-          {...fields.city}
-          name="city"
-          isdisabled={cityIsActive}
-          handleClick={handleClick}
-          handleSubmit={handleSubmit}
-        />
-        <Logout />
-      </UserForm>
+    <Formik
+      enableReinitialize
+      initialValues={initialState}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      {formik => (
+        <UserForm onSubmit={formik.handleSubmit}>
+          {Object.entries(fields).map(([name, field]) => (
+            <UserDataItem
+              key={name}
+              value={formik.values[name]}
+              formik={formik}
+              name={name}
+              isdisabled={fieldActivity[name]}
+              handleClick={handleClick}
+              formErrors={formErrors}
+              setFormErrors={setFormErrors}
+              {...field}
+            />
+          ))}
+          <Logout />
+        </UserForm>
+      )}
     </Formik>
   );
 };
 
 export default UserDataForm;
+
+UserDataForm.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.string,
+    username: PropTypes.string,
+    email: PropTypes.string,
+  }),
+  onSubmit: PropTypes.func.isRequired,
+};

@@ -10,14 +10,12 @@ import {
   PaginationList,
 } from './Pagination.styled';
 
-const Pagination = props => {
-  const {
-    onPageChange,
-    siblingCount = 1,
-    currentPage,
-    totalPagesCount,
-  } = props;
-
+const Pagination = ({
+  onPageChange,
+  siblingCount = 1,
+  currentPage,
+  totalPagesCount,
+}) => {
   const paginationRange = usePagination({
     currentPage,
     siblingCount,

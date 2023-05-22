@@ -1,5 +1,6 @@
 import { CheckIcon, EditIcon } from 'shared/utils/icons';
 import styled from 'styled-components';
+// import { Field } from 'formik';
 
 export const FormItem = styled.div`
   position: relative;
@@ -10,9 +11,9 @@ export const FormItem = styled.div`
 
 export const FormWrapper = styled.div`
   &:not(:last-child) {
-    margin-bottom: 12px;
+    margin-bottom: ${({ theme }) => theme.space[2] * 3 + 'px'};
     @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-      margin-bottom: 8px;
+      margin-bottom: ${({ theme }) => theme.space[3] + 'px'};
     }
   }
 `;
@@ -22,21 +23,25 @@ export const FormLabel = styled.label``;
 export const EditInpuButton = styled.button`
   position: absolute;
   overflow: visible;
-  right: 12px;
+  right: ${({ theme }) => theme.space[2] * 3 + 'px'};
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  margin: 0;
+  padding: ${({ theme }) => theme.space[0] + 'px'};
+  margin: ${({ theme }) => theme.space[0] + 'px'};
   background: transparent;
   border: none;
 `;
 
 export const FormInput = styled.input`
   width: calc(100vw - 40vw);
-  height: 28px;
-  padding: 4px 12px;
+  height: ${({ theme }) => theme.space[2] * 7 + 'px'};
+  padding-top: ${({ theme }) => theme.space[2] + 'px'};
+  padding-right: ${({ theme }) => theme.space[2] * 3 + 'px'};
+  padding-bottom: ${({ theme }) => theme.space[2] + 'px'};
+  padding-left: ${({ theme }) => theme.space[2] * 3 + 'px'};
   background: transparent;
+  outline: none;
   border: 1px solid #54adff;
   border-radius: 20px;
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
@@ -44,14 +49,14 @@ export const FormInput = styled.input`
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 255px;
-    height: 32px;
+    height: ${({ theme }) => theme.space[5] + 'px'};
   }
 `;
 
 export const InputName = styled.span`
   min-width: 0;
   font-weight: 600;
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.fontSizes[1]};
   line-height: 1.35;
   letter-spacing: 0.04em;
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
@@ -60,21 +65,33 @@ export const InputName = styled.span`
 `;
 
 export const EditIc = styled(EditIcon)`
-  stroke: #54adff;
-  fill: #54adff;
-  width: 20px;
-  height: 20px;
+  stroke: ${({ theme }) => theme.colors.blue};
+  fill: ${({ theme }) => theme.colors.blue};
+  width: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  heght: ${({ theme }) => theme.space[2] * 5 + 'px'};
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 24px;
-    height: 24px;
+    width: ${({ theme }) => theme.space[2] * 6 + 'px'};
+    heght: ${({ theme }) => theme.space[2] * 6 + 'px'};
   }
 `;
 export const ConfirmIcon = styled(CheckIcon)`
-  stroke: #00c3ad;
-  width: 20px;
-  height: 20px;
+  color: ${({ theme }) => theme.colors.green};
+  width: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  heght: ${({ theme }) => theme.space[2] * 5 + 'px'};
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 24px;
-    height: 24px;
+    width: ${({ theme }) => theme.space[2] * 6 + 'px'};
+    heght: ${({ theme }) => theme.space[2] * 6 + 'px'};
+  }
+`;
+
+export const ErrorContainer = styled.div`
+  position: absolute;
+  display: block;
+  color: ${({ theme }) => theme.colors.red};
+  margin-left: 110px;
+  margin-top: -30px;
+  background-color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.main.regular};
+  font-size: ${({ theme }) => theme.fontSizes[0]};
   }
 `;

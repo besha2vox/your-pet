@@ -1,7 +1,7 @@
 const fields = {
-  name: {
+  username: {
     type: 'text',
-    name: 'name',
+    name: 'username',
     label: 'Name:',
     placeholder: 'Your name',
   },
@@ -13,12 +13,12 @@ const fields = {
   },
   birthday: {
     type: 'text',
-    name: 'birthday:',
+    name: 'birthday',
     label: 'Birthday:',
     placeholder: '00.00.0000',
   },
   phone: {
-    type: 'phone:',
+    type: 'tel',
     name: 'phone',
     label: 'Phone:',
     placeholder: '+38000000000',

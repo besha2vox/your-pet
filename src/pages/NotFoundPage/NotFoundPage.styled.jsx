@@ -29,28 +29,59 @@ export const MainContainer = styled.div`
 `;
 
 export const Title = styled.h2`
-  margin-top: 71px;
-  display: flex;
+  margin-top: 80px;
+  display: block;
   align-items: center;
-  text-align: center;
   justify-content: center;
 
-  font-family: 'Manrope';
-  font-weight: 600;
-  @media (min-width: 768px) {
-    fontsize: 24px;
-    lineheight: 33px;
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 33px;
+text-align: center;
+
+@media (min-width: 768px) {
+    display: flex;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 42px;
+    text-align: inherit;
   }
 
-  @media (min-width: 1280px) {
-    lineheight: 88px;
-  }
-
-  @media (min-width: 1280px) {
-    fontsize: 68px;
-    lineheight: 100px;
+@media (min-width: 1280px) {
+    display: flex;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 42px;
   }
 `;
+
+export const Paragraf = styled.h2`
+font-family: 'Manrope';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 33px;
+text-align: center;
+
+@media (min-width: 768px) {
+    display: flex;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 42px;
+    text-align: inherit;
+    margin-left: 10px;
+  }
+
+@media (min-width: 1280px) {
+    display: flex;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 42px;
+  }
+`;
+
 export const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -58,24 +89,35 @@ export const ImageContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  /* margin-top: 80px; */
-  width: 100%;
-  height: auto;
+  width: 280px;
+  height: 123px;
   content: url('${mobile}');
 
   @media (min-width: 768px) {
     content: url('${tablet}');
+    width: 704px;
+    height: 308px;
   }
   @media (min-width: 1280px) {
     content: url('${desctop}');
+    width: 822px;
+    height: 360px;
   }
 `;
+
 export const BottomInfoWrapper = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 18px;
+  margin-top: 60px;
+
+  @media (min-width: 768px) {
+    margin-top: 68px;
+  }
+  @media (min-width: 1280px) {
+    margin-top: 18px;
+  }
 `;
 
 export const Span = styled.span``;

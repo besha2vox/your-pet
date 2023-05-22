@@ -42,6 +42,10 @@ export const AddFormInput = styled(Field)`
   outline-color: ${({ theme }) => theme.colors.blue};
   transition: outline 300ms ${({ theme }) => theme.transition.main};
 
+  &.invalid {
+    border-color: ${({ theme }) => theme.colors.red};
+  }
+
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: 16px;
     min-width: 394px;

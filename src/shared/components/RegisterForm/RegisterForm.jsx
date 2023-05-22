@@ -94,9 +94,14 @@ const RegisterForm = () => {
     }
 
     setLoading(true);
+    const credentials = {
+      email: values.email,
+      password: values.password,
+      username: values.username,
+    };
 
     try {
-      const response = await dispatch(register(values));
+      const response = await dispatch(register(credentials));
       if (response.error) {
         setEmailAvailable(false);
       } else {
