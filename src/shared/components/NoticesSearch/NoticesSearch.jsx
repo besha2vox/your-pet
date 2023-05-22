@@ -10,6 +10,7 @@ const NoticesSearch = ({ onFormSubmit }) => {
     if (!query) onFormSubmit(query);
   }, [onFormSubmit, query]);
 
+
   const submitHandler = e => {
     e.preventDefault();
 

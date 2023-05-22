@@ -53,9 +53,12 @@ const NewsPage = () => {
   }, [totalHints, hints]);
 
   const onSearch = searchQuery => {
-    var params = searchQuery ? { query: searchQuery, page: 1 } : { page: 1 };
-    setSearchParams(params);
-    // getNews(searchQuery, 1);
+    var currentQuery = searchParams.get('query') || '';
+    if (searchQuery !== currentQuery) {
+      var params = searchQuery ? { query: searchQuery, page: 1 } : { page: 1 };
+      setSearchParams(params);
+    }
+    //getNews(searchQuery, 1);
   };
 
   const clearWaitingQueue = () => {
