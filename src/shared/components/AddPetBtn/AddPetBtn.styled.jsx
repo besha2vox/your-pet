@@ -26,7 +26,7 @@ const Btn = styled(Link)`
   color: #fff;
 
   background-color: ${({ theme }) => theme.colors.blue};
-  border-radius: ${({ isFixed }) => (isFixed ? '50' : '40px')};
+  border-radius: ${({ isFixed }) => (isFixed ? '50%' : '40px')};
   box-shadow: ${({ theme }) => theme.boxShadows.main};
 
   z-index: 1;
