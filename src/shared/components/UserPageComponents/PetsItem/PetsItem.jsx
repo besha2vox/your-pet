@@ -10,6 +10,7 @@ import IconButton from '../IconButton/IconButton';
 import ModalApproveAction from '../ModalApproveAction/ModalApproveAction';
 import {
   MyPetCard,
+  InfoWrap,
   PetImage,
   NameWrapper,
   SubTitle,
@@ -54,7 +55,7 @@ const PetsItem = ({ pet }) => {
             src={pet.avatarURL || avatarDefault2x}
             alt="mypet's avatar"
           />
-          <div style={{}}>
+          <InfoWrap style={{ maxWidth: 580 }}>
             <NameWrapper>
               <InfoItem>
                 <SubTitle>Name:&nbsp;</SubTitle>
@@ -80,7 +81,7 @@ const PetsItem = ({ pet }) => {
                 <InfoText>{pet.comments}</InfoText>
               </PetComment>
             </InfoItem>
-          </div>
+          </InfoWrap>
         </MyPetCard>
       )}
       {isModalOpen && (
