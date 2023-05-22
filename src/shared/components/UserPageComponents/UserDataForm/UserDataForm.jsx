@@ -10,7 +10,6 @@ import { UserForm } from './UserDataForm.styled';
 const cityRegex =
   /^(?:(?:[a-zA-Zа-яА-ЯіІїЇєЄ]+(?:[.'’‘`-][a-zA-Zа-яА-ЯіІїЇєЄ]+)*)\s*)+$/;
 const nameRegex = /^[a-zA-Zа-яА-ЯІіїЇґҐ\s-]+$/;
-const birthdayRegex = /^([0-2]\d|3[0-1])\.(0\d|1[0-2])\.\d{4}$/;
 
 const validationSchema = Yup.object({
   username: Yup.string().matches(
@@ -18,13 +17,12 @@ const validationSchema = Yup.object({
     'Valid format for name is Elina K...'
   ),
   email: Yup.string().email('Valid format for email is test@gmail.com'),
-  birthday: Yup.string().matches(
-    birthdayRegex,
-    'Valid format for date is dd.mm.yyyy'
+  birthday: Yup.date(
+    'Valid format for date is dd/mm/yyyy'
   ),
   phone: Yup.string().matches(
-    /^\+380\d{9}$/,
-    'Valid format for phone is +38000000000'
+    /^\+\d{12}$/,
+    'Valid format for phone is +380000000000'
   ),
   city: Yup.string().matches(cityRegex, 'Valid format for "city" is "Brovary"'),
 });
@@ -39,16 +37,31 @@ const UserDataForm = ({ onSubmit, user }) => {
   });
 
   useEffect(() => {
-    if (user) {
-      setInitialState({
-        username: user.username || '',
-        email: user.email || '',
-        birthday: user.birthday || '',
-        phone: user.phone || '',
-        city: user.city || '',
+    if (user) { 
+      setInitialState(prevState => {
+        const newState = {
+          username: user.username || '',
+          email: user.email || '',
+          birthday: prevState.birthday || '',
+          phone: user.phone || '',
+          city: user.city || '',
+        };
+  
+        if (user.birthday && isValidDate(user.birthday)) {
+          const dateParts = user.birthday.split('.');
+          const formattedBirthday = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+          newState.birthday = formattedBirthday;
+        }
+  
+        return newState;
       });
     }
   }, [user]);
+  
+  function isValidDate(dateString) {
+    const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
+    return dateRegex.test(dateString);
+  }
 
   const [usernameIsActive, setUsernameIsActive] = useState(true);
   const [emailIsActive, setEmailIsActive] = useState(true);
@@ -118,10 +131,11 @@ const UserDataForm = ({ onSubmit, user }) => {
       enableReinitialize
       initialValues={initialState}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      validateOnChange={true}
+      validateOnBlur={true}
     >
       {formik => (
-        <UserForm onSubmit={formik.handleSubmit}>
+        <UserForm>
           {Object.entries(fields).map(([name, field]) => (
             <UserDataItem
               key={name}
@@ -132,6 +146,7 @@ const UserDataForm = ({ onSubmit, user }) => {
               handleClick={handleClick}
               formErrors={formErrors}
               setFormErrors={setFormErrors}
+              onSubmit={onSubmit}
               {...field}
             />
           ))}

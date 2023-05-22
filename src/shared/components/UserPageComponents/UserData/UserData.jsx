@@ -56,10 +56,23 @@ const UserData = ({ user }) => {
     document.getElementById('petPhoto').click();
   };
 
-  const handleChangeData = data => {
+  const handleChangeData = (data) => {
     const updatedData = Object.fromEntries(
-      Object.entries(data).filter(([key, value]) => value !== '')
+      Object.entries(data).map(([key, value]) => {
+        if (value !== '') {
+          if (key === 'birthday') {
+            return [key, new Date(value).toLocaleDateString('uk-UA', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })];
+          }
+          return [key, value];
+        }
+        return null;
+      }).filter(Boolean)
     );
+    // console.log(updatedData)
     dispatch(changeUser(updatedData));
   };
 

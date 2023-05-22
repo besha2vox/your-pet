@@ -26,6 +26,7 @@ const UserDataItem = ({
   formik,
   formErrors,
   setFormErrors,
+  onSubmit,
   ...props
 }) => {
   const id = useMemo(() => nanoid(), []);
@@ -45,7 +46,7 @@ const UserDataItem = ({
           </EditInpuButton>
         )}
         {!isdisabled && (
-          <EditInpuButton type="submit">
+          <EditInpuButton type="button" disabled={!formik.isValid} onClick={() => onSubmit(formik.values, name)}>
             <ConfirmIcon />
           </EditInpuButton>
         )}
@@ -57,6 +58,8 @@ const UserDataItem = ({
           onBlur={formik.handleBlur}
           value={formik.values[name]}
           disabled={isdisabled}
+          touched={formik.touched[name] ? formik.touched[name].toString() : ""}
+          error={formik.errors[name]}
           {...props}
         />
         <ErrorMessage name={name}>
