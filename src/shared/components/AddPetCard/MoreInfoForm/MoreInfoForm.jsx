@@ -104,6 +104,8 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
     const { name, value, type, files } = e.target;
     const fieldValue = type === 'file' ? files[0] : value;
 
+    setErrors(prevState => ({ ...prevState, [name]: '' }));
+
     if (type === 'file') {
       setImageValue(value);
     }
@@ -188,6 +190,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
                   onChange={handleInputChange}
                   value={formData.location}
                   onBlur={() => validateField('location', formData, setErrors)}
+                  className={errors.location ? 'invalid' : ''}
                 />
               </AddFormLabel>
               {!!errors.location && <ErrorMessage message={errors.location} />}
@@ -204,6 +207,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
                   onChange={handleInputChange}
                   value={formData.price}
                   onBlur={() => validateField('price', formData, setErrors)}
+                  className={errors.price ? 'invalid' : ''}
                 />
               </AddFormLabel>
               {!!errors.price && <ErrorMessage message={errors.price} />}
@@ -219,6 +223,7 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
                 onChange={handleInputChange}
                 value={formData.comments}
                 onBlur={() => validateField('comments', formData, setErrors)}
+                className={errors.comments ? 'invalid' : ''}
               />
             </AddFormTextAreaLabel>
             {!!errors.comments && <ErrorMessage message={errors.comments} />}

@@ -74,6 +74,9 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
 
   const handleInputChange = e => {
     const { name, value } = e.target;
+
+    setErrors(prevState => ({ ...prevState, [name]: '' }));
+
     const inputValue =
       name === 'birthday'
         ? new Date(value).toLocaleDateString('uk-UA', {
@@ -102,6 +105,7 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
               value={formData.title}
               onChange={handleInputChange}
               onBlur={() => validateField('title', formData, setErrors)}
+              className={errors.title ? 'invalid' : ''}
             />
           </AddFormLabel>
           {!!errors.title && <ErrorMessage message={errors.title} />}
@@ -117,6 +121,7 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
             onChange={handleInputChange}
             value={formData.name}
             onBlur={() => validateField('name', formData, setErrors)}
+            className={errors.name ? 'invalid' : ''}
           />
         </AddFormLabel>
         {!!errors.name && <ErrorMessage message={errors.name} />}
@@ -132,6 +137,7 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
             onChange={handleInputChange}
             value={formData.birthday.split('.').reverse().join('-')}
             onBlur={() => validateField('birthday', formData, setErrors)}
+            className={errors.birthday ? 'invalid' : ''}
           />
         </AddFormLabel>
         {!!errors.birthday && <ErrorMessage message={errors.birthday} />}
@@ -146,6 +152,7 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
             onChange={handleInputChange}
             value={formData.breed}
             onBlur={() => validateField('breed', formData, setErrors)}
+            className={errors.breed ? 'invalid' : ''}
           />
         </AddFormLabel>
         {!!errors.breed && <ErrorMessage message={errors.breed} />}
