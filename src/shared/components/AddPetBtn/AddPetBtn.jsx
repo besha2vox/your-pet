@@ -36,7 +36,7 @@ const AddPetBtn = ({ text, path, toggleUnauthorizeModal, isFixed }) => {
 AddPetBtn.propTypes = {
   text: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
-  toggleUnauthorizeModal: PropTypes.func.isRequired,
+  toggleUnauthorizeModal: PropTypes.func,
   isFixed: PropTypes.bool.isRequired,
 };
 

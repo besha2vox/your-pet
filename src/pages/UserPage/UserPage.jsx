@@ -58,15 +58,18 @@ const UserPage = () => {
             <UserData user={user} userId={userId} />
           </Card>
         </div>
-        {user && user.pet && (
-          <div style={{ position: 'relative' }}>
-            <PetsHeader>
-              <Title>My pets:</Title>
-              <AddPetBtn text="Add pet" path="/add-pet" isFixed={false} />
-            </PetsHeader>
+        <div style={{ position: 'relative' }}>
+          <PetsHeader>
+            <Title>My pets:</Title>
+            <AddPetBtn text="Add pet" path="/add-pet" 
+            // isFixed={false} 
+            />
+          </PetsHeader>
+          {user && user.pet && (
             <PetsData pets={user.pet} />
-          </div>
-        )}
+          )}
+        </div>
+
       </MainContent>
     </>
   );

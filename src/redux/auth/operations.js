@@ -148,11 +148,9 @@ export const getUserInfo = createAsyncThunk(
 
 export const changeUser = createAsyncThunk(
   'user/changeUser',
-  async (credentials, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const { data } = credentials;
       const response = await axios.put(`api/users/`, data);
-      console.log("response.data", response.data)
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
