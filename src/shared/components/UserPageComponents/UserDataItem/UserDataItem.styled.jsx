@@ -20,6 +20,27 @@ export const FormWrapper = styled.div`
 
 export const FormLabel = styled.label``;
 
+export const EditIc = styled(EditIcon)`
+  stroke: ${({ theme }) => theme.colors.blue};
+  fill: ${({ theme }) => theme.colors.blue};
+  width: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  height: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: ${({ theme }) => theme.space[2] * 6 + 'px'};
+    height: ${({ theme }) => theme.space[2] * 6 + 'px'};
+  }
+`;
+export const ConfirmIcon = styled(CheckIcon)`
+  color: ${({ theme }) => theme.colors.green};
+  width: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  height: ${({ theme }) => theme.space[2] * 5 + 'px'};
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: ${({ theme }) => theme.space[2] * 6 + 'px'};
+    height: ${({ theme }) => theme.space[2] * 6 + 'px'};
+  }
+`;
+
 export const EditInpuButton = styled.button`
   position: absolute;
   overflow: visible;
@@ -31,6 +52,10 @@ export const EditInpuButton = styled.button`
   margin: ${({ theme }) => theme.space[0] + 'px'};
   background: transparent;
   border: none;
+
+  ${ConfirmIcon} {
+    stroke: ${({ disabled }) => (disabled ? '#888888' : '#00C3AD')};
+  }
 `;
 
 export const FormInput = styled(Field)`
@@ -63,10 +88,14 @@ export const FormInput = styled(Field)`
       border: 1px solid #f43f5e;
     `}
   &::-webkit-calendar-picker-indicator {
-    color: red;
+    color: #111111;
     font-size: 15px;
     padding: 2px;
     margin-right: 25px;
+  }
+  &::-webkit-datetime-edit {
+    color: #111111;
+    padding: 2px;
   }
 `;
 
@@ -78,27 +107,6 @@ export const InputName = styled.span`
   letter-spacing: 0.04em;
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     font-size: 18px;
-  }
-`;
-
-export const EditIc = styled(EditIcon)`
-  stroke: ${({ theme }) => theme.colors.blue};
-  fill: ${({ theme }) => theme.colors.blue};
-  width: ${({ theme }) => theme.space[2] * 5 + 'px'};
-  height: ${({ theme }) => theme.space[2] * 5 + 'px'};
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: ${({ theme }) => theme.space[2] * 6 + 'px'};
-    height: ${({ theme }) => theme.space[2] * 6 + 'px'};
-  }
-`;
-export const ConfirmIcon = styled(CheckIcon)`
-  color: ${({ theme }) => theme.colors.green};
-  width: ${({ theme }) => theme.space[2] * 5 + 'px'};
-  height: ${({ theme }) => theme.space[2] * 5 + 'px'};
-
-  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: ${({ theme }) => theme.space[2] * 6 + 'px'};
-    height: ${({ theme }) => theme.space[2] * 6 + 'px'};
   }
 `;
 

@@ -19,7 +19,9 @@ const validationSchema = Yup.object({
   email: Yup.string().email('Valid format for email is test@gmail.com'),
   birthday: Yup.date(
     'Valid format for date is dd/mm/yyyy'
-  ),
+  )
+  .max(new Date(), 'Date must not be in the future')
+  .required('Birthday is required'),
   phone: Yup.string().matches(
     /^\+\d{12}$/,
     'Valid format for phone is +380000000000'
