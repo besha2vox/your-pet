@@ -84,6 +84,8 @@ export const InfoText = styled.span`
   font-size: ${({ theme }) => theme.fontSizes[1]};
   line-height: 1.36;
   letter-spacing: 0.04em;
+  word-break: break-word;
+  overflow-wrap: break-word;
 `;
 
 export const PetComment = styled.p`
