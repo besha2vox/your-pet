@@ -90,15 +90,6 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
     isPriceFieldValid,
     isSexFieldValid,
   ]);
-  console.log(isDisabled);
-  console.log(
-    !(
-      isPetPhotoFieldValid &&
-      isLocationFieldValid &&
-      isSexFieldValid &&
-      isCommentsFieldValid
-    )
-  );
 
   const handleInputChange = e => {
     const { name, value, type, files } = e.target;

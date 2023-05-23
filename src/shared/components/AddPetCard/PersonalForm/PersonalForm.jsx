@@ -19,7 +19,7 @@ import { validateField } from '../vaidatePet';
 const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
   const [errors, setErrors] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
-  const [maxDate, setMaxDate] = useState(getCurrentDate());
+  const [maxDate, setMaxDate] = useState();
 
   const isNameFieldValid = Boolean(!errors.name && !!formData.name);
   const isBirthdayFieldValid = Boolean(!errors.birthday && !!formData.birthday);
@@ -43,6 +43,7 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
         )
       );
     }
+    setMaxDate(getCurrentDate());
   }, [
     errors,
     formData.category,
