@@ -44,6 +44,11 @@ export const FormInput = styled(Field)`
   outline: none;
   border: 1px solid #54adff;
   border-radius: 20px;
+
+  &[type='date']::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
+
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.mobile}) {
     width: 320px;
   }
@@ -52,17 +57,17 @@ export const FormInput = styled(Field)`
     height: ${({ theme }) => theme.space[5] + 'px'};
   }
   ${({ touched, error }) =>
-    touched && error && css`
-      border: 1px solid #F43F5E;
-    `
-  }
+    touched &&
+    error &&
+    css`
+      border: 1px solid #f43f5e;
+    `}
   &::-webkit-calendar-picker-indicator {
     color: red;
     font-size: 15px;
     padding: 2px;
     margin-right: 25px;
   }
-}
 `;
 
 export const InputName = styled.span`
@@ -80,19 +85,20 @@ export const EditIc = styled(EditIcon)`
   stroke: ${({ theme }) => theme.colors.blue};
   fill: ${({ theme }) => theme.colors.blue};
   width: ${({ theme }) => theme.space[2] * 5 + 'px'};
-  heght: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  height: ${({ theme }) => theme.space[2] * 5 + 'px'};
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: ${({ theme }) => theme.space[2] * 6 + 'px'};
-    heght: ${({ theme }) => theme.space[2] * 6 + 'px'};
+    height: ${({ theme }) => theme.space[2] * 6 + 'px'};
   }
 `;
 export const ConfirmIcon = styled(CheckIcon)`
   color: ${({ theme }) => theme.colors.green};
   width: ${({ theme }) => theme.space[2] * 5 + 'px'};
-  heght: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  height: ${({ theme }) => theme.space[2] * 5 + 'px'};
+
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: ${({ theme }) => theme.space[2] * 6 + 'px'};
-    heght: ${({ theme }) => theme.space[2] * 6 + 'px'};
+    height: ${({ theme }) => theme.space[2] * 6 + 'px'};
   }
 `;
 
@@ -105,5 +111,4 @@ export const ErrorContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   font-family: ${({ theme }) => theme.fonts.main.regular};
   font-size: ${({ theme }) => theme.fontSizes[0]};
-  }
 `;

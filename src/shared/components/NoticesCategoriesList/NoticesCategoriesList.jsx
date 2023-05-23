@@ -53,7 +53,7 @@ const NoticesCategoriesList = ({
     return (
       <ListItem key={pet._id}>
         <ImageWrapper bgi={pet.avatarURL}>
-          <Category>{pet.category}</Category>
+          <Category>{pet.category.split('-').join(' ')}</Category>
           <FavoriteBtn
             inFavorite={favorite}
             type="button"

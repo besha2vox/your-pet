@@ -17,8 +17,10 @@ import {
 import { validateField } from '../vaidatePet';
 
 const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
-  const [isDisabled, setIsDisabled] = useState(true);
   const [errors, setErrors] = useState({});
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  console.log({ isDisabled });
 
   const isNameFieldValid = Boolean(!errors.name && !!formData.name);
   const isBirthdayFieldValid = Boolean(!errors.birthday && !!formData.birthday);
@@ -27,18 +29,7 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
 
   useEffect(() => {
     switch (formData.category) {
-      case 'sell':
-        setIsDisabled(
-          !(
-            isNameFieldValid &&
-            isBirthdayFieldValid &&
-            isBreedFieldValid &&
-            isTitleFieldValid
-          )
-        );
-        break;
-
-      case 'lost-found' || 'for-free':
+      case 'sell' || 'lost-found' || 'for-free':
         setIsDisabled(
           !(
             isNameFieldValid &&
