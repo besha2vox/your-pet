@@ -13,6 +13,7 @@ import {
   removeFavoriteNotice,
   removeFavoriteNoticeOnFavoritepage,
 } from './operations';
+import { setCurrentNotice, setNotices } from './actions';
 
 const initialState = {
   items: [],
@@ -31,6 +32,12 @@ const noticesSlice = createSlice({
     builder
       .addCase(getNoticeById.fulfilled, (state, { payload }) => {
         state.currentNotice = payload;
+      })
+      .addCase(setCurrentNotice, state => {
+        state.currentNotice = null;
+      })
+      .addCase(setNotices, state => {
+        state.items = [];
       })
       .addMatcher(
         isAnyOf(
