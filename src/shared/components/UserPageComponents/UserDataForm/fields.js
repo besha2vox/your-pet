@@ -12,7 +12,7 @@ const fields = {
     placeholder: 'user@mail.com',
   },
   birthday: {
-    type: 'text',
+    type: 'date',
     name: 'birthday',
     label: 'Birthday:',
     placeholder: '00.00.0000',

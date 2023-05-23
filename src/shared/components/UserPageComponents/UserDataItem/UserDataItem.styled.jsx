@@ -1,6 +1,6 @@
 import { CheckIcon, EditIcon } from 'shared/utils/icons';
-import styled from 'styled-components';
-// import { Field } from 'formik';
+import styled, { css } from 'styled-components';
+import { Field } from 'formik';
 
 export const FormItem = styled.div`
   position: relative;
@@ -33,7 +33,7 @@ export const EditInpuButton = styled.button`
   border: none;
 `;
 
-export const FormInput = styled.input`
+export const FormInput = styled(Field)`
   width: calc(100vw - 40vw);
   height: ${({ theme }) => theme.space[2] * 7 + 'px'};
   padding-top: ${({ theme }) => theme.space[2] + 'px'};
@@ -51,6 +51,18 @@ export const FormInput = styled.input`
     width: 255px;
     height: ${({ theme }) => theme.space[5] + 'px'};
   }
+  ${({ touched, error }) =>
+    touched && error && css`
+      border: 1px solid #F43F5E;
+    `
+  }
+  &::-webkit-calendar-picker-indicator {
+    color: red;
+    font-size: 15px;
+    padding: 2px;
+    margin-right: 25px;
+  }
+}
 `;
 
 export const InputName = styled.span`
