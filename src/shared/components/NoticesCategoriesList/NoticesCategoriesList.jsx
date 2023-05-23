@@ -49,8 +49,11 @@ const NoticesCategoriesList = ({
   const pets = items.map(pet => {
     const category = transformCategoryName(pet.category);
     const title = cutTitle(pet.titleOfAdd);
-    const favorite = !pet.favorite || pet.favorite.includes(user.id);
     const age = ageDeterminationFunc(pet.birthday);
+    const isDeleteBtnShown = Boolean(
+      pathname.includes('my-pets') || pet.owner._id === user.id
+    );
+    const favorite = Boolean(!pet.favorite || pet.favorite.includes(user.id));
 
     return (
       <ListItem key={pet._id}>
@@ -64,7 +67,7 @@ const NoticesCategoriesList = ({
           >
             <HeartIcon />
           </FavoriteBtn>
-          {pathname.includes('my-pets') && (
+          {isDeleteBtnShown && (
             <DeleteBtn
               type="button"
               onClick={() => onDeleteBtnClick(pet._id)}

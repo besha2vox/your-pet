@@ -25,6 +25,7 @@ export const getUsersNotices = createAsyncThunk(
       const { data } = await axios.get(
         `/api/notices?${createSearchParams(params)}`
       );
+      console.log('data: ', data);
 
       return data;
     } catch (error) {
@@ -106,7 +107,7 @@ export const removeNotice = createAsyncThunk(
     try {
       await axios.delete(`/api/notices/notice/${_id}`);
 
-      return { id: _id };
+      return { _id };
     } catch (error) {
       return rejectWithValue(error.message);
     }
