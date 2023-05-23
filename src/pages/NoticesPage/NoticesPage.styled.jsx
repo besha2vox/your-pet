@@ -52,6 +52,11 @@ const Filters = styled.div`
 `;
 
 const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
   margin-top: ${({ theme }) => theme.space[3] * 3 + 'px'};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
