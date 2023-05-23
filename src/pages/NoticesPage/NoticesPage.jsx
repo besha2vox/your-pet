@@ -22,6 +22,7 @@ import {
   removeNotice,
   removeFavoriteNoticeOnFavoritepage,
 } from 'redux/notices/operations';
+import { setCurrentNotice, setNotices } from 'redux/notices/actions';
 import { selectNotices, selectTotalHitsNotices } from 'redux/notices/selectors';
 import { selectUser } from 'redux/auth/selectors';
 
@@ -41,6 +42,7 @@ const NoticesPage = () => {
   const totalHits = useSelector(selectTotalHitsNotices);
   const { isLoggedIn } = useSelector(selectAuth);
   const user = useSelector(selectUser);
+
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [isAuthorizedModalOpen, setIsAuthorizedModalOpen] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
@@ -52,6 +54,8 @@ const NoticesPage = () => {
   const page = searchParams.get('page') || 1;
 
   useEffect(() => {
+    dispatch(setNotices());
+
     const searchQuery = {
       page,
     };
@@ -109,6 +113,8 @@ const NoticesPage = () => {
   };
 
   const toggleModal = () => {
+    if (isItemModalOpen) dispatch(setCurrentNotice());
+
     setIsItemModalOpen(prevState => !prevState);
   };
 
@@ -187,12 +193,13 @@ const NoticesPage = () => {
           chosenGenderFilter={genderFilter}
           toggleUnauthorizeModal={toggleUnauthorizeModal}
         />
+        <Pagination
+          onPageChange={onPageChange}
+          currentPage={Number(page)}
+          totalPagesCount={totalPages}
+        />
       </ListContainer>
-      <Pagination
-        onPageChange={onPageChange}
-        currentPage={Number(page)}
-        totalPagesCount={totalPages}
-      />
+
       {isItemModalOpen && (
         <ModalNotice
           toggleModal={toggleModal}
