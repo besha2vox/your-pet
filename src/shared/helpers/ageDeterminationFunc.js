@@ -1,4 +1,4 @@
-export const ageDeterminationFunc = bd => {
+const ageDeterminationFunc = bd => {
   const now = new Date(),
     birthdate = new Date(bd),
     diff = now.getTime() - birthdate.getTime(),
@@ -20,3 +20,5 @@ export const ageDeterminationFunc = bd => {
 
   return age;
 };
+
+export default ageDeterminationFunc;
