@@ -2,7 +2,7 @@ const padStart = value => {
   return String(value).padStart(2, '0');
 };
 
-export const transformDate = bd => {
+const transformDate = bd => {
   const date = new Date(bd);
   const day = date.getDate();
   const month = date.getMonth();
@@ -10,3 +10,5 @@ export const transformDate = bd => {
 
   return `${padStart(day)}.${padStart(month)}.${year}`;
 };
+
+export default transformDate;
