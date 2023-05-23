@@ -178,7 +178,7 @@ const AddPetPageForm = () => {
       </Formik>
       {isModalOpen && !isLoading && (
         <Modal toggleModal={() => navigate(backLink)}>
-          <AddPetModal backLink={backLink} />
+          <AddPetModal backLink={backLink} category={formData.category} />
         </Modal>
       )}
     </AddFormWrapper>

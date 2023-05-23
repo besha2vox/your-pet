@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -10,7 +12,7 @@ import { PawPrintIcon } from 'shared/utils/icons';
 import { AddFormButtonWrapper } from '../PetPageForm/PetPageForm.styled';
 import { AddFormModalWrapper } from './AddPetModal.styled';
 
-const AddPetModal = ({ backLink }) => {
+const AddPetModal = ({ backLink, category }) => {
   const navigate = useNavigate();
   const addMyPetError = useSelector(selectError);
   const addPetError = useSelector(selectNoticesError);
@@ -19,7 +21,9 @@ const AddPetModal = ({ backLink }) => {
     ? 'Something went wrong, please try again.'
     : 'Pet was successfully added!';
 
-  console.log({ isError });
+  const buttonText =
+    category === 'my-pet' ? 'Go to profile' : 'Go to your adds';
+  const path = category === 'my-pet' ? '/user' : '/notices/my-pets';
 
   return (
     <AddFormModalWrapper>
@@ -27,10 +31,10 @@ const AddPetModal = ({ backLink }) => {
       <AddFormButtonWrapper>
         <AddFormButtonNext
           type="button"
-          text="Go to profile"
+          text={buttonText}
           icon={<PawPrintIcon />}
           clickHandler={() => {
-            navigate('/user');
+            navigate(path);
           }}
           filled={false}
           isDisabled={false}
@@ -45,5 +49,10 @@ const AddPetModal = ({ backLink }) => {
     </AddFormModalWrapper>
   );
 };
+
+AddPetModal.propTypes = PropTypes.shape({
+  backLink: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+});
 
 export default AddPetModal;
