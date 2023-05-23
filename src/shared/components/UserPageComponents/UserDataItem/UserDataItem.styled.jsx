@@ -75,7 +75,7 @@ export const EditIc = styled(EditIcon)`
   }
 `;
 export const ConfirmIcon = styled(CheckIcon)`
-  color: ${({ theme }) => theme.colors.green};
+  stroke: ${({ theme }) => theme.colors.green};
   width: ${({ theme }) => theme.space[2] * 5 + 'px'};
   heght: ${({ theme }) => theme.space[2] * 5 + 'px'};
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {

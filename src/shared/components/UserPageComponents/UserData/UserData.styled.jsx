@@ -82,6 +82,7 @@ export const Cross = styled(CrossIcon)`
 `;
 
 export const Check = styled(CheckIcon)`
-  color: ${({ theme }) => theme.colors.green};
+  stroke: ${({ theme }) => theme.colors.green};
   margin-right: ${({ theme }) => theme.space[3] + 'px'};
 `;
+
