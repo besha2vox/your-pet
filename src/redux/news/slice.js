@@ -1,5 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { fetchNews, fetchNewsByQuery2 } from './operations';
+import { setNews } from './actions';
 
 const initialState = {
   items: [],
@@ -14,6 +15,9 @@ const newsSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
+      .addCase(setNews, state => {
+        state.items = [];
+      })
       .addMatcher(
         isAnyOf(fetchNews.pending, fetchNewsByQuery2.pending),
         state => {
