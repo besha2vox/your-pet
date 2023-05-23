@@ -35,6 +35,7 @@ export const LogInPage = styled.div`
   }
 
   @media screen and (max-width: 767px) {
+    padding-top: 44px;
     background-image: url('${mobile_1x}');
 
     @media (min-device-pixel-ratio: 2),
