@@ -68,7 +68,6 @@ const NoticesPage = () => {
       if (query) searchQuery.query = query;
       if (genderFilter) searchQuery.gender = genderFilter;
       if (ageFilter) searchQuery.age = ageFilter;
-      console.log(searchQuery);
 
       dispatch(getFavoriteNotices({ category: categoryName, ...searchQuery }));
 

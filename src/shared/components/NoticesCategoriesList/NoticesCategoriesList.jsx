@@ -3,7 +3,11 @@ import Button from '../Button/Button';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from 'redux/auth/selectors';
-import { ageDeterminationFunc } from 'shared/helpers/ageDeterminationFunc';
+import {
+  ageDeterminationFunc,
+  cutTitle,
+  transformCategoryName,
+} from 'shared/helpers';
 import {
   HeartIcon,
   LocationIcon,
@@ -43,17 +47,18 @@ const NoticesCategoriesList = ({
   if (!items) return;
 
   const pets = items.map(pet => {
+    const category = transformCategoryName(pet.category);
+    const title = cutTitle(pet.titleOfAdd);
     const age = ageDeterminationFunc(pet.birthday);
-    const favorite = !pet.favorite || pet.favorite.includes(user.id);
-    const title =
-      pet.titleOfAdd.length >= 35
-        ? pet.titleOfAdd.slice(0, 35) + ' ...'
-        : pet.titleOfAdd;
+    const isDeleteBtnShown = Boolean(
+      pathname.includes('my-pets') || pet.owner._id === user.id
+    );
+    const favorite = Boolean(!pet.favorite || pet.favorite.includes(user.id));
 
     return (
       <ListItem key={pet._id}>
         <ImageWrapper bgi={pet.avatarURL}>
-          <Category>{pet.category.split('-').join(' ')}</Category>
+          <Category>{category}</Category>
           <FavoriteBtn
             inFavorite={favorite}
             type="button"
@@ -62,7 +67,7 @@ const NoticesCategoriesList = ({
           >
             <HeartIcon />
           </FavoriteBtn>
-          {pathname.includes('my-pets') && (
+          {isDeleteBtnShown && (
             <DeleteBtn
               type="button"
               onClick={() => onDeleteBtnClick(pet._id)}

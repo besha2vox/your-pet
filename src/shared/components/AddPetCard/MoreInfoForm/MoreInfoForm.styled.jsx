@@ -144,6 +144,12 @@ export const AddFormImageWrapper = styled.div`
     stroke: currentColor;
   }
 
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     min-width: 182px;
     height: 182px;

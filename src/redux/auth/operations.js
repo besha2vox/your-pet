@@ -25,8 +25,9 @@ axios.interceptors.response.use(
           refreshToken,
         });
         setAuthHeader(data.accessToken);
+        error.config.headers.Authorization = `Bearer ${data.accessToken}`;
         localStorage.setItem('refreshToken', data.refreshToken);
-        return error.config;
+        return axios(error.config);
       } catch (error) {
         return Promise.reject.error;
       }

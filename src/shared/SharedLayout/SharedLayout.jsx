@@ -5,11 +5,13 @@ import Footer from 'shared/components/Footer/Footer';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ContentWrapper } from './SharedLayout.styled';
+import BtnScrollToTop from './../components/BtnScrollToTop/BtnScrollToTop';
 
 const SharedLayout = () => {
   return (
     <>
       <ContentWrapper>
+        <BtnScrollToTop />
         <Header />
         <main>
           <Section>

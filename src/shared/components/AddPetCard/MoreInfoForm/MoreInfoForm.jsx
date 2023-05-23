@@ -58,37 +58,28 @@ const MoreInfo = ({ formData, setFormData, submit, backStep }) => {
   }, []);
 
   useEffect(() => {
-    switch (formData.category) {
-      case 'sell':
-        setIsDisabled(
-          !(
-            isPetPhotoFieldValid &&
-            isLocationFieldValid &&
-            isSexFieldValid &&
-            isPriceFieldValid &&
-            isCommentsFieldValid
-          )
-        );
-        break;
-
-      case 'lost-found' || 'for-free':
-        setIsDisabled(
-          !(
-            isPetPhotoFieldValid &&
-            isLocationFieldValid &&
-            isSexFieldValid &&
-            isCommentsFieldValid
-          )
-        );
-        break;
-
-      case 'my-pet':
-        setIsDisabled(!(isPetPhotoFieldValid && isCommentsFieldValid));
-        break;
-
-      default:
-        setIsDisabled(true);
-        break;
+    if (formData.category === 'sell') {
+      setIsDisabled(
+        !(
+          isPetPhotoFieldValid &&
+          isLocationFieldValid &&
+          isSexFieldValid &&
+          isPriceFieldValid &&
+          isCommentsFieldValid
+        )
+      );
+    }
+    if (formData.category === 'my-pet') {
+      setIsDisabled(!(isPetPhotoFieldValid && isCommentsFieldValid));
+    } else {
+      setIsDisabled(
+        !(
+          isPetPhotoFieldValid &&
+          isLocationFieldValid &&
+          isSexFieldValid &&
+          isCommentsFieldValid
+        )
+      );
     }
   }, [
     errors,

@@ -32,11 +32,11 @@ const noticesSlice = createSlice({
       .addCase(getNoticeById.fulfilled, (state, { payload }) => {
         state.currentNotice = payload;
       })
-      .addCase(addNotice.fulfilled, (state, { payload }) => {
-        state.newNotice = payload.result;
-      })
-      .addCase(
-        removeFavoriteNoticeOnFavoritepage.fulfilled,
+      .addMatcher(
+        isAnyOf(
+          removeNotice.fulfilled,
+          removeFavoriteNoticeOnFavoritepage.fulfilled
+        ),
         (state, { payload }) => {
           const index = state.items.findIndex(item => item._id === payload._id);
           state.items.splice(index, 1);

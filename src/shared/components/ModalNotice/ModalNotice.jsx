@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentNotice } from 'redux/notices/selectors';
 import { HeartIcon } from 'shared/utils/icons';
-import { transformDate } from 'shared/helpers/transformDateFunc';
+import { transformDate, transformCategoryName } from 'shared/helpers';
 import { selectUser } from 'redux/auth/selectors';
 import { useWindowSize } from 'hooks/useResize';
 import {
@@ -47,6 +47,7 @@ const ModalNotice = ({ toggleModal, onFavoriteClick }) => {
     toggleContactModal();
   };
 
+  const category = transformCategoryName(item.category);
   const birthday = transformDate(item.birthday);
 
   return (
@@ -55,7 +56,7 @@ const ModalNotice = ({ toggleModal, onFavoriteClick }) => {
         <Wrapper>
           <Positioning>
             <Image bgi={item.avatarURL}>
-              <Category>{item.category}</Category>
+              <Category>{category}</Category>
             </Image>
             <InfoWrapper>
               <Title>{item.titleOfAdd}</Title>

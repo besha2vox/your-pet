@@ -19,8 +19,7 @@ import { validateField } from '../vaidatePet';
 const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
   const [errors, setErrors] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
-
-  console.log({ isDisabled });
+  const [maxDate, setMaxDate] = useState();
 
   const isNameFieldValid = Boolean(!errors.name && !!formData.name);
   const isBirthdayFieldValid = Boolean(!errors.birthday && !!formData.birthday);
@@ -28,28 +27,23 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
   const isTitleFieldValid = Boolean(!errors.title && !!formData.title);
 
   useEffect(() => {
-    switch (formData.category) {
-      case 'sell' || 'lost-found' || 'for-free':
-        setIsDisabled(
-          !(
-            isNameFieldValid &&
-            isBirthdayFieldValid &&
-            isBreedFieldValid &&
-            isTitleFieldValid
-          )
-        );
-        break;
-
-      case 'my-pet':
-        setIsDisabled(
-          !(isNameFieldValid && isBirthdayFieldValid && isBreedFieldValid)
-        );
-        break;
-
-      default:
-        setIsDisabled(true);
-        break;
+    if (formData.category === 'my-pet') {
+      setIsDisabled(
+        !(isNameFieldValid && isBirthdayFieldValid && isBreedFieldValid)
+      );
     }
+
+    if (formData.category !== 'my-pet') {
+      setIsDisabled(
+        !(
+          isNameFieldValid &&
+          isBirthdayFieldValid &&
+          isBreedFieldValid &&
+          isTitleFieldValid
+        )
+      );
+    }
+    setMaxDate(getCurrentDate());
   }, [
     errors,
     formData.category,
@@ -59,9 +53,13 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
     isTitleFieldValid,
   ]);
 
-  useEffect(() => {
-    setIsDisabled(true);
-  }, []);
+  function getCurrentDate() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -125,6 +123,7 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
             type="date"
             name="birthday"
             data-pattern="**.**.****"
+            max={maxDate}
             onChange={handleInputChange}
             value={formData.birthday.split('.').reverse().join('-')}
             onBlur={() => validateField('birthday', formData, setErrors)}
