@@ -91,98 +91,107 @@ const LoginForm = () => {
       {({
         values,
         errors,
+        setErrors,
         touched,
         handleChange,
         handleBlur,
         handleSubmit,
         isSubmitting,
         resetForm,
-      }) => (
-        <LogInForm onSubmit={handleSubmit}>
-          <LogInFormTitle>Log In</LogInFormTitle>
-          <LogInFormEmailContainer error={errors.email && touched.email}>
-            <LogInFormEmailInputContainer
-              error={errors.email && touched.email}
-              style={{
-                borderColor:
-                  errors.email && touched.email ? '#F43F5E' : '#54ADFF',
-              }}
-            >
-              <LogInFormInput
-                type="string"
-                name="email"
-                placeholder="Email"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                disabled={loading}
-              />
-              {errors.email && touched.email && values.email && (
-                <ErrorIcon
-                  onClick={() => {
-                    resetForm({ values: { ...values, email: '' } });
-                  }}
-                >
-                  <CrossIcon />
-                </ErrorIcon>
+      }) => {
+        const handleFieldChange = e => {
+          const { name } = e.target;
+          setErrors({ ...errors, [name]: '' }); // Clear the error for the specific field
+          handleChange(e);
+        };
+
+        return (
+          <LogInForm onSubmit={handleSubmit}>
+            <LogInFormTitle>Log In</LogInFormTitle>
+            <LogInFormEmailContainer error={errors.email && touched.email}>
+              <LogInFormEmailInputContainer
+                error={errors.email && touched.email}
+                style={{
+                  borderColor:
+                    errors.email && touched.email ? '#F43F5E' : '#54ADFF',
+                }}
+              >
+                <LogInFormInput
+                  type="string"
+                  name="email"
+                  placeholder="Email"
+                  value={values.email}
+                  onChange={handleFieldChange}
+                  onBlur={handleBlur}
+                  disabled={loading}
+                />
+                {errors.email && touched.email && values.email && (
+                  <ErrorIcon
+                    onClick={() => {
+                      resetForm({ values: { ...values, email: '' } });
+                    }}
+                  >
+                    <CrossIcon />
+                  </ErrorIcon>
+                )}
+              </LogInFormEmailInputContainer>
+
+              {errors.email && touched.email && (
+                <ErrorMessage name="email">{errors.email}</ErrorMessage>
               )}
-            </LogInFormEmailInputContainer>
+            </LogInFormEmailContainer>
 
-            {errors.email && touched.email && (
-              <ErrorMessage name="email">{errors.email}</ErrorMessage>
-            )}
-          </LogInFormEmailContainer>
-
-          <LogInFormPasswordContainer
-            error={errors.password && touched.password}
-          >
-            <LogInFormPasswordInputContainer
+            <LogInFormPasswordContainer
               error={errors.password && touched.password}
-              style={{
-                borderColor:
-                  errors.password && touched.password ? '#F43F5E' : '#54ADFF',
-              }}
             >
-              <LogInFormInput
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                placeholder="Password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                disabled={loading}
-              />
-              <PasswordIcon onClick={togglePasswordVisibility}>
-                <EyeIcon error={errors.password && touched.password}>
-                  {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
-                </EyeIcon>
-              </PasswordIcon>
-            </LogInFormPasswordInputContainer>
+              <LogInFormPasswordInputContainer
+                error={errors.password && touched.password}
+                style={{
+                  borderColor:
+                    errors.password && touched.password ? '#F43F5E' : '#54ADFF',
+                }}
+              >
+                <LogInFormInput
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  placeholder="Password"
+                  value={values.password}
+                  onChange={handleFieldChange}
+                  onBlur={handleBlur}
+                  disabled={loading}
+                />
+                <PasswordIcon onClick={togglePasswordVisibility}>
+                  <EyeIcon error={errors.password && touched.password}>
+                    {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
+                  </EyeIcon>
+                </PasswordIcon>
+              </LogInFormPasswordInputContainer>
 
-            {errors.password && touched.password && (
-              <ErrorMessage name="password">{errors.password}</ErrorMessage>
+              {errors.password && touched.password && (
+                <ErrorMessage name="password">{errors.password}</ErrorMessage>
+              )}
+            </LogInFormPasswordContainer>
+
+            {loginError && (
+              <LoginErrorMessage>{loginError.message}</LoginErrorMessage>
             )}
-          </LogInFormPasswordContainer>
 
-          {loginError && (
-            <LoginErrorMessage>{loginError.message}</LoginErrorMessage>
-          )}
-
-          <LogInBtn type="submit" disabled={isSubmitting || loading}>
-            Log In
-          </LogInBtn>
-          <RegisterText>
-            Don't have an account?{' '}
-            <RegisterLink
-              onClick={() => {
-                navigate('/register');
-              }}
-            >
-              Register
-            </RegisterLink>
-          </RegisterText>
-        </LogInForm>
-      )}
+            <LogInBtn type="submit" disabled={isSubmitting || loading}>
+              Log In
+            </LogInBtn>
+            <RegisterText>
+              Don't have an account?{' '}
+              <RegisterLink
+                onClick={() => {
+                  navigate('/register');
+                }}
+              >
+                Register
+              </RegisterLink>
+            </RegisterText>
+          </LogInForm>
+        );
+      }}
     </Formik>
   );
 };
