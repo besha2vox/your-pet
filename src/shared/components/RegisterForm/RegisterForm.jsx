@@ -12,7 +12,7 @@ import { register } from 'redux/auth/operations';
 import { ReactComponent as OpenEyeIcon } from '../../../images/icons/eye-open.svg';
 import { ReactComponent as CloseEyeIcon } from '../../../images/icons/eye-closed.svg';
 import { ReactComponent as CrossIcon } from '../../../images/icons/cross-small.svg';
-// import { ReactComponent as CheckIcon } from '../../../images/icons/check.svg';
+import { ReactComponent as CheckIcon } from '../../../images/icons/check.svg';
 
 import {
   RegisterFormEl,
@@ -29,8 +29,8 @@ import {
   RegisterBtn,
   EyeIcon,
   ErrorIcon,
-  // CheckMarkIcon,
-  // InfoMessage,
+  CheckMarkIcon,
+  InfoMessage,
   RegisterErrorMessage,
   LoginText,
   LoginLink,
@@ -129,6 +129,7 @@ const RegisterForm = () => {
       {({
         values,
         errors,
+        setErrors,
         touched,
         handleChange,
         handleBlur,
@@ -136,7 +137,12 @@ const RegisterForm = () => {
         isSubmitting,
         resetForm,
       }) => {
-        // const isPasswordValid = values.password && values.password.length >= 8;
+        const isPasswordValid = values.password && values.password.length >= 8;
+        const handleFieldChange = e => {
+          const { name } = e.target;
+          setErrors({ ...errors, [name]: '' }); // Clear the error for the specific field
+          handleChange(e);
+        };
 
         return (
           <RegisterFormEl onSubmit={handleSubmit}>
@@ -156,7 +162,7 @@ const RegisterForm = () => {
                   name="username"
                   placeholder="Username"
                   value={values.username}
-                  onChange={handleChange}
+                  onChange={handleFieldChange}
                   onBlur={handleBlur}
                   disabled={loading}
                 />
@@ -188,7 +194,7 @@ const RegisterForm = () => {
                   name="email"
                   placeholder="Email"
                   value={values.email}
-                  onChange={handleChange}
+                  onChange={handleFieldChange}
                   onBlur={handleBlur}
                   disabled={loading}
                 />
@@ -210,12 +216,18 @@ const RegisterForm = () => {
 
             <RegisterFormPasswordContainer
               error={errors.password && touched.password}
+              secure={isPasswordValid}
             >
               <RegisterFormPasswordInputContainer
                 error={errors.password && touched.password}
+                secure={isPasswordValid}
                 style={{
                   borderColor:
-                    errors.password && touched.password ? '#F43F5E' : '#54ADFF',
+                    errors.password && touched.password
+                      ? '#F43F5E'
+                      : isPasswordValid
+                      ? '#00C3AD'
+                      : '#54ADFF',
                 }}
               >
                 <RegisterFormInput
@@ -223,7 +235,7 @@ const RegisterForm = () => {
                   name="password"
                   placeholder="Password"
                   value={values.password}
-                  onChange={handleChange}
+                  onChange={handleFieldChange}
                   onBlur={handleBlur}
                   disabled={loading}
                 />
@@ -231,14 +243,15 @@ const RegisterForm = () => {
                   <EyeIcon
                     onClick={togglePasswordVisibility}
                     error={errors.password && touched.password}
+                    secure={isPasswordValid}
                   >
                     {showPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
                   </EyeIcon>
-                  {/* {isPasswordValid && (
+                  {isPasswordValid && (
                     <CheckMarkIcon>
                       <CheckIcon />
                     </CheckMarkIcon>
-                  )} */}
+                  )}
                   {errors.password && touched.password && values.password && (
                     <ErrorIcon
                       onClick={() => {
@@ -254,11 +267,11 @@ const RegisterForm = () => {
               {errors.password && touched.password && (
                 <ErrorMessage>{errors.password}</ErrorMessage>
               )}
-              {/* {isPasswordValid && (
+              {isPasswordValid && (
                 <InfoMessage valid={isPasswordValid}>
                   Password is secure
                 </InfoMessage>
-              )} */}
+              )}
             </RegisterFormPasswordContainer>
 
             <RegisterFormPasswordContainer
@@ -278,7 +291,7 @@ const RegisterForm = () => {
                   name="confirmPassword"
                   placeholder="Confirm password"
                   value={values.confirmPassword}
-                  onChange={handleChange}
+                  onChange={handleFieldChange}
                   onBlur={handleBlur}
                   disabled={loading}
                 />
@@ -289,11 +302,6 @@ const RegisterForm = () => {
                   >
                     {showConfirmPassword ? <OpenEyeIcon /> : <CloseEyeIcon />}
                   </EyeIcon>
-                  {/* {isPasswordValid && (
-                    <CheckMarkIcon>
-                      <CheckIcon />
-                    </CheckMarkIcon>
-                  )} */}
                   {errors.confirmPassword &&
                     touched.confirmPassword &&
                     values.confirmPassword && (
@@ -313,11 +321,6 @@ const RegisterForm = () => {
               {errors.confirmPassword && touched.confirmPassword && (
                 <ErrorMessage>{errors.confirmPassword}</ErrorMessage>
               )}
-              {/* {isPasswordValid && (
-                <InfoMessage valid={isPasswordValid}>
-                  Password is secure
-                </InfoMessage>
-              )} */}
             </RegisterFormPasswordContainer>
 
             {!emailAvailable && (

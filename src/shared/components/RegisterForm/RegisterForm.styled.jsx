@@ -100,10 +100,10 @@ export const RegisterFormPasswordContainer = styled.div`
   flex-direction: column;
   width: 100%;
 
-  margin-bottom: ${({ error }) => (error ? '6px' : '32px')};
+  margin-bottom: ${({ error, secure }) => (error || secure ? '6px' : '32px')};
 
   @media screen and (max-width: 767px) {
-    margin-bottom: ${({ error }) => (error ? '1px' : '24px')};
+    margin-bottom: ${({ error, secure }) => (error || secure ? '1px' : '24px')};
   }
 `;
 
@@ -113,7 +113,12 @@ export const RegisterFormPasswordInputContainer = styled.div`
   padding: 2px 16px;
 
   border: 1px solid
-    ${({ theme, error }) => (error ? theme.colors.red : theme.colors.blue)};
+    ${({ theme, error, secure }) =>
+      error
+        ? theme.colors.red
+        : secure
+        ? theme.colors.green
+        : theme.colors.blue};
   border-radius: 40px;
 `;
 
@@ -132,8 +137,12 @@ export const EyeIcon = styled.span`
   cursor: pointer;
 
   & svg {
-    stroke: ${({ theme, error }) =>
-      error ? theme.colors.red : theme.colors.blue};
+    stroke: ${({ theme, error, secure }) =>
+      error
+        ? theme.colors.red
+        : secure
+        ? theme.colors.green
+        : theme.colors.blue};
   }
 `;
 
