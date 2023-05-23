@@ -20,35 +20,35 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
   const [errors, setErrors] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
 
-  console.log({ isDisabled });
-
   const isNameFieldValid = Boolean(!errors.name && !!formData.name);
   const isBirthdayFieldValid = Boolean(!errors.birthday && !!formData.birthday);
   const isBreedFieldValid = Boolean(!errors.breed && !!formData.breed);
   const isTitleFieldValid = Boolean(!errors.title && !!formData.title);
 
   useEffect(() => {
-    switch (formData.category) {
-      case 'sell' || 'lost-found' || 'for-free':
-        setIsDisabled(
-          !(
-            isNameFieldValid &&
-            isBirthdayFieldValid &&
-            isBreedFieldValid &&
-            isTitleFieldValid
-          )
-        );
-        break;
+    if (formData.category === 'my-pet') {
+      setIsDisabled(
+        !(isNameFieldValid && isBirthdayFieldValid && isBreedFieldValid)
+      );
+    }
 
-      case 'my-pet':
-        setIsDisabled(
-          !(isNameFieldValid && isBirthdayFieldValid && isBreedFieldValid)
-        );
-        break;
-
-      default:
-        setIsDisabled(true);
-        break;
+    if (formData.category !== 'my-pet') {
+      console.log(
+        !(
+          isNameFieldValid &&
+          isBirthdayFieldValid &&
+          isBreedFieldValid &&
+          isTitleFieldValid
+        )
+      );
+      setIsDisabled(
+        !(
+          isNameFieldValid &&
+          isBirthdayFieldValid &&
+          isBreedFieldValid &&
+          isTitleFieldValid
+        )
+      );
     }
   }, [
     errors,
@@ -58,10 +58,6 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
     isNameFieldValid,
     isTitleFieldValid,
   ]);
-
-  useEffect(() => {
-    setIsDisabled(true);
-  }, []);
 
   const handleInputChange = e => {
     const { name, value } = e.target;

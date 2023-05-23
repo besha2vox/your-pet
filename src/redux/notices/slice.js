@@ -32,9 +32,6 @@ const noticesSlice = createSlice({
       .addCase(getNoticeById.fulfilled, (state, { payload }) => {
         state.currentNotice = payload;
       })
-      .addCase(addNotice.fulfilled, (state, { payload }) => {
-        state.newNotice = payload.result;
-      })
       .addMatcher(
         isAnyOf(
           removeNotice.fulfilled,
