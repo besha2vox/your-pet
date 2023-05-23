@@ -12,11 +12,12 @@ import { HeaderWrapper, Wrapper, NavWrapper, Menu } from './Header.styled';
 
 const Header = () => {
   const user = useSelector(selectUser);
+  console.log('user: ', user);
   const { isLoggedIn } = useSelector(selectAuth);
   const [isOpen, setIsOpen] = useState(false);
   const [screenWidth] = useWindowSize();
 
-  const { name = '' } = user;
+  const { username = '' } = user;
 
   return (
     <HeaderWrapper>
@@ -25,7 +26,7 @@ const Header = () => {
           <Logo />
           <NavWrapper>
             {isLoggedIn && (
-              <UserNav userName={name} showName={screenWidth >= 768} />
+              <UserNav userName={username} showName={screenWidth >= 768} />
             )}
             {screenWidth >= 768 && !isLoggedIn && <AuthNav />}
             {screenWidth <= 1279 && (
@@ -33,7 +34,7 @@ const Header = () => {
             )}
             <Menu isOpen={isOpen} screenWidth={screenWidth} user={user}>
               {screenWidth <= 767 && isLoggedIn && (
-                <UserNav userName={name} showName setIsOpen={setIsOpen} />
+                <UserNav userName={username} showName setIsOpen={setIsOpen} />
               )}
               {screenWidth < 768 && screenWidth <= 1279 && !isLoggedIn && (
                 <AuthNav setIsOpen={setIsOpen} />
