@@ -19,6 +19,7 @@ import { validateField } from '../vaidatePet';
 const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
   const [errors, setErrors] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
+  const [maxDate, setMaxDate] = useState(getCurrentDate());
 
   const isNameFieldValid = Boolean(!errors.name && !!formData.name);
   const isBirthdayFieldValid = Boolean(!errors.birthday && !!formData.birthday);
@@ -33,14 +34,6 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
     }
 
     if (formData.category !== 'my-pet') {
-      console.log(
-        !(
-          isNameFieldValid &&
-          isBirthdayFieldValid &&
-          isBreedFieldValid &&
-          isTitleFieldValid
-        )
-      );
       setIsDisabled(
         !(
           isNameFieldValid &&
@@ -58,6 +51,14 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
     isNameFieldValid,
     isTitleFieldValid,
   ]);
+
+  function getCurrentDate() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -121,6 +122,7 @@ const PersonalForm = ({ formData, setFormData, nextStep, backStep }) => {
             type="date"
             name="birthday"
             data-pattern="**.**.****"
+            max={maxDate}
             onChange={handleInputChange}
             value={formData.birthday.split('.').reverse().join('-')}
             onBlur={() => validateField('birthday', formData, setErrors)}
