@@ -49,7 +49,7 @@ export const RegisterPageWrapper = styled.div`
 export const RegisterFormWrapper = styled.div`
   padding: 60px 75px;
   width: 608px;
-  min-height: 481px;
+  height: fit-content;
   background: #ffffff;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
   border-radius: 40px;
