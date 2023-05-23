@@ -22,11 +22,7 @@ import {
   removeNotice,
   removeFavoriteNoticeOnFavoritepage,
 } from 'redux/notices/operations';
-import {
-  selectNotices,
-  selectTotalHitsNotices,
-  selectCurrentNotice,
-} from 'redux/notices/selectors';
+import { selectNotices, selectTotalHitsNotices } from 'redux/notices/selectors';
 import { selectUser } from 'redux/auth/selectors';
 
 import {
@@ -45,7 +41,6 @@ const NoticesPage = () => {
   const totalHits = useSelector(selectTotalHitsNotices);
   const { isLoggedIn } = useSelector(selectAuth);
   const user = useSelector(selectUser);
-  const item = useSelector(selectCurrentNotice);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [isAuthorizedModalOpen, setIsAuthorizedModalOpen] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
@@ -105,10 +100,6 @@ const NoticesPage = () => {
   ]);
 
   useEffect(() => {
-    toggleModal();
-  }, [item]);
-
-  useEffect(() => {
     const pageCount = Math.ceil(totalHits / 12);
 
     setTotalPages(pageCount);
@@ -123,6 +114,7 @@ const NoticesPage = () => {
   };
 
   const moreBtnClickHandler = async _id => {
+    toggleModal();
     dispatch(getNoticeById(_id));
   };
 

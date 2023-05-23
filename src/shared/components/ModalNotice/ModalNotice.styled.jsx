@@ -125,6 +125,27 @@ const BtnWrapper = styled.div`
   }
 `;
 
+const Contact = styled.a`
+  font-family: ${({ theme }) => theme.fonts.main.medium};
+  font-size: ${({ theme }) => theme.fontSizes[1]};
+  color: ${({ theme, disabled }) => (disabled ? 'grey' : theme.colors.yellow)};
+  text-decoration: ${({ disabled }) => !disabled && 'underline'};
+
+  cursor: ${({ disabled }) => !disabled && 'pointer'};
+  pointer-events: ${({ disabled }) => disabled && 'none'};
+
+  transition: color 300ms ${({ theme }) => theme.transition.main};
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    font-size: ${({ theme }) => theme.fontSizes[2]};
+  }
+
+  &:hover,
+  &:focus {
+    color: ${({ theme, disabled }) => (disabled ? 'grey' : theme.colors.blue)};
+  }
+`;
+
 export {
   Wrapper,
   Positioning,
@@ -138,4 +159,5 @@ export {
   CommentWrapper,
   Comment,
   BtnWrapper,
+  Contact,
 };
