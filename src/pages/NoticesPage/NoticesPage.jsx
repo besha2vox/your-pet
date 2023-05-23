@@ -12,7 +12,6 @@ import {
   Filters,
   ListContainer,
 } from './NoticesPage.styled';
-// import { Slider } from 'shared/components/Slider/Slider';
 
 const items = [
   {
@@ -116,7 +115,6 @@ const NoticesPage = () => {
         />
       </ListContainer>
       {isModalOpen && <ModalNotice item={pet} toggleModal={toggleModal} />}
-      {/* <Slider /> */}
     </Wrapper>
   );
 };

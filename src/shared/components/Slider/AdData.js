@@ -1,63 +1,73 @@
-import img1 from "./imagesAd/1.png"
-import img2 from "./imagesAd/2.png"
-import img3 from "./imagesAd/3.png"
-import img4 from "./imagesAd/4.png"
-import img5 from "./imagesAd/5.png"
-import img6 from "./imagesAd/6.png"
-import img7 from "./imagesAd/7.png"
-import img8 from "./imagesAd/8.png"
-import img9 from "./imagesAd/9.png"
-import img10 from "./imagesAd/10.png"
+import img1 from './imagesAd/zpolis.png';
+import img2 from './imagesAd/drug.png';
+import img3 from './imagesAd/Animal_clinic.png';
+import img4 from './imagesAd/aibolit.png';
+import img5 from './imagesAd/terra_vet.png';
+import img6 from './imagesAd/a_vet.png';
+import img7 from './imagesAd/vetplanet.png';
+import img8 from './imagesAd/hels.png';
+import img9 from './imagesAd/dingo.png';
+import img10 from './imagesAd/pes_kit.png';
 
 const AdData = [
   {
     id: '1',
-    text: 'Here you can place your advertisement.',
+    urlSite: 'https://zpolis.com.ua/',
+    text: 'We created our veterinary center to offer you and your pets quality veterinary care, health and longevity.',
     image: img1,
   },
   {
     id: '2',
-    text: 'Order a commercial with us! It will be here.',
+    urlSite: 'https://www.vetdrug.com.ua/',
+    text: 'Friend Clinic has created the best conditions for animals, and all services are provided with maximum care and love.',
     image: img2,
   },
   {
     id: '3',
-    text: 'Your ad space is still available.',
+    urlSite: 'https://animalclinic.ua/',
+    text: 'A good life for your pet means using all our knowledge and experience to keep your four-legged friend happy and healthy.',
     image: img3,
   },
   {
     id: '4',
-    text: 'Free space for your advertising here.',
+    urlSite: 'https://aybolit.od.ua/',
+    text: 'The staff at our clinic strives to restore the health of all patients and bring back the joy of companionship, calmness and optimism',
     image: img4,
   },
   {
     id: '5',
-    text: 'We accept requests for advertising.',
+    urlSite: 'https://terra.vet/',
+    text: 'Our veterinary clinic offers ultrasound, X-ray, laboratory and grooming services. Surgical operations of varying complexity are performed.',
     image: img5,
   },
   {
     id: '6',
-    text: 'We work with advertisers! Waiting for your advertising.',
+    urlSite: 'https://avet.kiev.ua/',
+    text: 'We sincerely wish you health and longevity, and therefore provide the most correct and competent treatment.',
     image: img6,
   },
   {
     id: '7',
-    text: 'This block can display exactly your advertisement.',
+    urlSite: 'https://vetplaneta.com/',
+    text: 'Here, your pet will be examined, consulted, and helped to choose a tactic and treatment regimen.',
     image: img7,
   },
   {
     id: '8',
-    text: 'Place your ad right here.',
+    urlSite: 'https://vethealth.sumy.ua/',
+    text: 'Our mission is to take care of the health of four-legged patients according to the world standards of veterinary care and service.',
     image: img8,
   },
   {
     id: '9',
-    text: 'We will be happy to place your advertisement here.',
+    urlSite: 'https://dingo.od.ua/',
+    text: 'The clinics have all the necessary modern equipment to provide quality care to your beloved pet.',
     image: img9,
   },
   {
     id: '10',
-    text: 'Your advertising will bring you income if you place it with us.',
+    urlSite: 'https://vetconsult.gladpet.org/',
+    text: 'Free online consultations with veterinarians for all Ukrainians who care about the health of their pets in difficult war conditions.',
     image: img10,
   },
 ];

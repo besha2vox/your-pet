@@ -11,7 +11,7 @@ const Slider = () => {
       setCurrentIndex((prevIndex) => (prevIndex + visibleSlides) % AdData.length);
     };
 
-    const timer = setInterval(updateIndex, 5000);
+    const timer = setInterval(updateIndex, 10000);
 
     return () => clearInterval(timer);
   }, [visibleSlides]);
@@ -24,7 +24,7 @@ const Slider = () => {
       } else if (windowWidth < 1280 && windowWidth >= 768) {
         setVisibleSlides(3);
       } else {
-        setVisibleSlides(3);
+        setVisibleSlides(2);
       }
     };
 
@@ -44,9 +44,12 @@ const Slider = () => {
       <AdList visibleSlides={visibleSlides}>
         {AdData.slice(currentIndex, currentIndex + visibleSlides).map(ad => (
           <AdItem key={ad.id}>
+            <a href={ad.urlSite} target='blank'>
             <AdImage src={ad.image} alt="" />
             <AdText>{ad.text}</AdText>
+            </a>
           </AdItem>
+       
         ))}
       </AdList>
     </>

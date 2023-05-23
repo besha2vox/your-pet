@@ -19,7 +19,6 @@ const AdTitle = styled.h2`
 const AdList = styled.ul`
   display: flex;
   max-width: 100%;
-  overflow: hidden;
   flex-direction: column;
   gap: ${({ theme }) => theme.space[4] + 4 + 'px'};
   margin-top: ${({ theme }) => theme.space[4] + 4 + 'px'};
@@ -38,23 +37,31 @@ const AdList = styled.ul`
 const AdItem = styled.li`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.space[3] + 2 + 'px'};
+  overflow: hidden;
+  cursor: pointer;
+  gap: ${({ theme }) => theme.space[3] + 4 + 'px'};
   background-color: white;
   justify-content: flex-start;
   align-items: center;
   max-width: 100%;
-  height: ${({ theme }) => theme.space[6] + 246 + 'px'};
+  height: ${({ theme }) => theme.space[6] + 226 + 'px'};
   border-radius: 0px 0px 40px 40px;
   box-shadow: ${({ theme }) => theme.boxShadows.main};
+  transition: 300ms ${({ theme }) => theme.transition.main};
+
+  :hover, :focus {
+    box-shadow: ${({ theme }) => theme.boxShadows.secondary};
+  }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     max-width: ${({ theme }) => theme.space[6] + 160 + 'px'};
+    height: ${({ theme }) => theme.space[6] + 246 + 'px'};
     margin-bottom: ${({ theme }) => theme.space[4] + 6 + 'px'};
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     max-width: ${({ theme }) => theme.space[6] + 161 + 'px'};
-    height: ${({ theme }) => theme.space[6] + 226 + 'px'};
+    height: ${({ theme }) => theme.space[6] + 196 + 'px'};
     margin-bottom: ${({ theme }) => theme.space[4] + 6 + 'px'};
   }
 `;
@@ -66,20 +73,18 @@ const AdImage = styled.img`
 
 const AdText = styled.p`
   text-align: center;
-  line-height: ${({ theme }) => theme.space[4] + 4 + 'px'};
+  line-height: ${({ theme }) => theme.space[4] + 8 + 'px'};
   padding: ${({ theme }) => theme.space[3] + 2 + 'px'};
   font-family: ${({ theme }) => theme.fonts.secondary.regular};
-  font-size: ${({ theme }) => theme.fontSizes[2]};
-  width: ${({ theme }) => theme.space[6] + 186 + 'px'};
+  font-size: ${({ theme }) => theme.fontSizes[3]};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: ${({ theme }) => theme.fontSizes[4]};
-    width: ${({ theme }) => theme.space[6] + 166 + 'px'};
+    font-size: ${({ theme }) => theme.fontSizes[3]};
     line-height: ${({ theme }) => theme.space[4] + 8 + 'px'};
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    font-size: ${({ theme }) => theme.fontSizes[3]};
+    font-size: ${({ theme }) => theme.fontSizes[2]};
   }
 `;
 
