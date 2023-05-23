@@ -110,6 +110,26 @@ export const InputName = styled.span`
   }
 `;
 
+export const EditIc = styled(EditIcon)`
+  stroke: ${({ theme }) => theme.colors.blue};
+  fill: ${({ theme }) => theme.colors.blue};
+  width: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  heght: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: ${({ theme }) => theme.space[2] * 6 + 'px'};
+    heght: ${({ theme }) => theme.space[2] * 6 + 'px'};
+  }
+`;
+export const ConfirmIcon = styled(CheckIcon)`
+  stroke: ${({ theme }) => theme.colors.green};
+  width: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  heght: ${({ theme }) => theme.space[2] * 5 + 'px'};
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    width: ${({ theme }) => theme.space[2] * 6 + 'px'};
+    heght: ${({ theme }) => theme.space[2] * 6 + 'px'};
+  }
+`;
+
 export const ErrorContainer = styled.div`
   position: absolute;
   display: block;
