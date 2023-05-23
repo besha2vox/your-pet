@@ -72,7 +72,6 @@ const UserData = ({ user }) => {
         return null;
       }).filter(Boolean)
     );
-    // console.log(updatedData)
     dispatch(changeUser(updatedData));
   };
 
@@ -115,7 +114,7 @@ const UserData = ({ user }) => {
                 {edit && petPhoto ? (
                   <ConfirmButtonWrap>
                     <EditButton type="button" onClick={handleAddAvatar}>
-                      <Check />
+                      <Check stroke="#00C3AD"/>
                       Confirm
                     </EditButton>
                     <EditButton type="button" onClick={handleCancelAvatar}>

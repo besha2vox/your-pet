@@ -63,10 +63,14 @@ export const FormInput = styled(Field)`
       border: 1px solid #f43f5e;
     `}
   &::-webkit-calendar-picker-indicator {
-    color: red;
+    color: #111111;
     font-size: 15px;
     padding: 2px;
     margin-right: 25px;
+  }
+  &::-webkit-datetime-edit {
+    color: #111111;
+    padding: 2px;
   }
 `;
 

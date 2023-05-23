@@ -47,7 +47,7 @@ const UserDataItem = ({
         )}
         {!isdisabled && (
           <EditInpuButton type="button" disabled={!formik.isValid} onClick={() => onSubmit(formik.values, name)}>
-            <ConfirmIcon />
+            <ConfirmIcon stroke="#00C3AD"/>
           </EditInpuButton>
         )}
         <FormInput
