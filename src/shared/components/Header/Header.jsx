@@ -12,7 +12,6 @@ import { HeaderWrapper, Wrapper, NavWrapper, Menu } from './Header.styled';
 
 const Header = () => {
   const user = useSelector(selectUser);
-  console.log('user: ', user);
   const { isLoggedIn } = useSelector(selectAuth);
   const [isOpen, setIsOpen] = useState(false);
   const [screenWidth] = useWindowSize();
