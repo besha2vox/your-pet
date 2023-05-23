@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
+import NoticeCardSkeleton from '../Skeleton/NoticeCardSkeleton/NoticeCardSkeleton';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from 'redux/auth/selectors';
+import { selectNoticesIsLoading } from 'redux/notices/selectors';
 import {
   ageDeterminationFunc,
   cutTitle,
@@ -42,6 +44,7 @@ const NoticesCategoriesList = ({
   chosenGenderFilter,
 }) => {
   const user = useSelector(selectUser);
+  const isLoading = useSelector(selectNoticesIsLoading);
   const { pathname } = useLocation();
 
   if (!items) return;
@@ -103,7 +106,12 @@ const NoticesCategoriesList = ({
       </ListItem>
     );
   });
-  return <List>{pets}</List>;
+  return (
+    <List>
+      {isLoading && <NoticeCardSkeleton cards={8} />}
+      {!isLoading && pets}
+    </List>
+  );
 };
 
 NoticesCategoriesList.propTypes = {
