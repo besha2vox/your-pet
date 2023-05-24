@@ -198,7 +198,6 @@ const NoticesPage = () => {
           totalPagesCount={totalPages}
         />
       </ListContainer>
-
       {isItemModalOpen && (
         <ModalNotice
           toggleModal={toggleModal}
