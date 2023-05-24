@@ -6,15 +6,16 @@ const FriendItem = styled.li`
   box-shadow: ${({ theme }) => theme.boxShadows.main};
   border-radius: 40px;
 
+  &:hover,
+  :focus {
+    box-shadow: ${({ theme }) => theme.boxShadows.secondary};
+  }
+
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     max-width: 395px;
     transition: box-shadow 300ms ${({ theme }) => theme.transition.main};
-
-    &:hover {
-      box-shadow: ${({ theme }) => theme.boxShadows.secondary};
-    }
   }
 `;
 
@@ -168,17 +169,14 @@ const WorkTimeList = styled.ul`
   top: 36px;
   left: 0;
   width: 120px;
-
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-
   background: #ffffff;
   border: 1px solid ${({ theme }) => theme.colors.blue};
   box-shadow: ${({ theme }) => theme.boxShadows.main};
   border-radius: 8px;
-
   color: ${({ theme }) => theme.colors.black};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
