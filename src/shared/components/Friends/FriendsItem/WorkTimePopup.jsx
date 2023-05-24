@@ -1,19 +1,42 @@
-import { WorkTimeList, WorkTimeItem, Text } from './FriendsItem.styled';
+import {
+  WorkTimeList,
+  WorkTimeItem,
+  WorkTimeText,
+  WorkTimeItemCurrent,
+} from './FriendsItem.styled';
+import { format } from 'date-fns';
+
+const dayNow = new Date();
+const dayOfWeek = format(dayNow, 'iiiiii');
 
 const WorkTimePopup = ({ shedule }) => {
-  const workDays = shedule.map(item => (
-    <WorkTimeItem key={item.day}>
-      {item?.isOpen ? (
-        <Text>
-          <span>{item.day}</span> {item.from}-{item.to}
-        </Text>
-      ) : (
-        <Text>
-          <span>{item.day}</span> Closed
-        </Text>
-      )}
-    </WorkTimeItem>
-  ));
+  const workDays = shedule.map(item =>
+    item.day === dayOfWeek.toUpperCase() ? (
+      <WorkTimeItemCurrent key={item.day}>
+        {item?.isOpen ? (
+          <WorkTimeText>
+            <span>{item.day}</span> {item.from}-{item.to}
+          </WorkTimeText>
+        ) : (
+          <WorkTimeText>
+            <span>{item.day}</span> Closed
+          </WorkTimeText>
+        )}
+      </WorkTimeItemCurrent>
+    ) : (
+      <WorkTimeItem key={item.day}>
+        {item?.isOpen ? (
+          <WorkTimeText>
+            <span>{item.day}</span> {item.from}-{item.to}
+          </WorkTimeText>
+        ) : (
+          <WorkTimeText>
+            <span>{item.day}</span> Closed
+          </WorkTimeText>
+        )}
+      </WorkTimeItem>
+    )
+  );
   return <WorkTimeList>{workDays}</WorkTimeList>;
 };
 

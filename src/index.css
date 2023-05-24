@@ -100,10 +100,10 @@ body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
 
-  background-color: #fdf7f2;
+  background-color: #fef9f9;
 
   overflow-y: scroll;
-    overflow-x: hidden;
+  overflow-x: hidden;
 
   @media screen and (min-width: 768px) {
     font-size: 16px;

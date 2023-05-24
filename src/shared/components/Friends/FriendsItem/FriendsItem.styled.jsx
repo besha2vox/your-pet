@@ -4,18 +4,18 @@ const FriendItem = styled.li`
   padding: 16px 12px;
   background-color: #ffffff;
   box-shadow: ${({ theme }) => theme.boxShadows.main};
-  border-radius: 20px;
+  border-radius: 40px;
+
+  &:hover,
+  :focus {
+    box-shadow: ${({ theme }) => theme.boxShadows.secondary};
+  }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    border-radius: 40px;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     max-width: 395px;
     transition: box-shadow 300ms ${({ theme }) => theme.transition.main};
-
-    &:hover {
-      box-shadow: ${({ theme }) => theme.boxShadows.secondary};
-    }
   }
 `;
 
@@ -129,7 +129,7 @@ const Text = styled.p`
   display: flex;
   justify-content: space-between;
   font: inherit;
-  font-size: ${({ theme }) => theme.fontSizes[0]};
+  font-size: ${({ theme }) => theme.fontSizes[2]};
   line-height: 1.34;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
@@ -166,37 +166,59 @@ const ContactLink = styled.a`
 const WorkTimeList = styled.ul`
   padding: 12px;
   position: absolute;
-  top: 48px;
+  top: 36px;
   left: 0;
-
+  width: 120px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-
   background: #ffffff;
   border: 1px solid ${({ theme }) => theme.colors.blue};
   box-shadow: ${({ theme }) => theme.boxShadows.main};
   border-radius: 8px;
-
   color: ${({ theme }) => theme.colors.black};
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     top: 40px;
+    width: 120px;
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
     top: 48px;
+    width: 120px;
   }
 `;
 
 const WorkTimeItem = styled.li`
-  width: 100px;
   :not(:last-child) {
     margin-bottom: 4px;
   }
+`;
+
+const WorkTimeItemCurrent = styled.li`
+  color: ${({ theme }) => theme.colors.blue};
+  font-weight: 600;
+
+  :not(:last-child) {
+    margin-bottom: 4px;
+  }
+`;
+
+const WorkTimeText = styled.p`
+  display: flex;
+  justify-content: space-between;
+  font: inherit;
+  font-size: ${({ theme }) => theme.fontSizes[0]};
+  font-weight: inherit;
+  line-height: 1.34;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    width: 120px;
+    font-size: ${({ theme }) => theme.fontSizes[0]};
+    line-height: 1.36;
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    font-size: ${({ theme }) => theme.fontSizes[0]};
+    line-height: 1.38;
   }
 `;
 
@@ -209,8 +231,10 @@ export {
   WorkTime,
   TextTitle,
   Text,
+  WorkTimeText,
   ContactLink,
   TextWrapper,
   WorkTimeList,
   WorkTimeItem,
+  WorkTimeItemCurrent,
 };
