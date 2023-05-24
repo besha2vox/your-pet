@@ -108,7 +108,7 @@ const NoticesCategoriesList = ({
   });
   return (
     <List>
-      {isLoading && <NoticeCardSkeleton cards={8} />}
+      {isLoading && <NoticeCardSkeleton cards={4} />}
       {!isLoading && pets}
     </List>
   );

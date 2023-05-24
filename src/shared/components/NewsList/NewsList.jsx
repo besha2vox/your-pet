@@ -20,7 +20,7 @@ export default function NewsList({ data }) {
 
   return (
     <List>
-      {isLoading && <NewsCardSkeleton cards={8} />}
+      {isLoading && <NewsCardSkeleton cards={3} />}
       {!isLoading && items}
     </List>
   );
