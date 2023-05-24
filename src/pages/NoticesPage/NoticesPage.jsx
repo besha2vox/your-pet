@@ -127,7 +127,7 @@ const NoticesPage = () => {
   };
 
   const toggleModal = () => {
-    if (isItemModalOpen) dispatch(setCurrentNotice());
+    if (!isItemModalOpen) dispatch(setCurrentNotice());
 
     setIsItemModalOpen(prevState => !prevState);
   };

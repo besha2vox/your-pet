@@ -19,7 +19,7 @@ const SharedLayout = () => {
         <Main screenHeight={screenHeight} screenWidth={screenWidth}>
           <Section>
             <Container>
-              <Suspense fallback={<p>Loading...</p>}>
+              <Suspense fallback={null}>
                 <Outlet />
               </Suspense>
             </Container>

@@ -1,4 +1,5 @@
 import NewsItem from '../NewsItem/NewsItem';
+import NoItemsFound from '../NoItemsFound/NoItemsFound';
 import NewsCardSkeleton from '../Skeleton/NewsCardSkeleton/NewsCardSkeleton';
 import { useSelector } from 'react-redux';
 import { selectNewsLoading } from 'redux/news/selectors';
@@ -19,9 +20,16 @@ export default function NewsList({ data }) {
   ));
 
   return (
-    <List>
-      {isLoading && <NewsCardSkeleton cards={8} />}
-      {!isLoading && items}
-    </List>
+    <>
+      {!data.length && !isLoading && (
+        <NoItemsFound text="Nothing was found for your request." />
+      )}
+      {isLoading && (
+        <List>
+          <NewsCardSkeleton cards={3} />
+        </List>
+      )}
+      {data.length > 0 && !isLoading && <List>{items}</List>}
+    </>
   );
 }
