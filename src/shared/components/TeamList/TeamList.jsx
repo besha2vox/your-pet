@@ -1,0 +1,60 @@
+import Button from '../Button/Button';
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectTeam } from 'redux/team/selectors';
+import { TelegramIcon, GitIcon, LinkedInIcon } from 'shared/utils/icons';
+
+import {
+  List,
+  ListItem,
+  ImageWrapper,
+  Category,
+  SocialLink,
+  SocialWrapper,
+  Info,
+  AgeInfo,
+  GenderInfo,
+  CardFooter,
+  Name,
+} from './TeamList.styled';
+
+const TeamList = () => {
+  const team = useSelector(selectTeam);
+
+  if (!team) return;
+
+  const members = team.map(member => {
+    return (
+      <ListItem key={member._id}>
+        <ImageWrapper bgi={member.avatarURL}>
+          {/* <Category>{member.category}</Category> */}
+        </ImageWrapper>
+        <CardFooter>
+          <Name>{member.name}</Name>
+          <SocialWrapper>
+            <SocialLink href={member.gitURL} target="_blank" rel="noreferrer">
+              <GitIcon />
+            </SocialLink>
+            <SocialLink
+              href={member.linkedInURL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <LinkedInIcon />
+            </SocialLink>
+            <SocialLink
+              href={member.telegramURL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <TelegramIcon />
+            </SocialLink>
+          </SocialWrapper>
+        </CardFooter>
+      </ListItem>
+    );
+  });
+  return <List>{members}</List>;
+};
+
+export default TeamList;

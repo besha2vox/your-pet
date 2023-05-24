@@ -10,6 +10,7 @@ import {
   cutTitle,
   transformCategoryName,
 } from 'shared/helpers';
+
 import {
   HeartIcon,
   LocationIcon,
@@ -45,6 +46,7 @@ const NoticesCategoriesList = ({
 }) => {
   const user = useSelector(selectUser);
   const isLoading = useSelector(selectNoticesIsLoading);
+
   const { pathname } = useLocation();
 
   if (!items) return;
@@ -115,23 +117,6 @@ const NoticesCategoriesList = ({
 };
 
 NoticesCategoriesList.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      birthday: PropTypes.string.isRequired,
-      breed: PropTypes.string.isRequired,
-      location: PropTypes.string.isRequired,
-      price: PropTypes.number,
-      sex: PropTypes.string.isRequired,
-      comments: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
-      titleOfAdd: PropTypes.string.isRequired,
-      owner: PropTypes.shape,
-      avatarURL: PropTypes.string.isRequired,
-      favorite: PropTypes.arrayOf(PropTypes.string.isRequired),
-    })
-  ),
   moreBtnClickHandler: PropTypes.func.isRequired,
 };
 

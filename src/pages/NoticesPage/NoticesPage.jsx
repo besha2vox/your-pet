@@ -3,6 +3,7 @@ import NoticesCategoriesNav from 'shared/components/NoticesCategoriesNav/Notices
 import NoticesFilters from 'shared/components/NoticesFilters/NoticesFilters';
 import AddPetBtn from 'shared/components/AddPetBtn/AddPetBtn';
 import NoticesCategoriesList from 'shared/components/NoticesCategoriesList/NoticesCategoriesList';
+import TeamList from 'shared/components/TeamList/TeamList';
 import Pagination from 'shared/components/Pagination/Pagination';
 import ModalNotice from 'shared/components/ModalNotice/ModalNotice';
 import ModalUnAuthorized from 'shared/components/ModalUnAuthorized/ModalUnAuthorized';
@@ -24,6 +25,7 @@ import {
 } from 'redux/notices/operations';
 import { setCurrentNotice, setNotices } from 'redux/notices/actions';
 import { selectNotices, selectTotalHitsNotices } from 'redux/notices/selectors';
+import { getTeam } from 'redux/team/operations';
 import { selectUser } from 'redux/auth/selectors';
 
 import {
@@ -38,23 +40,25 @@ const NoticesPage = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const { categoryName } = useParams();
-  const notices = useSelector(selectNotices);
   const totalHits = useSelector(selectTotalHitsNotices);
   const { isLoggedIn } = useSelector(selectAuth);
   const user = useSelector(selectUser);
-
+  const notices = useSelector(selectNotices);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [isAuthorizedModalOpen, setIsAuthorizedModalOpen] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const [query, setQuery] = useState('');
   const [genderFilter, setGenderFilter] = useState('');
   const [ageFilter, setAgeFilter] = useState('');
+  const [teamFilter, setTeamFilter] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page = searchParams.get('page') || 1;
 
   useEffect(() => {
     dispatch(setNotices());
+
+    setTeamFilter(false);
 
     const searchQuery = {
       page,
@@ -101,6 +105,16 @@ const NoticesPage = () => {
     query,
     setSearchParams,
   ]);
+
+  useEffect(() => {
+    if (teamFilter) {
+      setQuery('');
+      setAgeFilter('');
+      setGenderFilter('');
+
+      dispatch(getTeam());
+    }
+  }, [dispatch, teamFilter]);
 
   useEffect(() => {
     const pageCount = Math.ceil(totalHits / 12);
@@ -174,6 +188,7 @@ const NoticesPage = () => {
           <NoticesFilters
             chooseGender={setGenderFilter}
             chooseAge={setAgeFilter}
+            chooseKotikiFilter={setTeamFilter}
           />
           <AddPetBtn
             isFixed={true}
@@ -184,22 +199,33 @@ const NoticesPage = () => {
         </Container>
       </Filters>
       <ListContainer>
-        <NoticesCategoriesList
-          items={notices}
-          moreBtnClickHandler={moreBtnClickHandler}
-          toggleFavorites={toggleFavorites}
-          onDeleteBtnClick={onDeleteMyPet}
-          chosenAgeFilter={ageFilter}
-          chosenGenderFilter={genderFilter}
-          toggleUnauthorizeModal={toggleUnauthorizeModal}
-        />
+        {!teamFilter && (
+          <NoticesCategoriesList
+            items={notices}
+            moreBtnClickHandler={moreBtnClickHandler}
+            toggleFavorites={toggleFavorites}
+            onDeleteBtnClick={onDeleteMyPet}
+            chosenAgeFilter={ageFilter}
+            chosenGenderFilter={genderFilter}
+            toggleUnauthorizeModal={toggleUnauthorizeModal}
+          />
+        )}
+        {teamFilter && (
+          <TeamList
+            moreBtnClickHandler={moreBtnClickHandler}
+            toggleFavorites={toggleFavorites}
+            onDeleteBtnClick={onDeleteMyPet}
+            chosenAgeFilter={ageFilter}
+            chosenGenderFilter={genderFilter}
+            toggleUnauthorizeModal={toggleUnauthorizeModal}
+          />
+        )}
         <Pagination
           onPageChange={onPageChange}
           currentPage={Number(page)}
           totalPagesCount={totalPages}
         />
       </ListContainer>
-
       {isItemModalOpen && (
         <ModalNotice
           toggleModal={toggleModal}

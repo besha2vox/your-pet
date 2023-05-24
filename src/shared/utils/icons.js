@@ -28,6 +28,9 @@ import { ReactComponent as UserIcon } from 'images/icons/user-1.svg';
 import { ReactComponent as LogoIcon } from 'images/icons/logo.svg';
 import { ReactComponent as LogoIconSm } from 'images/icons/logo-small.svg';
 import { ReactComponent as PawprintSkeletonIcon } from 'images/icons/pawprintSkeleton.svg';
+import { ReactComponent as TelegramIcon } from 'images/icons/telegram.svg';
+import { ReactComponent as GitIcon } from 'images/icons/github.svg';
+import { ReactComponent as LinkedInIcon } from 'images/icons/linkedin.svg';
 
 export {
   ArrowLeftIcon,
@@ -60,4 +63,7 @@ export {
   LogoIcon,
   LogoIconSm,
   PawprintSkeletonIcon,
+  TelegramIcon,
+  GitIcon,
+  LinkedInIcon,
 };
