@@ -25,7 +25,7 @@ const PaginationList = styled.ul`
 const PaginationItem = styled.li`
   width: 35px;
   height: 35px;
-  color: ${({ theme }) => theme.colors.lightBlue};
+  color: ${({ theme }) => theme.colors.blue};
   display: flex;
   border: 1px solid ${({ theme }) => theme.colors.lightBlue};
   border-radius: 50%;
@@ -58,6 +58,10 @@ const PaginationItem = styled.li`
   &.disabled {
     pointer-events: none;
     background-color: transparent;
+
+    & svg {
+      stroke: ${({ theme }) => theme.colors.lightBlue};
+    }
   }
 `;
 const ArrowLeft = styled.div`
