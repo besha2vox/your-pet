@@ -13,12 +13,14 @@ import {
   Wrapper,
 } from './NewsCardSkeleton.styled';
 
+//import { nanoid } from 'nanoid';
+
 const NewsCardSkeleton = ({ cards }) => {
   const [screenWidth] = useWindowSize();
   return Array(cards)
     .fill(0)
-    .map(card => (
-      <Item>
+    .map((card, index )=> (
+      <Item key = {index}>
         <ImageWrapper>
           <PawprintSkeletonIcon />
         </ImageWrapper>
