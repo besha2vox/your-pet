@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Pagination from 'shared/components/Pagination/Pagination';
-import { Title } from './NewsPage.styled';
+import { Title, NewsWrapper} from './NewsPage.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNews, fetchNewsByQuery2 } from 'redux/news/operations';
 
@@ -78,7 +78,8 @@ const NewsPage = () => {
   };
 
   return (
-    <>
+    
+    <NewsWrapper>
       <Title> News</Title>
       <NoticesSearch onFormSubmit={onSearch}></NoticesSearch>
 
@@ -101,7 +102,10 @@ const NewsPage = () => {
           onPageChange={page => onPageChange(page)}
         />
       )}
-    </>
+     
+    </NewsWrapper>
+   
+   
   );
 };
 

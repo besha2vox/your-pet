@@ -21,3 +21,11 @@ text-align: center;
   }
 `;
 
+export const NewsWrapper = styled.div`
+display: flex;
+ flex-direction: column;
+ 
+
+ flex: 1 1 auto;
+ align-content: stretch;
+`;
