@@ -10,7 +10,7 @@ import {
   FiltersText,
 } from './NoticesFilters.styled';
 
-const NoticesFilters = ({ chooseGender, chooseAge }) => {
+const NoticesFilters = ({ chooseGender, chooseAge, chooseKotikiFilter }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAgeMenuOpen, setAgeIsMenuOpen] = useState(false);
   const [isGenderMenuOpen, setGenderIsMenuOpen] = useState(false);
@@ -88,6 +88,7 @@ const NoticesFilters = ({ chooseGender, chooseAge }) => {
           toggleMenu={filtersToggle}
           setGenderFilter={setGender}
           setAgeFilter={setAge}
+          setKotikiFilter={chooseKotikiFilter}
           age={age}
           gender={gender}
         />

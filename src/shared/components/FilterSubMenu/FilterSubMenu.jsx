@@ -4,6 +4,7 @@ import {
   ChevronUpIcon,
   RoundIcon,
   CheckRoundIcon,
+  PawPrintIcon,
 } from 'shared/utils/icons';
 import {
   Menu,
@@ -14,6 +15,7 @@ import {
   CheckedIcon,
   ItemText,
   ItemCheckbox,
+  KotikiBtn,
 } from './FilterSubMenu.styled';
 
 const ageFilterData = [
@@ -29,6 +31,7 @@ const FilterSubMenu = ({
   toggleMenu,
   setGenderFilter,
   setAgeFilter,
+  setKotikiFilter,
   age,
   gender,
 }) => {
@@ -95,6 +98,12 @@ const FilterSubMenu = ({
             </ItemText>
           ))}
         </GenderSubMenu>
+      </Menu>
+      <Menu>
+        <KotikiBtn type="button" onClick={() => setKotikiFilter(true)}>
+          <PawPrintIcon />
+          IT-kotiki
+        </KotikiBtn>
       </Menu>
     </>
   );

@@ -128,12 +128,12 @@ export { FilterWrapper, Btn, Filters, FiltersText };
 
 function filtersHeight(ageFilterFlag, genderFilterFlag) {
   if (!ageFilterFlag && !genderFilterFlag) {
-    return '126px';
+    return '166px';
   } else if (ageFilterFlag && !genderFilterFlag) {
-    return '226px';
+    return '266px';
   } else if (!ageFilterFlag && genderFilterFlag) {
-    return '197px';
+    return '237px';
   } else {
-    return '298px';
+    return '338px';
   }
 }

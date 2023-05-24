@@ -14,6 +14,7 @@ import { authReducer } from './auth/slice';
 import { newsReducer } from './news/slice';
 import { friendsReducer } from './friends/slice';
 import { noticesReducer } from './notices/slice';
+import { teamReducer } from './team/slice';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -35,6 +36,7 @@ export const store = configureStore({
     news: newsReducer,
     friends: friendsReducer,
     notices: noticesReducer,
+    team: teamReducer,
   },
   middleware,
 });
