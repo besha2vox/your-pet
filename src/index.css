@@ -3,43 +3,43 @@
 @font-face {
   font-family: 'Inter-Regular';
   src: local('Inter-Regular'),
-    url('./fonts/Inter/Inter-Regular.ttf') format('truetype');
+    url('./fonts/Inter/Inter-Regular.woff') format('truetype');
 }
 
 @font-face {
   font-family: 'Inter-Medium';
   src: local('Inter-Medium'),
-    url('./fonts/Inter/Inter-Medium.ttf') format('truetype');
+    url('./fonts/Inter/Inter-Medium.woff') format('truetype');
 }
 
 @font-face {
   font-family: 'Manrope-Regular';
   src: local('Manrope-Regular'),
-    url('./fonts/Manrope/Manrope-Regular.ttf') format('truetype');
+    url('./fonts/Manrope/Manrope-Regular.woff') format('truetype');
 }
 
 @font-face {
   font-family: 'Manrope-Medium';
   src: local('Manrope-Medium'),
-    url('./fonts/Manrope/Manrope-Medium.ttf') format('truetype');
+    url('./fonts/Manrope/Manrope-Medium.woff') format('truetype');
 }
 
 @font-face {
   font-family: 'Manrope-SemiBold';
   src: local('Manrope-SemiBold'),
-    url('./fonts/Manrope/Manrope-SemiBold.ttf') format('truetype');
+    url('./fonts/Manrope/Manrope-SemiBold.woff') format('truetype');
 }
 
 @font-face {
   font-family: 'Manrope-Bold';
   src: local('Manrope-Bold'),
-    url('./fonts/Manrope/Manrope-Bold.ttf') format('truetype');
+    url('./fonts/Manrope/Manrope-Bold.woff') format('truetype');
 }
 
 @font-face {
   font-family: 'Manrope-ExtraBold';
   src: local('Manrope-ExtraBold'),
-    url('./fonts/Manrope/Manrope-ExtraBold.ttf') format('truetype');
+    url('./fonts/Manrope/Manrope-ExtraBold.woff') format('truetype');
 }
 
 *,

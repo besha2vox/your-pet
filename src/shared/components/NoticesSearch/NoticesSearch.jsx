@@ -10,7 +10,6 @@ const NoticesSearch = ({ onFormSubmit }) => {
     if (!query) onFormSubmit(query);
   }, [onFormSubmit, query]);
 
-
   const submitHandler = e => {
     e.preventDefault();
 
@@ -33,10 +32,15 @@ const NoticesSearch = ({ onFormSubmit }) => {
         value={query}
         placeholder="Search"
       />
-      <SubmitBtn type="submit" query={query}>
+      <SubmitBtn type="submit" query={query} aria-label="Submit">
         <SearchIcon />
       </SubmitBtn>
-      <CleareUpBtn type="button" onClick={() => setQuery('')} query={query}>
+      <CleareUpBtn
+        type="button"
+        onClick={() => setQuery('')}
+        query={query}
+        aria-label="Discard query"
+      >
         <CrossIcon />
       </CleareUpBtn>
     </Form>

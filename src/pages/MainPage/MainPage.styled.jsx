@@ -12,37 +12,37 @@ import bg_desctop2x from '../../images/bg_desctop1x.png';
 import bg_desctop3x from '../../images/bg_desctop1x.png';
 
 // імпорт контентних зображень для мобілки
-import mobile1_1x from '../../images/main_img/mobile/1mobile1x.png';
-import mobile1_2x from '../../images/main_img/mobile/1mobile2x.png';
-import mobile1_3x from '../../images/main_img/mobile/1mobile3x.png';
-import mobile2_1x from '../../images/main_img/mobile/2mobile1x.png';
-import mobile2_2x from '../../images/main_img/mobile/2mobile2x.png';
-import mobile2_3x from '../../images/main_img/mobile/2mobile3x.png';
-import mobile3_1x from '../../images/main_img/mobile/3mobile1x.png';
-import mobile3_2x from '../../images/main_img/mobile/3mobile2x.png';
-import mobile3_3x from '../../images/main_img/mobile/3mobile3x.png';
+import mobile1_1x from '../../images/main_img/mobile/1mobile1x.webp';
+import mobile1_2x from '../../images/main_img/mobile/1mobile2x.webp';
+import mobile1_3x from '../../images/main_img/mobile/1mobile3x.webp';
+import mobile2_1x from '../../images/main_img/mobile/2mobile1x.webp';
+import mobile2_2x from '../../images/main_img/mobile/2mobile2x.webp';
+import mobile2_3x from '../../images/main_img/mobile/2mobile3x.webp';
+import mobile3_1x from '../../images/main_img/mobile/3mobile1x.webp';
+import mobile3_2x from '../../images/main_img/mobile/3mobile2x.webp';
+import mobile3_3x from '../../images/main_img/mobile/3mobile3x.webp';
 
 // імпорт контактніх зображень для таблетки
-import tablet1_1x from '../../images/main_img/tablet/1tablet1x.png';
-import tablet1_2x from '../../images/main_img/tablet/1tablet2x.png';
-import tablet1_3x from '../../images/main_img/tablet/1tablet3x.png';
-import tablet2_1x from '../../images/main_img/tablet/2tablet1x.png';
-import tablet2_2x from '../../images/main_img/tablet/2tablet2x.png';
-import tablet2_3x from '../../images/main_img/tablet/2tablet3x.png';
-import tablet3_1x from '../../images/main_img/tablet/3tablet1x.png';
-import tablet3_2x from '../../images/main_img/tablet/3tablet2x.png';
-import tablet3_3x from '../../images/main_img/tablet/3tablet3x.png';
+import tablet1_1x from '../../images/main_img/tablet/1tablet1x.webp';
+import tablet1_2x from '../../images/main_img/tablet/1tablet2x.webp';
+import tablet1_3x from '../../images/main_img/tablet/1tablet3x.webp';
+import tablet2_1x from '../../images/main_img/tablet/2tablet1x.webp';
+import tablet2_2x from '../../images/main_img/tablet/2tablet2x.webp';
+import tablet2_3x from '../../images/main_img/tablet/2tablet3x.webp';
+import tablet3_1x from '../../images/main_img/tablet/3tablet1x.webp';
+import tablet3_2x from '../../images/main_img/tablet/3tablet2x.webp';
+import tablet3_3x from '../../images/main_img/tablet/3tablet3x.webp';
 
 // шьпорт контактніх зображень для декстопу
-import desctop1_1x from '../../images/main_img/desctop/1desctop1x.png';
-import desctop1_2x from '../../images/main_img/desctop/1desctop2x.png';
-import desctop1_3x from '../../images/main_img/desctop/1desctop3x.png';
-import desctop2_1x from '../../images/main_img/desctop/2desctop1x.png';
-import desctop2_2x from '../../images/main_img/desctop/2desctop2x.png';
-import desctop2_3x from '../../images/main_img/desctop/2desctop3x.png';
-import desctop3_1x from '../../images/main_img/desctop/3desctop1x.png';
-import desctop3_2x from '../../images/main_img/desctop/3desctop2x.png';
-import desctop3_3x from '../../images/main_img/desctop/3desctop3x.png';
+import desctop1_1x from '../../images/main_img/desctop/1desctop1x.webp';
+import desctop1_2x from '../../images/main_img/desctop/1desctop2x.webp';
+import desctop1_3x from '../../images/main_img/desctop/1desctop3x.webp';
+import desctop2_1x from '../../images/main_img/desctop/2desctop1x.webp';
+import desctop2_2x from '../../images/main_img/desctop/2desctop2x.webp';
+import desctop2_3x from '../../images/main_img/desctop/2desctop3x.webp';
+import desctop3_1x from '../../images/main_img/desctop/3desctop1x.webp';
+import desctop3_2x from '../../images/main_img/desctop/3desctop2x.webp';
+import desctop3_3x from '../../images/main_img/desctop/3desctop3x.webp';
 
 const MainContainer = styled.div`
   display: flex;

@@ -6,7 +6,7 @@ const Logo = () => {
   const [screenWidth] = useWindowSize();
 
   return (
-    <LogoWrapper to="/">
+    <LogoWrapper to="/" aria-label="Site logo">
       {screenWidth <= 767 ? <LogoIconSm /> : <LogoIcon />}
     </LogoWrapper>
   );

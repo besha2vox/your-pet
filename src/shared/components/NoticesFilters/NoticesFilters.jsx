@@ -68,7 +68,12 @@ const NoticesFilters = ({ chooseGender, chooseAge }) => {
       {gender && screenWidth >= 1280 && (
         <CheckedFilter text={gender} clickHandler={() => setGender('')} />
       )}
-      <Btn type="button" onClick={filtersToggle} isOpen={isMenuOpen}>
+      <Btn
+        type="button"
+        onClick={filtersToggle}
+        isOpen={isMenuOpen}
+        aria-label="Show filters"
+      >
         {screenWidth >= 768 && 'Filter'} <FilterIcon />
       </Btn>
       <Filters
