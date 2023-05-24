@@ -59,26 +59,6 @@ border-top-right-radius: 10px;
   height: 100%;
 `;
 
-const Category = styled.p`
-  /* position: absolute; */
-  top: 16px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 126px;
-  max-height: 32px;
-  padding: ${({ theme }) => theme.space[3] + 3 + 'px'} 0;
-
-  font-family: ${({ theme }) => theme.fonts.main.medium};
-  font-size: ${({ theme }) => theme.fontSizes[1]};
-  line-height: inherit;
-  color: ${({ theme }) => theme.colors.black};
-
-  background-color: ${({ theme }) => theme.colors.lightBlue};
-  border-radius: 0px 16px 16px 0px;
-`;
 
 const SocialLink = styled.a`
   display: flex;
@@ -147,17 +127,7 @@ const RoleInfo = styled(Info)`
   }
 `;
 
-const GenderInfo = styled(Info)`
-  color: ${({ theme, inRange }) => theme.colors.black};
 
-  background-color: ${({ theme, inRange }) =>
-    inRange ? theme.colors.blue : theme.colors.lightBlue};
-
-  & svg {
-    stroke: ${({ theme, inRange }) =>
-      theme.colors.blue};
-  }
-`;
 
 const CardFooter = styled.div`
   display: flex;
@@ -186,12 +156,10 @@ export {
   List,
   ListItem,
   ImageWrapper,
-  Category,
   SocialLink,
   SocialWrapper,
   Info,
   RoleInfo,
-  GenderInfo,
   CardFooter,
   Name,
 };
