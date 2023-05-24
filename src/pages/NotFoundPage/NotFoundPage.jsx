@@ -18,12 +18,13 @@ function NotFoundPage() {
   return (
     <MainContainer>
       <Span>
-        <Title>Ooops!
-          <Paragraf>  This page not found :(</Paragraf>
+        <Title>
+          Ooops!
+          <Paragraf> This page not found :(</Paragraf>
         </Title>
       </Span>
       <ImageContainer>
-        <Image />
+        <Image alt="not found" />
       </ImageContainer>
       <BottomInfoWrapper>
         <Button
