@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export const validatePetSchema = Yup.object().shape({
   title: Yup.string()
     .required('Title is required')
-    .min(2, 'Name must be at least 2 characters')
+    .min(8, 'Name must be at least 2 characters')
     .max(16, 'Name must not exceed 16 characters'),
   category: Yup.string()
     .required('Category is required')
