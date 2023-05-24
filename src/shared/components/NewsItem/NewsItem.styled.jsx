@@ -7,6 +7,8 @@ export const Item = styled.li`
   flex-direction: column;
   box-shadow: ${({ theme }) => theme.boxShadows.main};
   border-radius: 20px;
+  min-height: 578px;
+  width: 280px;
 
   background: #ffffff;
   transition: box-shadow 300ms ${({ theme }) => theme.transition.main};
@@ -17,7 +19,7 @@ export const Item = styled.li`
   &::before {
     content: '';
     position: absolute;
-    top: -14px;
+    top: -12px;
     left: 0;
     width: 100%;
     height: 4px;
@@ -46,6 +48,7 @@ export const ImageWrapper = styled.div`
   width: 100%;
   object-fit: cover;
   max-height: 252px;
+  flex-grow: 2;
 
   border-radius: 20px;
   overflow: hidden;
@@ -54,7 +57,7 @@ export const ImageWrapper = styled.div`
 export const TextContent = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 16px 12px 15px;
+  padding: 16px 12px 12px;
   row-gap: 16px;
   flex-grow: 1;
 

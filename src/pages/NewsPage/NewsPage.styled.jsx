@@ -20,3 +20,12 @@ text-align: center;
     padding: 80px 0 0 0;
   }
 `;
+
+export const NewsWrapper = styled.div`
+display: flex;
+ flex-direction: column;
+ 
+
+ flex: 1 1 auto;
+ align-content: stretch;
+`;
