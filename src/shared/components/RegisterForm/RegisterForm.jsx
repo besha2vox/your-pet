@@ -331,13 +331,7 @@ const RegisterForm = () => {
             </RegisterBtn>
             <LoginText>
               Already have an account?{' '}
-              <LoginLink
-                onClick={() => {
-                  navigate('/login');
-                }}
-              >
-                Log In
-              </LoginLink>
+              <LoginLink to={'/login'}>Log In</LoginLink>
             </LoginText>
           </RegisterFormEl>
         );

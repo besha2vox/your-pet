@@ -181,13 +181,7 @@ const LoginForm = () => {
             </LogInBtn>
             <RegisterText>
               Don't have an account?{' '}
-              <RegisterLink
-                onClick={() => {
-                  navigate('/register');
-                }}
-              >
-                Register
-              </RegisterLink>
+              <RegisterLink to={'/register'}>Register</RegisterLink>
             </RegisterText>
           </LogInForm>
         );
