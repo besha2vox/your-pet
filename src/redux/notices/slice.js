@@ -81,10 +81,10 @@ const noticesSlice = createSlice({
           getUsersNotices.pending,
           getFavoriteNotices.pending,
           addNotice.pending,
-          updateNotice.pending,
-          removeNotice.pending,
-          addFavoriteNotice.pending,
-          removeFavoriteNotice.pending
+          updateNotice.pending
+          // removeNotice.pending,
+          // addFavoriteNotice.pending,
+          // removeFavoriteNotice.pending
         ),
         state => {
           state.isLoading = true;
