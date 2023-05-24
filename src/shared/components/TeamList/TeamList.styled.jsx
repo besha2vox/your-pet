@@ -83,12 +83,10 @@ const SocialLink = styled.a`
 `;
 
 const SocialWrapper = styled.div`
-
   top: 12px;
   left: 12px;
   gap: 10px;
   display: flex;
-
   align-items: center;
 `;
 
@@ -118,10 +116,8 @@ const RoleInfo = styled(Info)`
   color: ${({ theme, inRange }) => theme.colors.black};
   font-size: ${({ theme }) => theme.fontSizes[3]};
   padding: 10px;
-
   background-color: ${({ theme, inRange }) =>
     inRange ? theme.colors.blue : theme.colors.lightBlue};
-
   & svg {
     stroke: ${({ theme, inRange }) => theme.colors.blue};
   }
