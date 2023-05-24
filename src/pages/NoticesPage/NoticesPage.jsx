@@ -113,6 +113,7 @@ const NoticesPage = () => {
       setAgeFilter('');
       setGenderFilter('');
 
+      dispatch(setNotices());
       dispatch(getTeam());
     }
   }, [dispatch, teamFilter]);
