@@ -25,7 +25,6 @@ export const getUsersNotices = createAsyncThunk(
       const { data } = await axios.get(
         `/api/notices?${createSearchParams(params)}`
       );
-      console.log('data: ', data);
 
       return data;
     } catch (error) {
