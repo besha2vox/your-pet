@@ -107,6 +107,8 @@ export const FriendInfoTitleSkeleton = styled(BaseSkeleton)`
   height: 16px;
   margin: 0;
 
+  border-radius: 8px;
+
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     height: 20px;
   }
@@ -118,6 +120,8 @@ export const FriendInfoTitleSkeleton = styled(BaseSkeleton)`
 export const FriendInfoTextSkeleton = styled(BaseSkeleton)`
   width: 90%;
   height: 16px;
+
+  border-radius: 8px;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     height: 20px;

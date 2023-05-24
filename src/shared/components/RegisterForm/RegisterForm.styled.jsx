@@ -1,4 +1,5 @@
 import { Field } from 'formik';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const RegisterFormEl = styled.form`
@@ -203,7 +204,7 @@ export const LoginText = styled.p`
   color: ${({ theme }) => theme.colors.grey};
 `;
 
-export const LoginLink = styled.a`
+export const LoginLink = styled(Link)`
   text-decoration-line: underline;
   color: ${({ theme }) => theme.colors.blue};
   display: inline;

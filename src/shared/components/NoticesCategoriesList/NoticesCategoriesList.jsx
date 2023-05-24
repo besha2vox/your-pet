@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import NoticeCardSkeleton from '../Skeleton/NoticeCardSkeleton/NoticeCardSkeleton';
+import NoItemsFound from '../NoItemsFound/NoItemsFound';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from 'redux/auth/selectors';
@@ -106,11 +107,19 @@ const NoticesCategoriesList = ({
       </ListItem>
     );
   });
+
   return (
-    <List>
-      {isLoading && <NoticeCardSkeleton cards={8} />}
-      {!isLoading && pets}
-    </List>
+    <>
+      {!items.length && !isLoading && (
+        <NoItemsFound text="Nothing was found for your request." />
+      )}
+      {isLoading && (
+        <List>
+          <NoticeCardSkeleton cards={4} />
+        </List>
+      )}
+      {items.length > 0 && !isLoading && <List>{pets}</List>}
+    </>
   );
 };
 

@@ -42,7 +42,6 @@ const NoticesPage = () => {
   const totalHits = useSelector(selectTotalHitsNotices);
   const { isLoggedIn } = useSelector(selectAuth);
   const user = useSelector(selectUser);
-
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
   const [isAuthorizedModalOpen, setIsAuthorizedModalOpen] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
@@ -113,7 +112,7 @@ const NoticesPage = () => {
   };
 
   const toggleModal = () => {
-    if (isItemModalOpen) dispatch(setCurrentNotice());
+    if (!isItemModalOpen) dispatch(setCurrentNotice());
 
     setIsItemModalOpen(prevState => !prevState);
   };
@@ -199,7 +198,6 @@ const NoticesPage = () => {
           totalPagesCount={totalPages}
         />
       </ListContainer>
-
       {isItemModalOpen && (
         <ModalNotice
           toggleModal={toggleModal}
