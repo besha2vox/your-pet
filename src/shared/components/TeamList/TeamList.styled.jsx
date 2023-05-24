@@ -23,6 +23,7 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
+  text-align: center;
   border-radius: 0px 0px 40px 40px;
   box-shadow: ${({ theme }) => theme.boxShadows.main};
   transition: box-shadow 300ms ${({ theme }) => theme.transition.main};
@@ -46,9 +47,11 @@ const ListItem = styled.li`
 
 const ImageWrapper = styled.div`
   position: relative;
-
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
   background-image: url(${({ bgi }) => bgi});
-  background-position: center;
+
+
   background-size: cover;
 
   max-width: 100%;
@@ -85,28 +88,28 @@ const SocialLink = styled.a`
   border-radius: 50%;
 
   transition: background-color 300ms ${({ theme }) => theme.transition.main};
-
+  & svg {
+    fill: ${({ theme }) => theme.colors.blue};
+    transition: stroke 300ms ${({ theme }) => theme.transition.main};
+  }
   &:hover,
   &:focus {
     background-color: ${({ theme }) => theme.colors.blue};
+    & svg {
+      fill: ${({ theme }) => theme.colors.lightBlue};
   }
 
-  & svg {
-    fill: ${({ theme }) => theme.colors.white};
-
-    transition: stroke 300ms ${({ theme }) => theme.transition.main};
-  }
+ 
 `;
 
 const SocialWrapper = styled.div`
-  /* position: absolute; */
+
   top: 12px;
   left: 12px;
-
+  gap: 10px;
   display: flex;
-  /* flex-direction: column; */
+
   align-items: center;
-  /* gap: ${({ theme }) => theme.space[4] * 3 + 'px'}; */
 `;
 
 const Info = styled.span`
@@ -131,29 +134,28 @@ const Info = styled.span`
   }
 `;
 
-const AgeInfo = styled(Info)`
-  color: ${({ theme, inRange }) =>
-    inRange ? theme.colors.white : theme.colors.black};
+const RoleInfo = styled(Info)`
+  color: ${({ theme, inRange }) => theme.colors.black};
+  font-size: ${({ theme }) => theme.fontSizes[3]};
+  padding: 10px;
 
   background-color: ${({ theme, inRange }) =>
     inRange ? theme.colors.blue : theme.colors.lightBlue};
 
   & svg {
-    stroke: ${({ theme, inRange }) =>
-      inRange ? theme.colors.white : theme.colors.blue};
+    stroke: ${({ theme, inRange }) => theme.colors.blue};
   }
 `;
 
 const GenderInfo = styled(Info)`
-  color: ${({ theme, inRange }) =>
-    inRange ? theme.colors.white : theme.colors.black};
+  color: ${({ theme, inRange }) => theme.colors.black};
 
   background-color: ${({ theme, inRange }) =>
     inRange ? theme.colors.blue : theme.colors.lightBlue};
 
   & svg {
     stroke: ${({ theme, inRange }) =>
-      inRange ? theme.colors.white : theme.colors.blue};
+      theme.colors.blue};
   }
 `;
 
@@ -172,11 +174,10 @@ const CardFooter = styled.div`
 
 const Name = styled.h3`
   width: 100%;
-  height: 66px;
 
   font-family: ${({ theme }) => theme.fonts.main.bold};
   font-size: ${({ theme }) => theme.fontSizes[4]};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
 
   overflow: hidden;
 `;
@@ -189,7 +190,7 @@ export {
   SocialLink,
   SocialWrapper,
   Info,
-  AgeInfo,
+  RoleInfo,
   GenderInfo,
   CardFooter,
   Name,

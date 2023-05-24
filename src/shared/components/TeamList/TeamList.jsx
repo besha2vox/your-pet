@@ -8,12 +8,9 @@ import {
   List,
   ListItem,
   ImageWrapper,
-  Category,
   SocialLink,
   SocialWrapper,
-  Info,
-  AgeInfo,
-  GenderInfo,
+  RoleInfo,
   CardFooter,
   Name,
 } from './TeamList.styled';
@@ -31,6 +28,7 @@ const TeamList = () => {
         </ImageWrapper>
         <CardFooter>
           <Name>{member.name}</Name>
+          <RoleInfo>{member.comments}</RoleInfo>
           <SocialWrapper>
             <SocialLink href={member.gitURL} target="_blank" rel="noreferrer">
               <GitIcon />
