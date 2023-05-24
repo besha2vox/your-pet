@@ -5,6 +5,7 @@ export const List = styled.ul`
   flex-direction: column;
   row-gap: 44px;
   margin-top: 44px;
+  align-items: center;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     display: flex;
