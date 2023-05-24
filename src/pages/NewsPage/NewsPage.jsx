@@ -5,9 +5,6 @@ import { useSearchParams } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from 'shared/components/Loader/Loader';
-
-import Container from 'shared/components/Container/Container';
 //import news from './news.json';
 //import Section from 'shared/components/Section/Section';
 import Pagination from 'shared/components/Pagination/Pagination';
@@ -15,14 +12,18 @@ import { Title } from './NewsPage.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNews, fetchNewsByQuery2 } from 'redux/news/operations';
 
-import { getAllNews, getHints, loading, error } from 'redux/news/selectors';
+import {
+  selectAllNews,
+  selectHints,
+  selectNewsError,
+} from 'redux/news/selectors';
+import { setNews } from 'redux/news/actions';
 
 const NewsPage = () => {
   const dispatch = useDispatch();
-  const data = useSelector(getAllNews);
-  const { totalHints, hints } = useSelector(getHints);
-  const isLoading = useSelector(loading);
-  const isError = useSelector(error);
+  const data = useSelector(selectAllNews);
+  const { totalHints, hints } = useSelector(selectHints);
+  const isError = useSelector(selectNewsError);
   const [totalPages, setTotalPages] = useState(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -31,9 +32,11 @@ const NewsPage = () => {
   const searchQuery = searchParams.get('query');
 
   useEffect(() => {
+    dispatch(setNews());
+
     const getNews = (searchQuery, page) => {
-      const fetchNewsByQuery = async () => {
-        await dispatch(
+      const fetchNewsByQuery = () => {
+        dispatch(
           searchQuery
             ? fetchNewsByQuery2({ query: searchQuery, page: page })
             : fetchNews({ page: page })
@@ -76,10 +79,9 @@ const NewsPage = () => {
   };
 
   return (
-    <Container>
+    <>
       <Title> News</Title>
       <NoticesSearch onFormSubmit={onSearch}></NoticesSearch>
-      {isLoading && <Loader />}
 
       {isError &&
         (toast.warn('Nothing have found. Try smth else!', {
@@ -99,7 +101,7 @@ const NewsPage = () => {
         totalPagesCount={totalPages}
         onPageChange={page => onPageChange(page)}
       />
-    </Container>
+    </>
   );
 };
 

@@ -1,9 +1,9 @@
-export const getAllNews = state => state.news.items;
+export const selectAllNews = state => state.news.items;
 
-export const getHints = state => ({
+export const selectHints = state => ({
   hints: state.news.hints,
   totalHints: state.news.totalHints,
 });
 
-export const loading = state => state.news.isLoading;
-export const error = ({ news }) => news.error;
+export const selectNewsLoading = state => state.news.isLoading;
+export const selectNewsError = ({ news }) => news.error;

@@ -16,15 +16,11 @@ import { FriendsPageTitle, NoFriendsOnPage } from './OurFriendsPage.styled';
 
 const OurFriendsPage = () => {
   const friends = useSelector(getAllFriends);
-
   const [totalPages, setTotalPages] = useState(null);
-
   const [searchParams, setSearchParams] = useSearchParams();
-
   const isLoading = useSelector(loading);
   const isError = useSelector(error);
   const { totalHints, hints } = useSelector(getHints);
-
   const dispatch = useDispatch();
 
   const page = searchParams.get('page') || 1;
@@ -35,8 +31,8 @@ const OurFriendsPage = () => {
       setTotalPages(pages);
     }
 
-    const fetchFriendsList = async () => {
-      await dispatch(fetchFriends(page));
+    const fetchFriendsList = () => {
+      dispatch(fetchFriends(page));
     };
     fetchFriendsList();
   }, [dispatch, page, totalHints, hints]);

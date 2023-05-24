@@ -27,6 +27,7 @@ import { ReactComponent as TrashIcon } from 'images/icons/trash-2.svg';
 import { ReactComponent as UserIcon } from 'images/icons/user-1.svg';
 import { ReactComponent as LogoIcon } from 'images/icons/logo.svg';
 import { ReactComponent as LogoIconSm } from 'images/icons/logo-small.svg';
+import { ReactComponent as PawprintSkeletonIcon } from 'images/icons/pawprintSkeleton.svg';
 
 export {
   ArrowLeftIcon,
@@ -58,4 +59,5 @@ export {
   UserIcon,
   LogoIcon,
   LogoIconSm,
+  PawprintSkeletonIcon,
 };
