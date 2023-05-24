@@ -10,6 +10,8 @@ import styled from 'styled-components';
 
 export const Parent = styled.div`
   position: relative;
+  width: 100%;
+  height: 0;
   opacity: 0.52;
 
   @keyframes pawAnimation {
@@ -52,7 +54,6 @@ export const Paw2 = styled(Pawprint2)`
   transform: rotate(127.69deg);
 
   animation: 3000ms pawAnimation ease-in-out 1s infinite;
-  
 `;
 
 export const Paw3 = styled(Pawprint3)`
@@ -65,7 +66,6 @@ export const Paw3 = styled(Pawprint3)`
   transform: rotate(53.71deg);
 
   animation: 3000ms pawAnimation ease-in-out 3s infinite;
-  
 `;
 export const Paw4 = styled(Pawprint4)`
   position: absolute;
@@ -77,7 +77,6 @@ export const Paw4 = styled(Pawprint4)`
   transform: rotate(7.08deg);
 
   animation: 3000ms pawAnimation ease-in-out 3s infinite;
-  
 `;
 export const Paw5 = styled(Pawprint5)`
   position: absolute;
@@ -89,7 +88,6 @@ export const Paw5 = styled(Pawprint5)`
   transform: rotate(-125.93deg);
 
   animation: 3000ms pawAnimation ease-in-out 5s infinite;
-  
 `;
 export const Paw6 = styled(Pawprint6)`
   position: absolute;
@@ -112,4 +110,4 @@ export const Paw7 = styled(Pawprint7)`
   transform: rotate(-65.1deg);
 
   animation: 3000ms pawAnimation ease-in-out 2s infinite;
-  `;
+`;

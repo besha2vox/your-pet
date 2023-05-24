@@ -8,7 +8,6 @@ import { useSearchParams } from 'react-router-dom';
 
 import FriendsList from './../../shared/components/Friends/FriendsList/FriendsList';
 import Pagination from 'shared/components/Pagination/Pagination';
-import Loader from 'shared/components/Loader/Loader';
 
 import { getAllFriends, loading, error } from './../../redux/friends/selectors';
 
@@ -49,9 +48,10 @@ const OurFriendsPage = () => {
   return (
     <>
       <FriendsPageTitle>Our Friends</FriendsPageTitle>
-      {isLoading && <Loader />}
       {isFriends && <FriendsList friends={friends} />}
-      {!isFriends && <NoFriendsOnPage>No fiends in list</NoFriendsOnPage>}
+      {!isFriends && !isLoading && (
+        <NoFriendsOnPage>No fiends in list</NoFriendsOnPage>
+      )}
       {isError && (
         <NoFriendsOnPage>{`${isError}, try again later`}</NoFriendsOnPage>
       )}

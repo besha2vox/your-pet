@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { loading } from 'redux/friends/selectors';
 
 import { FriendsItem } from './../FriendsItem/FriendsItem';
 import { FriendList } from './FriendsList.styled';
+import FriendCardSkeleton from 'shared/components/Skeleton/FriendsCardSkeleton/FriendsCardSkeleton';
 
 const FriendsList = ({ friends }) => {
+  const isLoading = useSelector(loading);
   const friendsList = friends.map(
     ({
       _id,
@@ -32,7 +36,8 @@ const FriendsList = ({ friends }) => {
 
   return (
     <>
-      <FriendList>{friendsList}</FriendList>
+      {isLoading && <FriendList>{<FriendCardSkeleton count={9} />}</FriendList>}
+      {!isLoading && <FriendList>{friendsList}</FriendList>}
     </>
   );
 };
