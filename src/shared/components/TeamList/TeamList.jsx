@@ -1,5 +1,4 @@
-import Button from '../Button/Button';
-import { useLocation } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 import { selectTeam } from 'redux/team/selectors';
 import { TelegramIcon, GitIcon, LinkedInIcon } from 'shared/utils/icons';
@@ -24,8 +23,7 @@ const TeamList = () => {
     return (
       <ListItem key={member._id}>
         <ImageWrapper bgi={member.avatarURL}>
-          {/* <Category>{member.category}</Category> */}
-        </ImageWrapper>
+                  </ImageWrapper>
         <CardFooter>
           <Name>{member.name}</Name>
           <RoleInfo>{member.comments}</RoleInfo>
