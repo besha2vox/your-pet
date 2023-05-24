@@ -20,9 +20,9 @@ const MainPage = () => {
     <MainContainer>
       <MainTitle>Take good care of your small pets</MainTitle>
       <ImageContainer>
-        <ImageOne />
-        <ImageTwo />
-        <ImageThree />
+        <ImageOne alt="Cute buldog" />
+        <ImageTwo alt="Cute dog" />
+        <ImageThree alt="Cute cat" />
       </ImageContainer>
     </MainContainer>
   );
