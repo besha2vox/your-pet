@@ -77,7 +77,7 @@ const noticesSlice = createSlice({
         isAnyOf(
           getNotices.pending,
           getNoticesByQuery.pending,
-          getNoticeById.pending,
+          // getNoticeById.pending,
           getUsersNotices.pending,
           getFavoriteNotices.pending,
           addNotice.pending,
