@@ -30,13 +30,13 @@ const AdData = [
   },
   {
     id: '4',
-    urlSite: 'https://aybolit.od.ua/',
+    urlSite: 'https://aybolit.od.ua/uk/',
     text: 'The staff at our clinic strives to restore the health of all patients and bring back the joy of companionship, calmness and optimism',
     image: img4,
   },
   {
     id: '5',
-    urlSite: 'https://terra.vet/',
+    urlSite: 'https://terra.vet/uk/',
     text: 'Our veterinary clinic offers ultrasound, X-ray, laboratory and grooming services. Surgical operations of varying complexity are performed.',
     image: img5,
   },

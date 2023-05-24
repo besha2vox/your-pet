@@ -35,6 +35,7 @@ import {
   Filters,
   ListContainer,
 } from './NoticesPage.styled';
+import { Slider } from 'shared/components/Slider/Slider';
 
 const NoticesPage = () => {
   const dispatch = useDispatch();
@@ -235,6 +236,7 @@ const NoticesPage = () => {
       {isAuthorizedModalOpen && (
         <ModalUnAuthorized toggleUnauthorizeModal={toggleUnauthorizeModal} />
       )}
+      <Slider />
     </Wrapper>
   );
 };
