@@ -3,11 +3,10 @@ import NoticesSearch from '../../shared/components/NoticesSearch/NoticesSearch';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Pagination from 'shared/components/Pagination/Pagination';
-import { Title, NewsWrapper} from './NewsPage.styled';
+import { Title, NewsWrapper } from './NewsPage.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNews, fetchNewsByQuery2 } from 'redux/news/operations';
 
@@ -60,11 +59,6 @@ const NewsPage = () => {
       var params = searchQuery ? { query: searchQuery, page: 1 } : { page: 1 };
       setSearchParams(params);
     }
-    //getNews(searchQuery, 1);
-  };
-
-  const clearWaitingQueue = () => {
-    toast.clearWaitingQueue();
   };
 
   const onPageChange = currentPage => {
@@ -78,23 +72,12 @@ const NewsPage = () => {
   };
 
   return (
-    
     <NewsWrapper>
       <Title> News</Title>
       <NoticesSearch onFormSubmit={onSearch}></NoticesSearch>
 
-      {isError &&
-        (toast.warn('Nothing have found. Try smth else!', {
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          draggable: true,
-        }),
-        clearWaitingQueue())}
-
       <NewsList data={data} />
 
-      <ToastContainer limit={1} />
       {!isError && (
         <Pagination
           currentPage={Number(page)}
@@ -102,10 +85,7 @@ const NewsPage = () => {
           onPageChange={page => onPageChange(page)}
         />
       )}
-     
     </NewsWrapper>
-   
-   
   );
 };
 

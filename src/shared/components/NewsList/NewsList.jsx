@@ -3,14 +3,14 @@ import NoItemsFound from '../NoItemsFound/NoItemsFound';
 import NewsCardSkeleton from '../Skeleton/NewsCardSkeleton/NewsCardSkeleton';
 import { useSelector } from 'react-redux';
 import { selectNewsLoading } from 'redux/news/selectors';
-import { nanoid } from 'nanoid';
+
 import { List } from './NewsList.styled';
 
 export default function NewsList({ data }) {
   const isLoading = useSelector(selectNewsLoading);
-  const items = data?.map(({ title, url, date, imgUrl, text }) => (
+  const items = data?.map(({ title, url, date, imgUrl, text }, index) => (
     <NewsItem
-      key={nanoid()}
+      key={index}
       title={title}
       url={url}
       text={text}
@@ -22,7 +22,7 @@ export default function NewsList({ data }) {
   return (
     <>
       {!data.length && !isLoading && (
-        <NoItemsFound text="Nothing was found for your request." />
+        <NoItemsFound text="Nothing was found for your request. Try again" />
       )}
       {isLoading && (
         <List>
