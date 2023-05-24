@@ -38,6 +38,7 @@ const noticesSlice = createSlice({
       })
       .addCase(setNotices, state => {
         state.items = [];
+        state.totalHits = 0;
       })
       .addMatcher(
         isAnyOf(
