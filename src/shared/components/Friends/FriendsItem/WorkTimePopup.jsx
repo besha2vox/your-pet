@@ -1,16 +1,16 @@
-import { WorkTimeList, WorkTimeItem, Text } from './FriendsItem.styled';
+import { WorkTimeList, WorkTimeItem, WorkTimeText } from './FriendsItem.styled';
 
 const WorkTimePopup = ({ shedule }) => {
   const workDays = shedule.map(item => (
     <WorkTimeItem key={item.day}>
       {item?.isOpen ? (
-        <Text>
+        <WorkTimeText>
           <span>{item.day}</span> {item.from}-{item.to}
-        </Text>
+        </WorkTimeText>
       ) : (
-        <Text>
+        <WorkTimeText>
           <span>{item.day}</span> Closed
-        </Text>
+        </WorkTimeText>
       )}
     </WorkTimeItem>
   ));
