@@ -3,6 +3,7 @@ import Section from 'shared/components/Section/Section';
 import Container from 'shared/components/Container/Container';
 import Footer from 'shared/components/Footer/Footer';
 import BtnScrollToTop from './../components/BtnScrollToTop/BtnScrollToTop';
+import Loader from 'shared/components/Loader/Loader';
 import { useWindowSize } from 'hooks/useResize';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
@@ -19,7 +20,7 @@ const SharedLayout = () => {
         <Main screenHeight={screenHeight} screenWidth={screenWidth}>
           <Section>
             <Container>
-              <Suspense fallback={<p>Loading...</p>}>
+              <Suspense fallback={<Loader />}>
                 <Outlet />
               </Suspense>
             </Container>
