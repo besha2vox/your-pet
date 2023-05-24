@@ -47,10 +47,9 @@ const ListItem = styled.li`
 
 const ImageWrapper = styled.div`
   position: relative;
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   background-image: url(${({ bgi }) => bgi});
-
 
   background-size: cover;
 
@@ -59,27 +58,26 @@ border-top-right-radius: 10px;
   height: 100%;
 `;
 
-
 const SocialLink = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
 
   border-radius: 50%;
+  color: ${({ theme }) => theme.colors.blue};
 
-  transition: background-color 300ms ${({ theme }) => theme.transition.main};
+  transition: background-color 300ms ${({ theme }) => theme.transition.main},
+    color 300ms ${({ theme }) => theme.transition.main};
+
   & svg {
-    fill: ${({ theme }) => theme.colors.blue};
-    transition: stroke 300ms ${({ theme }) => theme.transition.main};
+    fill: currentColor;
   }
+
   &:hover,
   &:focus {
     background-color: ${({ theme }) => theme.colors.blue};
-    & svg {
-      fill: ${({ theme }) => theme.colors.lightBlue};
+    color: ${({ theme }) => theme.colors.lightBlue};
   }
-
- 
 `;
 
 const SocialWrapper = styled.div`
@@ -122,8 +120,6 @@ const RoleInfo = styled(Info)`
     stroke: ${({ theme, inRange }) => theme.colors.blue};
   }
 `;
-
-
 
 const CardFooter = styled.div`
   display: flex;
