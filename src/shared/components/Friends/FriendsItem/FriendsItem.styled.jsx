@@ -195,12 +195,21 @@ const WorkTimeItem = styled.li`
   }
 `;
 
+const WorkTimeItemCurrent = styled.li`
+  color: ${({ theme }) => theme.colors.blue};
+  font-weight: 600;
+
+  :not(:last-child) {
+    margin-bottom: 4px;
+  }
+`;
+
 const WorkTimeText = styled.p`
   display: flex;
   justify-content: space-between;
   font: inherit;
   font-size: ${({ theme }) => theme.fontSizes[0]};
-  font-weight: 500;
+  font-weight: inherit;
   line-height: 1.34;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
@@ -227,4 +236,5 @@ export {
   TextWrapper,
   WorkTimeList,
   WorkTimeItem,
+  WorkTimeItemCurrent,
 };
