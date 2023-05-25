@@ -26,7 +26,8 @@ const NoticesFilters = ({ chooseGender, chooseAge, chooseKotikiFilter }) => {
       if (
         e.target !== menu &&
         !menu.contains(e.target) &&
-        e.target !== filterBtn
+        e.target !== filterBtn &&
+        !filterBtn.contains(e.target)
       )
         setIsMenuOpen(false);
     };
