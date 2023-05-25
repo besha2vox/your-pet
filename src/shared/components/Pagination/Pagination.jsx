@@ -1,9 +1,10 @@
 import { nanoid } from 'nanoid';
 import { usePagination, DOTS } from '../../../hooks/usePagination';
 import { ArrowLeftIcon } from 'shared/utils/icons';
+import { useWindowSize } from 'hooks/useResize';
 
 import {
-  PaginationItem,
+  PaginationButton,
   PaginationContainer,
   ArrowLeft,
   ArrowRight,
@@ -16,10 +17,12 @@ const Pagination = ({
   currentPage,
   totalPagesCount,
 }) => {
+  const [viewportWidth] = useWindowSize();
   const paginationRange = usePagination({
     currentPage,
     siblingCount,
     totalPagesCount,
+    viewportWidth,
   });
 
   if (currentPage === 0 || paginationRange.length < 2) {
@@ -38,43 +41,61 @@ const Pagination = ({
   return (
     <PaginationContainer>
       <PaginationList>
-        <PaginationItem
-          key={nanoid()}
-          className={currentPage === 1 && 'disabled'}
-          onClick={onPrevious}
-        >
-          <ArrowLeft key={'left'}>
-            <ArrowLeftIcon />
-          </ArrowLeft>
-        </PaginationItem>
+        {viewportWidth < 767 && currentPage === 1 ? (
+          ''
+        ) : (
+          <li>
+            <PaginationButton
+              key={nanoid()}
+              className={currentPage === 1 && 'disabled'}
+              onClick={onPrevious}
+            >
+              <ArrowLeft key={'left'}>
+                <ArrowLeftIcon />
+              </ArrowLeft>
+            </PaginationButton>
+          </li>
+        )}
         {paginationRange.map(pageNumber => {
           if (pageNumber === DOTS) {
-            return (
-              <PaginationItem key={nanoid()} className="dots">
-                &#8230;
-              </PaginationItem>
+            return viewportWidth < 767 ? (
+              ''
+            ) : (
+              <li>
+                <PaginationButton key={nanoid()} className="dots">
+                  &#8230;
+                </PaginationButton>
+              </li>
             );
           }
 
           return (
-            <PaginationItem
-              key={nanoid()}
-              className={pageNumber === currentPage && 'selected'}
-              onClick={() => onPageChange(pageNumber)}
-            >
-              {pageNumber}
-            </PaginationItem>
+            <li>
+              <PaginationButton
+                key={nanoid()}
+                className={pageNumber === currentPage && 'selected'}
+                onClick={() => onPageChange(pageNumber)}
+              >
+                {pageNumber}
+              </PaginationButton>
+            </li>
           );
         })}
-        <PaginationItem
-          key={nanoid()}
-          className={currentPage === lastPage && 'disabled'}
-          onClick={onNext}
-        >
-          <ArrowRight key={'right'}>
-            <ArrowLeftIcon />
-          </ArrowRight>
-        </PaginationItem>
+        {viewportWidth < 767 && currentPage === lastPage ? (
+          ''
+        ) : (
+          <li>
+            <PaginationButton
+              key={nanoid()}
+              className={currentPage === lastPage && 'disabled'}
+              onClick={onNext}
+            >
+              <ArrowRight key={'right'}>
+                <ArrowLeftIcon />
+              </ArrowRight>
+            </PaginationButton>
+          </li>
+        )}
       </PaginationList>
     </PaginationContainer>
   );

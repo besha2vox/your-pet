@@ -6,7 +6,7 @@ const PaginationContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 60px;
-  
+
   flex: 0 1 auto;
 `;
 
@@ -24,7 +24,7 @@ const PaginationList = styled.ul`
   padding: 8px 12px;
   gap: 7px;
 `;
-const PaginationItem = styled.li`
+const PaginationButton = styled.button`
   width: 35px;
   height: 35px;
   color: ${({ theme }) => theme.colors.blue};
@@ -95,7 +95,7 @@ const ArrowRight = styled.div`
 export {
   PaginationList,
   PaginationContainer,
-  PaginationItem,
+  PaginationButton,
   ArrowLeft,
   ArrowRight,
 };
