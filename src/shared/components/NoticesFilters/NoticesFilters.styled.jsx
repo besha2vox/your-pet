@@ -107,7 +107,7 @@ const Filters = styled.div`
   background-color: #fff;
   border-radius: 20px;
 
-  ${({ isOpen }) => isOpen && 'pointer-events: none'}
+  /* ${({ isOpen }) => isOpen && 'pointer-events: none'} */
 
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
   will-change: opacity, max-height;
