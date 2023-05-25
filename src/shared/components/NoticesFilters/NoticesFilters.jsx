@@ -19,6 +19,25 @@ const NoticesFilters = ({ chooseGender, chooseAge, chooseKotikiFilter }) => {
   const [age, setAge] = useState('');
 
   useEffect(() => {
+    const filterBtn = document.getElementById('filtersBtn');
+    const menu = document.getElementById('filtersMenu');
+
+    const outsideFilterMenuClickHandler = e => {
+      if (
+        e.target !== menu &&
+        !menu.contains(e.target) &&
+        e.target !== filterBtn
+      )
+        setIsMenuOpen(false);
+    };
+
+    document.body.addEventListener('click', outsideFilterMenuClickHandler);
+
+    return () =>
+      document.body.removeEventListener('click', outsideFilterMenuClickHandler);
+  }, []);
+
+  useEffect(() => {
     chooseGender(gender);
   }, [gender, chooseGender]);
 
@@ -69,6 +88,7 @@ const NoticesFilters = ({ chooseGender, chooseAge, chooseKotikiFilter }) => {
         <CheckedFilter text={gender} clickHandler={() => setGender('')} />
       )}
       <Btn
+        id="filtersBtn"
         type="button"
         onClick={filtersToggle}
         isOpen={isMenuOpen}
@@ -77,6 +97,7 @@ const NoticesFilters = ({ chooseGender, chooseAge, chooseKotikiFilter }) => {
         {screenWidth >= 768 && 'Filter'} <FilterIcon />
       </Btn>
       <Filters
+        id="filtersMenu"
         isOpen={isMenuOpen}
         isAgeMenuOpen={isAgeMenuOpen}
         isGenderMenuOpen={isGenderMenuOpen}

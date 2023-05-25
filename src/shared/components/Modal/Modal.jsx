@@ -46,6 +46,7 @@ const Modal = ({ toggleModal, children }) => {
       toggleModal();
     }
   };
+
   return createPortal(
     <>
       <Backdrop onClick={onModalOpen} inNoticePage={inNoticePage}>

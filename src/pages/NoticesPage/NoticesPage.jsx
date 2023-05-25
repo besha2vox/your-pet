@@ -108,13 +108,12 @@ const NoticesPage = () => {
   ]);
 
   useEffect(() => {
-    if (teamFilter) {
-      setQuery('');
-      setAgeFilter('');
-      setGenderFilter('');
+    setQuery('');
+    setAgeFilter('');
+    setGenderFilter('');
 
-      dispatch(getTeam());
-    }
+    dispatch(setNotices());
+    dispatch(getTeam());
   }, [dispatch, teamFilter]);
 
   useEffect(() => {
