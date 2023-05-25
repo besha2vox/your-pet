@@ -34,7 +34,6 @@ export const usePagination = ({
       let leftItemCount =
         viewportWidth < 767 ? 2 + 2 * siblingCount : 3 + 2 * siblingCount;
       let leftRange = range(1, leftItemCount);
-      console.log({ leftItemCount });
       return [...leftRange, DOTS, totalPagesCount];
     }
 

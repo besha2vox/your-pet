@@ -24,7 +24,6 @@ const AddPetModal = ({ backLink, category }) => {
   const buttonText =
     category === 'my-pet' ? 'Go to profile' : 'Go to your adds';
   const path = category === 'my-pet' ? '/user' : '/notices/my-pets';
-  console.log({ backLink, category });
   return (
     <AddFormModalWrapper>
       <p>{text}</p>

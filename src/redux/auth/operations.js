@@ -164,7 +164,6 @@ export const changeStatus = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await axios.patch(`api/users/status`, data);
-      console.log('response.data', response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
