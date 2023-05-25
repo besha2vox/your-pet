@@ -44,7 +44,7 @@ const Pagination = ({
         {viewportWidth < 767 && currentPage === 1 ? (
           ''
         ) : (
-          <li>
+          <li key="prev">
             <PaginationButton
               key={nanoid()}
               className={currentPage === 1 && 'disabled'}
@@ -61,7 +61,7 @@ const Pagination = ({
             return viewportWidth < 767 ? (
               ''
             ) : (
-              <li>
+              <li key={pageNumber}>
                 <PaginationButton key={nanoid()} className="dots">
                   &#8230;
                 </PaginationButton>
@@ -70,7 +70,7 @@ const Pagination = ({
           }
 
           return (
-            <li>
+            <li key={pageNumber}>
               <PaginationButton
                 key={nanoid()}
                 className={pageNumber === currentPage && 'selected'}
@@ -84,7 +84,7 @@ const Pagination = ({
         {viewportWidth < 767 && currentPage === lastPage ? (
           ''
         ) : (
-          <li>
+          <li key="next">
             <PaginationButton
               key={nanoid()}
               className={currentPage === lastPage && 'disabled'}
