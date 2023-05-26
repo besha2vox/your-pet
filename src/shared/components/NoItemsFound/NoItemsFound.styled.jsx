@@ -12,6 +12,7 @@ const Text = styled.p`
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
     padding-top: ${({ theme }) => theme.space[6] + 'px'};
+    padding-bottom: ${({ theme }) => theme.space[6] + 'px'};
 
     font-size: ${({ theme }) => theme.fontSizes[5]};
   }
