@@ -65,6 +65,9 @@ const NewsPage = () => {
     if (page === currentPage) {
       return;
     }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     var params = searchQuery
       ? { query: searchQuery, page: currentPage }
       : { page: currentPage };
