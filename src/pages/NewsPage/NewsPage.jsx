@@ -3,8 +3,6 @@ import NoticesSearch from '../../shared/components/NoticesSearch/NoticesSearch';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import 'react-toastify/dist/ReactToastify.css';
-
 import Pagination from 'shared/components/Pagination/Pagination';
 import { Title, NewsWrapper } from './NewsPage.styled';
 import { useDispatch, useSelector } from 'react-redux';
