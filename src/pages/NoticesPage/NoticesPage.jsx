@@ -53,8 +53,11 @@ const NoticesPage = () => {
   const [ageFilter, setAgeFilter] = useState('');
   const [teamFilter, setTeamFilter] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [page, setPage] = useState(1);
 
-  const page = searchParams.get('page') || 1;
+  useEffect(() => {
+    setPage(1);
+  }, [categoryName]);
 
   useEffect(() => {
     dispatch(setNotices());
@@ -97,15 +100,7 @@ const NoticesPage = () => {
 
       setSearchParams(searchQuery);
     }
-  }, [
-    ageFilter,
-    categoryName,
-    dispatch,
-    genderFilter,
-    page,
-    query,
-    setSearchParams,
-  ]);
+  }, [ageFilter, categoryName, dispatch, genderFilter, page, query, setSearchParams]);
 
   useEffect(() => {
     setQuery('');
@@ -161,6 +156,7 @@ const NoticesPage = () => {
   };
 
   const onPageChange = currentPage => {
+    setPage(currentPage);
     if (page === currentPage) {
       return;
     }

@@ -24,6 +24,7 @@ const PaginationList = styled.ul`
   padding: 8px 12px;
   gap: 7px;
 `;
+
 const PaginationButton = styled.button`
   width: 35px;
   height: 35px;

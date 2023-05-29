@@ -49,6 +49,7 @@ const Pagination = ({
               key={nanoid()}
               className={currentPage === 1 && 'disabled'}
               onClick={onPrevious}
+              aria-label="Previous page"
             >
               <ArrowLeft key={'left'}>
                 <ArrowLeftIcon />
@@ -89,6 +90,7 @@ const Pagination = ({
               key={nanoid()}
               className={currentPage === lastPage && 'disabled'}
               onClick={onNext}
+              aria-label="Next page"
             >
               <ArrowRight key={'right'}>
                 <ArrowLeftIcon />
