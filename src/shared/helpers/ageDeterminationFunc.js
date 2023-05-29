@@ -13,7 +13,7 @@ const ageDeterminationFunc = bd => {
   if (years) {
     termin = years === 1 ? 'year' : 'years';
   } else {
-    termin = months === 1 ? 'month' : 'months';
+    termin = 'mon';
   }
 
   const age = years ? `${years} ${termin}` : `${months} ${termin}`;
