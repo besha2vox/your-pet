@@ -1,13 +1,13 @@
-import img1 from './imagesAd/zpolis.png';
-import img2 from './imagesAd/drug.png';
-import img3 from './imagesAd/Animal_clinic.png';
-import img4 from './imagesAd/aibolit.png';
-import img5 from './imagesAd/terra_vet.png';
-import img6 from './imagesAd/a_vet.png';
-import img7 from './imagesAd/vetplanet.png';
-import img8 from './imagesAd/hels.png';
-import img9 from './imagesAd/dingo.png';
-import img10 from './imagesAd/pes_kit.png';
+import img1 from './imagesAd/zpolis.webp';
+import img2 from './imagesAd/drug.webp';
+import img3 from './imagesAd/Animal_clinic.webp';
+import img4 from './imagesAd/aibolit.webp';
+import img5 from './imagesAd/terra_vet.webp';
+import img6 from './imagesAd/a_vet.webp';
+import img7 from './imagesAd/vetplanet.webp';
+import img8 from './imagesAd/hels.webp';
+import img9 from './imagesAd/dingo.webp';
+import img10 from './imagesAd/pes_kit.webp';
 
 const AdData = [
   {
