@@ -100,7 +100,16 @@ const NoticesPage = () => {
 
       setSearchParams(searchQuery);
     }
-  }, [ageFilter, categoryName, dispatch, genderFilter, page, query, setSearchParams]);
+  }, [
+    ageFilter,
+    categoryName,
+    dispatch,
+    genderFilter,
+    page,
+    query,
+    setSearchParams,
+    searchParams,
+  ]);
 
   useEffect(() => {
     setQuery('');
