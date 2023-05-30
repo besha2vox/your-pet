@@ -5,7 +5,7 @@ import NoItemsFound from '../NoItemsFound/NoItemsFound';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from 'redux/auth/selectors';
-import { selectNoticesIsLoading } from 'redux/notices/selectors';
+import { selectNotices, selectNoticesIsLoading } from 'redux/notices/selectors';
 import {
   ageDeterminationFunc,
   cutTitle,
@@ -38,7 +38,6 @@ import {
 } from './NoticesCategoriesList.styled';
 
 const NoticesCategoriesList = ({
-  items,
   moreBtnClickHandler,
   toggleFavorites,
   onDeleteBtnClick,
@@ -46,13 +45,12 @@ const NoticesCategoriesList = ({
   chosenGenderFilter,
 }) => {
   const user = useSelector(selectUser);
+  const notices = useSelector(selectNotices);
   const isLoading = useSelector(selectNoticesIsLoading);
 
   const { pathname } = useLocation();
 
-  if (!items) return;
-
-  const pets = items.map(pet => {
+  const pets = notices.map(pet => {
     const category = transformCategoryName(pet.category);
     const title = cutTitle(pet.titleOfAdd);
     const age = ageDeterminationFunc(pet.birthday);
@@ -112,7 +110,7 @@ const NoticesCategoriesList = ({
 
   return (
     <>
-      {!items.length && !isLoading && (
+      {!notices.length && !isLoading && (
         <NoItemsFound text="Nothing was found for your request." />
       )}
       {isLoading && (
@@ -120,7 +118,7 @@ const NoticesCategoriesList = ({
           <NoticeCardSkeleton cards={12} />
         </List>
       )}
-      {items.length > 0 && !isLoading && <List>{pets}</List>}
+      {notices.length > 0 && !isLoading && <List>{pets}</List>}
     </>
   );
 };
