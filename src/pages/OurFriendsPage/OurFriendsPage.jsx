@@ -40,6 +40,9 @@ const OurFriendsPage = () => {
     if (page === currentPage) {
       return;
     }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     setSearchParams({ page: currentPage });
   };
 

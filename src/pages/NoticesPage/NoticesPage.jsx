@@ -161,6 +161,8 @@ const NoticesPage = () => {
       return;
     }
 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     const searchQuery = { page: currentPage };
 
     if (query) searchQuery.query = query;

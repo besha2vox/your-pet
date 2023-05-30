@@ -117,7 +117,7 @@ const NoticesCategoriesList = ({
       )}
       {isLoading && (
         <List>
-          <NoticeCardSkeleton cards={4} />
+          <NoticeCardSkeleton cards={12} />
         </List>
       )}
       {items.length > 0 && !isLoading && <List>{pets}</List>}
